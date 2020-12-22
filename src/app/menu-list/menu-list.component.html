@@ -1,0 +1,14 @@
+<div id="cssmenu">
+  <ul>
+    <li *ngFor="let menu of getMenu()">
+      <a href="javascript:void(0);" >{{menu.getTitle()}}</a>
+      <ul style="z-index:100;">
+        <li *ngFor="let map of menu.getMenuList() | keyvalue">
+          <a [routerLink]="map.value">{{map.key}}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<router-outlet></router-outlet>
+
