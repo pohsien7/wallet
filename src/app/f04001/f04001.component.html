@@ -1,12 +1,61 @@
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>代碼類別</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="food">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td style="width: 10px;">
+    </td>
+    <td>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" value="{{selectedValue}}"/>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
 
-<form>
-  <mat-form-field appearance="fill">
-    <mat-label>代碼類別</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="food">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{food.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <p> Selected food: {{selectedValue}} </p>
-</form>
+<mat-table [dataSource]="mappingCodeSource" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="code_TYPE">
+    <mat-header-cell *matHeaderCellDef>類別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.code_TYPE }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="code_NO">
+    <mat-header-cell *matHeaderCellDef>代碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.code_NO }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="code_DESC">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>描述</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.code_DESC }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="code_SORT">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>排序</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.code_SORT }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="code_TAG">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>備註</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.code_TAG }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="code_FLAG">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>是否停用</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.code_FLAG }}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['code_TYPE', 'code_NO', 'code_DESC', 'code_SORT', 'code_TAG', 'code_FLAG']"></mat-header-row>
+  <mat-row *matRowDef="let emailRow; columns: ['code_TYPE', 'code_NO', 'code_DESC', 'code_SORT', 'code_TAG', 'code_FLAG']"></mat-row>
+</mat-table>
+
+
