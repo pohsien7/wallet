@@ -1,12 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService extends BaseService {
+
+  constructor(protected httpClient: HttpClient) { super(); }
 
   private async checkEmpNoPromise(empNo: String) {
     const getURL = 'http://localhost:8080/checkId?empNo=' + empNo;

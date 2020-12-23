@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
 import { Menu } from './menu.model';
@@ -9,7 +11,11 @@ import { Menu } from './menu.model';
 export class MenuListService extends BaseService {
   private empNo: String = '';
   private menuList: Menu[] = [];
-  super() { this.addMenu(); }
+
+  constructor (private httpClient: HttpClient, private route: ActivatedRoute){
+    super();
+    this.addMenu();
+  }
 
   public getMenuData(): Observable<any> {
     this.route.queryParams.subscribe(params => {
