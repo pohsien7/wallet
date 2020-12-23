@@ -18,18 +18,22 @@
   </tr>
 </table>
 
-<mat-table [dataSource]="emailsDataSource" matSort (matSortChange)="changeSort($event)">
-  <ng-container matColumnDef="user">
-    <mat-header-cell *matHeaderCellDef>寄件人</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.user.login }}</mat-cell>
+<mat-table [dataSource]="cusinfoDataSource" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="applno">
+    <mat-header-cell *matHeaderCellDef>收件編號</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.applno }}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="title">
-    <mat-header-cell *matHeaderCellDef>標題</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
+  <ng-container matColumnDef="cu_CNAME">
+    <mat-header-cell *matHeaderCellDef>客戶姓名</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.cu_CNAME }}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="created_at">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>日期</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.created_at }}</mat-cell>
+  <ng-container matColumnDef="cu_ID">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>身分證字號</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.cu_ID }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="cu_URGENT">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>是否急件</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.cu_URGENT }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="management">
     <mat-header-cell *matHeaderCellDef>
@@ -39,7 +43,7 @@
       <button mat-raised-button color="primary"  (click) = "getLockCase(row.user.login)">取件</button>
     </mat-cell>
   </ng-container>
-  <mat-header-row *matHeaderRowDef="['user', 'title', 'created_at', 'management']"></mat-header-row>
-  <mat-row *matRowDef="let emailRow; columns: ['user', 'title', 'created_at', 'management']"></mat-row>
+  <mat-header-row *matHeaderRowDef="['applno', 'cu_CNAME', 'cu_ID', 'cu_URGENT', 'management']"></mat-header-row>
+  <mat-row *matRowDef="let emailRow; columns: ['applno', 'cu_CNAME', 'cu_ID', 'cu_URGENT', 'management']"></mat-row>
 </mat-table>
 

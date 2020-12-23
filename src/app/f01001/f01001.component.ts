@@ -5,6 +5,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { F01001Service } from './f01001.service';
 
 
 @Component({
@@ -20,8 +21,8 @@ export class F01001Component implements AfterViewInit  {
 
   currentSort: Sort;
 
-  emailsDataSource = new MatTableDataSource<any>();
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  cusinfoDataSource = new MatTableDataSource<any>();
+  constructor(private httpClient: HttpClient, private router: Router, private f01001Service: F01001Service) {}
 
   ngAfterViewInit() {
 
@@ -36,10 +37,10 @@ export class F01001Component implements AfterViewInit  {
       active: '',
       direction: ''
     };
-    this.getIssuees();
+    this.getCaseList();
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      this.getIssuees();
+      this.getCaseList();
     });
   }
 
@@ -57,26 +58,33 @@ export class F01001Component implements AfterViewInit  {
       sortInfo.active = 'created';
     }
     this.currentSort = sortInfo;
-    this.getIssuees();
+    this.getCaseList();
   }
 
-  getIssuees() {
-    const baseUrl = 'https://api.github.com/search/issues?q=repo:angular/components';
-    let targetUrl = `${baseUrl}&page=${this.currentPage.pageIndex + 1}&per_page=${this.currentPage.pageSize}`;
-    if (this.currentSort.direction) {
-      targetUrl = `${targetUrl}&&sort=${this.currentSort.active}&order=${this.currentSort.direction}`;
-    }
-    this.httpClient
-      .get<any>(targetUrl)
-      .subscribe(data => {
-        this.totalCount = 1000;
-        this.emailsDataSource.data = data.items;
-        // 從後端進行排序時，不用指定sort
-        // this.emailsDataSource.sort = this.sortTable;
-        // 從後端取得資料時，就不用指定data srouce的paginator了
-        // this.emailsDataSource.paginator = this.paginator;
-      });
+  getCaseList() {
+    this.f01001Service.getCaseList(this.currentPage.pageIndex, this.currentPage.pageSize).subscribe(data => {
+      this.totalCount = data.size;
+      this.cusinfoDataSource.data = data.items;
+    });
   }
+
+  // getIssuees() {
+  //   const baseUrl = 'https://api.github.com/search/issues?q=repo:angular/components';
+  //   let targetUrl = `${baseUrl}&page=${this.currentPage.pageIndex + 1}&per_page=${this.currentPage.pageSize}`;
+  //   if (this.currentSort.direction) {
+  //     targetUrl = `${targetUrl}&&sort=${this.currentSort.active}&order=${this.currentSort.direction}`;
+  //   }
+  //   this.httpClient
+  //     .get<any>(targetUrl)
+  //     .subscribe(data => {
+  //       this.totalCount = 1000;
+  //       this.emailsDataSource.data = data.items;
+  //       // 從後端進行排序時，不用指定sort
+  //       // this.emailsDataSource.sort = this.sortTable;
+  //       // 從後端取得資料時，就不用指定data srouce的paginator了
+  //       // this.emailsDataSource.paginator = this.paginator;
+  //     });
+  // }
 
   getLockCase(param: String) {
     console.log('1.' + param);
@@ -87,7 +95,7 @@ export class F01001Component implements AfterViewInit  {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.emailsDataSource.filter = filterValue;
+    this.cusinfoDataSource.filter = filterValue;
   }
 
 }
