@@ -5,7 +5,7 @@ import { BaseService } from '../base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class F01001Service extends BaseService {
+export class F04001Service extends BaseService {
   getCaseList(pageIndex: number, pageSize: number): Observable<any> {
     const baseUrl = 'http://localhost:8080/getCaseList';
     let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}`;

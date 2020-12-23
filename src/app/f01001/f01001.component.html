@@ -40,7 +40,7 @@
       <u>管理</u>
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-raised-button color="primary"  (click) = "getLockCase(row.user.login)">取件</button>
+      <button mat-raised-button color="primary"  (click) = "getLockCase(row.applno)">取件</button>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="['applno', 'cu_CNAME', 'cu_ID', 'cu_URGENT', 'management']"></mat-header-row>

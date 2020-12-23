@@ -1,1 +1,12 @@
-<p>f04001 works!</p>
+
+<form>
+  <mat-form-field appearance="fill">
+    <mat-label>代碼類別</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="food">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p> Selected food: {{selectedValue}} </p>
+</form>
