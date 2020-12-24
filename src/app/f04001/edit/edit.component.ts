@@ -1,14 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { F04001Service } from '../f04001.service';
+
+interface ynCode {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditComponent {
+  ynCode: ynCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
+  constructor(public dialogRef: MatDialogRef<EditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public f04001Service: F04001Service) { }
 
-  constructor() { }
+  formControl = new FormControl('', [
+    Validators.required
+    // Validators.email,
+  ]);
 
-  ngOnInit(): void {
+  getErrorMessage() {
+    return this.formControl.hasError('required') ? 'Required field' :
+    this.formControl.hasError('email') ? 'Not a valid email' :
+    '';
+  }
+
+  submit() {
+
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  stopEdit(): void {
+    this.f04001Service.updateMappingCode(this.data);
   }
 
 }

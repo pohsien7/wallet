@@ -1,12 +1,14 @@
 import { AfterViewInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { EditComponent } from './edit/edit.component';
 import { F04001Service } from './f04001.service';
 
-interface Food {
+interface sysCode {
   value: string;
   viewValue: string;
 }
@@ -17,15 +19,15 @@ interface Food {
   styleUrls: ['./f04001.component.css']
 })
 export class F04001Component implements OnInit, AfterViewInit {
-  foods: Food[] = [];
+  sysCode: sysCode[] = [];
   selectedValue: string;
-  constructor(private f04001Service: F04001Service) { }
+  constructor(private f04001Service: F04001Service, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.f04001Service.getSysTypeCode().subscribe(data => {
       for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
-        this.foods.push({value: codeNo, viewValue: desc})
+        this.sysCode.push({value: codeNo, viewValue: desc})
       }
     });
   }
@@ -46,7 +48,6 @@ export class F04001Component implements OnInit, AfterViewInit {
       active: '',
       direction: ''
     };
-    this.getMappingCode();
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
       this.getMappingCode();
@@ -66,9 +67,35 @@ export class F04001Component implements OnInit, AfterViewInit {
     });
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.mappingCodeSource.filter = filterValue;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.mappingCodeSource.filter = filterValue.trim().toLowerCase();
   }
+
+  changeSelect() {
+    this.getMappingCode();
+  }
+
+  addNew() {
+
+  }
+
+  startEdit(i: number,
+    code_TYPE: string, code_NO: string, code_DESC: string,
+    code_SORT: string, code_TAG: string, code_FLAG: string) {
+      const dialogRef = this.dialog.open(EditComponent, {
+        data: {
+               code_TYPE: code_TYPE, code_NO : code_NO , code_DESC: code_DESC,
+               code_SORT: code_SORT, code_TAG: code_TAG, code_FLAG: code_FLAG
+              }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 1) { this.refreshTable(); }
+      });
+  }
+
+  private refreshTable() {
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
+
 }

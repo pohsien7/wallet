@@ -3,9 +3,9 @@
     <td>
       <mat-form-field appearance="fill">
         <mat-label>代碼類別</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="food">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+        <mat-select [(ngModel)]="selectedValue" name="sysCode" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let code of sysCode" [value]="code.value">
+            {{code.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -14,7 +14,7 @@
     </td>
     <td>
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" value="{{selectedValue}}"/>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter" value="{{selectedValue}}"/>
       </mat-form-field>
     </td>
     <td>
@@ -54,8 +54,27 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header>是否停用</mat-header-cell>
     <mat-cell *matCellDef="let row">{{ row.code_FLAG }}</mat-cell>
   </ng-container>
-  <mat-header-row *matHeaderRowDef="['code_TYPE', 'code_NO', 'code_DESC', 'code_SORT', 'code_TAG', 'code_FLAG']"></mat-header-row>
-  <mat-row *matRowDef="let emailRow; columns: ['code_TYPE', 'code_NO', 'code_DESC', 'code_SORT', 'code_TAG', 'code_FLAG']"></mat-row>
+
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button mat-icon-button color="accent" (click)="startEdit(i,
+        row.code_TYPE, row.code_NO, row.code_DESC, row.code_SORT, row.code_TAG, row.code_FLAG)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="['code_TYPE', 'code_NO', 'code_DESC', 'code_SORT', 'code_TAG', 'code_FLAG', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let emailRow; columns: ['code_TYPE', 'code_NO', 'code_DESC', 'code_SORT', 'code_TAG', 'code_FLAG', 'actions']"></mat-row>
 </mat-table>
 
 
