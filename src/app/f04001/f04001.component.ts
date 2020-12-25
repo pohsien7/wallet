@@ -1,3 +1,4 @@
+import { isNull } from '@angular/compiler/src/output/output_ast';
 import { AfterViewInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { F04001Service } from './f04001.service';
 
@@ -73,11 +75,31 @@ export class F04001Component implements OnInit, AfterViewInit {
   }
 
   changeSelect() {
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 10,
+      length: null
+    };
+    this.paginator.firstPage();
     this.getMappingCode();
   }
 
   addNew() {
-
+    if (this.selectedValue == null) {
+      alert('請選擇：代碼類別');
+    } else {
+      const dialogRef = this.dialog.open(AddComponent, {
+        data: {
+                code_TYPE: this.selectedValue,
+                code_NO : '' , code_DESC: '',
+                code_SORT: '', code_TAG: '',
+                code_FLAG: 'N'
+              }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result.event == 'success') { this.refreshTable(); }
+      });
+    }
   }
 
   startEdit(i: number,

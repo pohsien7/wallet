@@ -29,4 +29,29 @@ export class F04001Service extends BaseService {
     });
   }
 
+  private async checkExistPromise(datas: any) {
+    const baseUrl = 'http://localhost:8080/checkMappgingExist';
+    let targetUrl = `${baseUrl}?code_TYPE=${datas.code_TYPE}&code_NO=${datas.code_NO}`;
+    return await this.httpClient.post<any>(targetUrl, this.httpOptions).toPromise();
+  }
+
+  public async checkMappgingExist(datas: any): Promise<boolean> {
+    let isExist: boolean = false;
+    const data = await this.checkExistPromise(datas).then((data) => {
+      isExist = (JSON.stringify(data) === 'true');
+    })
+    .catch((error) => {
+      console.log("Promise rejected with " + JSON.stringify(error));
+    });
+    return isExist;
+  }
+
+  insertMappingCode(datas: any) {
+    const baseUrl = 'http://localhost:8080/insertMappingCode';
+    let targetUrl = `${baseUrl}?code_TYPE=${datas.code_TYPE}&code_NO=${datas.code_NO}&code_DESC=${datas.code_DESC}&code_SORT=${datas.code_SORT}&code_TAG=${datas.code_TAG}&code_FLAG=${datas.code_FLAG}`;
+    this.httpClient.post<any>(targetUrl, this.httpOptions).subscribe(data => {
+      console.log(data);
+    });
+  }
+
 }

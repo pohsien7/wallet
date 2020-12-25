@@ -37,8 +37,8 @@ import { F01001scn12Component } from './f01001scn12/f01001scn12.component';
 import { F01001scn13Component } from './f01001scn13/f01001scn13.component';
 import { F01001scn2Component } from './f01001scn2/f01001scn2.component';
 import { AddComponent } from './f04001/add/add.component';
-import { DeleteComponent } from './f04001/delete/delete.component';
 import { EditComponent } from './f04001/edit/edit.component';
+import { AddConfirmComponent } from './f04001/add/add-confirm/add-confirm.component';
 
 @NgModule({
   declarations: [
@@ -64,8 +64,8 @@ import { EditComponent } from './f04001/edit/edit.component';
     F01001scn12Component,
     F01001scn13Component,
     AddComponent,
-    DeleteComponent,
-    EditComponent
+    EditComponent,
+    AddConfirmComponent
   ],
   imports: [
     BrowserModule,
