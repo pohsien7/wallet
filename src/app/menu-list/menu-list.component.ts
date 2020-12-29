@@ -7,14 +7,7 @@ import { Menu } from './menu.model';
   templateUrl: './menu-list.component.html',
   styleUrls: ['./menu-list.component.css']
 })
-export class MenuListComponent implements OnInit {
-
+export class MenuListComponent {
   constructor(private menuListService: MenuListService) { }
-
-  ngOnInit(): void {
-  }
-
-  getMenu(): Menu[] {
-    return this.menuListService.getMap();
-  }
+  getMenu(): Menu[] { return this.menuListService.getMap(); }
 }

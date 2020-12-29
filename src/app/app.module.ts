@@ -39,6 +39,8 @@ import { F01001scn2Component } from './f01001scn2/f01001scn2.component';
 import { AddComponent } from './f04001/add/add.component';
 import { EditComponent } from './f04001/edit/edit.component';
 import { AddConfirmComponent } from './f04001/add/add-confirm/add-confirm.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   declarations: [
@@ -80,9 +82,10 @@ import { AddConfirmComponent } from './f04001/add/add-confirm/add-confirm.compon
     BrowserAnimationsModule,
     MaterialModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [BnNgIdleService],
   bootstrap: [AppComponent]
 })
 

@@ -29,6 +29,14 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'logIn',
+    component: LoginComponent
+  },
+  {
+    path: 'logOut',
+    component: LoginComponent
+  },
+  {
     path: '',
     component: MenuListComponent,
     children: [

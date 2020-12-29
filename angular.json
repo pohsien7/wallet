@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "RoutingPracticeForAngular30Days"
+  "defaultProject": "RoutingPracticeForAngular30Days",
+  "cli": {
+    "analytics": false
+  }
 }

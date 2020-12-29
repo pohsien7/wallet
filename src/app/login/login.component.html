@@ -1,4 +1,22 @@
-<div>員工編號：<input type="text" [(ngModel)]="no" /></div>
-<div>員工密碼：<input type="password" [(ngModel)]="pwd" /></div>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
 
-<button (click) = "onClickMe()">登入</button>
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="員工編號" [(ngModel)]="no" name="account">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="員工密碼" [(ngModel)]="pwd" name="password">
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button color="primary" class="btn-block" (click) = "onClickMe()">登入</button>
+    </form>
+  </mat-card>
+
+</div>

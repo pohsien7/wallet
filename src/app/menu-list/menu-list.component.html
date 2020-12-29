@@ -1,14 +1,22 @@
-<div id="cssmenu">
-  <ul>
-    <li *ngFor="let menu of getMenu()">
-      <a href="javascript:void(0);" >{{menu.getTitle()}}</a>
-      <ul style="z-index:100;">
-        <li *ngFor="let map of menu.getMenuList() | keyvalue">
-          <a [routerLink]="map.value">{{map.key}}</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button [matMenuTriggerFor]="aboveMenu" *ngFor="let menu of getMenu()">
+      {{menu.getTitle()}}
+      <mat-menu #aboveMenu="matMenu" yPosition="below">
+        <button mat-menu-item *ngFor="let map of menu.getMenuList() | keyvalue" [routerLink]="map.value">{{map.key}}</button>
+      </mat-menu>
+    </button>
+    <span class="example-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User">
+      <mat-icon>account_box</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'logOut'">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>登出</span>
+        </button>
+      </mat-menu>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
 <router-outlet></router-outlet>
 
