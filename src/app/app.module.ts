@@ -41,6 +41,7 @@ import { EditComponent } from './f04001/edit/edit.component';
 import { AddConfirmComponent } from './f04001/add/add-confirm/add-confirm.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { ShowComponent } from './f01001scn13/show/show.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { BnNgIdleService } from 'bn-ng-idle';
     F01001scn13Component,
     AddComponent,
     EditComponent,
-    AddConfirmComponent
+    AddConfirmComponent,
+    ShowComponent
   ],
   imports: [
     BrowserModule,

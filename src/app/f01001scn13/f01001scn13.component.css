@@ -1,0 +1,31 @@
+table{
+  width: 100%;
+}
+
+.mat-column-applno {
+  max-width: 10%;
+}
+
+.mat-column-web {
+  max-width: 5%;
+}
+
+.mat-column-web_addr {
+  max-width: 35%;
+}
+
+.mat-column-message_content {
+  max-width: 20%;
+}
+
+.mat-column-daytime {
+  max-width: 15%;
+}
+
+.mat-column-empno {
+  max-width: 10%;
+}
+
+.mat-column-image {
+  max-width: 5%;
+}

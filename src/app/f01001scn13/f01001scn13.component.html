@@ -1,1 +1,52 @@
-<p>f01001scn13 works! {{ getApplno() }}</p>
+<table>
+  <tr>
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
+
+<mat-table [dataSource]="webInfoSource" matSortDisableClear>
+  <ng-container matColumnDef="applno">
+    <mat-header-cell *matHeaderCellDef>案編</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.applno }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="web">
+    <mat-header-cell *matHeaderCellDef>代碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.web }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="web_addr">
+    <mat-header-cell *matHeaderCellDef>網址</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.web_addr }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="message_content">
+    <mat-header-cell *matHeaderCellDef>說明</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.message_content }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="daytime">
+    <mat-header-cell *matHeaderCellDef>時間</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.daytime }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="empno">
+    <mat-header-cell *matHeaderCellDef>員工編號</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.empno }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef>
+      <u>顯示圖片</u>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" (click)="openView(row.web_img)">
+        <mat-icon aria-label="">image</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['applno', 'web', 'web_addr', 'message_content', 'daytime', 'empno', 'image']"></mat-header-row>
+  <mat-row *matRowDef="let webInfoRow; columns: ['applno', 'web', 'web_addr', 'message_content', 'daytime', 'empno', 'image']"></mat-row>
+</mat-table>
