@@ -40,7 +40,7 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <mat-select [(ngModel)]="data.code_FLAG" name="code_FLAG" >
+        <mat-select placeholder="是否停用" [(ngModel)]="data.code_FLAG" name="code_FLAG" >
           <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
             {{yn.viewValue}}
           </mat-option>

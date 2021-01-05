@@ -1,0 +1,72 @@
+<div class="container">
+  <h2 mat-dialog-title>參數條件設定-新增</h2>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit()" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="條件代碼" [(ngModel)]="data.conditionid" name="conditionid" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="條件代碼說明" [(ngModel)]="data.conditiondesc" name="conditiondesc" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput #input class="form-control" placeholder="限定條件" [(ngModel)]="data.conditionwhere" name="conditionwhere" required ></textarea>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="參數">
+        <div style="width: 30%; float: left;">
+          <mat-table>
+            <ng-container matColumnDef="typeSelect">
+              <mat-header-cell *matHeaderCellDef>
+                  <mat-select [(ngModel)]="ParmClassValue" name="ParmClassOption" (ngModelChange)="changeSelect()" placeholder="參數類別">
+                    <mat-option *ngFor="let option of ParmClass" [value]="option.value">
+                      {{option.viewValue}}
+                    </mat-option>
+                  </mat-select>
+              </mat-header-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="['typeSelect']; sticky: true"></mat-header-row>
+          </mat-table>
+        </div>
+        <div style="width: 70%; float: right;">
+          <mat-table [dataSource]="ruleParamWhereClass">
+            <ng-container matColumnDef="code_NO">
+              <mat-header-cell *matHeaderCellDef>參數代碼</mat-header-cell>
+              <mat-cell *matCellDef="let row" (click)="getCodeToCondition(row.code_NO)">{{ row.code_NO }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="code_DESC">
+              <mat-header-cell *matHeaderCellDef>參數名稱</mat-header-cell>
+              <mat-cell *matCellDef="let row" (click)="getCodeToCondition(row.code_NO)">{{ row.code_DESC }}</mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="['code_NO', 'code_DESC']; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let ruleParmRow; columns: ['code_NO', 'code_DESC']"></mat-row>
+          </mat-table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="函數">Content 2</mat-tab>
+      <mat-tab label="運算元">Content 3</mat-tab>
+      <mat-tab label="驗證">Content 4</mat-tab>
+      <mat-tab label="自定義參數值">Content 5</mat-tab>
+    </mat-tab-group>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>
+
+

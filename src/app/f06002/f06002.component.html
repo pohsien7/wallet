@@ -1,0 +1,68 @@
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>條件代碼</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="sysCode" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let code of sysCode" [value]="code.value">
+            {{code.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td style="width: 10px;">
+    </td>
+    <td>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter" value="{{selectedValue}}"/>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
+
+<mat-table [dataSource]="ruleParamCondition" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="conditionid">
+    <mat-header-cell *matHeaderCellDef>條件代碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.conditionid }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="conditiondesc">
+    <mat-header-cell *matHeaderCellDef>條件代碼說明</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.conditiondesc }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="conditionwhere">
+    <mat-header-cell *matHeaderCellDef>限定條件</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.conditionwhere || row.conditionwhere2 }}</mat-cell>
+  </ng-container>
+
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon aria-label="新增">add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button mat-icon-button color="primary" (click)="startEdit(i, row.conditionid, row.conditiondesc, row.conditionwhere)">
+        <mat-icon aria-label="編輯">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" (click)="deleteItem(i, row.conditionid)">
+        <mat-icon aria-label="刪除">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="['conditionid', 'conditiondesc', 'conditionwhere', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let ruleParmRow; columns: ['conditionid', 'conditiondesc', 'conditionwhere', 'actions']"></mat-row>
+</mat-table>

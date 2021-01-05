@@ -7,9 +7,9 @@ import { BaseService } from '../base.service';
   providedIn: 'root'
 })
 export class F01001scn13Service extends BaseService {
-  constructor(protected httpClient: HttpClient) { super(); }
+  constructor(protected httpClient: HttpClient) { super(httpClient); }
   getWebInfo(): Observable<any> {
-    const baseUrl = 'http://localhost:8080/getWebInfo';
-    return this.httpClient.post<any>(baseUrl, this.httpOptions);
+    const baseUrl = 'getWebInfo';
+    return this.postHttpClient(baseUrl);
   }
 }

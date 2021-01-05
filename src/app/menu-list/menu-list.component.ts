@@ -10,4 +10,5 @@ import { Menu } from './menu.model';
 export class MenuListComponent {
   constructor(private menuListService: MenuListService) { }
   getMenu(): Menu[] { return this.menuListService.getMap(); }
+  returnZero() { return 0; }
 }

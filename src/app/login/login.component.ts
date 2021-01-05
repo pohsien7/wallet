@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { BnNgIdleService } from 'bn-ng-idle';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +23,11 @@ export class LoginComponent {
       this.bnIdle.startWatching(60*30).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) { this.routerGoUrl(); }
       });
+      sessionStorage.setItem('BusType', JSON.stringify(await this.loginService.getBusType()));
+      sessionStorage.setItem('ParmType', JSON.stringify(await this.loginService.getParmType()));
+      sessionStorage.setItem('ParmDim', JSON.stringify(await this.loginService.getParmDim()));
+      sessionStorage.setItem('ParmClass', JSON.stringify(await this.loginService.getParmClass()));
+      sessionStorage.setItem('Condition', JSON.stringify(await this.loginService.getCondition()));
     } else {
       alert('帳號有誤!');
     }
@@ -29,7 +36,7 @@ export class LoginComponent {
   private routerGoUrl(): void {
     this.bnIdle.stopTimer();
     this.router.navigate(['./logOut']);
-    alert('test');
+    alert('閒置過久已登出');
 
   }
 }

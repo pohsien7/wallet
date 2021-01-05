@@ -7,32 +7,32 @@ import { BaseService } from '../base.service';
   providedIn: 'root'
 })
 export class F04001Service extends BaseService {
-  constructor(protected httpClient: HttpClient) { super(); }
+  constructor(protected httpClient: HttpClient) { super(httpClient); }
   dialogData: any;
 
   getSysTypeCode(): Observable<any> {
-    const baseUrl = 'http://localhost:8080/getSysTypeCode';
-    return this.httpClient.post<any>(baseUrl, this.httpOptions);
+    const baseUrl = 'getSysTypeCode';
+    return this.postHttpClient(baseUrl);
   }
 
   getMappingCode(pageIndex: number, pageSize: number, sysType: String): Observable<any> {
-    const baseUrl = 'http://localhost:8080/getMappingCode';
+    const baseUrl = 'getMappingCode';
     let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}&sys_type=${sysType}`;
-    return this.httpClient.post<any>(targetUrl, this.httpOptions);
+    return this.postHttpClient(targetUrl);
   }
 
   updateMappingCode(datas: any) {
-    const baseUrl = 'http://localhost:8080/updateMappingCode';
+    const baseUrl = 'updateMappingCode';
     let targetUrl = `${baseUrl}?code_TYPE=${datas.code_TYPE}&code_NO=${datas.code_NO}&code_DESC=${datas.code_DESC}&code_SORT=${datas.code_SORT}&code_TAG=${datas.code_TAG}&code_FLAG=${datas.code_FLAG}`;
-    this.httpClient.post<any>(targetUrl, this.httpOptions).subscribe(data => {
+    this.postHttpClient(targetUrl).subscribe(data => {
       console.log(data);
     });
   }
 
   private async checkExistPromise(datas: any) {
-    const baseUrl = 'http://localhost:8080/checkMappgingExist';
+    const baseUrl = 'checkMappgingExist';
     let targetUrl = `${baseUrl}?code_TYPE=${datas.code_TYPE}&code_NO=${datas.code_NO}`;
-    return await this.httpClient.post<any>(targetUrl, this.httpOptions).toPromise();
+    return await this.postHttpClient(targetUrl).toPromise();
   }
 
   public async checkMappgingExist(datas: any): Promise<boolean> {
@@ -47,9 +47,9 @@ export class F04001Service extends BaseService {
   }
 
   insertMappingCode(datas: any) {
-    const baseUrl = 'http://localhost:8080/insertMappingCode';
+    const baseUrl = 'insertMappingCode';
     let targetUrl = `${baseUrl}?code_TYPE=${datas.code_TYPE}&code_NO=${datas.code_NO}&code_DESC=${datas.code_DESC}&code_SORT=${datas.code_SORT}&code_TAG=${datas.code_TAG}&code_FLAG=${datas.code_FLAG}`;
-    this.httpClient.post<any>(targetUrl, this.httpOptions).subscribe(data => {
+    this.postHttpClient(targetUrl).subscribe(data => {
       console.log(data);
     });
   }

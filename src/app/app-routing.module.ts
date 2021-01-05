@@ -18,6 +18,11 @@ import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
 import { F05001Component } from './f05001/f05001.component';
 import { F05002Component } from './f05002/f05002.component';
+import { F06001Component } from './f06001/f06001.component';
+import { F06002Component } from './f06002/f06002.component';
+import { F06003Component } from './f06003/f06003.component';
+import { F06004Component } from './f06004/f06004.component';
+import { F06005Component } from './f06005/f06005.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
@@ -58,51 +63,51 @@ const routes: Routes = [
         component: F01001scn1Component,
         children: [
           {
-            path: 'F01001SC2',
+            path: 'F01001SCN2',
             component: F01001scn2Component
           },
           {
-            path: 'F01001SC3',
+            path: 'F01001SCN3',
             component: F01001scn3Component
           },
           {
-            path: 'F01001SC4',
+            path: 'F01001SCN4',
             component: F01001scn4Component
           },
           {
-            path: 'F01001SC5',
+            path: 'F01001SCN5',
             component: F01001scn5Component
           },
           {
-            path: 'F01001SC6',
+            path: 'F01001SCN6',
             component: F01001scn6Component
           },
           {
-            path: 'F01001SC7',
+            path: 'F01001SCN7',
             component: F01001scn7Component
           },
           {
-            path: 'F01001SC8',
+            path: 'F01001SCN8',
             component: F01001scn8Component
           },
           {
-            path: 'F01001SC9',
+            path: 'F01001SCN9',
             component: F01001scn9Component
           },
           {
-            path: 'F01001SC10',
+            path: 'F01001SCN10',
             component: F01001scn10Component
           },
           {
-            path: 'F01001SC11',
+            path: 'F01001SCN11',
             component: F01001scn11Component
           },
           {
-            path: 'F01001SC12',
+            path: 'F01001SCN12',
             component: F01001scn12Component
           },
           {
-            path: 'F01001SC13',
+            path: 'F01001SCN13',
             component: F01001scn13Component
           }
         ]
@@ -122,6 +127,26 @@ const routes: Routes = [
       {
         path: 'F05002',
         component: F05002Component
+      },
+      {
+        path: 'F06001',
+        component: F06001Component
+      },
+      {
+        path: 'F06002',
+        component: F06002Component
+      },
+      {
+        path: 'F06003',
+        component: F06003Component
+      },
+      {
+        path: 'F06004',
+        component: F06004Component
+      },
+      {
+        path: 'F06005',
+        component: F06005Component
       }
     ]
   }

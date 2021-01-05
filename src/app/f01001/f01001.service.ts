@@ -7,10 +7,10 @@ import { BaseService } from '../base.service';
   providedIn: 'root'
 })
 export class F01001Service extends BaseService {
-  constructor(protected httpClient: HttpClient) { super(); }
+  constructor(protected httpClient: HttpClient) { super(httpClient); }
   getCaseList(pageIndex: number, pageSize: number): Observable<any> {
-    const baseUrl = 'http://localhost:8080/getCaseList';
+    const baseUrl = 'getCaseList';
     let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}`;
-    return this.httpClient.post<any>(targetUrl, this.httpOptions);
+    return this.postHttpClient(targetUrl);
   }
 }

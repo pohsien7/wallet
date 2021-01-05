@@ -3,7 +3,7 @@
     <button mat-button [matMenuTriggerFor]="aboveMenu" *ngFor="let menu of getMenu()">
       {{menu.getTitle()}}
       <mat-menu #aboveMenu="matMenu" yPosition="below">
-        <button mat-menu-item *ngFor="let map of menu.getMenuList() | keyvalue" [routerLink]="map.value">{{map.key}}</button>
+        <button mat-menu-item *ngFor="let map of menu.getMenuList() | keyvalue: returnZero" [routerLink]="map.value">{{map.key}}</button>
       </mat-menu>
     </button>
     <span class="example-spacer"></span>

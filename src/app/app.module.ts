@@ -42,6 +42,17 @@ import { AddConfirmComponent } from './f04001/add/add-confirm/add-confirm.compon
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { ShowComponent } from './f01001scn13/show/show.component';
+import { F06001Component } from './f06001/f06001.component';
+import { F06002Component } from './f06002/f06002.component';
+import { F06003Component } from './f06003/f06003.component';
+import { F06004Component } from './f06004/f06004.component';
+import { F06005Component } from './f06005/f06005.component';
+import { F06001addComponent } from './f06001/f06001add/f06001add.component';
+import { F06001editComponent } from './f06001/f06001edit/f06001edit.component';
+import { F06001deleteComponent } from './f06001/f06001delete/f06001delete.component';
+import { F06002addComponent } from './f06002/f06002add/f06002add.component';
+import { F06002editComponent } from './f06002/f06002edit/f06002edit.component';
+import { F06002deleteComponent } from './f06002/f06002delete/f06002delete.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +80,18 @@ import { ShowComponent } from './f01001scn13/show/show.component';
     AddComponent,
     EditComponent,
     AddConfirmComponent,
-    ShowComponent
+    ShowComponent,
+    F06001Component,
+    F06002Component,
+    F06003Component,
+    F06004Component,
+    F06005Component,
+    F06001addComponent,
+    F06001editComponent,
+    F06001deleteComponent,
+    F06002addComponent,
+    F06002editComponent,
+    F06002deleteComponent
   ],
   imports: [
     BrowserModule,

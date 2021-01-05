@@ -12,8 +12,8 @@ export class MenuListService extends BaseService {
   private empNo: String = '';
   private menuList: Menu[] = [];
 
-  constructor (private httpClient: HttpClient, private route: ActivatedRoute){
-    super();
+  constructor (protected httpClient: HttpClient, private route: ActivatedRoute){
+    super(httpClient);
     this.addMenu();
   }
 
@@ -22,8 +22,8 @@ export class MenuListService extends BaseService {
       console.log('menu====>' + params['empNo']);
       this.empNo = params['empNo'];
     });
-    const getURL = 'http://localhost:8080/getMenu?empNo=' + this.empNo;
-    return this.httpClient.post<any>(getURL, this.httpOptions);
+    const baseURL = 'getMenu?empNo=' + this.empNo;
+    return this.postHttpClient(baseURL);
   }
 
   addMenu(): void {
