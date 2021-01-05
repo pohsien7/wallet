@@ -22,26 +22,26 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { F01001scn1Component } from './f01001scn1/f01001scn1.component';
+import { F01001scn1Component } from './f01001/f01001scn1/f01001scn1.component';
 
-import { F01001scn3Component } from './f01001scn3/f01001scn3.component';
-import { F01001scn4Component } from './f01001scn4/f01001scn4.component';
-import { F01001scn5Component } from './f01001scn5/f01001scn5.component';
-import { F01001scn6Component } from './f01001scn6/f01001scn6.component';
-import { F01001scn7Component } from './f01001scn7/f01001scn7.component';
-import { F01001scn8Component } from './f01001scn8/f01001scn8.component';
-import { F01001scn9Component } from './f01001scn9/f01001scn9.component';
-import { F01001scn10Component } from './f01001scn10/f01001scn10.component';
-import { F01001scn11Component } from './f01001scn11/f01001scn11.component';
-import { F01001scn12Component } from './f01001scn12/f01001scn12.component';
-import { F01001scn13Component } from './f01001scn13/f01001scn13.component';
-import { F01001scn2Component } from './f01001scn2/f01001scn2.component';
+import { F01001scn3Component } from './f01001/f01001scn3/f01001scn3.component';
+import { F01001scn4Component } from './f01001/f01001scn4/f01001scn4.component';
+import { F01001scn5Component } from './f01001/f01001scn5/f01001scn5.component';
+import { F01001scn6Component } from './f01001/f01001scn6/f01001scn6.component';
+import { F01001scn7Component } from './f01001/f01001scn7/f01001scn7.component';
+import { F01001scn8Component } from './f01001/f01001scn8/f01001scn8.component';
+import { F01001scn9Component } from './f01001/f01001scn9/f01001scn9.component';
+import { F01001scn10Component } from './f01001/f01001scn10/f01001scn10.component';
+import { F01001scn11Component } from './f01001/f01001scn11/f01001scn11.component';
+import { F01001scn12Component } from './f01001/f01001scn12/f01001scn12.component';
+
+import { F01001scn2Component } from './f01001/f01001scn2/f01001scn2.component';
 import { AddComponent } from './f04001/add/add.component';
 import { EditComponent } from './f04001/edit/edit.component';
 import { AddConfirmComponent } from './f04001/add/add-confirm/add-confirm.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { ShowComponent } from './f01001scn13/show/show.component';
+
 import { F06001Component } from './f06001/f06001.component';
 import { F06002Component } from './f06002/f06002.component';
 import { F06003Component } from './f06003/f06003.component';
@@ -53,6 +53,8 @@ import { F06001deleteComponent } from './f06001/f06001delete/f06001delete.compon
 import { F06002addComponent } from './f06002/f06002add/f06002add.component';
 import { F06002editComponent } from './f06002/f06002edit/f06002edit.component';
 import { F06002deleteComponent } from './f06002/f06002delete/f06002delete.component';
+import { F01001scn13Component } from './f01001/f01001scn13/f01001scn13.component';
+import { ShowComponent } from './f01001/f01001scn13/show/show.component';
 
 @NgModule({
   declarations: [
