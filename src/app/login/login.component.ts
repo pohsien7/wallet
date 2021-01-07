@@ -28,6 +28,7 @@ export class LoginComponent {
       sessionStorage.setItem('ParmDim', JSON.stringify(await this.loginService.getParmDim()));
       sessionStorage.setItem('ParmClass', JSON.stringify(await this.loginService.getParmClass()));
       sessionStorage.setItem('Condition', JSON.stringify(await this.loginService.getCondition()));
+      sessionStorage.setItem('RuleStep', JSON.stringify(await this.loginService.getRuleStep()));
     } else {
       alert('帳號有誤!');
     }

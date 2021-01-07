@@ -145,12 +145,13 @@
     </mat-header-cell>
 
     <mat-cell *matCellDef="let row; let i=index;">
-      <button mat-icon-button color="primary" (click)="startEdit(i, row.BUSTYPE, row.PARMID, row.PARMNAME,
-                                                                    row.PARMTYPE, row.PARMDIM, row.PARMVALUE,
-                                                                    row.CONDITION, row.PARMDEFAULT, row.PARMCLASS)">
+
+      <button mat-icon-button color="primary" (click)="startEdit(i, [row.BUSTYPE, row.PARMID, row.PARMNAME,
+                                                                     row.PARMTYPE, row.PARMDIM, row.PARMVALUE,
+                                                                     row.CONDITION, row.PARMDEFAULT, row.PARMCLASS])">
         <mat-icon aria-label="編輯">edit</mat-icon>
       </button>
-      <button mat-icon-button color="accent" (click)="deleteItem(i, row.conditionid)">
+      <button mat-icon-button color="accent" (click)="deleteItem(i, [row.BUSTYPE, row.PARMID, row.PARMNAME])">
         <mat-icon aria-label="刪除">delete</mat-icon>
       </button>
     </mat-cell>

@@ -1,0 +1,42 @@
+<div class="container">
+  <h2 mat-dialog-title>參數步驟設定-新增</h2>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit()" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>業務別</mat-label>
+        <mat-select [(ngModel)]="BusTypeValue" name="BusTypeOption" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of data.BusType" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>步驟別</mat-label>
+        <mat-select [(ngModel)]="RuleStepValue" name="RuleStepOption">
+          <mat-option *ngFor="let option of data.RuleStep" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>參數</mat-label>
+        <mat-select [(ngModel)]="ParmDataValue" name="ParmDataOption">
+          <mat-option *ngFor="let option of ParmData" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>
+
+

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogAdd } from 'src/app/interfaceCRUD.component';
 import { F06002Service } from '../f06002.service';
 
 interface sysCode {
@@ -13,7 +14,7 @@ interface sysCode {
   templateUrl: './f06002add.component.html',
   styleUrls: ['./f06002add.component.css']
 })
-export class F06002addComponent implements OnInit {
+export class F06002addComponent implements OnInit, DialogAdd {
   ParmClass: sysCode[] = [];
   ParmClassValue: string;
   ruleParamWhereClass = new MatTableDataSource<any>();

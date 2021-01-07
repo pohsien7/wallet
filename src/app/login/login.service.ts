@@ -17,6 +17,7 @@ export class LoginService extends BaseService {
   ParmDim: sysCode[] = [];
   ParmClass: sysCode[] = [];
   Condition: sysCode[] = [];
+  RuleStep: sysCode[] = [];
   constructor(protected httpClient: HttpClient) { super(httpClient); }
 
   private async checkEmpNoPromise(empNo: String) {
@@ -113,6 +114,22 @@ export class LoginService extends BaseService {
       }
     });
     return this.Condition;
+  }
+
+  private async getRuleStepOption(): Promise<Observable<any>> {
+    const baseUrl = 'getRuleStepOption';
+    return await this.postHttpClient(baseUrl).toPromise();
+  }
+
+  public async getRuleStep(): Promise<sysCode[]> {
+    await this.getRuleStepOption().then((data: any) => {
+      for (const jsonObj of data) {
+        const codeNo = jsonObj['code_NO'];
+        const desc = jsonObj['code_DESC'];
+        this.RuleStep.push({value: codeNo, viewValue: desc})
+      }
+    });
+    return this.RuleStep;
   }
 
 }

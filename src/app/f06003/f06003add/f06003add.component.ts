@@ -2,25 +2,29 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogAdd } from 'src/app/interfaceCRUD.component';
-import { F06001Service } from '../f06001.service';
+import { F06003Service } from '../f06003.service';
+
+interface sysCode {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
-  templateUrl: './f06001add.component.html',
-  styleUrls: ['./f06001add.component.css']
+  templateUrl: './f06003add.component.html',
+  styleUrls: ['./f06003add.component.css']
 })
-export class F06001addComponent implements DialogAdd {
+export class F06003addComponent implements OnInit, DialogAdd {
+  ParmData: sysCode[] = null;
   BusTypeValue: string;
-  ParmTypeValue: string;
-  ParmDimValue: string;
-  ParmClassValue: string;
-  ConditionValue: string;
-  ParmIdValue: string;
-  ParmNameValue: string;
-  ParmValue: string;
-  ParmDefaultValue: string;
-  constructor(public dialogRef: MatDialogRef<F06001addComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public f06001Service: F06001Service, public dialog: MatDialog) { }
+  RuleStepValue: string;
+  ParmDataValue: string;
+  constructor(public dialogRef: MatDialogRef<F06003addComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public f06003Service: F06003Service, public dialog: MatDialog) { }
 
+    ngOnInit(): void {
+      this.data.BusType = JSON.parse(sessionStorage.getItem('BusType'));
+      this.data.RuleStep = JSON.parse(sessionStorage.getItem('RuleStep'));
+    }
 
     formControl = new FormControl('', [
       Validators.required
@@ -35,6 +39,17 @@ export class F06001addComponent implements DialogAdd {
 
     submit() {
 
+    }
+
+    changeSelect() {
+      this.ParmData = [];
+      this.f06003Service.getRuleParmWhereBusType(this.BusTypeValue).subscribe(data => {
+        for (const jsonObj of data) {
+          const codeNo = jsonObj['code_NO'];
+          const desc = jsonObj['code_DESC'];
+          this.ParmData.push({value: codeNo, viewValue: desc})
+        }
+      });
     }
 
     onNoClick(): void {
@@ -55,4 +70,5 @@ export class F06001addComponent implements DialogAdd {
       //   this.dialogRef.close({ event:'success' })
       // }
     }
+
 }

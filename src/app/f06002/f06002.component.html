@@ -52,10 +52,10 @@
     </mat-header-cell>
 
     <mat-cell *matCellDef="let row; let i=index;">
-      <button mat-icon-button color="primary" (click)="startEdit(i, row.conditionid, row.conditiondesc, row.conditionwhere)">
+      <button mat-icon-button color="primary" (click)="startEdit(i, [row.conditionid, row.conditiondesc, row.conditionwhere])">
         <mat-icon aria-label="編輯">edit</mat-icon>
       </button>
-      <button mat-icon-button color="accent" (click)="deleteItem(i, row.conditionid)">
+      <button mat-icon-button color="accent" (click)="deleteItem(i, [row.conditionid])">
         <mat-icon aria-label="刪除">delete</mat-icon>
       </button>
     </mat-cell>

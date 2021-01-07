@@ -1,13 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogEdit } from 'src/app/interfaceCRUD.component';
 import { F06001Service } from '../f06001.service';
 
 @Component({
   templateUrl: './f06001edit.component.html',
   styleUrls: ['./f06001edit.component.css']
 })
-export class F06001editComponent {
+export class F06001editComponent implements DialogEdit {
   BusTypeValue: string = this.data.bustype;
   ParmTypeValue: string = this.data.parmtype;
   ParmDimValue: string = this.data.parmdim;

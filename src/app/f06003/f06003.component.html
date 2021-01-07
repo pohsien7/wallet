@@ -1,1 +1,95 @@
-<p>f06003 works!</p>
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>業務別</mat-label>
+        <mat-select [(ngModel)]="BusTypeValue" name="BusTypeOption" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of BusType" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>步驟別</mat-label>
+        <mat-select [(ngModel)]="RuleStepValue" name="RuleStepOption" (ngModelChange)="changeOption()">
+          <mat-option *ngFor="let option of RuleStep" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>參數</mat-label>
+        <mat-select [(ngModel)]="ParmDataValue" name="ParmDimOption" (ngModelChange)="changeOption()">
+          <mat-option *ngFor="let option of ParmData" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" value="{{selectedValue}}"/>
+      </mat-form-field>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
+<mat-table [dataSource]="ruleParamStep" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="BUSTYPE">
+    <mat-header-cell *matHeaderCellDef>業務別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(BusType, row.BUSTYPE) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="RULESTEP">
+    <mat-header-cell *matHeaderCellDef>步驟別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(RuleStep, row.RULESTEP) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="PARMID">
+    <mat-header-cell *matHeaderCellDef>參數代碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.PARMID }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="PARMNAME">
+    <mat-header-cell *matHeaderCellDef>參數</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.PARMNAME }}</mat-cell>
+  </ng-container>
+
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon aria-label="新增">add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button mat-icon-button color="primary" (click)="startEdit(i, [row.BUSTYPE, row.RULESTEP, row.PARMID])">
+        <mat-icon aria-label="編輯">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" (click)="deleteItem(i, [row.BUSTYPE, row.RULESTEP, row.PARMID])">
+        <mat-icon aria-label="刪除">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="['BUSTYPE', 'RULESTEP', 'PARMID', 'PARMNAME', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let ruleParmRow; columns: ['BUSTYPE', 'RULESTEP', 'PARMID', 'PARMNAME', 'actions']"></mat-row>
+</mat-table>

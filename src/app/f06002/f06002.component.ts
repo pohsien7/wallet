@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { InterfaceCRUD } from '../interfaceCRUD.component';
 import { F06002Service } from './f06002.service';
 import { F06002addComponent } from './f06002add/f06002add.component';
 import { F06002deleteComponent } from './f06002delete/f06002delete.component';
@@ -21,7 +22,7 @@ interface sysCode {
   templateUrl: './f06002.component.html',
   styleUrls: ['./f06002.component.css']
 })
-export class F06002Component implements OnInit, AfterViewInit {
+export class F06002Component implements OnInit, AfterViewInit, InterfaceCRUD {
   sysCode: sysCode[] = [];
   selectedValue: string;
   constructor(private f06002Service: F06002Service, public dialog: MatDialog) { }
@@ -34,6 +35,7 @@ export class F06002Component implements OnInit, AfterViewInit {
       }
     });
   }
+
 //=================================================================
   totalCount: any;
   @ViewChild('paginator', { static: true }) paginator: MatPaginator;
@@ -53,9 +55,20 @@ export class F06002Component implements OnInit, AfterViewInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      this.getRuleParmList();
+      this.getViewDataList();
     });
-    this.getRuleParmList();
+    this.getViewDataList();
+  }
+
+//=================================================================
+  getOptionDesc(option: sysCode[], codeVal: string): string {
+    for (const data of option) {
+      if (data.value == codeVal) {
+        return data.viewValue;
+        break;
+      }
+    }
+    return codeVal;
   }
 
   changeSelect() {
@@ -70,10 +83,10 @@ export class F06002Component implements OnInit, AfterViewInit {
 
   changeSort(sortInfo: Sort) {
     this.currentSort = sortInfo;
-    this.getRuleParmList();
+    this.getViewDataList();
   }
 
-  getRuleParmList() {
+  getViewDataList() {
     this.f06002Service.getRuleParmList(this.currentPage.pageIndex, this.currentPage.pageSize)
     .subscribe(data => {
       this.totalCount = data.size;
@@ -90,18 +103,18 @@ export class F06002Component implements OnInit, AfterViewInit {
     });
   }
 
-  startEdit(i: number, conditionid: string, conditiondesc: string, conditionwhere: string) {
+  startEdit(i: number, parmArray: string[]) {
       const dialogRef = this.dialog.open(F06002editComponent, {
-        data: { conditionid: conditionid, conditiondesc: conditiondesc , conditionwhere: conditionwhere }
+        data: { conditionid: parmArray[0], conditiondesc: parmArray[1] , conditionwhere: parmArray[2] }
       });
       dialogRef.afterClosed().subscribe(result => {
         // if (result === 1) { this.refreshTable(); }
       });
   }
 
-  deleteItem(i: number, conditionid: string) {
+  deleteItem(i: number, parmArray: string[]) {
       const dialogRef = this.dialog.open(F06002deleteComponent, {
-        data: { conditionid: conditionid }
+        data: { conditionid: parmArray[0] }
       });
       dialogRef.afterClosed().subscribe(result => {
         // if (result === 1) { this.refreshTable(); }

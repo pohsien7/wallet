@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { InterfaceCRUD } from '../interfaceCRUD.component';
 import { F06001Service } from './f06001.service';
 import { F06001addComponent } from './f06001add/f06001add.component';
 import { F06001deleteComponent } from './f06001delete/f06001delete.component';
@@ -20,7 +21,7 @@ interface sysCode {
   templateUrl: './f06001.component.html',
   styleUrls: ['./f06001.component.css']
 })
-export class F06001Component implements OnInit, AfterViewInit {
+export class F06001Component implements OnInit, AfterViewInit, InterfaceCRUD {
   BusType: sysCode[] = [];
   ParmType: sysCode[] = [];
   ParmDim: sysCode[] = [];
@@ -65,11 +66,12 @@ export class F06001Component implements OnInit, AfterViewInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      this.getRuleParmList();
+      this.getViewDataList();
     });
-    this.getRuleParmList();
+    this.getViewDataList();
   }
 
+//=================================================================
   getOptionDesc(option: sysCode[], codeVal: string): string {
     for (const data of option) {
       if (data.value == codeVal) {
@@ -105,10 +107,10 @@ export class F06001Component implements OnInit, AfterViewInit {
 
   changeSort(sortInfo: Sort) {
     this.currentSort = sortInfo;
-    this.getRuleParmList();
+    this.getViewDataList();
   }
 
-  getRuleParmList() {
+  getViewDataList() {
     this.f06001Service.getRuleParmList(this.currentPage.pageIndex, this.currentPage.pageSize)
     .subscribe(data => {
       this.totalCount = data.size;
@@ -131,20 +133,18 @@ export class F06001Component implements OnInit, AfterViewInit {
     });
   }
 
-  startEdit(i: number, bustype: string, parmid: string, parmname: string,
-                       parmtype: string, parmdim: string, parmvalue: string,
-                       condition: string, parmdefault: string, parmclass: string) {
+  startEdit(i: number, parmArray: string[]) {
       const dialogRef = this.dialog.open(F06001editComponent, {
         data: {
-                bustype: bustype,
-                parmid: parmid,
-                parmname: parmname,
-                parmtype: parmtype,
-                parmdim: parmdim,
-                parmvalue: parmvalue,
-                condition: condition,
-                parmdefault: parmdefault,
-                parmclass: parmclass,
+                bustype: parmArray[0],
+                parmid: parmArray[1],
+                parmname: parmArray[2],
+                parmtype: parmArray[3],
+                parmdim: parmArray[4],
+                parmvalue: parmArray[5],
+                condition: parmArray[6],
+                parmdefault: parmArray[7],
+                parmclass: parmArray[8],
                 BusType: this.BusType,
                 ParmType: this.ParmType,
                 ParmDim: this.ParmDim,
@@ -157,9 +157,13 @@ export class F06001Component implements OnInit, AfterViewInit {
       });
   }
 
-  deleteItem(i: number, conditionid: string) {
+  deleteItem(i: number, parmArray: string[]) {
       const dialogRef = this.dialog.open(F06001deleteComponent, {
-        data: { conditionid: conditionid }
+        data: {
+                bustype: parmArray[0],
+                parmid: parmArray[1],
+                parmname: parmArray[2]
+              }
       });
       dialogRef.afterClosed().subscribe(result => {
         // if (result === 1) { this.refreshTable(); }
