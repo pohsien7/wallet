@@ -29,6 +29,8 @@ export class LoginComponent {
       sessionStorage.setItem('ParmClass', JSON.stringify(await this.loginService.getParmClass()));
       sessionStorage.setItem('Condition', JSON.stringify(await this.loginService.getCondition()));
       sessionStorage.setItem('RuleStep', JSON.stringify(await this.loginService.getRuleStep()));
+      sessionStorage.setItem('PolicyId', JSON.stringify(await this.loginService.getPolicyId()));
+
     } else {
       alert('帳號有誤!');
     }

@@ -76,7 +76,7 @@ export class F06003Component implements OnInit, AfterViewInit, InterfaceCRUD {
     const bustype = this.BusTypeValue != null ? this.BusTypeValue : '';
     const rulestep = this.RuleStepValue != null ? this.RuleStepValue : '';
     const parmdata = this.ParmDataValue != null ? this.ParmDataValue : '';
-    this.f06003Service.getRuleStepWithFormData(this.currentPage.pageIndex, this.currentPage.pageSize, bustype, rulestep, parmdata)
+    this.f06003Service.getRuleStepWithParm(this.currentPage.pageIndex, this.currentPage.pageSize, bustype, rulestep, parmdata)
     .subscribe(data => {
       this.totalCount = data.size;
       this.ruleParamStep.data = data.items;

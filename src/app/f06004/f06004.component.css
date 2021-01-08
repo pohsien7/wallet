@@ -1,0 +1,40 @@
+
+.mat-column-BUSTYPE {
+  max-width: 10%;
+}
+
+.mat-column-POLICYID {
+  max-width: 10%;
+}
+
+.mat-column-STEPID {
+  max-width: 10%;
+}
+
+.mat-column-COLID {
+  max-width: 7%;
+}
+
+.mat-column-TABLEID {
+  max-width: 7%;
+}
+
+.mat-column-FIELEID {
+  max-width: 7%;
+}
+
+.mat-column-CONDITIONWHERE {
+  max-width: 35%;
+}
+
+.mat-column-SEARCHFLAG {
+  max-width: 10%;
+}
+
+.mat-column-POLICYACTION {
+  max-width: 5%;
+}
+
+.mat-column-actions {
+  max-width: 10%;
+}

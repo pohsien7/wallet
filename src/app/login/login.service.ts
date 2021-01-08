@@ -18,6 +18,7 @@ export class LoginService extends BaseService {
   ParmClass: sysCode[] = [];
   Condition: sysCode[] = [];
   RuleStep: sysCode[] = [];
+  PolicyId: sysCode[] = [];
   constructor(protected httpClient: HttpClient) { super(httpClient); }
 
   private async checkEmpNoPromise(empNo: String) {
@@ -46,7 +47,7 @@ export class LoginService extends BaseService {
       for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
-        this.BusType.push({value: codeNo, viewValue: desc})
+        this.BusType.push({value: codeNo, viewValue: desc});
       }
     });
     return this.BusType;
@@ -54,7 +55,7 @@ export class LoginService extends BaseService {
 
   private async getParmTypeOption(): Promise<Observable<any>> {
     const baseUrl = 'getParmTypeOption';
-    return await this.postHttpClient(baseUrl).toPromise();;
+    return await this.postHttpClient(baseUrl).toPromise();
   }
 
   public async getParmType(): Promise<sysCode[]> {
@@ -62,7 +63,7 @@ export class LoginService extends BaseService {
       for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
-        this.ParmType.push({value: codeNo, viewValue: desc})
+        this.ParmType.push({value: codeNo, viewValue: desc});
       }
     });
     return this.ParmType;
@@ -78,7 +79,7 @@ export class LoginService extends BaseService {
       for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
-        this.ParmDim.push({value: codeNo, viewValue: desc})
+        this.ParmDim.push({value: codeNo, viewValue: desc});
       }
     });
     return this.ParmDim;
@@ -86,7 +87,7 @@ export class LoginService extends BaseService {
 
   private async getParmClassOption(): Promise<Observable<any>> {
     const baseUrl = 'getParmClassOption';
-    return await this.postHttpClient(baseUrl).toPromise();;
+    return await this.postHttpClient(baseUrl).toPromise();
   }
 
   public async getParmClass(): Promise<sysCode[]> {
@@ -94,7 +95,7 @@ export class LoginService extends BaseService {
       for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
-        this.ParmClass.push({value: codeNo, viewValue: desc})
+        this.ParmClass.push({value: codeNo, viewValue: desc});
       }
     });
     return this.ParmClass;
@@ -110,7 +111,7 @@ export class LoginService extends BaseService {
       for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
-        this.Condition.push({value: codeNo, viewValue: desc})
+        this.Condition.push({value: codeNo, viewValue: desc});
       }
     });
     return this.Condition;
@@ -126,10 +127,26 @@ export class LoginService extends BaseService {
       for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
-        this.RuleStep.push({value: codeNo, viewValue: desc})
+        this.RuleStep.push({value: codeNo, viewValue: desc});
       }
     });
     return this.RuleStep;
+  }
+
+  private async getPolicyIdOption(): Promise<Observable<any>> {
+    const baseUrl = 'getPolicyIdOption';
+    return await this.postHttpClient(baseUrl).toPromise();
+  }
+
+  public async getPolicyId(): Promise<sysCode[]> {
+    await this.getPolicyIdOption().then((data: any) => {
+      for (const jsonObj of data) {
+        const codeNo = jsonObj['code_NO'];
+        const desc = jsonObj['code_DESC'];
+        this.PolicyId.push({value: codeNo, viewValue: desc});
+      }
+    });
+    return this.PolicyId;
   }
 
 }

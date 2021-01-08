@@ -22,7 +22,7 @@ export class F06003Service extends BaseService {
     return this.postHttpClient(targetUrl);
   }
 
-  getRuleStepWithFormData(pageIndex: number, pageSize: number, bustype: string, rulestep: string, parmid: string): Observable<any> {
+  getRuleStepWithParm(pageIndex: number, pageSize: number, bustype: string, rulestep: string, parmid: string): Observable<any> {
     const baseUrl = 'getRuleParmStep2';
     let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}&bustype=${bustype}&rulestep=${rulestep}&parmid=${parmid}`;
     return this.postHttpClient(targetUrl);

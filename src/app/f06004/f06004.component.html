@@ -1,1 +1,136 @@
-<p>f06004 works!</p>
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>業務別</mat-label>
+        <mat-select [(ngModel)]="BusTypeValue" name="BusTypeOption" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of BusType" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>步驟別</mat-label>
+        <mat-select [(ngModel)]="RuleStepValue" name="RuleStepOption" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of RuleStep" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>欄位代碼</mat-label>
+        <input matInput [(ngModel)]="ColumnIdValue" (blur)="changeSelect()">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>寫入表格</mat-label>
+        <input matInput [(ngModel)]="TableIdValue" (blur)="changeSelect()">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>寫入欄位</mat-label>
+        <input matInput [(ngModel)]="FieldIdValue" (blur)="changeSelect()">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>策略代碼</mat-label>
+        <mat-select [(ngModel)]="PolicyIdValue" name="RuleStepOption" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of PolicyId" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" value="{{selectedValue}}"/>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
+<mat-table [dataSource]="ruleStep2ColSource" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="BUSTYPE">
+    <mat-header-cell *matHeaderCellDef>業務別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(BusType, row.BUSTYPE) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="POLICYID">
+    <mat-header-cell *matHeaderCellDef>策略名稱</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(PolicyId, row.POLICYID) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="STEPID">
+    <mat-header-cell *matHeaderCellDef>步驟別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(RuleStep, row.STEPID) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="COLID">
+    <mat-header-cell *matHeaderCellDef>欄位代碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.COLID }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="TABLEID">
+    <mat-header-cell *matHeaderCellDef>寫入表格</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.TABLEID }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="FIELEID">
+    <mat-header-cell *matHeaderCellDef>寫入欄位</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.FIELEID }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="CONDITIONWHERE">
+    <mat-header-cell *matHeaderCellDef>限定條件</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.CONDITIONWHERE }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="SEARCHFLAG">
+    <mat-header-cell *matHeaderCellDef>允許搜尋不到</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(YnOption, row.SEARCHFLAG) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="POLICYACTION">
+    <mat-header-cell *matHeaderCellDef>動作</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(Action, row.POLICYACTION) }}</mat-cell>
+  </ng-container>
+
+
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon aria-label="新增">add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+
+      <button mat-icon-button color="primary" (click)="startEdit(i, [row.BUSTYPE, row.POLICYID, row.STEPID,
+                                                                     row.COLID, row.TABLEID, row.FIELEID,
+                                                                     row.CONDITIONWHERE, row.SEARCHFLAG, row.POLICYACTION])">
+        <mat-icon aria-label="編輯">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" (click)="deleteItem(i, [row.BUSTYPE, row.POLICYID, row.STEPID, row.COLID, row.TABLEID, row.FIELEID])">
+        <mat-icon aria-label="刪除">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="['BUSTYPE', 'POLICYID', 'STEPID', 'COLID', 'TABLEID', 'FIELEID', 'CONDITIONWHERE', 'SEARCHFLAG', 'POLICYACTION', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let ruleParmRow; columns: ['BUSTYPE', 'POLICYID', 'STEPID', 'COLID', 'TABLEID', 'FIELEID', 'CONDITIONWHERE', 'SEARCHFLAG', 'POLICYACTION', 'actions']"></mat-row>
+</mat-table>

@@ -1,0 +1,16 @@
+<div class="container">
+  <h3 mat-dialog-title>確定要刪除嗎？</h3>
+  <div mat-dialog-content>
+    業務別：{{ data.bustype }} <br>
+    策略名稱：{{ data.policyid }} <br>
+    步驟別：{{ data.stepid }} <br>
+    欄位代碼：{{ data.colid }} <br>
+    寫入表格：{{ data.tableid }} <br>
+    寫入欄位：{{ data.fieleid }} <br>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="1" (click)="confirmDelete()">Delete</button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </div>
+</div>
