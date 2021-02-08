@@ -1,1 +1,132 @@
-<p>f06005 works!</p>
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>業務別</mat-label>
+        <mat-select [(ngModel)]="BusTypeValue" name="BusTypeValue" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of BusType" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>步驟別</mat-label>
+        <mat-select [(ngModel)]="RuleStepValue" name="RuleStepValue" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of RuleStep" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>策略類型</mat-label>
+        <mat-select [(ngModel)]="PolicyTypeVal" name="PolicyTypeVal" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of PolicyType" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>策略代碼</mat-label>
+        <mat-select [(ngModel)]="PolicyIdValue" name="PolicyIdValue" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let option of PolicyId" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" value="{{selectedValue}}"/>
+      </mat-form-field>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
+<mat-table [dataSource]="rulePolicySource" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="BUSTYPE">
+    <mat-header-cell *matHeaderCellDef>業務別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(BusType, row.BUSTYPE) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="STEPID">
+    <mat-header-cell *matHeaderCellDef>步驟別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(RuleStep, row.STEPID) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="POLICYID">
+    <mat-header-cell *matHeaderCellDef>策略代碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.POLICYID }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="POLICYNAME">
+    <mat-header-cell *matHeaderCellDef>策略名稱</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.POLICYNAME }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="POLICYTYPE">
+    <mat-header-cell *matHeaderCellDef>策略類型</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(PolicyType, row.POLICYTYPE) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="RETURNVALUE">
+    <mat-header-cell *matHeaderCellDef>回傳值</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.RETURNVALUE }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="RETURNTYPE">
+    <mat-header-cell *matHeaderCellDef>回傳值類型</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.RETURNTYPE }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="PRIORITY">
+    <mat-header-cell *matHeaderCellDef>優先序</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.PRIORITY }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="STEPPRIORTY">
+    <mat-header-cell *matHeaderCellDef>步驟序</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.STEPPRIORTY }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="POLICYCONDITION">
+    <mat-header-cell *matHeaderCellDef>策略比對條件或計算式</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.POLICYCONDITION }}</mat-cell>
+  </ng-container>
+
+
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon aria-label="新增">add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+
+      <button mat-icon-button color="primary" (click)="startEdit(i, [row.BUSTYPE, row.POLICYID, row.STEPID,
+                                                                     row.COLID, row.TABLEID, row.FIELEID,
+                                                                     row.CONDITIONWHERE, row.SEARCHFLAG, row.POLICYACTION])">
+        <mat-icon aria-label="編輯">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" (click)="deleteItem(i, [row.BUSTYPE, row.POLICYID, row.STEPID, row.COLID, row.TABLEID, row.FIELEID])">
+        <mat-icon aria-label="刪除">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="['BUSTYPE', 'STEPID', 'POLICYID', 'POLICYNAME', 'POLICYTYPE', 'RETURNVALUE', 'RETURNTYPE', 'PRIORITY', 'STEPPRIORTY', 'POLICYCONDITION', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let ruleParmRow; columns: ['BUSTYPE', 'STEPID', 'POLICYID', 'POLICYNAME', 'POLICYTYPE', 'RETURNVALUE', 'RETURNTYPE', 'PRIORITY', 'STEPPRIORTY', 'POLICYCONDITION', 'actions']"></mat-row>
+</mat-table>

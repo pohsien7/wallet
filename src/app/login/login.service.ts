@@ -149,4 +149,10 @@ export class LoginService extends BaseService {
     return this.PolicyId;
   }
 
+  public async test(): Promise<Observable<any>> {
+    return await this.testHttpClient().toPromise();
+  }
+
+
+
 }

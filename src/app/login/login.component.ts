@@ -30,7 +30,7 @@ export class LoginComponent {
       sessionStorage.setItem('Condition', JSON.stringify(await this.loginService.getCondition()));
       sessionStorage.setItem('RuleStep', JSON.stringify(await this.loginService.getRuleStep()));
       sessionStorage.setItem('PolicyId', JSON.stringify(await this.loginService.getPolicyId()));
-
+      this.loginService.test();
     } else {
       alert('帳號有誤!');
     }

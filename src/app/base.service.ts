@@ -28,4 +28,9 @@ export class BaseService {
   protected postFormData(baseUrl: string, formdata: FormData) {
     return this.httpClient.post<any>(environment.allowOrigin + '/' + baseUrl, formdata, this.httpOptions);
   }
+
+  protected testHttpClient() {
+    const baseUrl = 'http://192.168.0.62:9082/FlowControl?strCodeType=EProdTypeCode';
+    return this.httpClient.get<any>(baseUrl);
+  }
 }
