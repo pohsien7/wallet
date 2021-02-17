@@ -1,29 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MenuListModule } from './menu-list/menu-list.module';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
 import { F05001Component } from './f05001/f05001.component';
 import { F05002Component } from './f05002/f05002.component';
-import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './login/login.component';
+
 import { F01001Component } from './f01001/f01001.component';
-
-import { MatTableModule }from '@angular/material/table'
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
 import { F01001scn1Component } from './f01001/f01001scn1/f01001scn1.component';
-
 import { F01001scn3Component } from './f01001/f01001scn3/f01001scn3.component';
 import { F01001scn4Component } from './f01001/f01001scn4/f01001scn4.component';
 import { F01001scn5Component } from './f01001/f01001scn5/f01001scn5.component';
@@ -61,6 +53,11 @@ import { F06003deleteComponent } from './f06003/f06003delete/f06003delete.compon
 import { F06004addComponent } from './f06004/f06004add/f06004add.component';
 import { F06004editComponent } from './f06004/f06004edit/f06004edit.component';
 import { F06004deleteComponent } from './f06004/f06004delete/f06004delete.component';
+
+import { MaterialModule } from './material/material.module';
+import { F04002addComponent } from './f04002/f04002add/f04002add.component';
+import { F04002editComponent } from './f04002/f04002edit/f04002edit.component';
+import { F04002addConfirmComponent } from './f04002/f04002add/f04002add-confirm/f04002add-confirm.component';
 
 @NgModule({
   declarations: [
@@ -105,22 +102,21 @@ import { F06004deleteComponent } from './f06004/f06004delete/f06004delete.compon
     F06003deleteComponent,
     F06004addComponent,
     F06004editComponent,
-    F06004deleteComponent
+    F06004deleteComponent,
+    F04002addComponent,
+    F04002editComponent,
+    F04002addConfirmComponent
   ],
   imports: [
     BrowserModule,
     MenuListModule,
     FormsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientJsonpModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MatFormFieldModule,
-    MatInputModule,
     FlexLayoutModule
   ],
   providers: [BnNgIdleService],

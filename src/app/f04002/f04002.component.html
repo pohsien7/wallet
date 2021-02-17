@@ -1,1 +1,81 @@
-<p>f04002 works!</p>
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>原因碼類別</mat-label>
+        <mat-select [(ngModel)]="selectedAdrValue" name="adrType" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let code of adrType" [value]="code.value">
+            {{code.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>補件類別</mat-label>
+        <mat-select [(ngModel)]="selectedAdValue" name="adType" (ngModelChange)="changeSelect()" [disabled]="selectedAdrValue != 'R' ? true : null">
+          <mat-option *ngFor="let code of adType" [value]="code.value">
+            {{code.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td style="width: 10px;">
+    </td>
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
+
+<mat-table [dataSource]="adrCodeSource" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="reason_KIND">
+    <mat-header-cell *matHeaderCellDef>原因碼類別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.reason_KIND }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="ad_TYPE">
+    <mat-header-cell *matHeaderCellDef>補件類別</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.ad_TYPE }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="reason_CODE">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>原因碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.reason_CODE }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="reason_DESC">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>原因碼說明</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.reason_DESC }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="reason_SORT">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>排序</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.reason_SORT }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="reason_FLAG">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>是否停用</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.reason_FLAG }}</mat-cell>
+  </ng-container>
+
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button mat-icon-button color="accent" (click)="startEdit(i,
+        row.reason_KIND, row.ad_TYPE, row.reason_CODE, row.reason_DESC, row.reason_SORT, row.reason_FLAG)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="['reason_KIND', 'ad_TYPE', 'reason_CODE', 'reason_DESC', 'reason_SORT', 'reason_FLAG', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let mappingCodeRow; columns: ['reason_KIND', 'ad_TYPE', 'reason_CODE', 'reason_DESC', 'reason_SORT', 'reason_FLAG', 'actions']"></mat-row>
+</mat-table>

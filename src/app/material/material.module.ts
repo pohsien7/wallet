@@ -43,7 +43,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {NgxMatFileInputModule} from '@angular-material-components/file-input';
+//import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
   exports: [
@@ -70,6 +72,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatFormFieldModule,
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
@@ -92,7 +95,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    MaterialFileInputModule
+    //MaterialFileInputModule,
+    NgxMatFileInputModule
   ]
 })
 export class MaterialModule { }

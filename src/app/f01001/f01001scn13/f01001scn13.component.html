@@ -1,3 +1,10 @@
+  <mat-card class="zone zone-picker">
+    <mat-form-field>
+      <ngx-mat-file-input [formControl]="fileControl" [accept]="accept" placeholder="請選擇檔案"></ngx-mat-file-input>
+    </mat-form-field>
+    <button mat-stroked-button style="margin-left: 10px;" (click)="uploadFileToCE()"><mat-icon matSuffix>backup</mat-icon></button>
+  </mat-card>
+
 <table>
   <tr>
     <td>

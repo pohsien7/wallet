@@ -87,7 +87,6 @@ export class F01001Component implements AfterViewInit  {
   // }
 
   getLockCase(param: String) {
-    console.log('1.' + param);
     // CALL API 鎖定流程上的案件並取得案件資料
     this.router.navigate(['./F01001SCN1'], { queryParams: { applno: param } });
   }

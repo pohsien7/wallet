@@ -10,7 +10,7 @@
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User">
       <mat-icon>account_box</mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item [routerLink]="'logOut'">
+        <button mat-menu-item (click)="logOut()">
           <mat-icon>exit_to_app</mat-icon>
           <span>登出</span>
         </button>
