@@ -58,6 +58,10 @@ import { MaterialModule } from './material/material.module';
 import { F04002addComponent } from './f04002/f04002add/f04002add.component';
 import { F04002editComponent } from './f04002/f04002edit/f04002edit.component';
 import { F04002addConfirmComponent } from './f04002/f04002add/f04002add-confirm/f04002add-confirm.component';
+import { F04003Component } from './f04003/f04003.component';
+import { F04004Component } from './f04004/f04004.component';
+import { F04003addComponent } from './f04003/f04003add/f04003add.component';
+import { F04003editComponent } from './f04003/f04003edit/f04003edit.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +109,11 @@ import { F04002addConfirmComponent } from './f04002/f04002add/f04002add-confirm/
     F06004deleteComponent,
     F04002addComponent,
     F04002editComponent,
-    F04002addConfirmComponent
+    F04002addConfirmComponent,
+    F04003Component,
+    F04004Component,
+    F04003addComponent,
+    F04003editComponent
   ],
   imports: [
     BrowserModule,
