@@ -22,14 +22,14 @@ export class LoginService extends BaseService {
   constructor(protected httpClient: HttpClient) { super(httpClient); }
 
   private async checkEmpNoPromise(empNo: String) {
-    const getURL = 'checkId?empNo=' + empNo;
-    return await this.getHttpClient(getURL).toPromise();
+    const baseURL = 'FunctionList?strEmpID=' + empNo;
+    return await this.postHttpClient(baseURL).toPromise();
   }
 
   public async initData(empNo: String): Promise<boolean> {
     let isOk: boolean = false;
     const data = await this.checkEmpNoPromise(empNo).then((data) => {
-      isOk = (JSON.stringify(data) === 'true');
+      isOk = (data.RspCode === '0000' && data.RspMsg === '成功');
     })
     .catch((error) => {
       console.log("Promise rejected with " + JSON.stringify(error));
@@ -38,15 +38,15 @@ export class LoginService extends BaseService {
   }
 
   private async getBusTypeOption(): Promise<Observable<any>> {
-    const baseUrl = 'getBusTypeOption';
-    return await this.postHttpClient(baseUrl).toPromise();
+    const baseUrl = 'http://192.168.0.62:9082/RuleCode/GetRuleCodeV2';
+    return await this.getRuleEngine(baseUrl).toPromise();
   }
 
   public async getBusType(): Promise<sysCode[]> {
     await this.getBusTypeOption().then((data: any) => {
-      for (const jsonObj of data) {
-        const codeNo = jsonObj['code_NO'];
-        const desc = jsonObj['code_DESC'];
+      for (const jsonObj of data.rspBody) {
+        const codeNo = jsonObj['codeNo'];
+        const desc = jsonObj['codeDesc'];
         this.BusType.push({value: codeNo, viewValue: desc});
       }
     });

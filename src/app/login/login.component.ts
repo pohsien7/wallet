@@ -24,13 +24,12 @@ export class LoginComponent {
         if (isTimedOut) { this.routerGoUrl(); }
       });
       sessionStorage.setItem('BusType', JSON.stringify(await this.loginService.getBusType()));
-      sessionStorage.setItem('ParmType', JSON.stringify(await this.loginService.getParmType()));
-      sessionStorage.setItem('ParmDim', JSON.stringify(await this.loginService.getParmDim()));
-      sessionStorage.setItem('ParmClass', JSON.stringify(await this.loginService.getParmClass()));
-      sessionStorage.setItem('Condition', JSON.stringify(await this.loginService.getCondition()));
-      sessionStorage.setItem('RuleStep', JSON.stringify(await this.loginService.getRuleStep()));
-      sessionStorage.setItem('PolicyId', JSON.stringify(await this.loginService.getPolicyId()));
-      this.loginService.test();
+      //sessionStorage.setItem('ParmType', JSON.stringify(await this.loginService.getParmType()));
+      //sessionStorage.setItem('ParmDim', JSON.stringify(await this.loginService.getParmDim()));
+      //sessionStorage.setItem('ParmClass', JSON.stringify(await this.loginService.getParmClass()));
+      //sessionStorage.setItem('Condition', JSON.stringify(await this.loginService.getCondition()));
+      //sessionStorage.setItem('RuleStep', JSON.stringify(await this.loginService.getRuleStep()));
+      //sessionStorage.setItem('PolicyId', JSON.stringify(await this.loginService.getPolicyId()));
     } else {
       alert('帳號有誤!');
     }

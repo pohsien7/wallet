@@ -19,16 +19,15 @@ export class MenuListService extends BaseService {
 
   public getMenuData(): Observable<any> {
     this.route.queryParams.subscribe(params => {
-      console.log('menu====>' + params['empNo']);
       this.empNo = params['empNo'];
     });
-    const baseURL = 'getMenu?empNo=' + this.empNo;
+    const baseURL = 'FunctionList?strEmpID=' + this.empNo;
     return this.postHttpClient(baseURL);
   }
 
   addMenu(): void {
     this.getMenuData().subscribe(data => {
-      for (const jsonObj of data) {
+      for (const jsonObj of data.RspBody) {
         const title = jsonObj['title'];                // 功能主標題
         const dataMap = jsonObj['dataMap'];
         const keyArray = Object.keys(dataMap);         // 功能子標題

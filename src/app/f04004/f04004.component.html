@@ -1,1 +1,40 @@
-<p>f04004 works!</p>
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>請選擇角色</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="sysCode" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let code of sysCode" [value]="code.value">
+            {{code.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click) = "save()">儲存</button>
+    </td>
+  </tr>
+</table>
+
+<mat-table [dataSource]="roleFunctionSource">
+   <ng-container matColumnDef="IS_CHK">
+    <mat-header-cell *matHeaderCellDef><mat-checkbox color="primary"(change)="setAll($event.checked)">全選</mat-checkbox></mat-header-cell>
+    <mat-cell *matCellDef="let row; let i = index;">
+      <mat-checkbox [(ngModel)]="chkArray[i].completed" color="primary"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="CODE_DESC">
+    <mat-header-cell *matHeaderCellDef>功能名稱</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.CODE_DESC }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="FN_NO">
+    <mat-header-cell *matHeaderCellDef>程式代碼</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.FN_NO }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="FN_DESC">
+    <mat-header-cell *matHeaderCellDef>程式名稱</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.FN_DESC }}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['IS_CHK', 'CODE_DESC', 'FN_NO', 'FN_DESC']"></mat-header-row>
+  <mat-row *matRowDef="let mappingCodeRow; columns: ['IS_CHK', 'CODE_DESC', 'FN_NO', 'FN_DESC']"></mat-row>
+</mat-table>
