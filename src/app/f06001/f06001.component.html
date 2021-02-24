@@ -100,39 +100,39 @@
 <mat-table [dataSource]="ruleParamCondition" matSort (matSortChange)="changeSort($event)">
   <ng-container matColumnDef="BUSTYPE">
     <mat-header-cell *matHeaderCellDef>業務別</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ getOptionDesc(BusType, row.BUSTYPE) }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(BusType, row.BusType) }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="PARMID">
     <mat-header-cell *matHeaderCellDef>參數代碼</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.PARMID }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ row.ParmId }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="PARMNAME">
     <mat-header-cell *matHeaderCellDef>參數名稱</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.PARMNAME }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ row.ParmName }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="PARMTYPE">
     <mat-header-cell *matHeaderCellDef>參數類型</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ getOptionDesc(ParmType, row.PARMTYPE) }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(ParmType, row.ParmType) }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="PARMDIM">
     <mat-header-cell *matHeaderCellDef>參數型別</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ getOptionDesc(ParmDim, row.PARMDIM) }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(ParmDim, row.ParmDim) }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="PARMVALUE">
     <mat-header-cell *matHeaderCellDef>參數值</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.PARMVALUE }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ row.ParmValue }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="CONDITION">
     <mat-header-cell *matHeaderCellDef>使用條件</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ getOptionDesc(Condition, row.CONDITION) }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(Condition, row.Condition) }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="PARMDEFAULT">
     <mat-header-cell *matHeaderCellDef>預設值</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.PARMDEFAULT }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ row.ParmDefault }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="PARMCLASS">
     <mat-header-cell *matHeaderCellDef>參數類別</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ getOptionDesc(ParmClass, row.PARMCLASS) }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(ParmClass, row.ParmClass) }}</mat-cell>
   </ng-container>
 
 
@@ -146,12 +146,12 @@
 
     <mat-cell *matCellDef="let row; let i=index;">
 
-      <button mat-icon-button color="primary" (click)="startEdit(i, [row.BUSTYPE, row.PARMID, row.PARMNAME,
-                                                                     row.PARMTYPE, row.PARMDIM, row.PARMVALUE,
-                                                                     row.CONDITION, row.PARMDEFAULT, row.PARMCLASS])">
+      <button mat-icon-button color="primary" (click)="startEdit(i, [row.BusType, row.ParmId, row.ParmName,
+                                                                     row.ParmType, row.ParmDim, row.ParmValue,
+                                                                     row.Condition, row.ParmDefault, row.ParmClass])">
         <mat-icon aria-label="編輯">edit</mat-icon>
       </button>
-      <button mat-icon-button color="accent" (click)="deleteItem(i, [row.BUSTYPE, row.PARMID, row.PARMNAME])">
+      <button mat-icon-button color="accent" (click)="deleteItem(i, [row.BusType, row.ParmId, row.ParmName])">
         <mat-icon aria-label="刪除">delete</mat-icon>
       </button>
     </mat-cell>

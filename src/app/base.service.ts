@@ -37,14 +37,12 @@ export class BaseService {
     return this.httpClient.post<any>(environment.allowOrigin + '/' + baseUrl, formdata, this.httpOptions);
   }
 
-  protected getRuleEngine(baseUrl: string) {
-    let formData = new FormData();
-    formData.append('value', 'BUS_TYPE');
-    return this.httpClient.post<any>(baseUrl, formData, this.httpOptions);
-  }
-
-  protected testHttpClient() {
-    const baseUrl = 'http://192.168.0.62:9082/RuleCode/GetRuleCode?value=BUS_TYPE';
+  protected postApiFor_NET(baseUrl: string) {
     return this.httpClient.post<any>(baseUrl, this.httpOptions);
   }
+
+  protected formDataApiFor_NET(baseUrl: string, formdata: FormData) {
+    return this.httpClient.post<any>(baseUrl, formdata, this.httpOptions);
+  }
+
 }

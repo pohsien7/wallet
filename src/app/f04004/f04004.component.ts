@@ -40,8 +40,8 @@ export class F04004Component implements OnInit, AfterViewInit {
       if (obj.completed) { valArray.push(obj.value); }
     }
     const formData: FormData = new FormData();
-    formData.append("ROLE_NO", this.selectedValue);
-    formData.append("FN_NO", valArray.toString());
+    formData.append("roleNo", this.selectedValue);
+    formData.append("fnNo", valArray.toString());
     this.f04004Service.saveRoleFunction(formData).subscribe(data => {
       alert((data.RspCode === '0000' && data.RspMsg === '成功') ? '儲存成功！' : '儲存失敗！');
     });

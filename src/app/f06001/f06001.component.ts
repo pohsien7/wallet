@@ -83,21 +83,13 @@ export class F06001Component implements OnInit, AfterViewInit, InterfaceCRUD {
   }
 
   changeSelect() {
-    const formData = new FormData();
-    formData.append('bustype', this.BusTypeValue != null ? this.BusTypeValue : '');
-    formData.append('parmtype', this.ParmTypeValue != null ? this.ParmTypeValue : '');
-    formData.append('parmdim', this.ParmDimValue != null ? this.ParmDimValue : '');
-    formData.append('parmclass', this.ParmClassValue != null ? this.ParmClassValue : '');
-    formData.append('condition', this.ConditionValue != null ? this.ConditionValue : '');
-    formData.append('parmid', this.ParmIdValue != null ? this.ParmIdValue : '');
-    formData.append('parmname', this.ParmNameValue != null ? this.ParmNameValue : '');
-    formData.append('parmvalue', this.ParmValue != null ? this.ParmValue : '');
-    formData.append('parmdefault', this.ParmDefaultValue != null ? this.ParmDefaultValue : '');
-    this.f06001Service.getRuleParmWithFormData(this.currentPage.pageIndex, this.currentPage.pageSize, formData)
-    .subscribe(data => {
-      this.totalCount = data.size;
-      this.ruleParamCondition.data = data.items;
-    });
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 10,
+      length: null
+    };
+    this.paginator.firstPage();
+    this.getViewDataList();
   }
 
   applyFilter(event: Event) {
@@ -111,10 +103,20 @@ export class F06001Component implements OnInit, AfterViewInit, InterfaceCRUD {
   }
 
   getViewDataList() {
-    this.f06001Service.getRuleParmList(this.currentPage.pageIndex, this.currentPage.pageSize)
+    const formData = new FormData();
+    formData.append('BusType', this.BusTypeValue != null ? this.BusTypeValue : '');
+    formData.append('ParmType', this.ParmTypeValue != null ? this.ParmTypeValue : '');
+    formData.append('ParmDim', this.ParmDimValue != null ? this.ParmDimValue : '');
+    formData.append('ParmClass', this.ParmClassValue != null ? this.ParmClassValue : '');
+    formData.append('Condition', this.ConditionValue != null ? this.ConditionValue : '');
+    formData.append('ParmId', this.ParmIdValue != null ? this.ParmIdValue : '');
+    formData.append('ParmName', this.ParmNameValue != null ? this.ParmNameValue : '');
+    formData.append('ParmValue', this.ParmValue != null ? this.ParmValue : '');
+    formData.append('ParmDefault', this.ParmDefaultValue != null ? this.ParmDefaultValue : '');
+    this.f06001Service.getRuleParmList(this.currentPage.pageIndex, this.currentPage.pageSize, formData)
     .subscribe(data => {
-      this.totalCount = data.size;
-      this.ruleParamCondition.data = data.items;
+      this.totalCount = data.RspBody.size;
+      this.ruleParamCondition.data = data.RspBody.items;
     });
   }
 

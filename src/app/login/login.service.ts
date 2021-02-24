@@ -12,18 +12,15 @@ interface sysCode {
   providedIn: 'root'
 })
 export class LoginService extends BaseService {
-  BusType: sysCode[] = [];
-  ParmType: sysCode[] = [];
-  ParmDim: sysCode[] = [];
-  ParmClass: sysCode[] = [];
-  Condition: sysCode[] = [];
-  RuleStep: sysCode[] = [];
-  PolicyId: sysCode[] = [];
+  RuleCode: sysCode[] = null;
+  Condition: sysCode[] = null;
   constructor(protected httpClient: HttpClient) { super(httpClient); }
 
   private async checkEmpNoPromise(empNo: String) {
     const baseURL = 'FunctionList?strEmpID=' + empNo;
     return await this.postHttpClient(baseURL).toPromise();
+    //const baseURL = 'http://192.168.0.62:9082/FunctionList?strEmpID=' + empNo;
+    //return await this.postHttpClient(baseURL).toPromise();
   }
 
   public async initData(empNo: String): Promise<boolean> {
@@ -37,122 +34,40 @@ export class LoginService extends BaseService {
     return isOk;
   }
 
-  private async getBusTypeOption(): Promise<Observable<any>> {
-    const baseUrl = 'http://192.168.0.62:9082/RuleCode/GetRuleCodeV2';
-    return await this.getRuleEngine(baseUrl).toPromise();
+  private async getRuleCodeOption(value: string): Promise<Observable<any>> {
+    let formData = new FormData();
+    formData.append('value', value);
+    const baseUrl = 'http://192.168.0.62:9082/RuleCode/GetRuleCode';
+    return await this.formDataApiFor_NET(baseUrl, formData).toPromise();
   }
 
-  public async getBusType(): Promise<sysCode[]> {
-    await this.getBusTypeOption().then((data: any) => {
+  public async getRuleCode(value: string): Promise<sysCode[]> {
+    this.RuleCode = [];
+    await this.getRuleCodeOption(value).then((data: any) => {
       for (const jsonObj of data.rspBody) {
         const codeNo = jsonObj['codeNo'];
         const desc = jsonObj['codeDesc'];
-        this.BusType.push({value: codeNo, viewValue: desc});
+        this.RuleCode.push({value: codeNo, viewValue: desc});
       }
     });
-    return this.BusType;
-  }
-
-  private async getParmTypeOption(): Promise<Observable<any>> {
-    const baseUrl = 'getParmTypeOption';
-    return await this.postHttpClient(baseUrl).toPromise();
-  }
-
-  public async getParmType(): Promise<sysCode[]> {
-    await this.getParmTypeOption().then((data: any) => {
-      for (const jsonObj of data) {
-        const codeNo = jsonObj['code_NO'];
-        const desc = jsonObj['code_DESC'];
-        this.ParmType.push({value: codeNo, viewValue: desc});
-      }
-    });
-    return this.ParmType;
-  }
-
-  private async getParmDimOption(): Promise<Observable<any>> {
-    const baseUrl = 'getParmDimOption';
-    return await this.postHttpClient(baseUrl).toPromise();;
-  }
-
-  public async getParmDim(): Promise<sysCode[]> {
-    await this.getParmDimOption().then((data: any) => {
-      for (const jsonObj of data) {
-        const codeNo = jsonObj['code_NO'];
-        const desc = jsonObj['code_DESC'];
-        this.ParmDim.push({value: codeNo, viewValue: desc});
-      }
-    });
-    return this.ParmDim;
-  }
-
-  private async getParmClassOption(): Promise<Observable<any>> {
-    const baseUrl = 'getParmClassOption';
-    return await this.postHttpClient(baseUrl).toPromise();
-  }
-
-  public async getParmClass(): Promise<sysCode[]> {
-    await this.getParmClassOption().then((data: any) => {
-      for (const jsonObj of data) {
-        const codeNo = jsonObj['code_NO'];
-        const desc = jsonObj['code_DESC'];
-        this.ParmClass.push({value: codeNo, viewValue: desc});
-      }
-    });
-    return this.ParmClass;
+    return this.RuleCode;
   }
 
   private async getConditionOption(): Promise<Observable<any>> {
-    const baseUrl = 'getConditionOption';
-    return await this.postHttpClient(baseUrl).toPromise();
+    let formData = new FormData();
+    const baseUrl = 'http://192.168.0.62:9082/RuleParamCondition/GetCondition';
+    return await this.formDataApiFor_NET(baseUrl, formData).toPromise();
   }
 
   public async getCondition(): Promise<sysCode[]> {
+    this.Condition = [];
     await this.getConditionOption().then((data: any) => {
-      for (const jsonObj of data) {
-        const codeNo = jsonObj['code_NO'];
-        const desc = jsonObj['code_DESC'];
+      for (const jsonObj of data.rspBody) {
+        const codeNo = jsonObj['conditionId'];
+        const desc = jsonObj['conditionName'];
         this.Condition.push({value: codeNo, viewValue: desc});
       }
     });
     return this.Condition;
   }
-
-  private async getRuleStepOption(): Promise<Observable<any>> {
-    const baseUrl = 'getRuleStepOption';
-    return await this.postHttpClient(baseUrl).toPromise();
-  }
-
-  public async getRuleStep(): Promise<sysCode[]> {
-    await this.getRuleStepOption().then((data: any) => {
-      for (const jsonObj of data) {
-        const codeNo = jsonObj['code_NO'];
-        const desc = jsonObj['code_DESC'];
-        this.RuleStep.push({value: codeNo, viewValue: desc});
-      }
-    });
-    return this.RuleStep;
-  }
-
-  private async getPolicyIdOption(): Promise<Observable<any>> {
-    const baseUrl = 'getPolicyIdOption';
-    return await this.postHttpClient(baseUrl).toPromise();
-  }
-
-  public async getPolicyId(): Promise<sysCode[]> {
-    await this.getPolicyIdOption().then((data: any) => {
-      for (const jsonObj of data) {
-        const codeNo = jsonObj['code_NO'];
-        const desc = jsonObj['code_DESC'];
-        this.PolicyId.push({value: codeNo, viewValue: desc});
-      }
-    });
-    return this.PolicyId;
-  }
-
-  public async test(): Promise<Observable<any>> {
-    return await this.testHttpClient().toPromise();
-  }
-
-
-
 }

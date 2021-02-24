@@ -36,8 +36,10 @@ export class EditComponent {
     this.dialogRef.close();
   }
 
-  stopEdit(): void {
-    this.f04001Service.updateMappingCode(this.data);
+  async stopEdit(): Promise<void> {
+    let msg: any;
+    msg = await this.f04001Service.editMsgString(this.data);
+    alert(msg);
   }
 
 }

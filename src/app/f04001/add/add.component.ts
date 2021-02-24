@@ -41,17 +41,11 @@ export class AddComponent {
     }
 
     public async confirmAdd(): Promise<void> {
-      if (await this.f04001Service.checkMappgingExist(this.data)) {
-        const childernDialogRef = this.dialog.open(AddConfirmComponent, {
-          data: { msgStr: '該類別已存在此代碼' }
-        });
-
-      } else {
-        this.f04001Service.insertMappingCode(this.data);
-        const childernDialogRef = this.dialog.open(AddConfirmComponent, {
-          data: { msgStr: '儲存成功！' }
-        });
-        this.dialogRef.close({ event:'success' })
-      }
+      let msgStr: string = "";
+      msgStr = await this.f04001Service.saveMsgString(this.data);
+      const childernDialogRef = this.dialog.open(AddConfirmComponent, {
+        data: { msgStr: msgStr }
+      });
+      if (msgStr === '儲存成功！') { this.dialogRef.close({ event:'success' }); }
     }
 }
