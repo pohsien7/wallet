@@ -23,11 +23,13 @@ export class MenuListService extends BaseService {
     });
     const baseURL = 'FunctionList?strEmpID=' + this.empNo;
     return this.postHttpClient(baseURL);
+    //const baseURL = 'http://192.168.0.62:9082/FunctionList?strEmpID=' + this.empNo;
+    //return this.postApiFor_NET(baseURL);
   }
 
   addMenu(): void {
     this.getMenuData().subscribe(data => {
-      for (const jsonObj of data.RspBody) {
+      for (const jsonObj of data.rspBody) {
         const title = jsonObj['title'];                // 功能主標題
         const dataMap = jsonObj['dataMap'];
         const keyArray = Object.keys(dataMap);         // 功能子標題

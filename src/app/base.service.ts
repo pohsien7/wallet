@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 
 @Injectable({
@@ -43,6 +44,12 @@ export class BaseService {
 
   protected formDataApiFor_NET(baseUrl: string, formdata: FormData) {
     return this.httpClient.post<any>(baseUrl, formdata, this.httpOptions);
+  }
+
+  public getSysTypeCode(codeType: string): Observable<any> {
+    const baseUrl = 'getMappingCodeOption';
+    let targetUrl = `${baseUrl}?codeType=${codeType}`;
+    return this.postHttpClient(targetUrl);
   }
 
 }

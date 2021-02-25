@@ -1,1 +1,101 @@
-<p>f04003 works!</p>
+<table>
+  <tr>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>員工編號</mat-label>
+        <input matInput [(ngModel)]="empNoValue">
+      </mat-form-field>
+    </td>
+
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>是否在職</mat-label>
+        <mat-select [(ngModel)]="ynValue" name="ynCode" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let code of ynCode" [value]="code.value">
+            {{code.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>推廣單位</mat-label>
+        <mat-select [(ngModel)]="unitValue" name="unitCode" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let code of unitCode" [value]="code.value">
+            {{code.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>群組</mat-label>
+        <mat-select [(ngModel)]="groupValue" name="groupCode" (ngModelChange)="changeSelect()">
+          <mat-option *ngFor="let code of groupCode" [value]="code.value">
+            {{code.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+
+    <td>
+      <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 50, 100]"
+               [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</table>
+
+<mat-table [dataSource]="employeeSource" matSort (matSortChange)="changeSort($event)">
+  <ng-container matColumnDef="EMP_NO">
+    <mat-header-cell *matHeaderCellDef>員工編號</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.EMP_NO }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="EMP_NAME">
+    <mat-header-cell *matHeaderCellDef>員工姓名</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.EMP_NAME }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="ON_JOB">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>是否在職</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(ynCode, row.ON_JOB) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="EMAIL">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>電子信箱</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.EMAIL }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="PROMOTION_UNIT">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>推廣單位</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(unitCode, row.PROMOTION_UNIT) }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="GROUP_NO">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>群組</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ getOptionDesc(groupCode, row.GROUP_NO) }}</mat-cell>
+  </ng-container>
+
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button mat-icon-button color="accent" (click)="startEdit(i,
+        row.code_TYPE, row.code_NO, row.code_DESC, row.code_SORT, row.code_TAG, row.code_FLAG)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="['EMP_NO', 'EMP_NAME', 'ON_JOB', 'EMAIL', 'PROMOTION_UNIT', 'GROUP_NO', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let mappingCodeRow; columns: ['EMP_NO', 'EMP_NAME', 'ON_JOB', 'EMAIL', 'PROMOTION_UNIT', 'GROUP_NO', 'actions']"></mat-row>
+</mat-table>

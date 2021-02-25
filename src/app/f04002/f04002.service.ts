@@ -10,21 +10,11 @@ export class F04002Service extends BaseService {
   constructor(protected httpClient: HttpClient) { super(httpClient); }
   dialogData: any;
 
-  getSysTypeCode(codeType: string): Observable<any> {
-    const baseUrl = 'getMappingCodeOption';
-    let targetUrl = `${baseUrl}?codeType=${codeType}`;
-    return this.postHttpClient(targetUrl);
-  }
-
   getAdrCode(pageIndex: number, pageSize: number, adrType: string, adType: string): Observable<any> {
     const baseUrl = 'getAdrCode';
     let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}&adrType=${adrType}&adType=${adType}`;
     return this.postHttpClient(targetUrl);
   }
-
-
-
-
 
   updateAdrCode(datas: any) {
     const baseUrl = 'updateAdrCode';

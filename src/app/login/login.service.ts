@@ -20,13 +20,13 @@ export class LoginService extends BaseService {
     const baseURL = 'FunctionList?strEmpID=' + empNo;
     return await this.postHttpClient(baseURL).toPromise();
     //const baseURL = 'http://192.168.0.62:9082/FunctionList?strEmpID=' + empNo;
-    //return await this.postHttpClient(baseURL).toPromise();
+    //return await this.postApiFor_NET(baseURL).toPromise();
   }
 
   public async initData(empNo: String): Promise<boolean> {
     let isOk: boolean = false;
     const data = await this.checkEmpNoPromise(empNo).then((data) => {
-      isOk = (data.RspCode === '0000' && data.RspMsg === '成功');
+      isOk = (data.rspCode === '0000' && data.rspMsg === '成功');
     })
     .catch((error) => {
       console.log("Promise rejected with " + JSON.stringify(error));
