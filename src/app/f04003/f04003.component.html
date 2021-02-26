@@ -3,7 +3,7 @@
     <td>
       <mat-form-field appearance="fill">
         <mat-label>員工編號</mat-label>
-        <input matInput [(ngModel)]="empNoValue">
+        <input matInput [(ngModel)]="empNoValue"  (blur)="changeSelect()">
       </mat-form-field>
     </td>
 
@@ -88,7 +88,7 @@
 
     <mat-cell *matCellDef="let row; let i=index;">
       <button mat-icon-button color="accent" (click)="startEdit(i,
-        row.code_TYPE, row.code_NO, row.code_DESC, row.code_SORT, row.code_TAG, row.code_FLAG)">
+        row.EMP_NO, row.EMP_NAME, row.ON_JOB, row.EMAIL, row.PROMOTION_UNIT, row.GROUP_NO)">
         <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
     </mat-cell>

@@ -62,6 +62,11 @@ export class F04002Component implements OnInit, AfterViewInit {
     });
   }
 
+  changeSort(sortInfo: Sort) {
+    this.currentSort = sortInfo;
+    this.getAdrCode();
+  }
+
   changeSelect() {
     if (this.selectedAdrValue != 'R') { this.selectedAdValue = ''; }
     this.currentPage = {
@@ -74,9 +79,10 @@ export class F04002Component implements OnInit, AfterViewInit {
   }
 
   getAdrCode() {
+    const baseUrl = 'getAdrCode';
     const adrVal = this.selectedAdrValue != null ? this.selectedAdrValue : '';
     const adVal = this.selectedAdValue != null ? this.selectedAdValue : '';
-    this.f04002Service.getAdrCode(this.currentPage.pageIndex, this.currentPage.pageSize, adrVal, adVal).subscribe(data => {
+    this.f04002Service.getAdrCodeList(baseUrl, this.currentPage.pageIndex, this.currentPage.pageSize, adrVal, adVal).subscribe(data => {
       this.totalCount = data.size;
       this.adrCodeSource.data = data.items;
     });
@@ -120,13 +126,8 @@ export class F04002Component implements OnInit, AfterViewInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result === 1) { this.refreshTable(); }
+        if (result.event == 'success') { this.refreshTable(); }
       });
-  }
-
-  changeSort(sortInfo: Sort) {
-    this.currentSort = sortInfo;
-    this.getAdrCode();
   }
 
   private refreshTable() {

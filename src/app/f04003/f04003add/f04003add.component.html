@@ -1,1 +1,63 @@
-<p>f04003add works!</p>
+<div class="container">
+  <h2 mat-dialog-title>組織人員維護-編輯</h2>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit()" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="員工編號" [(ngModel)]="data.EMP_NO" name="EMP_NO" required >
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="員工姓名" [(ngModel)]="data.EMP_NAME" name="EMP_NAME" required >
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select placeholder="是否在職" [(ngModel)]="data.ON_JOB" name="ON_JOB" required>
+          <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+            {{yn.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="EMAIL" [(ngModel)]="data.EMAIL" name="EMAIL" required>
+        </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select placeholder="推廣單位" [(ngModel)]="data.PROMOTION_UNIT" name="PROMOTION_UNIT" >
+          <mat-option *ngFor="let obj of data.UNIT" [value]="obj.value">
+            {{obj.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select placeholder="群組" [(ngModel)]="data.GROUP_NO" name="GROUP_NO" >
+          <mat-option *ngFor="let obj of data.GROUP" [value]="obj.value">
+            {{obj.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

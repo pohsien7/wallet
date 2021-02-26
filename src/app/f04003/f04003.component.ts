@@ -35,7 +35,8 @@ export class F04003Component implements OnInit, AfterViewInit {
         this.unitCode.push({value: codeNo, viewValue: desc})
       }
     });
-    this.f04003Service.getGroupCode().subscribe(data => {
+    const baseUrl = 'EmployeeSet/gmOption';
+    this.f04003Service.getGroupCode(baseUrl).subscribe(data => {
       for (const jsonObj of data.rspBody) {
         const codeNo = jsonObj['GROUP_NO'];
         const desc = jsonObj['GROUP_NAME'];
@@ -73,7 +74,8 @@ export class F04003Component implements OnInit, AfterViewInit {
     formData.append('onJob', this.ynValue != null ?　this.ynValue : '');
     formData.append('unit', this.unitValue != null ?　this.unitValue : '');
     formData.append('group', this.groupValue != null ?　this.groupValue : '');
-    this.f04003Service.getEmployeeList(this.currentPage.pageIndex, this.currentPage.pageSize, formData)
+    const baseUrl = 'EmployeeSet/search';
+    this.f04003Service.getEmployeeList(baseUrl, this.currentPage.pageIndex, this.currentPage.pageSize, formData)
     .subscribe(data => {
       this.totalCount = data.rspBody.size;
       this.employeeSource.data = data.rspBody.items;
@@ -105,19 +107,16 @@ export class F04003Component implements OnInit, AfterViewInit {
     return codeVal;
   }
 
-
-
-
-
-
   addNew() {
       const dialogRef = this.dialog.open(F04003addComponent, {
         data: {
-                code_TYPE: '',
-                code_NO : '' , code_DESC: '',
-                code_SORT: '', code_TAG: '',
-                code_FLAG: 'N'
-              }
+          EMP_NO: '',
+          EMP_NAME : '' ,
+          ON_JOB: 'Y',
+          EMAIL: '',
+          PROMOTION_UNIT: '',
+          GROUP_NO: ''
+        }
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result.event == 'success') { this.refreshTable(); }
@@ -125,16 +124,19 @@ export class F04003Component implements OnInit, AfterViewInit {
   }
 
   startEdit(i: number,
-    code_TYPE: string, code_NO: string, code_DESC: string,
-    code_SORT: string, code_TAG: string, code_FLAG: string) {
+    EMP_NO: string, EMP_NAME: string, ON_JOB: string,
+    EMAIL: string, PROMOTION_UNIT: string, GROUP_NO: string) {
       const dialogRef = this.dialog.open(F04003editComponent, {
         data: {
-               code_TYPE: code_TYPE, code_NO : code_NO , code_DESC: code_DESC,
-               code_SORT: code_SORT, code_TAG: code_TAG, code_FLAG: code_FLAG
-              }
+          EMP_NO: EMP_NO, EMP_NAME : EMP_NAME , ON_JOB: ON_JOB, EMAIL: EMAIL,
+          PROMOTION_UNIT: PROMOTION_UNIT != null ? PROMOTION_UNIT : '',
+          GROUP_NO: GROUP_NO != null ? GROUP_NO : '',
+          UNIT: this.unitCode,
+          GROUP: this.groupCode
+        }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result === 1) { this.refreshTable(); }
+        if (result.event == 'success') { this.refreshTable(); }
       });
   }
 

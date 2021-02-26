@@ -13,25 +13,25 @@
     <td>
       <mat-form-field appearance="fill">
         <mat-label>參數代碼</mat-label>
-        <input matInput [(ngModel)]="ParmIdValue">
+        <input matInput [(ngModel)]="ParmIdValue" (blur)="changeSelect()">
       </mat-form-field>
     </td>
     <td>
       <mat-form-field appearance="fill">
         <mat-label>參數名稱</mat-label>
-        <input matInput [(ngModel)]="ParmNameValue">
+        <input matInput [(ngModel)]="ParmNameValue" (blur)="changeSelect()">
       </mat-form-field>
     </td>
     <td>
       <mat-form-field appearance="fill">
         <mat-label>參數值</mat-label>
-        <input matInput [(ngModel)]="ParmValue">
+        <input matInput [(ngModel)]="ParmValue" (blur)="changeSelect()">
       </mat-form-field>
     </td>
     <td>
       <mat-form-field appearance="fill">
         <mat-label>參數預設值</mat-label>
-        <input matInput [(ngModel)]="ParmDefaultValue">
+        <input matInput [(ngModel)]="ParmDefaultValue" (blur)="changeSelect()">
       </mat-form-field>
     </td>
   </tr>

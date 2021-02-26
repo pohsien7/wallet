@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { F04004Service } from './f04004.service';
+import { F04004confirmComponent } from './f04004confirm/f04004confirm.component';
 
 interface sysCode {
   value: string;
@@ -22,10 +24,11 @@ export class F04004Component implements OnInit, AfterViewInit {
   chkArray: checkBox[] = [];
   selectedValue: string;
   roleFunctionSource = new MatTableDataSource<any>();
-  constructor(private f04004Service: F04004Service) { }
+  constructor(private f04004Service: F04004Service, public dialog: MatDialog,) { }
   ngAfterViewInit() {}
   ngOnInit(): void {
-    this.f04004Service.getRoleOption().subscribe(data => {
+    const baseUrl = 'FunctionRoleSet/option';
+    this.f04004Service.getRoleOption(baseUrl).subscribe(data => {
       for (const jsonObj of data.RspBody) {
         const codeNo = jsonObj['ROLE_NO'];
         const desc = jsonObj['ROLE_NAME'];
@@ -42,9 +45,13 @@ export class F04004Component implements OnInit, AfterViewInit {
     const formData: FormData = new FormData();
     formData.append("roleNo", this.selectedValue);
     formData.append("fnNo", valArray.toString());
-    this.f04004Service.saveRoleFunction(formData).subscribe(data => {
-      alert((data.RspCode === '0000' && data.RspMsg === '成功') ? '儲存成功！' : '儲存失敗！');
+    const baseUrl = 'FunctionRoleSet/save';
+     this.f04004Service.saveRoleFunction(baseUrl, formData).subscribe(data => {
+      const childernDialogRef = this.dialog.open(F04004confirmComponent, {
+        data: { msgStr: (data.RspCode === '0000' && data.RspMsg === '成功') ? '儲存成功！' : '儲存失敗！' }
+      });
     });
+
   }
 
   setAll(completed: boolean) {
@@ -58,7 +65,8 @@ export class F04004Component implements OnInit, AfterViewInit {
   }
 
   private async getRoleFunction() {
-    this.f04004Service.getRoleFunction(this.selectedValue).subscribe(data => {
+    const baseUrl = 'FunctionRoleSet/search';
+    this.f04004Service.getRoleFunction(baseUrl, this.selectedValue).subscribe(data => {
       if (this.chkArray.length > 0) {
         let i: number = 0;
         for (const jsonObj of data.RspBody) {

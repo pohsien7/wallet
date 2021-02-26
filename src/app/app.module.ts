@@ -28,9 +28,8 @@ import { F01001scn11Component } from './f01001/f01001scn11/f01001scn11.component
 import { F01001scn12Component } from './f01001/f01001scn12/f01001scn12.component';
 
 import { F01001scn2Component } from './f01001/f01001scn2/f01001scn2.component';
-import { AddComponent } from './f04001/add/add.component';
-import { EditComponent } from './f04001/edit/edit.component';
-import { AddConfirmComponent } from './f04001/add/add-confirm/add-confirm.component';
+import { AddComponent } from './f04001/f04001add/add.component';
+import { EditComponent } from './f04001/f04001edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BnNgIdleService } from 'bn-ng-idle';
 
@@ -57,11 +56,14 @@ import { F06004deleteComponent } from './f06004/f06004delete/f06004delete.compon
 import { MaterialModule } from './material/material.module';
 import { F04002addComponent } from './f04002/f04002add/f04002add.component';
 import { F04002editComponent } from './f04002/f04002edit/f04002edit.component';
-import { F04002addConfirmComponent } from './f04002/f04002add/f04002add-confirm/f04002add-confirm.component';
 import { F04003Component } from './f04003/f04003.component';
 import { F04004Component } from './f04004/f04004.component';
 import { F04003addComponent } from './f04003/f04003add/f04003add.component';
 import { F04003editComponent } from './f04003/f04003edit/f04003edit.component';
+import { F04003confirmComponent } from './f04003/f04003confirm/f04003confirm.component';
+import { F04001confirmComponent } from './f04001/f04001confirm/f04001confirm.component';
+import { F04002confirmComponent } from './f04002/f04002confirm/f04002confirm.component';
+import { F04004confirmComponent } from './f04004/f04004confirm/f04004confirm.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,6 @@ import { F04003editComponent } from './f04003/f04003edit/f04003edit.component';
     F01001scn13Component,
     AddComponent,
     EditComponent,
-    AddConfirmComponent,
     ShowComponent,
     F06001Component,
     F06002Component,
@@ -109,11 +110,14 @@ import { F04003editComponent } from './f04003/f04003edit/f04003edit.component';
     F06004deleteComponent,
     F04002addComponent,
     F04002editComponent,
-    F04002addConfirmComponent,
     F04003Component,
     F04004Component,
     F04003addComponent,
-    F04003editComponent
+    F04003editComponent,
+    F04003confirmComponent,
+    F04001confirmComponent,
+    F04002confirmComponent,
+    F04004confirmComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-import { isNull } from '@angular/compiler/src/output/output_ast';
 import { AfterViewInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -6,8 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddComponent } from './add/add.component';
-import { EditComponent } from './edit/edit.component';
+import { AddComponent } from './f04001add/add.component';
+import { EditComponent } from './f04001edit/edit.component';
 import { F04001Service } from './f04001.service';
 
 interface sysCode {
@@ -25,8 +24,9 @@ export class F04001Component implements OnInit, AfterViewInit {
   selectedValue: string;
   constructor(private f04001Service: F04001Service, public dialog: MatDialog) { }
   ngOnInit(): void {
-    this.f04001Service.getSysTypeCode().subscribe(data => {
-      for (const jsonObj of data.RspBody) {
+    const baseUrl = 'http://192.168.0.62:9082/SystemCodeSet/Option';
+    this.f04001Service.getSysTypeCode(baseUrl).subscribe(data => {
+      for (const jsonObj of data.rspBody) {
         const codeNo = jsonObj['codeNo'];
         const desc = jsonObj['codeDesc'];
         this.sysCode.push({value: codeNo, viewValue: desc})
@@ -62,10 +62,11 @@ export class F04001Component implements OnInit, AfterViewInit {
   }
 
   getMappingCode() {
-    this.f04001Service.getMappingCode(this.currentPage.pageIndex, this.currentPage.pageSize, this.selectedValue)
+    const baseUrl = 'SystemCodeSet/Search';
+    this.f04001Service.getMappingCodeList(baseUrl, this.currentPage.pageIndex, this.currentPage.pageSize, this.selectedValue)
     .subscribe(data => {
-      this.totalCount = data.RspBody.size;
-      this.mappingCodeSource.data = data.RspBody.items;
+      this.totalCount = data.rspBody.size;
+      this.mappingCodeSource.data = data.rspBody.items;
     });
   }
 
@@ -112,7 +113,7 @@ export class F04001Component implements OnInit, AfterViewInit {
               }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result === 1) { this.refreshTable(); }
+        if (result.event == 'success') { this.refreshTable(); }
       });
   }
 

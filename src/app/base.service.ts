@@ -52,4 +52,34 @@ export class BaseService {
     return this.postHttpClient(targetUrl);
   }
 
+
+
+
+
+  //================下方是提供新增或編輯用的function========================================
+
+  private async saveOrEditWithFormData(baseUrl: string, formdata: FormData) {
+    return await this.formDataApiFor_NET(baseUrl, formdata).toPromise();
+  }
+
+  private async getMsgStr(rspCode: string, rspMsg: string): Promise<string> {
+    let msgStr: string = "";
+    if (rspCode === '0000' && rspMsg === '成功') { msgStr = '儲存成功！'; }
+    if (rspCode === '9999' && rspMsg === '失敗') { msgStr = '儲存失敗！'; }
+    if (rspCode === '0001' && rspMsg === '資料重複無法新增') { msgStr = '資料重複無法新增'; }
+    return msgStr;
+  }
+
+  public async saveOrEditMsgString(baseUrl: string, formdata: FormData): Promise<string> {
+    let rspCode: any;
+    let rspMsg: any;
+    await this.saveOrEditWithFormData(baseUrl, formdata).then((data) => {
+      rspCode = data.rspCode;
+      rspMsg = data.rspMsg;
+    })
+    .catch((error) => {
+      console.log("Promise rejected with " + JSON.stringify(error));
+    });
+    return await this.getMsgStr(rspCode, rspMsg);
+  }
 }

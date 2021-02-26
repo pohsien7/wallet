@@ -10,42 +10,19 @@ export class F04002Service extends BaseService {
   constructor(protected httpClient: HttpClient) { super(httpClient); }
   dialogData: any;
 
-  getAdrCode(pageIndex: number, pageSize: number, adrType: string, adType: string): Observable<any> {
-    const baseUrl = 'getAdrCode';
+  getAdrCodeList(baseUrl: string, pageIndex: number, pageSize: number, adrType: string, adType: string): Observable<any> {
     let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}&adrType=${adrType}&adType=${adType}`;
     return this.postHttpClient(targetUrl);
   }
 
-  updateAdrCode(datas: any) {
-    const baseUrl = 'updateAdrCode';
-    let targetUrl = `${baseUrl}?reason_KIND=${datas.reason_KIND}&ad_TYPE=${datas.ad_TYPE}&reason_CODE=${datas.reason_CODE}&reason_DESC=${datas.reason_DESC}&reason_SORT=${datas.reason_SORT}&reason_FLAG=${datas.reason_FLAG}`;
-    this.postHttpClient(targetUrl).subscribe(data => {
-      console.log(data);
-    });
-  }
-
-  private async checkExistPromise(datas: any) {
-    const baseUrl = 'checkAdrCodeExist';
-    let targetUrl = `${baseUrl}?reason_KIND=${datas.reason_KIND}&ad_TYPE=${datas.ad_TYPE}&reason_CODE=${datas.reason_CODE}`;
-    return await this.postHttpClient(targetUrl).toPromise();
-  }
-
-  public async checkAdrCodeExist(datas: any): Promise<boolean> {
-    let isExist: boolean = false;
-    const data = await this.checkExistPromise(datas).then((data) => {
-      isExist = (JSON.stringify(data) === 'true');
-    })
-    .catch((error) => {
-      console.log("Promise rejected with " + JSON.stringify(error));
-    });
-    return isExist;
-  }
-
-  insertAdrCode(datas: any) {
-    const baseUrl = 'insertAdrCode';
-    let targetUrl = `${baseUrl}?reason_KIND=${datas.reason_KIND}&ad_TYPE=${datas.ad_TYPE}&reason_CODE=${datas.reason_CODE}&reason_DESC=${datas.reason_DESC}&reason_SORT=${datas.reason_SORT}&reason_FLAG=${datas.reason_FLAG}`;
-    this.postHttpClient(targetUrl).subscribe(data => {
-      console.log(data);
-    });
+  addOrEditAdrCodeSet(baseUrl: string, data: any): any {
+    const formdata: FormData = new FormData();
+    formdata.append('REASON_KIND', data.reason_KIND);
+    formdata.append('AD_TYPE', data.ad_TYPE);
+    formdata.append('REASON_CODE', data.reason_CODE);
+    formdata.append('REASON_DESC', data.reason_DESC);
+    formdata.append('REASON_SORT', data.reason_SORT);
+    formdata.append('REASON_FLAG', data.reason_FLAG);
+    return this.saveOrEditMsgString(baseUrl, formdata);
   }
 }

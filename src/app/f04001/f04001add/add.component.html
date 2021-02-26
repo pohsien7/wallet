@@ -13,7 +13,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="代碼" [(ngModel)]="data.code_NO" name="code_NO" >
+        <input matInput #input class="form-control" placeholder="代碼" [(ngModel)]="data.code_NO" name="code_NO" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
@@ -28,7 +28,7 @@
 
     <div class="form">
         <mat-form-field color="accent">
-          <input matInput placeholder="排序" [(ngModel)]="data.code_SORT" name="code_SORT">
+          <input matInput placeholder="排序" [(ngModel)]="data.code_SORT" name="code_SORT" required>
         </mat-form-field>
     </div>
 
