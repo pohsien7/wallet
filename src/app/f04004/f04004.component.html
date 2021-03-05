@@ -17,24 +17,24 @@
 </table>
 
 <mat-table [dataSource]="roleFunctionSource">
-   <ng-container matColumnDef="IS_CHK">
+   <ng-container matColumnDef="is_CHK">
     <mat-header-cell *matHeaderCellDef><mat-checkbox color="primary"(change)="setAll($event.checked)">全選</mat-checkbox></mat-header-cell>
     <mat-cell *matCellDef="let row; let i = index;">
       <mat-checkbox [(ngModel)]="chkArray[i].completed" color="primary"></mat-checkbox>
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef="CODE_DESC">
+  <ng-container matColumnDef="code_DESC">
     <mat-header-cell *matHeaderCellDef>功能名稱</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.CODE_DESC }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ row.code_DESC }}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="FN_NO">
+  <ng-container matColumnDef="fn_NO">
     <mat-header-cell *matHeaderCellDef>程式代碼</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.FN_NO }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ row.fn_NO }}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="FN_DESC">
+  <ng-container matColumnDef="fn_DESC">
     <mat-header-cell *matHeaderCellDef>程式名稱</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.FN_DESC }}</mat-cell>
+    <mat-cell *matCellDef="let row">{{ row.fn_DESC }}</mat-cell>
   </ng-container>
-  <mat-header-row *matHeaderRowDef="['IS_CHK', 'CODE_DESC', 'FN_NO', 'FN_DESC']"></mat-header-row>
-  <mat-row *matRowDef="let mappingCodeRow; columns: ['IS_CHK', 'CODE_DESC', 'FN_NO', 'FN_DESC']"></mat-row>
+  <mat-header-row *matHeaderRowDef="['is_CHK', 'code_DESC', 'fn_NO', 'fn_DESC']"></mat-header-row>
+  <mat-row *matRowDef="let mappingCodeRow; columns: ['is_CHK', 'code_DESC', 'fn_NO', 'fn_DESC']"></mat-row>
 </mat-table>

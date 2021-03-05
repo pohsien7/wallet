@@ -27,11 +27,11 @@ export class F04004Component implements OnInit, AfterViewInit {
   constructor(private f04004Service: F04004Service, public dialog: MatDialog,) { }
   ngAfterViewInit() {}
   ngOnInit(): void {
-    const baseUrl = 'FunctionRoleSet/option';
+    const baseUrl = 'http://192.168.0.62:9082/FunctionRoleSet/option';
     this.f04004Service.getRoleOption(baseUrl).subscribe(data => {
-      for (const jsonObj of data.RspBody) {
-        const codeNo = jsonObj['ROLE_NO'];
-        const desc = jsonObj['ROLE_NAME'];
+      for (const jsonObj of data.rspBody) {
+        const codeNo = jsonObj['role_NO'];
+        const desc = jsonObj['role_NAME'];
         this.sysCode.push({value: codeNo, viewValue: desc})
       }
     });
@@ -45,10 +45,10 @@ export class F04004Component implements OnInit, AfterViewInit {
     const formData: FormData = new FormData();
     formData.append("roleNo", this.selectedValue);
     formData.append("fnNo", valArray.toString());
-    const baseUrl = 'FunctionRoleSet/save';
+    const baseUrl = 'http://192.168.0.62:9082/FunctionRoleSet/save';
      this.f04004Service.saveRoleFunction(baseUrl, formData).subscribe(data => {
       const childernDialogRef = this.dialog.open(F04004confirmComponent, {
-        data: { msgStr: (data.RspCode === '0000' && data.RspMsg === '成功') ? '儲存成功！' : '儲存失敗！' }
+        data: { msgStr: (data.rspCode === '0000' && data.rspMsg === '成功') ? '儲存成功！' : '儲存失敗！' }
       });
     });
 
@@ -65,25 +65,25 @@ export class F04004Component implements OnInit, AfterViewInit {
   }
 
   private async getRoleFunction() {
-    const baseUrl = 'FunctionRoleSet/search';
+    const baseUrl = 'http://192.168.0.62:9082/FunctionRoleSet/search';
     this.f04004Service.getRoleFunction(baseUrl, this.selectedValue).subscribe(data => {
       if (this.chkArray.length > 0) {
         let i: number = 0;
-        for (const jsonObj of data.RspBody) {
-          const chkValue = jsonObj['FN_NO'];
-          const isChk = jsonObj['IS_CHK'];
+        for (const jsonObj of data.rspBody) {
+          const chkValue = jsonObj['fn_NO'];
+          const isChk = jsonObj['is_CHK'];
           this.chkArray[i] = {value: chkValue, completed: isChk == 'Y'};
           i++;
         }
 
       } else {
-        for (const jsonObj of data.RspBody) {
-          const chkValue = jsonObj['FN_NO'];
-          const isChk = jsonObj['IS_CHK'];
+        for (const jsonObj of data.rspBody) {
+          const chkValue = jsonObj['fn_NO'];
+          const isChk = jsonObj['is_CHK'];
           this.chkArray.push({value: chkValue, completed: isChk == 'Y'});
         }
       }
-      this.roleFunctionSource.data = data.RspBody;
+      this.roleFunctionSource.data = data.rspBody;
     });
   }
 }

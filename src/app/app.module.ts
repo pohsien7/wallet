@@ -64,6 +64,7 @@ import { F04003confirmComponent } from './f04003/f04003confirm/f04003confirm.com
 import { F04001confirmComponent } from './f04001/f04001confirm/f04001confirm.component';
 import { F04002confirmComponent } from './f04002/f04002confirm/f04002confirm.component';
 import { F04004confirmComponent } from './f04004/f04004confirm/f04004confirm.component';
+import { F04003roleComponent } from './f04003/f04003role/f04003role.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { F04004confirmComponent } from './f04004/f04004confirm/f04004confirm.com
     F04003confirmComponent,
     F04001confirmComponent,
     F04002confirmComponent,
-    F04004confirmComponent
+    F04004confirmComponent,
+    F04003roleComponent
   ],
   imports: [
     BrowserModule,

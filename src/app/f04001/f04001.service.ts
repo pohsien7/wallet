@@ -15,8 +15,11 @@ export class F04001Service extends BaseService {
   }
 
   getMappingCodeList(baseUrl: string, pageIndex: number, pageSize: number, sysType: String): Observable<any> {
-    let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}&CODE_TYPE=${sysType}`;
-    return this.postHttpClient(targetUrl);
+    let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}&value=${sysType}`;
+    return this.postApiFor_NET(targetUrl);
+
+    //let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}&CODE_TYPE=${sysType}`;
+    //return this.postHttpClient(targetUrl);
   }
 
   addOrEditSystemCodeSet(baseUrl: string, data: any): any {

@@ -119,7 +119,7 @@ export class F06003Component implements OnInit, AfterViewInit, InterfaceCRUD {
             }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // if (result.event == 'success') { this.refreshTable(); }
+      // if (result != null && result.event == 'success') { this.refreshTable(); }
     });
   }
 
@@ -134,7 +134,7 @@ export class F06003Component implements OnInit, AfterViewInit, InterfaceCRUD {
               }
       });
       dialogRef.afterClosed().subscribe(result => {
-        // if (result === 1) { this.refreshTable(); }
+        // if (result != null && result === 1) { this.refreshTable(); }
       });
   }
 
@@ -143,7 +143,7 @@ export class F06003Component implements OnInit, AfterViewInit, InterfaceCRUD {
         data: { bustype: parmArray[0], rulestep: parmArray[1], parmid: parmArray[2] }
       });
       dialogRef.afterClosed().subscribe(result => {
-        // if (result === 1) { this.refreshTable(); }
+        // if (result != null && result === 1) { this.refreshTable(); }
       });
   }
 }

@@ -77,6 +77,12 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header>群組</mat-header-cell>
     <mat-cell *matCellDef="let row">{{ getOptionDesc(groupCode, row.GROUP_NO) }}</mat-cell>
   </ng-container>
+  <ng-container matColumnDef="ROLE_NO">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>角色</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-raised-button color="primary"  (click) = "setRoleNo(row.EMP_NO, row.ROLE_NO)">角色</button>
+    </mat-cell>
+  </ng-container>
 
   <!-- actions -->
   <ng-container matColumnDef="actions">
@@ -96,6 +102,6 @@
 
 
 
-  <mat-header-row *matHeaderRowDef="['EMP_NO', 'EMP_NAME', 'ON_JOB', 'EMAIL', 'PROMOTION_UNIT', 'GROUP_NO', 'actions']"></mat-header-row>
-  <mat-row *matRowDef="let mappingCodeRow; columns: ['EMP_NO', 'EMP_NAME', 'ON_JOB', 'EMAIL', 'PROMOTION_UNIT', 'GROUP_NO', 'actions']"></mat-row>
+  <mat-header-row *matHeaderRowDef="['EMP_NO', 'EMP_NAME', 'ON_JOB', 'EMAIL', 'PROMOTION_UNIT', 'GROUP_NO', 'ROLE_NO', 'actions']"></mat-header-row>
+  <mat-row *matRowDef="let mappingCodeRow; columns: ['EMP_NO', 'EMP_NAME', 'ON_JOB', 'EMAIL', 'PROMOTION_UNIT', 'GROUP_NO', 'ROLE_NO', 'actions']"></mat-row>
 </mat-table>

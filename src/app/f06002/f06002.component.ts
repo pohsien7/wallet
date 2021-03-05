@@ -99,7 +99,7 @@ export class F06002Component implements OnInit, AfterViewInit, InterfaceCRUD {
       data: { conditionid: '', conditiondesc: '', conditionwhere: '' }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // if (result.event == 'success') { this.refreshTable(); }
+      // if (result != null && result.event == 'success') { this.refreshTable(); }
     });
   }
 
@@ -108,7 +108,7 @@ export class F06002Component implements OnInit, AfterViewInit, InterfaceCRUD {
         data: { conditionid: parmArray[0], conditiondesc: parmArray[1] , conditionwhere: parmArray[2] }
       });
       dialogRef.afterClosed().subscribe(result => {
-        // if (result === 1) { this.refreshTable(); }
+        // if (result != null && result === 1) { this.refreshTable(); }
       });
   }
 
@@ -117,7 +117,7 @@ export class F06002Component implements OnInit, AfterViewInit, InterfaceCRUD {
         data: { conditionid: parmArray[0] }
       });
       dialogRef.afterClosed().subscribe(result => {
-        // if (result === 1) { this.refreshTable(); }
+        // if (result != null && result === 1) { this.refreshTable(); }
       });
   }
 }

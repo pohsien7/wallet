@@ -126,7 +126,7 @@ export class F06004Component implements OnInit, AfterViewInit, InterfaceCRUD {
             }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // if (result.event == 'success') { this.refreshTable(); }
+      // if (result != null && result.event == 'success') { this.refreshTable(); }
     });
   }
 
@@ -150,7 +150,7 @@ export class F06004Component implements OnInit, AfterViewInit, InterfaceCRUD {
               }
       });
       dialogRef.afterClosed().subscribe(result => {
-        // if (result === 1) { this.refreshTable(); }
+        // if (result != null && result === 1) { this.refreshTable(); }
       });
   }
 
@@ -166,7 +166,7 @@ export class F06004Component implements OnInit, AfterViewInit, InterfaceCRUD {
               }
       });
       dialogRef.afterClosed().subscribe(result => {
-        // if (result === 1) { this.refreshTable(); }
+        // if (result != null && result === 1) { this.refreshTable(); }
       });
   }
 }

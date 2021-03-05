@@ -10,6 +10,10 @@ export class F04003Service extends BaseService {
   constructor(protected httpClient: HttpClient) { super(httpClient); }
   dialogData: any;
 
+  getUnitCode(baseUrl: string): Observable<any> {
+    return this.postApiFor_NET(baseUrl);
+  }
+
   getGroupCode(baseUrl: string): Observable<any> {
     return this.postHttpClient(baseUrl);
   }
@@ -28,5 +32,13 @@ export class F04003Service extends BaseService {
     formdata.append('PROMOTION_UNIT', data.PROMOTION_UNIT);
     formdata.append('GROUP_NO', data.GROUP_NO);
     return this.saveOrEditMsgString(baseUrl, formdata);
+  }
+
+  getEmployeeRole(baseUrl: string): Observable<any> {
+    return this.postHttpClient(baseUrl);
+  }
+
+  saveEmployeeRole(baseUrl: string, formData: FormData): Observable<any> {
+    return this.postFormData(baseUrl, formData);
   }
 }

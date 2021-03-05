@@ -62,7 +62,7 @@ export class F04001Component implements OnInit, AfterViewInit {
   }
 
   getMappingCode() {
-    const baseUrl = 'SystemCodeSet/Search';
+    const baseUrl = 'http://192.168.0.62:9082/SystemCodeSet/Search';
     this.f04001Service.getMappingCodeList(baseUrl, this.currentPage.pageIndex, this.currentPage.pageSize, this.selectedValue)
     .subscribe(data => {
       this.totalCount = data.rspBody.size;
@@ -98,7 +98,7 @@ export class F04001Component implements OnInit, AfterViewInit {
               }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'success') { this.refreshTable(); }
+        if (result != null && result.event == 'success') { this.refreshTable(); }
       });
     }
   }
@@ -113,7 +113,7 @@ export class F04001Component implements OnInit, AfterViewInit {
               }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'success') { this.refreshTable(); }
+        if (result != null && result.event == 'success') { this.refreshTable(); }
       });
   }
 

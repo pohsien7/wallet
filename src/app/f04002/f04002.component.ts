@@ -107,7 +107,7 @@ export class F04002Component implements OnInit, AfterViewInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'success') { this.refreshTable(); }
+        if (result != null && result.event == 'success') { this.refreshTable(); }
       });
     }
   }
@@ -126,7 +126,7 @@ export class F04002Component implements OnInit, AfterViewInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'success') { this.refreshTable(); }
+        if (result != null && result.event == 'success') { this.refreshTable(); }
       });
   }
 

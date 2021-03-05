@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 mat-dialog-title>組織人員維護-角色設定</h2>
+  <mat-table [dataSource]="data.SOURCE" class="mat-dialog-content">
+    <ng-container matColumnDef="is_CHK">
+     <mat-header-cell *matHeaderCellDef><mat-checkbox color="primary"(change)="setAll($event.checked)">全選</mat-checkbox></mat-header-cell>
+     <mat-cell *matCellDef="let row; let i = index;">
+       <mat-checkbox [(ngModel)]="data.CHECKBOX[i].completed" color="primary"></mat-checkbox>
+     </mat-cell>
+   </ng-container>
+   <ng-container matColumnDef="role_NAME">
+     <mat-header-cell *matHeaderCellDef>角色名稱</mat-header-cell>
+     <mat-cell *matCellDef="let row">{{ row.role_NAME }}</mat-cell>
+   </ng-container>
+   <mat-header-row *matHeaderRowDef="['is_CHK', 'role_NAME']"></mat-header-row>
+   <mat-row *matRowDef="let mappingCodeRow; columns: ['is_CHK', 'role_NAME']"></mat-row>
+  </mat-table>
+
+  <div mat-dialog-actions>
+    <button mat-button [type]="submit" (click)="confirmAdd()">Save</button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </div>
+</div>
