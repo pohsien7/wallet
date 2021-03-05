@@ -18,7 +18,9 @@
 
 <mat-table [dataSource]="roleFunctionSource">
    <ng-container matColumnDef="is_CHK">
-    <mat-header-cell *matHeaderCellDef><mat-checkbox color="primary"(change)="setAll($event.checked)">全選</mat-checkbox></mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox color="primary" [(ngModel)]="isAllCheck" (change)="setAll($event.checked)">全選</mat-checkbox>
+    </mat-header-cell>
     <mat-cell *matCellDef="let row; let i = index;">
       <mat-checkbox [(ngModel)]="chkArray[i].completed" color="primary"></mat-checkbox>
     </mat-cell>

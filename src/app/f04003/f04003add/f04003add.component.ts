@@ -38,7 +38,7 @@ export class F04003addComponent {
 
   public async confirmAdd(): Promise<void> {
     let msgStr: string = "";
-    let baseUrl = 'http://localhost:8080/EmployeeSet/Add';
+    let baseUrl = 'EmployeeSet/Add';
     msgStr = await this.f04003Service.addOrEditSystemCodeSet(baseUrl, this.data);
     const childernDialogRef = this.dialog.open(F04003confirmComponent, {
       data: { msgStr: msgStr }

@@ -23,8 +23,6 @@ export class MenuListService extends BaseService {
     });
     const baseURL = 'FunctionList?strEmpID=' + this.empNo;
     return this.postHttpClient(baseURL);
-    //const baseURL = 'http://192.168.0.62:9082/FunctionList?strEmpID=' + this.empNo;
-    //return this.postApiFor_NET(baseURL);
   }
 
   addMenu(): void {

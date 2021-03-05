@@ -20,6 +20,7 @@ interface checkBox {
   styleUrls: ['./f04004.component.css']
 })
 export class F04004Component implements OnInit, AfterViewInit {
+  isAllCheck: boolean = false;
   sysCode: sysCode[] = [];
   chkArray: checkBox[] = [];
   selectedValue: string;
@@ -27,7 +28,7 @@ export class F04004Component implements OnInit, AfterViewInit {
   constructor(private f04004Service: F04004Service, public dialog: MatDialog,) { }
   ngAfterViewInit() {}
   ngOnInit(): void {
-    const baseUrl = 'http://192.168.0.62:9082/FunctionRoleSet/option';
+    const baseUrl = 'FunctionRoleSet/option';
     this.f04004Service.getRoleOption(baseUrl).subscribe(data => {
       for (const jsonObj of data.rspBody) {
         const codeNo = jsonObj['role_NO'];
@@ -45,7 +46,7 @@ export class F04004Component implements OnInit, AfterViewInit {
     const formData: FormData = new FormData();
     formData.append("roleNo", this.selectedValue);
     formData.append("fnNo", valArray.toString());
-    const baseUrl = 'http://192.168.0.62:9082/FunctionRoleSet/save';
+    const baseUrl = 'FunctionRoleSet/save';
      this.f04004Service.saveRoleFunction(baseUrl, formData).subscribe(data => {
       const childernDialogRef = this.dialog.open(F04004confirmComponent, {
         data: { msgStr: (data.rspCode === '0000' && data.rspMsg === '成功') ? '儲存成功！' : '儲存失敗！' }
@@ -61,11 +62,12 @@ export class F04004Component implements OnInit, AfterViewInit {
   }
 
   async changeSelect() {
+    this.isAllCheck = false;
     await this.getRoleFunction();
   }
 
   private async getRoleFunction() {
-    const baseUrl = 'http://192.168.0.62:9082/FunctionRoleSet/search';
+    const baseUrl = 'FunctionRoleSet/search';
     this.f04004Service.getRoleFunction(baseUrl, this.selectedValue).subscribe(data => {
       if (this.chkArray.length > 0) {
         let i: number = 0;

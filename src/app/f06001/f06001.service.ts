@@ -11,8 +11,8 @@ export class F06001Service extends BaseService {
   constructor(protected httpClient: HttpClient) { super(httpClient); }
 
   getRuleParmList(pageIndex: number, pageSize: number, formdata: FormData): Observable<any> {
-    const baseUrl = 'http://localhost:8080/RuleParam/Search';
+    const baseUrl = 'RuleParam/Search';
     let targetUrl = `${baseUrl}?page=${pageIndex + 1}&per_page=${pageSize}`;
-    return this.formDataApiFor_NET(targetUrl, formdata);
+    return this.postFormData(targetUrl, formdata);
   }
 }

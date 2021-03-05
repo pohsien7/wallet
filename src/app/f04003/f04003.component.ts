@@ -34,9 +34,7 @@ export class F04003Component implements OnInit, AfterViewInit {
   ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
   constructor(private f04003Service: F04003Service, public dialog: MatDialog) { }
   ngOnInit(): void {
-    //this.f04003Service.getSysTypeCode('GEN_UNIT').subscribe(data => {
-    const unitUrl = 'http://192.168.0.62:9082/EmployeeSet/guOption';
-    this.f04003Service.getUnitCode(unitUrl).subscribe(data => {
+    this.f04003Service.getSysTypeCode('GEN_UNIT').subscribe(data => {
       for (const jsonObj of data.rspBody) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];

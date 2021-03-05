@@ -38,7 +38,7 @@ export class F04002editComponent {
 
   public async stopEdit(): Promise<void> {
     let msgStr: string = "";
-    let baseUrl = 'http://localhost:8080/AdrCodeSet/Edit';
+    let baseUrl = 'AdrCodeSet/Edit';
     msgStr = await this.f04002Service.addOrEditAdrCodeSet(baseUrl, this.data);
     const childernDialogRef = this.dialog.open(F04002confirmComponent, {
       data: { msgStr: msgStr }

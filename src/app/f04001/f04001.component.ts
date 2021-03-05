@@ -24,7 +24,7 @@ export class F04001Component implements OnInit, AfterViewInit {
   selectedValue: string;
   constructor(private f04001Service: F04001Service, public dialog: MatDialog) { }
   ngOnInit(): void {
-    const baseUrl = 'http://192.168.0.62:9082/SystemCodeSet/Option';
+    const baseUrl = 'SystemCodeSet/Option';
     this.f04001Service.getSysTypeCode(baseUrl).subscribe(data => {
       for (const jsonObj of data.rspBody) {
         const codeNo = jsonObj['codeNo'];
@@ -62,7 +62,7 @@ export class F04001Component implements OnInit, AfterViewInit {
   }
 
   getMappingCode() {
-    const baseUrl = 'http://192.168.0.62:9082/SystemCodeSet/Search';
+    const baseUrl = 'SystemCodeSet/Search';
     this.f04001Service.getMappingCodeList(baseUrl, this.currentPage.pageIndex, this.currentPage.pageSize, this.selectedValue)
     .subscribe(data => {
       this.totalCount = data.rspBody.size;

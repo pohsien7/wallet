@@ -19,8 +19,6 @@ export class LoginService extends BaseService {
   private async checkEmpNoPromise(empNo: String) {
     const baseURL = 'FunctionList?strEmpID=' + empNo;
     return await this.postHttpClient(baseURL).toPromise();
-    //const baseURL = 'http://192.168.0.62:9082/FunctionList?strEmpID=' + empNo;
-    //return await this.postApiFor_NET(baseURL).toPromise();
   }
 
   public async initData(empNo: String): Promise<boolean> {
@@ -33,6 +31,11 @@ export class LoginService extends BaseService {
     });
     return isOk;
   }
+
+
+
+
+
 
   private async getRuleCodeOption(value: string): Promise<Observable<any>> {
     let formData = new FormData();
