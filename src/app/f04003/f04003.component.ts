@@ -35,7 +35,7 @@ export class F04003Component implements OnInit, AfterViewInit {
   constructor(private f04003Service: F04003Service, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.f04003Service.getSysTypeCode('GEN_UNIT').subscribe(data => {
-      for (const jsonObj of data.rspBody) {
+      for (const jsonObj of data) {
         const codeNo = jsonObj['code_NO'];
         const desc = jsonObj['code_DESC'];
         this.unitCode.push({value: codeNo, viewValue: desc})
