@@ -23,6 +23,7 @@ export class LoginComponent {
       this.bnIdle.startWatching(60*30).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) { this.routerGoUrl(); }
       });
+
       sessionStorage.setItem('BusType', JSON.stringify(await this.loginService.getRuleCode('BUS_TYPE')));
       sessionStorage.setItem('ParmType', JSON.stringify(await this.loginService.getRuleCode('PARM_TYPE')));
       sessionStorage.setItem('ParmDim', JSON.stringify(await this.loginService.getRuleCode('PARM_DIM')));
