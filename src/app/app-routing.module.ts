@@ -1,31 +1,33 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { F01001Component } from './f01001/f01001.component';
-import { F01001scn1Component } from './f01001/f01001scn1/f01001scn1.component';
-import { F01001scn10Component } from './f01001/f01001scn10/f01001scn10.component';
-import { F01001scn11Component } from './f01001/f01001scn11/f01001scn11.component';
-import { F01001scn12Component } from './f01001/f01001scn12/f01001scn12.component';
-import { F01001scn13Component } from './f01001/f01001scn13/f01001scn13.component';
+import { F01002Component } from './f01002/f01002.component';
+import { F02001Component } from './f02001/f02001.component';
+import { F02002Component } from './f02002/f02002.component';
+import { F03001Component } from './f03001/f03001.component';
+import { F03002Component } from './f03002/f03002.component';
 
-import { F01001scn2Component } from './f01001/f01001scn2/f01001scn2.component';
-import { F01001scn3Component } from './f01001/f01001scn3/f01001scn3.component';
-import { F01001scn4Component } from './f01001/f01001scn4/f01001scn4.component';
-import { F01001scn5Component } from './f01001/f01001scn5/f01001scn5.component';
-import { F01001scn6Component } from './f01001/f01001scn6/f01001scn6.component';
-import { F01001scn7Component } from './f01001/f01001scn7/f01001scn7.component';
-import { F01001scn8Component } from './f01001/f01001scn8/f01001scn8.component';
-import { F01001scn9Component } from './f01001/f01001scn9/f01001scn9.component';
 import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
-import { F04003Component } from './f04003/f04003.component';
-import { F04004Component } from './f04004/f04004.component';
 import { F05001Component } from './f05001/f05001.component';
 import { F05002Component } from './f05002/f05002.component';
+import { F05003Component } from './f05003/f05003.component';
 import { F06001Component } from './f06001/f06001.component';
 import { F06002Component } from './f06002/f06002.component';
 import { F06003Component } from './f06003/f06003.component';
 import { F06004Component } from './f06004/f06004.component';
 import { F06005Component } from './f06005/f06005.component';
+import { F06006Component } from './f06006/f06006.component';
+import { F06007Component } from './f06007/f06007.component';
+import { F07001Component } from './f07001/f07001.component';
+import { F07002Component } from './f07002/f07002.component';
+import { F07003Component } from './f07003/f07003.component';
+import { F07004Component } from './f07004/f07004.component';
+import { F07005Component } from './f07005/f07005.component';
+import { F07006Component } from './f07006/f07006.component';
+import { F07007Component } from './f07007/f07007.component';
+import { F07008Component } from './f07008/f07008.component';
+import { F07009Component } from './f07009/f07009.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
@@ -62,58 +64,24 @@ const routes: Routes = [
         component: F01001Component
       },
       {
-        path: 'F01001SCN1',
-        component: F01001scn1Component,
-        children: [
-          {
-            path: 'F01001SCN2',
-            component: F01001scn2Component
-          },
-          {
-            path: 'F01001SCN3',
-            component: F01001scn3Component
-          },
-          {
-            path: 'F01001SCN4',
-            component: F01001scn4Component
-          },
-          {
-            path: 'F01001SCN5',
-            component: F01001scn5Component
-          },
-          {
-            path: 'F01001SCN6',
-            component: F01001scn6Component
-          },
-          {
-            path: 'F01001SCN7',
-            component: F01001scn7Component
-          },
-          {
-            path: 'F01001SCN8',
-            component: F01001scn8Component
-          },
-          {
-            path: 'F01001SCN9',
-            component: F01001scn9Component
-          },
-          {
-            path: 'F01001SCN10',
-            component: F01001scn10Component
-          },
-          {
-            path: 'F01001SCN11',
-            component: F01001scn11Component
-          },
-          {
-            path: 'F01001SCN12',
-            component: F01001scn12Component
-          },
-          {
-            path: 'F01001SCN13',
-            component: F01001scn13Component
-          }
-        ]
+        path: 'F01002',
+        component: F01002Component
+      },
+      {
+        path: 'F02001',
+        component: F02001Component
+      },
+      {
+        path: 'F02002',
+        component: F02002Component
+      },
+      {
+        path: 'F03001',
+        component: F03001Component
+      },
+      {
+        path: 'F03002',
+        component: F03002Component
       },
       {
         path: 'F04001',
@@ -124,20 +92,16 @@ const routes: Routes = [
         component: F04002Component
       },
       {
-        path: 'F04003',
-        component: F04003Component
-      },
-      {
-        path: 'F04004',
-        component: F04004Component
-      },
-      {
         path: 'F05001',
         component: F05001Component
       },
       {
         path: 'F05002',
         component: F05002Component
+      },
+      {
+        path: 'F05003',
+        component: F05003Component
       },
       {
         path: 'F06001',
@@ -158,6 +122,50 @@ const routes: Routes = [
       {
         path: 'F06005',
         component: F06005Component
+      },
+      {
+        path: 'F06006',
+        component: F06006Component
+      },
+      {
+        path: 'F06007',
+        component: F06007Component
+      },
+      {
+        path: 'F07001',
+        component: F07001Component
+      },
+      {
+        path: 'F07002',
+        component: F07002Component
+      },
+      {
+        path: 'F07003',
+        component: F07003Component
+      },
+      {
+        path: 'F07004',
+        component: F07004Component
+      },
+      {
+        path: 'F07005',
+        component: F07005Component
+      },
+      {
+        path: 'F07006',
+        component: F07006Component
+      },
+      {
+        path: 'F07007',
+        component: F07007Component
+      },
+      {
+        path: 'F07008',
+        component: F07008Component
+      },
+      {
+        path: 'F07009',
+        component: F07009Component
       }
     ]
   }

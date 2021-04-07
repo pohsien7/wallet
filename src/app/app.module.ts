@@ -15,19 +15,7 @@ import { F05001Component } from './f05001/f05001.component';
 import { F05002Component } from './f05002/f05002.component';
 
 import { F01001Component } from './f01001/f01001.component';
-import { F01001scn1Component } from './f01001/f01001scn1/f01001scn1.component';
-import { F01001scn3Component } from './f01001/f01001scn3/f01001scn3.component';
-import { F01001scn4Component } from './f01001/f01001scn4/f01001scn4.component';
-import { F01001scn5Component } from './f01001/f01001scn5/f01001scn5.component';
-import { F01001scn6Component } from './f01001/f01001scn6/f01001scn6.component';
-import { F01001scn7Component } from './f01001/f01001scn7/f01001scn7.component';
-import { F01001scn8Component } from './f01001/f01001scn8/f01001scn8.component';
-import { F01001scn9Component } from './f01001/f01001scn9/f01001scn9.component';
-import { F01001scn10Component } from './f01001/f01001scn10/f01001scn10.component';
-import { F01001scn11Component } from './f01001/f01001scn11/f01001scn11.component';
-import { F01001scn12Component } from './f01001/f01001scn12/f01001scn12.component';
 
-import { F01001scn2Component } from './f01001/f01001scn2/f01001scn2.component';
 import { AddComponent } from './f04001/f04001add/add.component';
 import { EditComponent } from './f04001/f04001edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -44,8 +32,7 @@ import { F06001deleteComponent } from './f06001/f06001delete/f06001delete.compon
 import { F06002addComponent } from './f06002/f06002add/f06002add.component';
 import { F06002editComponent } from './f06002/f06002edit/f06002edit.component';
 import { F06002deleteComponent } from './f06002/f06002delete/f06002delete.component';
-import { F01001scn13Component } from './f01001/f01001scn13/f01001scn13.component';
-import { ShowComponent } from './f01001/f01001scn13/show/show.component';
+
 import { F06003addComponent } from './f06003/f06003add/f06003add.component';
 import { F06003editComponent } from './f06003/f06003edit/f06003edit.component';
 import { F06003deleteComponent } from './f06003/f06003delete/f06003delete.component';
@@ -56,15 +43,25 @@ import { F06004deleteComponent } from './f06004/f06004delete/f06004delete.compon
 import { MaterialModule } from './material/material.module';
 import { F04002addComponent } from './f04002/f04002add/f04002add.component';
 import { F04002editComponent } from './f04002/f04002edit/f04002edit.component';
-import { F04003Component } from './f04003/f04003.component';
-import { F04004Component } from './f04004/f04004.component';
-import { F04003addComponent } from './f04003/f04003add/f04003add.component';
-import { F04003editComponent } from './f04003/f04003edit/f04003edit.component';
-import { F04003confirmComponent } from './f04003/f04003confirm/f04003confirm.component';
 import { F04001confirmComponent } from './f04001/f04001confirm/f04001confirm.component';
 import { F04002confirmComponent } from './f04002/f04002confirm/f04002confirm.component';
-import { F04004confirmComponent } from './f04004/f04004confirm/f04004confirm.component';
-import { F04003roleComponent } from './f04003/f04003role/f04003role.component';
+import { F01002Component } from './f01002/f01002.component';
+import { F02001Component } from './f02001/f02001.component';
+import { F02002Component } from './f02002/f02002.component';
+import { F03001Component } from './f03001/f03001.component';
+import { F03002Component } from './f03002/f03002.component';
+import { F05003Component } from './f05003/f05003.component';
+import { F06006Component } from './f06006/f06006.component';
+import { F06007Component } from './f06007/f06007.component';
+import { F07001Component } from './f07001/f07001.component';
+import { F07002Component } from './f07002/f07002.component';
+import { F07003Component } from './f07003/f07003.component';
+import { F07004Component } from './f07004/f07004.component';
+import { F07005Component } from './f07005/f07005.component';
+import { F07006Component } from './f07006/f07006.component';
+import { F07007Component } from './f07007/f07007.component';
+import { F07008Component } from './f07008/f07008.component';
+import { F07009Component } from './f07009/f07009.component';
 
 @NgModule({
   declarations: [
@@ -76,22 +73,8 @@ import { F04003roleComponent } from './f04003/f04003role/f04003role.component';
     F05002Component,
     LoginComponent,
     F01001Component,
-    F01001scn1Component,
-    F01001scn2Component,
-    F01001scn3Component,
-    F01001scn4Component,
-    F01001scn5Component,
-    F01001scn6Component,
-    F01001scn7Component,
-    F01001scn8Component,
-    F01001scn9Component,
-    F01001scn10Component,
-    F01001scn11Component,
-    F01001scn12Component,
-    F01001scn13Component,
     AddComponent,
     EditComponent,
-    ShowComponent,
     F06001Component,
     F06002Component,
     F06003Component,
@@ -111,15 +94,25 @@ import { F04003roleComponent } from './f04003/f04003role/f04003role.component';
     F06004deleteComponent,
     F04002addComponent,
     F04002editComponent,
-    F04003Component,
-    F04004Component,
-    F04003addComponent,
-    F04003editComponent,
-    F04003confirmComponent,
     F04001confirmComponent,
     F04002confirmComponent,
-    F04004confirmComponent,
-    F04003roleComponent
+    F01002Component,
+    F02001Component,
+    F02002Component,
+    F03001Component,
+    F03002Component,
+    F05003Component,
+    F06006Component,
+    F06007Component,
+    F07001Component,
+    F07002Component,
+    F07003Component,
+    F07004Component,
+    F07005Component,
+    F07006Component,
+    F07007Component,
+    F07008Component,
+    F07009Component
   ],
   imports: [
     BrowserModule,
