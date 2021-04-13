@@ -1,1 +1,65 @@
-<p>f02001 works!</p>
+<div class="container">
+  <h2>開立記名錢包(法人,憑證)</h2>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <button type="submit" mat-raised-button color="primary">送出</button>
+    <table>
+      <tr>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #input class="form-control" placeholder="機構名稱" formControlName="name">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" placeholder="營利事業統一編號" formControlName="ban">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" placeholder="負責人" formControlName="owner">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" placeholder="負責人電話" formControlName="phonenumber">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field color="accent">
+            <mat-select placeholder="商戶類別碼">
+              <mat-option *ngFor="let mcc of mccCode" [value]="mcc.value">
+                {{mcc.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" placeholder="公司地址" formControlName="address">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

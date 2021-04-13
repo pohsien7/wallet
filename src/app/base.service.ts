@@ -36,8 +36,8 @@ export class BaseService {
     return this.postHttpClient(targetUrl);
   }
 
-  protected formDataApiFor_NET(baseUrl: string, formdata: FormData) {
-    return this.httpClient.post<any>(baseUrl, formdata, this.httpOptions);
+  public sendConsumer(baseUrl: string, formdata: FormData): Observable<any> {
+    return this.postFormData(baseUrl, formdata);
   }
 
   //================下方是提供新增或編輯用的function========================================
