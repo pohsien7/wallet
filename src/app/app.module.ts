@@ -62,6 +62,8 @@ import { F07006Component } from './f07006/f07006.component';
 import { F07007Component } from './f07007/f07007.component';
 import { F07008Component } from './f07008/f07008.component';
 import { F07009Component } from './f07009/f07009.component';
+import { F02003Component } from './f02003/f02003.component';
+import { F02004Component } from './f02004/f02004.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,9 @@ import { F07009Component } from './f07009/f07009.component';
     F07006Component,
     F07007Component,
     F07008Component,
-    F07009Component
+    F07009Component,
+    F02003Component,
+    F02004Component
   ],
   imports: [
     BrowserModule,
