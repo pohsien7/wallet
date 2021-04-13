@@ -42,7 +42,7 @@ export class LoginService extends BaseService {
     let formData = new FormData();
     formData.append('value', value);
     const baseUrl = 'http://192.168.0.62:9082/RuleCode/GetRuleCode';
-    alert("123")
+
     return await this.formDataApiFor_NET(baseUrl, formData).toPromise();
   }
 
