@@ -28,6 +28,8 @@ import { F07006Component } from './f07006/f07006.component';
 import { F07007Component } from './f07007/f07007.component';
 import { F07008Component } from './f07008/f07008.component';
 import { F07009Component } from './f07009/f07009.component';
+import { F07009Component } from './f07009/f07009.component';
+
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
