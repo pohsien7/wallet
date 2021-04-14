@@ -41,7 +41,7 @@ export class F02001Component implements OnInit {
   ]);
 
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
+    return this.formControl.hasError('required') ? '此為必填欄位!' :
     this.formControl.hasError('email') ? 'Not a valid email' :
     '';
   }
