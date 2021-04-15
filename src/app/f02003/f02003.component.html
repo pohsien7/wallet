@@ -1,1 +1,79 @@
-<p>f02003 works!</p>
+<div class="container">
+    <h2>開立記名錢包(自然人,公鑰)</h2>
+  
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <button type="submit" mat-raised-button color="primary">送出</button>
+      <table>
+        <tr>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="姓名" formControlName="name">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #inputstate class="form-control" placeholder="身分證字號、護照號碼、居留證號" formControlName="idnumber">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field color="accent">
+                <mat-select placeholder="國籍" formControlName="nation" >
+                  <mat-option *ngFor="let nation of nationCode" [value]="nation.value">
+                    {{nation.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>
+            <mat-form-field color="accent">
+                <mat-select placeholder="性別" formControlName="gender" >
+                  <mat-option *ngFor="let gender of genderCode" [value]="gender.value">
+                    {{gender.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </td>
+          <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate [matDatepicker]="pick_birth" class="form-control" placeholder="出生日期" formControlName="birthday">
+                <mat-datepicker-toggle matSuffix [for]="pick_birth"></mat-datepicker-toggle>
+                <mat-datepicker #pick_birth></mat-datepicker>
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+          </td>
+        </tr>
+  
+        <tr>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phonenumber">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        <tr>
+          <td colspan="3">
+            <mat-form-field color="accent">
+              <input matInput #inputstate class="form-control" placeholder="戶籍地址" formControlName="address">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  

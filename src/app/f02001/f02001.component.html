@@ -43,7 +43,7 @@
         </td>
         <td>
           <mat-form-field color="accent">
-            <mat-select placeholder="商戶類別碼">
+            <mat-select placeholder="商戶類別碼" formControlName="mcc">
               <mat-option *ngFor="let mcc of mccCode" [value]="mcc.value">
                 {{mcc.viewValue}}
               </mat-option>
