@@ -21,3 +21,11 @@ th {
 .form-address{
   width: 200%;
 }
+
+.mat-typography{
+  background-image: url(src\assets\images\ctbcLogo.png);
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 50%;
+}

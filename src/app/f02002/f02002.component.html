@@ -1,8 +1,7 @@
 <div class="container">
   <h2>開立記名錢包(自然人,憑證)</h2>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
-    <button type="submit" mat-raised-button color="primary">送出</button><br><br>
-    <table style="width: 50%;">
+    <table>
       <tr>
         <th>錢包顯示名稱：</th>
         <td>
@@ -78,6 +77,11 @@
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
+      </tr>
+      <tr>
+        <th>
+          <button type="submit" mat-raised-button color="primary">送出</button>
+        </th>
       </tr>
     </table>
   </form>
