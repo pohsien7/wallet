@@ -2,3 +2,30 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-form-field{
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table {
+  width: 50%;
+}
+
+th {
+  text-align: left;
+  padding-left: 30px;
+}
+
+.form-address{
+  width: 200%;
+}
+
+.mat-typography{
+  background-image: url(src\assets\images\ctbcLogo.png);
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 50%;
+}
