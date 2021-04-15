@@ -1,1 +1,79 @@
-<p>f02002 works!</p>
+<div class="container">
+  <h2>開立記名錢包(自然人,憑證)</h2>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <button type="submit" mat-raised-button color="primary">送出</button>
+    <table>
+      <tr>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dncert">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #input class="form-control" placeholder="姓名" formControlName="namecert">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #input class="form-control" placeholder="身分證字號、護照號碼、居留證號" formControlName="idnumbercert">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field color="accent">
+            <mat-select placeholder="國籍">
+              <mat-option *ngFor="let natcert of nation" [value]="natcert.value">
+                {{natcert.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <mat-form-field color="accent">
+            <mat-select placeholder="性別">
+              <mat-option *ngFor="let gencert of gender" [value]="gencert.value">
+                {{gencert.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field color="accent">
+            <input type="date" formControlName="birthdatecert" matInput placeholder="生日" [(ngModel)]="dateStart"/>
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phonenumbercert">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" placeholder="戶籍地址" formControlName="addresscert">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+    </table>
+  </form>
+</div>
