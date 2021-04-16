@@ -67,6 +67,19 @@ import { F07009Component } from './f07009/f07009.component';
 import { F02003Component } from './f02003/f02003.component';
 import { F02004Component } from './f02004/f02004.component';
 import { F02001confirmComponent } from './f02001/f02001confirm/f02001confirm.component';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
+export const TW_FORMATS = {
+  parse: {
+    dateInput: 'YYYY/MM/DD'
+  },
+  display: {
+    dateInput: 'YYYY/MM/DD',
+    monthYearLabel: 'YYYY MMM',
+    dateA11yLabel: 'YYYY/MM/DD',
+    monthYearA11yLabel: 'YYYY MMM'
+  }
+}
 
 @NgModule({
   declarations: [
@@ -135,7 +148,12 @@ import { F02001confirmComponent } from './f02001/f02001confirm/f02001confirm.com
     FlexLayoutModule,
     BlockUIModule.forRoot()
   ],
-  providers: [BnNgIdleService, DatePipe],
+  providers: [
+    BnNgIdleService,
+    DatePipe,
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
+    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 
