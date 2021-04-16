@@ -52,15 +52,8 @@
         </td>
         <th>生日：</th>
         <td>
-          <!--<mat-form-field color="accent">
-            <input type="date" formControlName="birthDate" matInput [(ngModel)]="dateStart"/>
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>-->
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthDate"
-            [(ngModel)]="planModel.start_time"
-            (ngModelChange)='dateChanged($event)'
-            >
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

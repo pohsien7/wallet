@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MenuListModule } from './menu-list/menu-list.module';
@@ -134,7 +135,7 @@ import { F02001confirmComponent } from './f02001/f02001confirm/f02001confirm.com
     FlexLayoutModule,
     BlockUIModule.forRoot()
   ],
-  providers: [BnNgIdleService],
+  providers: [BnNgIdleService, DatePipe],
   bootstrap: [AppComponent]
 })
 

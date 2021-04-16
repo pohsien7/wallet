@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { F02002Service } from './f02002.service';
+import { DatePipe } from '@angular/common';
 
 interface COMB {
   value: string;
@@ -20,17 +21,6 @@ export class F02002Component implements OnInit {
 
   planModel: any = {start_time: new Date() };
 
-  date: string = '';
-
-  dateChanged(evt) {
-    let selectedDate = new Date(evt);
-    console.log("by default:", selectedDate);
-    console.log("by UTCString:", selectedDate.toUTCString());
-    console.log("by LocaleString:", selectedDate.toLocaleString());
-    console.log("by LocaleTimeString:", selectedDate.toLocaleTimeString());
-    this.date = selectedDate.toUTCString.toString();
-  }
-
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.maxLength(50)]],
@@ -44,7 +34,7 @@ export class F02002Component implements OnInit {
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, public f02002Service: F02002Service) { }
+  constructor(private fb: FormBuilder, public f02002Service: F02002Service, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
   }
@@ -60,21 +50,23 @@ export class F02002Component implements OnInit {
     '';
   }
 
+  // 參考範例: https://ej2.syncfusion.com/angular/documentation/datepicker/how-to/json-data-binding/
   onSubmit() {
     this.submitted = true;
-    console.log(FormGroup);
-    this.registrationForm.patchValue({birthDate: this.date});
     if(!this.registrationForm.valid) {
       alert('資料必填喔!')
       return false;
     } else {
+      // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
+      let jsonStr = JSON.stringify(this.registrationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      let selectedDate = new Date(this.registrationForm.value.birthDate);
+      jsonObj.birthDate = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
       const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(this.registrationForm.value));
+      formdata.append('value', JSON.stringify(jsonObj));
       this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
-        alert(data.status);
+        alert(data.statusMessage);
       });
-
-      console.log(JSON.stringify(this.registrationForm.value));
     }
   }
 }
