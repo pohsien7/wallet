@@ -26,6 +26,7 @@
     "bn-ng-idle": "^1.0.1",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
+    "ng-block-ui": "^3.0.2",
     "ngx-material-file-input": "^2.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",

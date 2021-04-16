@@ -1,6 +1,6 @@
 <div class="container">
   <h2>開立記名錢包(法人,憑證)</h2>
-
+  <block-ui>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <button type="submit" mat-raised-button color="primary">送出</button>
     <table>
@@ -37,7 +37,7 @@
       <tr>
         <td>
           <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" placeholder="負責人電話" formControlName="phonenumber">
+            <input matInput #inputstate class="form-control" placeholder="負責人電話" formControlName="phoneNumber">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
@@ -62,4 +62,5 @@
       </tr>
     </table>
   </form>
+  </block-ui>
 </div>

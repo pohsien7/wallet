@@ -36,8 +36,8 @@ export class BaseService {
     return this.postHttpClient(targetUrl);
   }
 
-  public sendConsumer(baseUrl: string, formdata: FormData): Observable<any> {
-    return this.postFormData(baseUrl, formdata);
+  public async sendConsumer(baseUrl: string, formdata: FormData): Promise<any> {
+    return await this.postFormData(baseUrl, formdata).toPromise();
   }
 
   //================下方是提供新增或編輯用的function========================================
