@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { F02002Service } from './f02002.service';
+import { DatePipe } from '@angular/common';
 
 interface COMB {
   value: string;
@@ -15,23 +16,25 @@ interface COMB {
 export class F02002Component implements OnInit {
   dateStart = '1999-01-01';
   //之後API取得下拉內容
-  nation: COMB[] = [{value: 'Tai', viewValue: 'Taiwan'}, {value: 'Jan', viewValue: 'Japan'}, {value: 'USA', viewValue: 'USA'}];
-  gender: COMB[] = [{value: 'M', viewValue: 'Male'}, {value: 'F', viewValue: 'Female'}];
+  nationCode: COMB[] = [{value: 'Tai', viewValue: 'Taiwan'}, {value: 'Jan', viewValue: 'Japan'}, {value: 'USA', viewValue: 'USA'}];
+  genderCode: COMB[] = [{value: 'M', viewValue: 'Male'}, {value: 'F', viewValue: 'Female'}];
+
+  planModel: any = {start_time: new Date() };
 
   registrationForm: FormGroup = this.fb.group({
-    dncert: ['', [Validators.maxLength(30)]],
-    namecert: ['', [Validators.required, Validators.maxLength(50)]],
-    idnumbercert: ['', [Validators.required, Validators.maxLength(10)]],
-    natcert: ['tai', [Validators.required, Validators.maxLength(3)]],
-    gencert: ['m', [Validators.required, Validators.maxLength(1)]],
-    birthdatecert: ['', [Validators.required, Validators.maxLength(10)]],
-    phonenumbercert: ['', [Validators.required, Validators.maxLength(30)]],
-    addresscert: ['', [Validators.required, Validators.maxLength(128)]]
+    dn: ['', [Validators.maxLength(30)]],
+    name: ['', [Validators.required, Validators.maxLength(50)]],
+    idNumber: ['', [Validators.required, Validators.maxLength(10)]],
+    nation: ['tai', [Validators.required, Validators.maxLength(3)]],
+    gender: ['m', [Validators.required, Validators.maxLength(1)]],
+    birthDate: ['', [Validators.required, Validators.maxLength(10)]],
+    phoneNumber: ['', [Validators.required, Validators.maxLength(30)]],
+    address: ['', [Validators.required, Validators.maxLength(128)]]
   });
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, public f02002Service: F02002Service) { }
+  constructor(private fb: FormBuilder, public f02002Service: F02002Service, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
   }
@@ -47,20 +50,23 @@ export class F02002Component implements OnInit {
     '';
   }
 
+  // 參考範例: https://ej2.syncfusion.com/angular/documentation/datepicker/how-to/json-data-binding/
   onSubmit() {
     this.submitted = true;
-    console.log(FormGroup);
     if(!this.registrationForm.valid) {
       alert('資料必填喔!')
       return false;
     } else {
+      // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
+      let jsonStr = JSON.stringify(this.registrationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      let selectedDate = new Date(this.registrationForm.value.birthDate);
+      jsonObj.birthDate = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
       const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(this.registrationForm.value));
-      this.f02002Service.sendConsumer('consumer/f02002', formdata).subscribe(data => {
-        alert(data.status);
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
+        alert(data.statusMessage);
       });
-
-      console.log(JSON.stringify(this.registrationForm.value));
     }
   }
 }

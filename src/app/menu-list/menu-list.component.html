@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+    <img src="assets\images\ctbcLogo.png" width="10%">
     <button mat-button [matMenuTriggerFor]="aboveMenu" *ngFor="let menu of getMenu()">
       {{menu.getTitle()}}
       <mat-menu #aboveMenu="matMenu" yPosition="below">

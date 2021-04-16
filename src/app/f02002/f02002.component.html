@@ -6,14 +6,14 @@
         <th>錢包顯示名稱：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="dncert">
+            <input matInput #input class="form-control" formControlName="dn">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
         <th>姓名：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="namecert">
+            <input matInput #input class="form-control" formControlName="name">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
@@ -23,7 +23,7 @@
         <th>身分證字號、護照號碼、居留證號：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="idnumbercert">
+            <input matInput #input class="form-control" formControlName="idNumber">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
@@ -31,8 +31,8 @@
         <td>
           <mat-form-field color="accent">
             <mat-select>
-              <mat-option *ngFor="let natcert of nation" [value]="natcert.value">
-                {{natcert.viewValue}}
+              <mat-option *ngFor="let nation of nationCode" [value]="nation.value">
+                {{nation.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -44,17 +44,18 @@
         <td>
           <mat-form-field color="accent">
             <mat-select>
-              <mat-option *ngFor="let gencert of gender" [value]="gencert.value">
-                {{gencert.viewValue}}
+              <mat-option *ngFor="let gender of genderCode" [value]="gender.value">
+                {{gender.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </td>
         <th>生日：</th>
         <td>
-          <mat-form-field color="accent">
-            <input type="date" formControlName="birthdatecert" matInput [(ngModel)]="dateStart"/>
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </td>
       </tr>
@@ -63,7 +64,7 @@
         <th>手機號碼：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" formControlName="phonenumbercert">
+            <input matInput #inputstate class="form-control" formControlName="phoneNumber">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
@@ -73,7 +74,7 @@
         <th>戶籍地址：</th>
         <td colspan="2">
           <mat-form-field color="accent" class="form-address">
-            <input matInput #inputstate class="form-control" formControlName="addresscert">
+            <input matInput #inputstate class="form-control" formControlName="address">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
