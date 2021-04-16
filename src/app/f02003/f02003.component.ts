@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -22,17 +23,17 @@ export class F02003Component implements OnInit {
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.maxLength(50)]],
-    idnumber: ['', [Validators.required, Validators.maxLength(10)]],
+    idNumber: ['', [Validators.required, Validators.maxLength(10)]],
     nation: ['', [Validators.required, Validators.maxLength(3)]],
     gender: ['', [Validators.required, Validators.maxLength(1)]],
-    birthday: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-    phonenumber: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
+    birthDate: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+    phoneNumber: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
   });
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, public f02003Service: F02003Service) { }
+  constructor(private fb: FormBuilder, public f02003Service: F02003Service, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
   }
@@ -54,10 +55,14 @@ export class F02003Component implements OnInit {
       alert('資料必填喔!')
       return false;
     } else {
+      let jsonStr = JSON.stringify(this.registrationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      let selectedDate = new Date(this.registrationForm.value.birthDate);
+      jsonObj.birthDate = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
       const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(this.registrationForm.value));
+      formdata.append('value', JSON.stringify(jsonObj));
       this.f02003Service.sendConsumer('consumer/f02003', formdata).then((data) => {
-        alert(data.status);
+        alert(data.statusMessage);
       });
 
       console.log(JSON.stringify(this.registrationForm.value));
