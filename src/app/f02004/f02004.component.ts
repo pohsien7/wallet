@@ -50,8 +50,8 @@ export class F02004Component implements OnInit {
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
-      this.f02004Service.sendConsumer('consumer/f02004', formdata).subscribe(data => {
-        alert(data.status);
+      this.f02004Service.sendConsumer('consumer/f02004', formdata).then((data) => {
+        alert(data.statusMessage);
       });
 
       console.log(JSON.stringify(this.registrationForm.value));

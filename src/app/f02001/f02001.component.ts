@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { F02001Service } from './f02001.service';
+import { F02001confirmComponent } from './f02001confirm/f02001confirm.component';
 
 interface COMB {
   value: string;
@@ -14,8 +17,10 @@ interface COMB {
   styleUrls: ['./f02001.component.css']
 })
 export class F02001Component implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
+
   // 之後要改打API去取得下拉內容
-  mccCode: COMB[] = [{value: 'MCC1', viewValue: 'MCC1'}, {value: 'MCC2', viewValue: 'MCC2'}];
+  mccCode: COMB[] = [{value: 'C1234', viewValue: 'C1234'}, {value: 'C1234', viewValue: 'C1234'}];
 
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
@@ -23,14 +28,14 @@ export class F02001Component implements OnInit {
     name: ['', [Validators.required, Validators.maxLength(100)]],
     ban: ['', [Validators.required, Validators.maxLength(10)]],
     owner: ['', [Validators.required, Validators.maxLength(50)]],
-    phonenumber: ['', [Validators.required, Validators.maxLength(30)]],
-    mcc: ['MCC1', [Validators.required, Validators.maxLength(5)]],
+    phoneNumber: ['', [Validators.required, Validators.maxLength(30)]],
+    mcc: ['C1234', [Validators.required, Validators.maxLength(5)]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
   });
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, public f02001Service: F02001Service) { }
+  constructor(private fb: FormBuilder, public f02001Service: F02001Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -46,19 +51,22 @@ export class F02001Component implements OnInit {
     '';
   }
 
-  onSubmit() {
+  async onSubmit() {
+    let msg = '';
     this.submitted = true;
+    this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      alert('資料必填喔!')
-      return false;
+      msg = '資料必填喔!'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
-      this.f02001Service.sendConsumer('consumer/f02001', formdata).subscribe(data => {
-        alert(data.status);
+      await this.f02001Service.sendConsumer('consumer/f02001', formdata).then((data) => {
+        msg = data.statusMessage;
       });
-
-      console.log(JSON.stringify(this.registrationForm.value));
     }
+    setTimeout(() => {
+      this.blockUI.stop(); // Stop blocking
+      const childernDialogRef = this.dialog.open(F02001confirmComponent, { data: { msgStr: msg } });
+    }, 500);
   }
 }

@@ -56,7 +56,7 @@ export class F02002Component implements OnInit {
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
-      this.f02002Service.sendConsumer('consumer/f02002', formdata).subscribe(data => {
+      this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
         alert(data.status);
       });
 

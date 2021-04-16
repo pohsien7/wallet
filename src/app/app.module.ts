@@ -8,6 +8,7 @@ import { MenuListModule } from './menu-list/menu-list.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { BlockUIModule } from 'ng-block-ui';
 
 import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
@@ -64,6 +65,7 @@ import { F07008Component } from './f07008/f07008.component';
 import { F07009Component } from './f07009/f07009.component';
 import { F02003Component } from './f02003/f02003.component';
 import { F02004Component } from './f02004/f02004.component';
+import { F02001confirmComponent } from './f02001/f02001confirm/f02001confirm.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +118,8 @@ import { F02004Component } from './f02004/f02004.component';
     F07008Component,
     F07009Component,
     F02003Component,
-    F02004Component
+    F02004Component,
+    F02001confirmComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +131,8 @@ import { F02004Component } from './f02004/f02004.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    BlockUIModule.forRoot()
   ],
   providers: [BnNgIdleService],
   bootstrap: [AppComponent]
