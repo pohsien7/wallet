@@ -3,6 +3,11 @@
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
     <table>
       <tr>
+        <th>
+          <button type="submit" mat-raised-button color="primary">送出</button>
+        </th>
+      </tr>
+      <tr>
         <th>錢包顯示名稱：</th>
         <td>
           <mat-form-field color="accent">
@@ -10,7 +15,7 @@
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
-        <th>姓名：</th>
+        <th nowrap="nowrap">姓名：</th>
         <td>
           <mat-form-field color="accent">
             <input matInput #input class="form-control" formControlName="name">
@@ -20,14 +25,14 @@
       </tr>
 
       <tr>
-        <th>身分證字號、護照號碼、居留證號：</th>
+        <th nowrap="nowrap">身分證字號、護照號碼、居留證號：</th>
         <td>
           <mat-form-field color="accent">
             <input matInput #input class="form-control" formControlName="idNumber">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
-        <th>國籍：</th>
+        <th nowrap="nowrap">國籍：</th>
         <td>
           <mat-form-field color="accent">
             <mat-select>
@@ -50,10 +55,10 @@
             </mat-select>
           </mat-form-field>
         </td>
-        <th>生日：</th>
+        <th nowrap="nowrap">出生日期：</th>
         <td>
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthDate">
+            <input matInput [matDatepicker]="picker" formControlName="birthDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -79,11 +84,34 @@
           </mat-form-field>
         </td>
       </tr>
-      <tr>
-        <th>
-          <button type="submit" mat-raised-button color="primary">送出</button>
-        </th>
-      </tr>
     </table>
   </form>
 </div>
+<form [formGroup]="testForm" (ngSubmit)="test()" style="padding-left: 20px;">
+  <table>
+    <tr>
+      <th>
+        <button type="submit" mat-raised-button color="primary">時間測試</button>
+      </th>
+    </tr>
+    <tr>
+      <th>時間區間</th>
+      <td>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>選擇時間</mat-label>
+          <mat-date-range-input [rangePicker]="rangePicker">
+            <input matStartDate placeholder="Start date" formControlName="startTime">
+            <input matEndDate placeholder="End date" formControlName="endTime">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #rangePicker>
+            <mat-date-range-picker-actions>
+              <button mat-button matDateRangePickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+            </mat-date-range-picker-actions>
+          </mat-date-range-picker>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</form>
