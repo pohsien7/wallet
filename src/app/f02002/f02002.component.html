@@ -96,14 +96,14 @@
         <mat-form-field appearance="fill" class="example-form-field">
           <mat-label>選擇時間</mat-label>
           <mat-date-range-input [rangePicker]="rangePicker">
-            <input matStartDate placeholder="開始時間" formControlName="startTime">
+            <input matStartDate placeholder="開始時間" formControlName="startTime" value="">
             <input matEndDate placeholder="結束時間" formControlName="endTime">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
           <mat-date-range-picker #rangePicker>
             <mat-date-range-picker-actions>
               <button mat-button matDateRangePickerCancel>Cancel</button>
-              <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+              <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">Apply</button>
             </mat-date-range-picker-actions>
           </mat-date-range-picker>
         </mat-form-field>

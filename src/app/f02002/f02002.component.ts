@@ -84,14 +84,16 @@ export class F02002Component implements OnInit {
     startTime: ['', [Validators.required, Validators.maxLength(10)]],
     endTime: ['', [Validators.maxLength(10)]]
   });
+
+  setTimes() {
+    if (this.testForm.value.endTime == null) {
+      this.testForm.setValue({startTime:this.testForm.value.startTime,endTime:this.testForm.value.startTime});
+    }
+  }
+
   test(){
     let startDate = new Date(this.testForm.value.startTime);
-    let endDate = new Date();
-    if ( this.testForm.value.endTime == null ) {
-      endDate = startDate;
-    } else {
-      endDate = new Date(this.testForm.value.endTime);
-    }
+    let endDate = new Date(this.testForm.value.endTime);
     alert(this.datePipe.transform(startDate,"yyyy-MM-dd") + "," + this.datePipe.transform(endDate,"yyyy-MM-dd"));
   }
 }

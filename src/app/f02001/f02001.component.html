@@ -9,7 +9,7 @@
         </th>
       </tr>
       <tr>
-        <th >錢包顯示名稱：</th>
+        <th>錢包顯示名稱：</th>
         <td>
           <mat-form-field color="accent">
             <input matInput #input class="form-control" formControlName="dn">
@@ -26,7 +26,7 @@
       </tr>
 
       <tr>
-        <th>營利事業統一編號：</th>
+        <th nowrap="nowrap">營利事業統一編號：</th>
         <td>
           <mat-form-field color="accent">
             <input matInput #inputstate class="form-control" formControlName="ban">
@@ -50,7 +50,7 @@
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
-        <th>商戶類別碼：</th>
+        <th nowrap="nowrap">商戶類別碼：</th>
         <td>
           <mat-form-field color="accent">
             <mat-select formControlName="mcc">
