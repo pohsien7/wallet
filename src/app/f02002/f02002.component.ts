@@ -80,16 +80,22 @@ export class F02002Component implements OnInit {
     }, 500);
   }
 
+  dateType: string;
+  dateNums: string[] = ['單一日期', '區間日期'];
+
   testForm: FormGroup = this.fb.group({
     startTime: ['', [Validators.required, Validators.maxLength(10)]],
-    endTime: ['', [Validators.required, Validators.maxLength(10)]]
+    endTime: ['0000', [Validators.maxLength(10)]]
   });
   test(){
-    let jsonStr = JSON.stringify(this.testForm.value);
-    let jsonObj = JSON.parse(jsonStr);
     let startDate = new Date(this.testForm.value.startTime);
-    let endDate = new Date(this.testForm.value.endTime);
-    alert(startDate + "," + endDate);
+    let endDate = new Date();
+    if ( this.testForm.value.endTime == '0000' ) {
+      endDate = startDate;
+    } else {
+      endDate = new Date(this.testForm.value.endTime);
+    }
+    alert(this.datePipe.transform(startDate,"yyyy-MM-dd") + "," + this.datePipe.transform(endDate,"yyyy-MM-dd"));
   }
 }
 

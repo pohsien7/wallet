@@ -87,21 +87,36 @@
     </table>
   </form>
 </div>
+<br><br><br>
+<table>
+  <tr>
+    <th>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="dateType">
+      <mat-radio-button *ngFor = "let dateNum of dateNums" [value] = "dateNum">{{dateNum}}</mat-radio-button>
+    </mat-radio-group>
+    </th>
+  </tr>
+</table>
 <form [formGroup]="testForm" (ngSubmit)="test()" style="padding-left: 20px;">
   <table>
-    <tr>
-      <th>
-        <button type="submit" mat-raised-button color="primary">時間測試</button>
-      </th>
+    <tr *ngIf=" dateType === '單一日期' ">
+      <th>單一日期：</th>
+        <td>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" formControlName="startTime">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
     </tr>
-    <tr>
-      <th>時間區間</th>
+    <tr *ngIf=" dateType === '區間日期' ">
+      <th>區間日期：</th>
       <td>
         <mat-form-field appearance="fill" class="example-form-field">
           <mat-label>選擇時間</mat-label>
           <mat-date-range-input [rangePicker]="rangePicker">
-            <input matStartDate placeholder="Start date" formControlName="startTime">
-            <input matEndDate placeholder="End date" formControlName="endTime">
+            <input matStartDate placeholder="開始時間" formControlName="startTime">
+            <input matEndDate placeholder="結束時間" formControlName="endTime">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
           <mat-date-range-picker #rangePicker>
@@ -112,6 +127,11 @@
           </mat-date-range-picker>
         </mat-form-field>
       </td>
+    </tr>
+    <tr>
+      <th>
+        <button type="submit" mat-raised-button color="primary">時間測試</button>
+      </th>
     </tr>
   </table>
 </form>
