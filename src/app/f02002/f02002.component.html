@@ -88,28 +88,9 @@
   </form>
 </div>
 <br><br><br>
-<table>
-  <tr>
-    <th>
-    <mat-radio-group aria-label="Select an option" [(ngModel)]="dateType">
-      <mat-radio-button *ngFor = "let dateNum of dateNums" [value] = "dateNum">{{dateNum}}</mat-radio-button>
-    </mat-radio-group>
-    </th>
-  </tr>
-</table>
 <form [formGroup]="testForm" (ngSubmit)="test()" style="padding-left: 20px;">
   <table>
-    <tr *ngIf=" dateType === '單一日期' ">
-      <th>單一日期：</th>
-        <td>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" formControlName="startTime">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </td>
-    </tr>
-    <tr *ngIf=" dateType === '區間日期' ">
+    <tr>
       <th>區間日期：</th>
       <td>
         <mat-form-field appearance="fill" class="example-form-field">

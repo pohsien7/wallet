@@ -80,17 +80,14 @@ export class F02002Component implements OnInit {
     }, 500);
   }
 
-  dateType: string;
-  dateNums: string[] = ['單一日期', '區間日期'];
-
   testForm: FormGroup = this.fb.group({
     startTime: ['', [Validators.required, Validators.maxLength(10)]],
-    endTime: ['0000', [Validators.maxLength(10)]]
+    endTime: ['', [Validators.maxLength(10)]]
   });
   test(){
     let startDate = new Date(this.testForm.value.startTime);
     let endDate = new Date();
-    if ( this.testForm.value.endTime == '0000' ) {
+    if ( this.testForm.value.endTime == null ) {
       endDate = startDate;
     } else {
       endDate = new Date(this.testForm.value.endTime);
