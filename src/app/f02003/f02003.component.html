@@ -22,7 +22,7 @@
         <tr>
           <td>
             <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" placeholder="身分證字號、護照號碼、居留證號" formControlName="idnumber">
+              <input matInput #inputstate class="form-control" placeholder="身分證字號、護照號碼、居留證號" formControlName="idNumber">
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </td>
@@ -49,7 +49,7 @@
           </td>
           <td>
               <mat-form-field color="accent">
-                <input matInput #inputstate [matDatepicker]="pick_birth" class="form-control" placeholder="出生日期" formControlName="birthday">
+                <input matInput #inputstate [matDatepicker]="pick_birth" class="form-control" placeholder="出生日期" formControlName="birthDate">
                 <mat-datepicker-toggle matSuffix [for]="pick_birth"></mat-datepicker-toggle>
                 <mat-datepicker #pick_birth></mat-datepicker>
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -60,7 +60,7 @@
         <tr>
             <td>
               <mat-form-field color="accent">
-                <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phonenumber">
+                <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phoneNumber">
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>

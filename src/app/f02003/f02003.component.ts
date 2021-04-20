@@ -22,11 +22,11 @@ export class F02003Component implements OnInit {
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.maxLength(50)]],
-    idnumber: ['', [Validators.required, Validators.maxLength(10)]],
+    idNumber: ['', [Validators.required, Validators.maxLength(10)]],
     nation: ['', [Validators.required, Validators.maxLength(3)]],
     gender: ['', [Validators.required, Validators.maxLength(1)]],
-    birthday: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-    phonenumber: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
+    birthDate: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+    phoneNumber: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
   });
 
