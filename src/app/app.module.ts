@@ -13,6 +13,7 @@ import { BlockUIModule } from 'ng-block-ui';
 
 import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
+import { F04003Component } from './f04003/f04003.component';
 import { F05001Component } from './f05001/f05001.component';
 import { F05002Component } from './f05002/f05002.component';
 
@@ -91,6 +92,7 @@ export const TW_FORMATS = {
     HomeComponent,
     F04001Component,
     F04002Component,
+    F04003Component,
     F05001Component,
     F05002Component,
     LoginComponent,
