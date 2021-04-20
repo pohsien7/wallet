@@ -15,7 +15,7 @@ interface COMB {
 @Component({
   selector: 'app-f02003',
   templateUrl: './f02003.component.html',
-  styleUrls: ['./f02003.component.css']
+  styleUrls: ['./f02003.component.css','../../assets/css/f02.css']
 })
 export class F02003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;

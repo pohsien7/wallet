@@ -22,3 +22,24 @@ th {
   width: 200%;
 }
 
+.login-background{
+  background-image: url(src\assets\images\ctbcLogo.png);
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-position: left 50% top 0%;
+  background-size: 50%;
+}
+
+.home-background{
+  background-image: url(src\assets\images\homeBack.png);
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  text-align:center;
+  font-size: 100%;
+}
+
+footer{
+  position: fixed;
+  bottom: 0;
+}

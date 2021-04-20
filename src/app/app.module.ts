@@ -73,6 +73,9 @@ import { F02005Component } from './f02005/f02005.component';
 import { F02006Component } from './f02006/f02006.component';
 import { F02005confirmComponent } from './f02005/f02005confirm/f02005confirm.component';
 import { F02005wopenComponent } from './f02005/f02005wopen/f02005wopen.component';
+import { CssSettingComponent } from './css-setting/css-setting.component';
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+
 
 export const TW_FORMATS = {
   parse: {
@@ -143,7 +146,8 @@ export const TW_FORMATS = {
     F02005Component,
     F02006Component,
     F02005confirmComponent,
-    F02005wopenComponent
+    F02005wopenComponent,
+    CssSettingComponent
   ],
   imports: [
     BrowserModule,
@@ -156,13 +160,15 @@ export const TW_FORMATS = {
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    BlockUIModule.forRoot()
+    BlockUIModule.forRoot(),
+    NgxMatColorPickerModule
   ],
   providers: [
     BnNgIdleService,
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
-    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ],
   bootstrap: [AppComponent]
 })
