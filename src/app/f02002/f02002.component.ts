@@ -1,7 +1,11 @@
+import { TestBed } from '@angular/core/testing';
+import { F02002confirmComponent } from './f02002confirm/f02002confirm.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { F02002Service } from './f02002.service';
 import { DatePipe } from '@angular/common';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { MatDialog } from '@angular/material/dialog';
 
 interface COMB {
   value: string;
@@ -14,7 +18,8 @@ interface COMB {
   styleUrls: ['./f02002.component.css']
 })
 export class F02002Component implements OnInit {
-  dateStart = '1999-01-01';
+  @BlockUI() blockUI: NgBlockUI;
+
   //之後API取得下拉內容
   nationCode: COMB[] = [{value: 'TWN', viewValue: 'Taiwan'}, {value: 'JAN', viewValue: 'Japan'}, {value: 'USA', viewValue: 'USA'}];
   genderCode: COMB[] = [{value: 'M', viewValue: '男'}, {value: 'F', viewValue: '女'}];
@@ -34,7 +39,7 @@ export class F02002Component implements OnInit {
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, public f02002Service: F02002Service, private datePipe: DatePipe) { }
+  constructor(private fb: FormBuilder, public f02002Service: F02002Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -45,17 +50,18 @@ export class F02002Component implements OnInit {
   ]);
 
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
+    return this.formControl.hasError('required') ? '此為必填欄位!' :
     this.formControl.hasError('email') ? 'Not a valid email' :
     '';
   }
 
   // 參考範例: https://ej2.syncfusion.com/angular/documentation/datepicker/how-to/json-data-binding/
-  onSubmit() {
+  async onSubmit() {
+    let msg = '';
     this.submitted = true;
+    this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      alert('資料必填喔!')
-      return false;
+      msg = '資料必填喔!'
     } else {
       // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
       let jsonStr = JSON.stringify(this.registrationForm.value);
@@ -65,9 +71,30 @@ export class F02002Component implements OnInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
-        alert(data.statusMessage);
+        msg = data.statusMessage;
       });
     }
+    setTimeout(() => {
+      this.blockUI.stop();
+      const childernDialogRef = this.dialog.open(F02002confirmComponent, { data: { msgStr: msg } });
+    }, 500);
+  }
+
+  testForm: FormGroup = this.fb.group({
+    startTime: ['', [Validators.required, Validators.maxLength(10)]],
+    endTime: ['', [Validators.maxLength(10)]]
+  });
+
+  setTimes() {
+    if (this.testForm.value.endTime == null) {
+      this.testForm.setValue({startTime:this.testForm.value.startTime,endTime:this.testForm.value.startTime});
+    }
+  }
+
+  test(){
+    let startDate = new Date(this.testForm.value.startTime);
+    let endDate = new Date(this.testForm.value.endTime);
+    alert(this.datePipe.transform(startDate,"yyyy-MM-dd") + "," + this.datePipe.transform(endDate,"yyyy-MM-dd"));
   }
 }
 

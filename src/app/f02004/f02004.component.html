@@ -1,10 +1,14 @@
 <div class="container">
   <h2>開立匿名錢包</h2>
-
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <button type="submit" mat-raised-button color="primary">送出</button>
     <table>
       <tr>
+        <th>
+          <button type="submit" mat-raised-button color="primary">送出</button>
+        </th>
+      </tr>
+      <tr>
+        <th nowrap="nowrap">錢包顯示名稱：</th>
         <td>
           <mat-form-field color="accent">
             <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
@@ -13,10 +17,13 @@
                 錢包顯示名稱必填
               </div>
             </mat-error>
+
           </mat-form-field>
         </td>
+        <th>手機號碼：</th>
         <td>
           <mat-form-field color="accent">
+
             <input matInput #input class="form-control" placeholder="手機號碼" formControlName="phoneNumber">
 
             <mat-error *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
@@ -27,6 +34,7 @@
                 至少輸入10碼
               </div>
             </mat-error>
+
           </mat-form-field>
         </td>
       </tr>
