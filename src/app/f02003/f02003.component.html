@@ -24,66 +24,66 @@
           </td>
         </tr>
 
-        <tr>
-          <th nowrap="nowrap">身分證字號、護照號碼、居留證號：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" formControlName="idNumber">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      <tr>
+        <th nowrap="nowrap">身分證字號、護照號碼、居留證號：</th>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" formControlName="idNumber">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <th>國籍：</th>
+        <td>
+          <mat-form-field color="accent">
+              <mat-select formControlName="nation" >
+                <mat-option *ngFor="let nation of nationCode" [value]="nation.value">
+                  {{nation.viewValue}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
-          </td>
-          <th>國籍：</th>
-          <td>
-            <mat-form-field color="accent">
-                <mat-select formControlName="nation" >
-                  <mat-option *ngFor="let nation of nationCode" [value]="nation.value">
-                    {{nation.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </td>
-        </tr>
+        </td>
+      </tr>
 
-        <tr>
-          <th>性別：</th>
-          <td>
+      <tr>
+        <th>性別：</th>
+        <td>
+          <mat-form-field color="accent">
+              <mat-select formControlName="gender" >
+                <mat-option *ngFor="let gender of genderCode" [value]="gender.value">
+                  {{gender.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </td>
+        <th nowrap="nowrap">出生日期：</th>
+        <td>
             <mat-form-field color="accent">
-                <mat-select formControlName="gender" >
-                  <mat-option *ngFor="let gender of genderCode" [value]="gender.value">
-                    {{gender.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </td>
-          <th nowrap="nowrap">出生日期：</th>
-          <td>
-              <mat-form-field color="accent">
-                <input matInput #inputstate [matDatepicker]="pick_birth" class="form-control" formControlName="birthDate">
-                <mat-datepicker-toggle matSuffix [for]="pick_birth"></mat-datepicker-toggle>
-                <mat-datepicker #pick_birth ng-model-options="{ timezone: 'utc' }"></mat-datepicker>
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-          </td>
-        </tr>
+              <input matInput #inputstate [matDatepicker]="pick_birth" class="form-control" formControlName="birthDate">
+              <mat-datepicker-toggle matSuffix [for]="pick_birth"></mat-datepicker-toggle>
+              <mat-datepicker #pick_birth ng-model-options="{ timezone: 'utc' }"></mat-datepicker>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </td>
+      </tr>
 
-        <tr>
-          <th>手機號碼：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" formControlName="phoneNumber">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <th>戶籍地址：</th>
-          <td colspan="3">
-            <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" formControlName="address">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
+      <tr>
+        <th>手機號碼：</th>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" formControlName="phoneNumber">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th>戶籍地址：</th>
+        <td colspan="3">
+          <mat-form-field color="accent">
+            <input matInput #inputstate class="form-control" formControlName="address">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

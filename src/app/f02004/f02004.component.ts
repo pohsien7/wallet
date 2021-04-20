@@ -23,36 +23,48 @@ export class F02004Component implements OnInit {
   mccCode: COMB[] = [{value: 'MCC1', viewValue: 'MCC1'}, {value: 'MCC2', viewValue: 'MCC2'}];
 
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
-  registrationForm: FormGroup = this.fb.group({
-    dn: ['', [Validators.maxLength(30)]],
-    phoneNumber: ['', [Validators.required, Validators.maxLength(10)]]
 
-  });
+  registrationForm: FormGroup;
 
   submitted = false;
 
   constructor(private fb: FormBuilder, public f02004Service: F02004Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.registrationForm =
+    this.fb.group({
+      dn : new FormControl('' ,[
+        Validators.required
+
+
+      ]),
+      phoneNumber : new FormControl('' ,[
+        Validators.required,
+        Validators.minLength(10)
+      ])
+
+    });
+
   }
 
-  formControl = new FormControl('', [
-    Validators.required
-    // Validators.email,
-  ]);
+  // getErrorMessage() {
+  //     console.log(this.registrationForm.getError('dn'));
+  //   return this.registrationForm.hasError('required') ? 'Required field' :
+  //   this.registrationForm.hasError('minlength') ? '太短' :
+  //   '';
+  // }
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此為必填欄位!' :
-    this.formControl.hasError('email') ? 'Not a valid email' :
-    '';
-  }
+  get dn() { return this.registrationForm.get('dn'); }
+  get phoneNumber() { return this.registrationForm.get('phoneNumber'); }
 
   onSubmit() {
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      msg = '資料必填喔!'
+      alert('資料有誤!')
+      return false;
+
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
