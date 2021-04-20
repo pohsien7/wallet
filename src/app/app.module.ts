@@ -68,6 +68,10 @@ import { F02003Component } from './f02003/f02003.component';
 import { F02004Component } from './f02004/f02004.component';
 import { F02001confirmComponent } from './f02001/f02001confirm/f02001confirm.component';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { F02005Component } from './f02005/f02005.component';
+import { F02006Component } from './f02006/f02006.component';
+import { F02005confirmComponent } from './f02005/f02005confirm/f02005confirm.component';
+import { F02005wopenComponent } from './f02005/f02005wopen/f02005wopen.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -133,7 +137,11 @@ export const TW_FORMATS = {
     F07009Component,
     F02003Component,
     F02004Component,
-    F02001confirmComponent
+    F02001confirmComponent,
+    F02005Component,
+    F02006Component,
+    F02005confirmComponent,
+    F02005wopenComponent
   ],
   imports: [
     BrowserModule,
