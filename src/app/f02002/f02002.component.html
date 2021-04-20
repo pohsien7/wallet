@@ -3,36 +3,41 @@
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
     <table>
       <tr>
+        <th>
+          <button type="submit" mat-raised-button color="primary">送出</button>
+        </th>
+      </tr>
+      <tr>
         <th>錢包顯示名稱：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="dncert">
+            <input matInput #input class="form-control" formControlName="dn">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
-        <th>姓名：</th>
+        <th nowrap="nowrap">姓名：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="namecert">
+            <input matInput #input class="form-control" formControlName="name">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
       </tr>
 
       <tr>
-        <th>身分證字號、護照號碼、居留證號：</th>
+        <th nowrap="nowrap">身分證字號、護照號碼、居留證號：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="idNumbercert">
+            <input matInput #input class="form-control" formControlName="idNumber">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
-        <th>國籍：</th>
+        <th nowrap="nowrap">國籍：</th>
         <td>
           <mat-form-field color="accent">
             <mat-select>
-              <mat-option *ngFor="let natcert of nation" [value]="natcert.value">
-                {{natcert.viewValue}}
+              <mat-option *ngFor="let nation of nationCode" [value]="nation.value">
+                {{nation.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -44,17 +49,18 @@
         <td>
           <mat-form-field color="accent">
             <mat-select>
-              <mat-option *ngFor="let gencert of gender" [value]="gencert.value">
-                {{gencert.viewValue}}
+              <mat-option *ngFor="let gender of genderCode" [value]="gender.value">
+                {{gender.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </td>
-        <th>生日：</th>
+        <th nowrap="nowrap">出生日期：</th>
         <td>
-          <mat-form-field color="accent">
-            <input type="date" formControlName="birthdatecert" matInput [(ngModel)]="dateStart"/>
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" formControlName="birthDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </td>
       </tr>
@@ -63,7 +69,7 @@
         <th>手機號碼：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" formControlName="phonenumbercert">
+            <input matInput #inputstate class="form-control" formControlName="phoneNumber">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
@@ -73,16 +79,40 @@
         <th>戶籍地址：</th>
         <td colspan="2">
           <mat-form-field color="accent" class="form-address">
-            <input matInput #inputstate class="form-control" formControlName="addresscert">
+            <input matInput #inputstate class="form-control" formControlName="address">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
       </tr>
-      <tr>
-        <th>
-          <button type="submit" mat-raised-button color="primary">送出</button>
-        </th>
-      </tr>
     </table>
   </form>
 </div>
+<br><br><br>
+<form [formGroup]="testForm" (ngSubmit)="test()" style="padding-left: 20px;">
+  <table>
+    <tr>
+      <th>區間日期：</th>
+      <td>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>選擇時間</mat-label>
+          <mat-date-range-input [rangePicker]="rangePicker">
+            <input matStartDate placeholder="開始時間" formControlName="startTime" value="">
+            <input matEndDate placeholder="結束時間" formControlName="endTime">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #rangePicker>
+            <mat-date-range-picker-actions>
+              <button mat-button matDateRangePickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">Apply</button>
+            </mat-date-range-picker-actions>
+          </mat-date-range-picker>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <button type="submit" mat-raised-button color="primary">時間測試</button>
+      </th>
+    </tr>
+  </table>
+</form>

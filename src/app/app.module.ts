@@ -2,12 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MenuListModule } from './menu-list/menu-list.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { BlockUIModule } from 'ng-block-ui';
 
 import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
@@ -65,6 +67,20 @@ import { F07008Component } from './f07008/f07008.component';
 import { F07009Component } from './f07009/f07009.component';
 import { F02003Component } from './f02003/f02003.component';
 import { F02004Component } from './f02004/f02004.component';
+import { F02001confirmComponent } from './f02001/f02001confirm/f02001confirm.component';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
+export const TW_FORMATS = {
+  parse: {
+    dateInput: 'YYYY/MM/DD'
+  },
+  display: {
+    dateInput: 'YYYY/MM/DD',
+    monthYearLabel: 'YYYY MMM',
+    dateA11yLabel: 'YYYY/MM/DD',
+    monthYearA11yLabel: 'YYYY MMM'
+  }
+}
 
 @NgModule({
   declarations: [
@@ -118,7 +134,8 @@ import { F02004Component } from './f02004/f02004.component';
     F07008Component,
     F07009Component,
     F02003Component,
-    F02004Component
+    F02004Component,
+    F02001confirmComponent
   ],
   imports: [
     BrowserModule,
@@ -130,9 +147,15 @@ import { F02004Component } from './f02004/f02004.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    BlockUIModule.forRoot()
   ],
-  providers: [BnNgIdleService],
+  providers: [
+    BnNgIdleService,
+    DatePipe,
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
+    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 

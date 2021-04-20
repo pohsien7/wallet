@@ -1,6 +1,11 @@
+import { TestBed } from '@angular/core/testing';
+import { F02002confirmComponent } from './f02002confirm/f02002confirm.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { F02002Service } from './f02002.service';
+import { DatePipe } from '@angular/common';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { MatDialog } from '@angular/material/dialog';
 
 interface COMB {
   value: string;
@@ -13,25 +18,28 @@ interface COMB {
   styleUrls: ['./f02002.component.css']
 })
 export class F02002Component implements OnInit {
-  dateStart = '1999-01-01';
+  @BlockUI() blockUI: NgBlockUI;
+
   //之後API取得下拉內容
-  nation: COMB[] = [{value: 'Tai', viewValue: 'Taiwan'}, {value: 'Jan', viewValue: 'Japan'}, {value: 'USA', viewValue: 'USA'}];
-  gender: COMB[] = [{value: 'M', viewValue: 'Male'}, {value: 'F', viewValue: 'Female'}];
+  nationCode: COMB[] = [{value: 'TWN', viewValue: 'Taiwan'}, {value: 'JAN', viewValue: 'Japan'}, {value: 'USA', viewValue: 'USA'}];
+  genderCode: COMB[] = [{value: 'M', viewValue: '男'}, {value: 'F', viewValue: '女'}];
+
+  planModel: any = {start_time: new Date() };
 
   registrationForm: FormGroup = this.fb.group({
-    dncert: ['', [Validators.maxLength(30)]],
-    namecert: ['', [Validators.required, Validators.maxLength(50)]],
-    idnumbercert: ['', [Validators.required, Validators.maxLength(10)]],
-    natcert: ['tai', [Validators.required, Validators.maxLength(3)]],
-    gencert: ['m', [Validators.required, Validators.maxLength(1)]],
-    birthdatecert: ['', [Validators.required, Validators.maxLength(10)]],
-    phonenumbercert: ['', [Validators.required, Validators.maxLength(30)]],
-    addresscert: ['', [Validators.required, Validators.maxLength(128)]]
+    dn: ['', [Validators.maxLength(30)]],
+    name: ['', [Validators.required, Validators.maxLength(50)]],
+    idNumber: ['', [Validators.required, Validators.maxLength(10)]],
+    nation: ['TWN', [Validators.required, Validators.maxLength(3)]],
+    gender: ['M', [Validators.required, Validators.maxLength(1)]],
+    birthDate: ['', [Validators.required, Validators.maxLength(10)]],
+    phoneNumber: ['', [Validators.required, Validators.maxLength(30)]],
+    address: ['', [Validators.required, Validators.maxLength(128)]]
   });
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, public f02002Service: F02002Service) { }
+  constructor(private fb: FormBuilder, public f02002Service: F02002Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -42,26 +50,51 @@ export class F02002Component implements OnInit {
   ]);
 
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
+    return this.formControl.hasError('required') ? '此為必填欄位!' :
     this.formControl.hasError('email') ? 'Not a valid email' :
     '';
   }
 
-  onSubmit() {
+  // 參考範例: https://ej2.syncfusion.com/angular/documentation/datepicker/how-to/json-data-binding/
+  async onSubmit() {
+    let msg = '';
     this.submitted = true;
-    console.log(FormGroup);
+    this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      alert('資料必填喔!')
-      return false;
+      msg = '資料必填喔!'
     } else {
+      // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
+      let jsonStr = JSON.stringify(this.registrationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      let selectedDate = new Date(this.registrationForm.value.birthDate);
+      jsonObj.birthDate = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
       const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(this.registrationForm.value));
-      this.f02002Service.sendConsumer('consumer/f02002', formdata).subscribe(data => {
-        alert(data.status);
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
+        msg = data.statusMessage;
       });
-
-      console.log(JSON.stringify(this.registrationForm.value));
     }
+    setTimeout(() => {
+      this.blockUI.stop();
+      const childernDialogRef = this.dialog.open(F02002confirmComponent, { data: { msgStr: msg } });
+    }, 500);
+  }
+
+  testForm: FormGroup = this.fb.group({
+    startTime: ['', [Validators.required, Validators.maxLength(10)]],
+    endTime: ['', [Validators.maxLength(10)]]
+  });
+
+  setTimes() {
+    if (this.testForm.value.endTime == null) {
+      this.testForm.setValue({startTime:this.testForm.value.startTime,endTime:this.testForm.value.startTime});
+    }
+  }
+
+  test(){
+    let startDate = new Date(this.testForm.value.startTime);
+    let endDate = new Date(this.testForm.value.endTime);
+    alert(this.datePipe.transform(startDate,"yyyy-MM-dd") + "," + this.datePipe.transform(endDate,"yyyy-MM-dd"));
   }
 }
 

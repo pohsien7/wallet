@@ -1,1 +1,28 @@
-<p>f02004 works!</p>
+<div class="container">
+  <h2>開立匿名錢包</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <table>
+      <tr>
+        <th>
+          <button type="submit" mat-raised-button color="primary">送出</button>
+        </th>
+      </tr>
+      <tr>
+        <th nowrap="nowrap">錢包顯示名稱：</th>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #input class="form-control" formControlName="dn">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+        <th>手機號碼：</th>
+        <td>
+          <mat-form-field color="accent">
+            <input matInput #input class="form-control" formControlName="phoneNumber">
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
