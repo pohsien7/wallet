@@ -35,16 +35,13 @@ export class F02004Component implements OnInit {
     this.fb.group({
       dn : new FormControl('' ,[
         Validators.required
-
-
       ]),
       phoneNumber : new FormControl('' ,[
         Validators.required,
-        Validators.minLength(10)
+        Validators.minLength(10),
+        Validators.maxLength(10)
       ])
-
     });
-
   }
 
   // getErrorMessage() {
