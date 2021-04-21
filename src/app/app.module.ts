@@ -1,3 +1,4 @@
+import { F04003Component } from './f04003/f04003.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
