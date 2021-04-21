@@ -17,7 +17,7 @@ interface COMB {
 @Component({
   selector: 'app-f04002',
   templateUrl: './f04002.component.html',
-  styleUrls: ['./f04002.component.css']
+  styleUrls: ['./f04002.component.css','../../assets/css/f04.css']
 })
 export class F04002Component implements OnInit, AfterViewInit {
 
