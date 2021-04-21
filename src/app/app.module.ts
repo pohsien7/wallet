@@ -93,6 +93,31 @@ export const TW_FORMATS = {
   }
 }
 
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { F02005Component } from './f02005/f02005.component';
+import { F02006Component } from './f02006/f02006.component';
+import { F02005confirmComponent } from './f02005/f02005confirm/f02005confirm.component';
+import { F02005wopenComponent } from './f02005/f02005wopen/f02005wopen.component';
+import { F02006confirmComponent } from './f02006/f02006confirm/f02006confirm.component';
+import { F02006wopenComponent } from './f02006/f02006wopen/f02006wopen.component';
+import { CssSettingComponent } from './css-setting/css-setting.component';
+import { F03001confirmComponent } from './f03001/f03001confirm/f03001confirm.component';
+import { F03002confirmComponent } from './f03002/f03002confirm/f03002confirm.component';
+import { DatePipe } from '@angular/common';
+
+
+export const TW_FORMATS = {
+  parse: {
+    dateInput: 'YYYY/MM/DD'
+  },
+  display: {
+    dateInput: 'YYYY/MM/DD',
+    monthYearLabel: 'YYYY MMM',
+    dateA11yLabel: 'YYYY/MM/DD',
+    monthYearA11yLabel: 'YYYY MMM'
+  }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,6 +179,7 @@ export const TW_FORMATS = {
     F02006confirmComponent,
     F02006wopenComponent,
     F03001confirmComponent,
+    CssSettingComponent,
     F03002confirmComponent
   ],
   imports: [
@@ -167,15 +193,13 @@ export const TW_FORMATS = {
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    BlockUIModule.forRoot(),
-    NgxMatColorPickerModule
+    BlockUIModule.forRoot()
   ],
   providers: [
     BnNgIdleService,
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
-    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
-    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS }
   ],
   bootstrap: [AppComponent]
 })
