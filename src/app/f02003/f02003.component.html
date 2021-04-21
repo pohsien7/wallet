@@ -1,28 +1,28 @@
 <div class="container">
-  <h2>開立記名錢包(自然人,公鑰)</h2>
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
-    <table>
-      <tr>
-        <th>
-          <button type="submit" mat-raised-button color="primary">送出</button>
-        </th>
-      </tr>
-      <tr>
-        <th>錢包顯示名稱：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="dn">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <th>姓名：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="name">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
+    <th class="f02_th">開立記名錢包(自然人,公鑰)</th>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary">送出</button>
+          </th>
+        </tr>
+        <tr>
+          <th>錢包顯示名稱：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" formControlName="dn">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+          <th>姓名：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" formControlName="name">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
 
       <tr>
         <th nowrap="nowrap">身分證字號、護照號碼、居留證號：</th>

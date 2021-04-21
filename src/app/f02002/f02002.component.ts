@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import { F02002confirmComponent } from './f02002confirm/f02002confirm.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +14,7 @@ interface COMB {
 @Component({
   selector: 'app-f02002',
   templateUrl: './f02002.component.html',
-  styleUrls: ['./f02002.component.css']
+  styleUrls: ['./f02002.component.css','../../assets/css/f02.css']
 })
 export class F02002Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
@@ -87,7 +86,8 @@ export class F02002Component implements OnInit {
 
   setTimes() {
     if (this.testForm.value.endTime == null) {
-      this.testForm.setValue({startTime:this.testForm.value.startTime,endTime:this.testForm.value.startTime});
+      this.testForm.patchValue({endTime:this.testForm.value.startTime});
+      //this.testForm.setValue({endTime:this.testForm.value.startTime});
     }
   }
 
