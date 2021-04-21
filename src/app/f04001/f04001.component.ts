@@ -1,15 +1,15 @@
-import { AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { F04001Service } from './f04001.service';
 import { ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddComponent } from './f04001add/add.component';
-import { EditComponent } from './f04001edit/edit.component';
-import { F04001Service } from './f04001.service';
+import { DatePipe } from '@angular/common';
 
-interface sysCode {
+
+interface COMB {
   value: string;
   viewValue: string;
 }
@@ -20,30 +20,91 @@ interface sysCode {
   styleUrls: ['./f04001.component.css']
 })
 export class F04001Component implements OnInit, AfterViewInit {
-  sysCode: sysCode[] = [];
-  selectedValue: string;
-  constructor(private f04001Service: F04001Service, public dialog: MatDialog) { }
+
+  // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
+  registrationForm: FormGroup = this.fb.group({
+    dn: ['', [Validators.maxLength(30)]],
+    name: ['', [Validators.maxLength(100)]],
+    ban: ['', [Validators.maxLength(10)]],
+    owner: ['', [Validators.maxLength(50)]],
+    createdate_start: ['', [Validators.maxLength(10), Validators.minLength(10)]],
+    createdate_end: ['', [Validators.maxLength(10), Validators.minLength(10)]],
+    pageIndex: ['', [Validators.maxLength(3)]],
+    pageSize: ['', [Validators.maxLength(3)]]
+  });
+
+  // $validator = Validator::make($request->all(), [
+  //   "names"    => "nullable|required_with:price.*|string",
+  //   "names.*"  => "required|string|distinct|min:3"
+  // ]);
+
+  submitted = false;
+
+  dn: string;
+  name: string;
+  ban: string;
+  owner: string;
+  createdate_start: string;
+  createdate_end: string;
+  dnVal: string;
+  nameVal: string;
+  banVal: string;
+  ownerVal: string;
+  creatdateStartVal: string;
+  creatdateEndVal: string;
+  phonenumberVal: string;
+  mccVal: string;
+  addressVal: string;
+  walletidVal: string;
+  useridVal: string;
+
+
+  constructor(private fb: FormBuilder, public f04001Service: F04001Service, private datePipe: DatePipe ) { }
+
   ngOnInit(): void {
-    const baseUrl = 'SystemCodeSet/Option';
-    this.f04001Service.getSysTypeCode(baseUrl).subscribe(data => {
-      for (const jsonObj of data.rspBody) {
-        const codeNo = jsonObj['codeNo'];
-        const desc = jsonObj['codeDesc'];
-        this.sysCode.push({value: codeNo, viewValue: desc})
-      }
-    });
+
+    // this.getViewDataList();
   }
-//============================================================
+
+  formControl = new FormControl('', [
+    Validators.required
+    // Validators.email,
+  ]);
+
+  getErrorMessage() {
+    return this.formControl.hasError('required') ? 'Required field' :
+    '';
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if(!this.registrationForm.valid) {
+      alert('資料必填喔!')
+      return false;
+    } else {
+      this.currentPage = {
+        pageIndex: 0,
+        pageSize: 5,
+        length: null
+      };
+      this.paginator.firstPage();
+      this.getViewDataList();
+    }
+  }
+
+
+  //================================================================
   totalCount: any;
   @ViewChild('paginator', { static: true }) paginator: MatPaginator;
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
   currentSort: Sort;
-  mappingCodeSource = new MatTableDataSource<any>();
-  ngAfterViewInit() {
+  jpWalletCert = new MatTableDataSource<any>();
+
+  ngAfterViewInit(): void {
     this.currentPage = {
       pageIndex: 0,
-      pageSize: 10,
+      pageSize: 5,
       length: null
     };
     this.currentSort = {
@@ -52,73 +113,65 @@ export class F04001Component implements OnInit, AfterViewInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      this.getMappingCode();
+      this.getViewDataList();
     });
+
+  }
+
+
+
+  //================================================================
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.jpWalletCert.filter = filterValue.trim().toLowerCase();
   }
 
   changeSort(sortInfo: Sort) {
     this.currentSort = sortInfo;
-    this.getMappingCode();
+    this.getViewDataList();
   }
 
-  getMappingCode() {
-    const baseUrl = 'SystemCodeSet/Search';
-    this.f04001Service.getMappingCodeList(baseUrl, this.currentPage.pageIndex, this.currentPage.pageSize, this.selectedValue)
-    .subscribe(data => {
-      this.totalCount = data.rspBody.size;
-      this.mappingCodeSource.data = data.rspBody.items;
-    });
-  }
+  getViewDataList() {
+    let jsonStr = JSON.stringify(this.registrationForm.value);
+    let jsonObj = JSON.parse(jsonStr);
+    console.log(this.registrationForm.value.createdate_start)
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.mappingCodeSource.filter = filterValue.trim().toLowerCase();
-  }
+    if (this.registrationForm.value.createdate_start != null && this.registrationForm.value.createdate_start != '' &&
+    this.registrationForm.value.createdate_end != null && this.registrationForm.value.createdate_end != '') {
+    // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
+    let startDate = new Date(this.registrationForm.value.createdate_start);
+    let endDate = new Date(this.registrationForm.value.createdate_end);
 
-  changeSelect() {
-    this.currentPage = {
-      pageIndex: 0,
-      pageSize: 10,
-      length: null
-    };
-    this.paginator.firstPage();
-    this.getMappingCode();
-  }
 
-  addNew() {
-    if (this.selectedValue == null) {
-      alert('請選擇：代碼類別');
-    } else {
-      const dialogRef = this.dialog.open(AddComponent, {
-        data: {
-                code_TYPE: this.selectedValue,
-                code_NO : '' , code_DESC: '',
-                code_SORT: '', code_TAG: '',
-                code_FLAG: 'N'
-              }
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result != null && result.event == 'success') { this.refreshTable(); }
-      });
+      jsonObj.createdate_start = this.datePipe.transform(startDate,"yyyy-MM-dd");
+      jsonObj.createdate_end = this.datePipe.transform(endDate,"yyyy-MM-dd");
     }
+    let pgIndex = `${this.currentPage.pageIndex + 1}`;
+    let pgSize = `${this.currentPage.pageSize}`;
+    jsonObj.pageIndex = pgIndex;
+    jsonObj.pageSize = pgSize;
+    console.log(pgIndex)
+    console.log(pgSize)
+    const formdata: FormData = new FormData();
+    formdata.append('value', JSON.stringify(jsonObj));
+
+    this.f04001Service.sendConsumer('consumer/f04001', formdata).then(data => {
+      console.log(data.dataMap)
+      console.log(data.totalCount)
+
+      this.totalCount = data.totalCount;
+      this.jpWalletCert.data = data.dataMap;
+    });
+
+    console.log(JSON.stringify(this.registrationForm.value));
   }
 
-  startEdit(i: number,
-    code_TYPE: string, code_NO: string, code_DESC: string,
-    code_SORT: string, code_TAG: string, code_FLAG: string) {
-      const dialogRef = this.dialog.open(EditComponent, {
-        data: {
-               code_TYPE: code_TYPE, code_NO : code_NO , code_DESC: code_DESC,
-               code_SORT: code_SORT, code_TAG: code_TAG, code_FLAG: code_FLAG
-              }
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result != null && result.event == 'success') { this.refreshTable(); }
-      });
-  }
-
-  private refreshTable() {
-    this.paginator._changePageSize(this.paginator.pageSize);
+  setTimes() {
+    if (this.registrationForm.value.createdate_end == null) {
+      this.registrationForm.patchValue({createdate_end:this.registrationForm.value.createdate_start});
+      //this.testForm.setValue({endTime:this.testForm.value.startTime});
+    }
   }
 
 }
