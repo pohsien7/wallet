@@ -19,8 +19,8 @@ import { F05002Component } from './f05002/f05002.component';
 
 import { F01001Component } from './f01001/f01001.component';
 
-import { AddComponent } from './f04001/f04001add/add.component';
-import { EditComponent } from './f04001/f04001edit/edit.component';
+// import { AddComponent } from './f04001/f04001add/add.component';
+// import { EditComponent } from './f04001/f04001edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BnNgIdleService } from 'bn-ng-idle';
 
@@ -44,8 +44,8 @@ import { F06004editComponent } from './f06004/f06004edit/f06004edit.component';
 import { F06004deleteComponent } from './f06004/f06004delete/f06004delete.component';
 
 import { MaterialModule } from './material/material.module';
-import { F04002addComponent } from './f04002/f04002add/f04002add.component';
-import { F04002editComponent } from './f04002/f04002edit/f04002edit.component';
+// import { F04002addComponent } from './f04002/f04002add/f04002add.component';
+// import { F04002editComponent } from './f04002/f04002edit/f04002edit.component';
 import { F04001confirmComponent } from './f04001/f04001confirm/f04001confirm.component';
 import { F04002confirmComponent } from './f04002/f04002confirm/f04002confirm.component';
 import { F01002Component } from './f01002/f01002.component';
@@ -100,8 +100,8 @@ export const TW_FORMATS = {
     F05002Component,
     LoginComponent,
     F01001Component,
-    AddComponent,
-    EditComponent,
+    // AddComponent,
+    // EditComponent,
     F06001Component,
     F06002Component,
     F06003Component,
@@ -119,8 +119,8 @@ export const TW_FORMATS = {
     F06004addComponent,
     F06004editComponent,
     F06004deleteComponent,
-    F04002addComponent,
-    F04002editComponent,
+    // F04002addComponent,
+    // F04002editComponent,
     F04001confirmComponent,
     F04002confirmComponent,
     F01002Component,

@@ -20,7 +20,7 @@ interface COMB {
   styleUrls: ['./f04003.component.css']
 })
 export class F04003Component implements OnInit, AfterViewInit {
-  
+
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
@@ -58,12 +58,12 @@ export class F04003Component implements OnInit, AfterViewInit {
   addressVal: string;
   walletidVal: string;
   useridVal: string;
- 
+
 
   constructor(private fb: FormBuilder, public f04003Service: F04003Service, private datePipe: DatePipe ) { }
 
   ngOnInit(): void {
-    
+
     // this.getViewDataList();
   }
 
@@ -92,8 +92,8 @@ export class F04003Component implements OnInit, AfterViewInit {
       this.getViewDataList();
     }
   }
-  
-  
+
+
   //================================================================
   totalCount: any;
   @ViewChild('paginator', { static: true }) paginator: MatPaginator;
@@ -116,10 +116,10 @@ export class F04003Component implements OnInit, AfterViewInit {
       this.currentPage = page;
       this.getViewDataList();
     });
-  
+
   }
 
-  
+
 
   //================================================================
 
@@ -138,13 +138,13 @@ export class F04003Component implements OnInit, AfterViewInit {
     let jsonObj = JSON.parse(jsonStr);
     console.log(this.registrationForm.value.createdate_start)
 
-    if (jsonObj.createdate_start.createdate_start != null && 
+    if (jsonObj.createdate_start.createdate_start != null &&
       jsonObj.createdate_start.createdate_end != null) {
     // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
     let startDate = new Date(this.registrationForm.value.createdate_start);
     let endDate = new Date(this.registrationForm.value.createdate_end);
-    
-    
+
+
       jsonObj.createdate_start = this.datePipe.transform(startDate,"yyyy-MM-dd");
       jsonObj.createdate_end = this.datePipe.transform(endDate,"yyyy-MM-dd");
     }
@@ -156,11 +156,11 @@ export class F04003Component implements OnInit, AfterViewInit {
     console.log(pgSize)
     const formdata: FormData = new FormData();
     formdata.append('value', JSON.stringify(jsonObj));
-    
+
     this.f04003Service.sendConsumer('consumer/f04003', formdata).then(data => {
       console.log(data.dataMap)
       console.log(data.totalCount)
-      
+
       this.totalCount = data.totalCount;
       this.npWalletPubkey.data = data.dataMap;
     });
