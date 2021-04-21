@@ -1,3 +1,4 @@
+import { F04003Component } from './f04003/f04003.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -94,6 +95,7 @@ export const TW_FORMATS = {
     HomeComponent,
     F04001Component,
     F04002Component,
+    F04003Component,
     F05001Component,
     F05002Component,
     LoginComponent,
