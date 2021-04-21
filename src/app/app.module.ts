@@ -125,6 +125,10 @@ import { F02001confirmComponent } from './f02001/f02001confirm/f02001confirm.com
     MaterialModule,
     FlexLayoutModule,
     BlockUIModule.forRoot()
+
+
+
+
   ],
   providers: [BnNgIdleService],
   bootstrap: [AppComponent]
