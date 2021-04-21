@@ -1,1 +1,139 @@
-<p>f02006 works!</p>
+<div class="container">
+  <h2>交易ID查詢自機構開立之錢包帳本紀錄</h2>
+  <block-ui>
+    <form [formGroup]="registrationForm">
+      <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+      <table>
+        <tr>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="欲查詢之交易ID" formControlName="queryWalletID">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-icon-button color="primary" (click)="getList()">
+              <span class="material-icons">view_list</span>
+            </button>
+          </td>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="券幣代號" formControlName="">
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <mat-card class="matCard">
+      <form [formGroup]="resultForm">
+        <table>
+          <tr>
+            <th nowrap="nowrap">交易付方ID</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="senderID" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">交易收方ID</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="recipientID" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">交易被授權方總庫ID</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="authorizedPartyID" readonly>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">交易付方顯示名稱</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="recipientDN" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">請求訊息中指令物件之CVC</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="cvc" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">交易金額</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="amount" readonly>
+              </mat-form-field>
+            </td>
+
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">交易付方餘額</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="senderBalance" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">交易收方餘額</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="recipientBalance" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">付方交易序號</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="senderSN" readonly>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">收方交易序號</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="senderSN" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">銷帳編號</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="won" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">交易備註</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="remark" readonly>
+              </mat-form-field>
+            </td>
+
+          </tr>
+          <tr>
+            <th nowrap="nowrap">交易時間</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="txnTime" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">移轉結果</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="result" readonly>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">付款方式</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input formControlName="paymentMethod" readonly>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card>
+  </block-ui>
+</div>

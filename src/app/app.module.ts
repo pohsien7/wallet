@@ -73,8 +73,12 @@ import { F02005Component } from './f02005/f02005.component';
 import { F02006Component } from './f02006/f02006.component';
 import { F02005confirmComponent } from './f02005/f02005confirm/f02005confirm.component';
 import { F02005wopenComponent } from './f02005/f02005wopen/f02005wopen.component';
+import { F02006confirmComponent } from './f02006/f02006confirm/f02006confirm.component';
+import { F02006wopenComponent } from './f02006/f02006wopen/f02006wopen.component';
 import { CssSettingComponent } from './css-setting/css-setting.component';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+import { F03001confirmComponent } from './f03001/f03001confirm/f03001confirm.component';
+import { F03002confirmComponent } from './f03002/f03002confirm/f03002confirm.component';
 
 
 export const TW_FORMATS = {
@@ -147,7 +151,10 @@ export const TW_FORMATS = {
     F02006Component,
     F02005confirmComponent,
     F02005wopenComponent,
-    CssSettingComponent
+    F02006confirmComponent,
+    F02006wopenComponent,
+    F03001confirmComponent,
+    F03002confirmComponent
   ],
   imports: [
     BrowserModule,
