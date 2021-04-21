@@ -3,19 +3,19 @@
   
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       <button type="submit" mat-raised-button color="primary">查詢</button>
-      <button type="clear" mat-raised-button color="primary">清除</button>
+      <!-- <button type="clear" mat-raised-button color="primary" (click)="handleClear()">清除</button> -->
 
       <table>
         <tr>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
+              <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn" name="filterName">
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="姓名" formControlName="name">
+              <input matInput #input class="form-control" placeholder="姓名" formControlName="name" name="filterName">
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </td>
@@ -24,22 +24,22 @@
         <tr>
           <td>
             <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" placeholder="身分證字號、護照號碼、居留證號" formControlName="idNumber">
+              <input matInput #inputstate class="form-control" placeholder="身分證字號、護照號碼、居留證號" formControlName="idNumber" name="filterName"> 
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phoneNumber">
+              <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phoneNumber" name="filterName"> 
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </td>
         </tr>
       
         <tr>
-          <td>
+          <!-- <td>
               <mat-form-field color="accent">
-                <input matInput #inputstate [matDatepicker]="pick_start" class="form-control" placeholder="建立日期起" formControlName="createdate_start">
+                <input matInput #inputstate [matDatepicker]="pick_start" class="form-control" placeholder="建立日期起" formControlName="createdate_start" name="filterName">
                 <mat-datepicker-toggle matSuffix [for]="pick_start"></mat-datepicker-toggle>
                 <mat-datepicker #pick_start></mat-datepicker>
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -47,12 +47,29 @@
           </td>
           <td>
               <mat-form-field color="accent">
-                <input matInput #inputstate [matDatepicker]="pick_end" class="form-control" placeholder="建立日期迄" formControlName="createdate_end">
+                <input matInput #inputstate [matDatepicker]="pick_end" class="form-control" placeholder="建立日期迄" formControlName="createdate_end" name="filterName">
                 <mat-datepicker-toggle matSuffix [for]="pick_end"></mat-datepicker-toggle>
                 <mat-datepicker #pick_end></mat-datepicker>
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
+          </td> -->
+          <td>
+            <mat-form-field appearance="fill" class="example-form-field">
+              <mat-label>建立日期</mat-label>
+              <mat-date-range-input [rangePicker]="rangePicker">
+                <input matStartDate placeholder="建立日期起" formControlName="createdate_start" value="">
+                <input matEndDate placeholder="建立日期迄" formControlName="createdate_end">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                  <button mat-button matDateRangePickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">Apply</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
           </td>
+
         </tr>
 
       </table>
