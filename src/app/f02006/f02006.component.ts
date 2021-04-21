@@ -20,14 +20,19 @@ export class F02006Component implements OnInit {
   });
 
   resultForm: FormGroup = this.fb.group({
-    balance : ['', []],
-    totalCount: ['', []],
-    statusLastModified: ['', []],
-    type: ['', []],
-    mcc: ['', []],
-    frozen: ['', []],
-    disabled: ['', []],
-    settingLastModified: ['', []]
+    senderID : ['', []],
+    recipientID: ['', []],
+    authorizedPartyID: ['', []],
+    recipientDN: ['', []],
+    cvc: ['', []],
+    amount: ['', []],
+    senderBalance: ['', []],
+    recipientBalance: ['', []],
+    senderSN: ['', []],
+
+    won: ['', []],
+    remark: ['', []],
+    txnTime: ['', []]
   });
 
   submitted = false;
@@ -55,12 +60,13 @@ export class F02006Component implements OnInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f02006Service.sendConsumer('consumer/f02006', formdata).then((data) => {
+        console.log(data.wallet)
         msg = data.statusMessage;
-        this.resultForm.patchValue({ balance : data.wallet.balance });
-        this.resultForm.patchValue({ totalCount : data.wallet.totalCount });
-        this.resultForm.patchValue({ statusLastModified : data.wallet.statusLastModified });
-        this.resultForm.patchValue({ type : data.wallet.type });
-        this.resultForm.patchValue({ mcc : data.wallet.mcc });
+        this.resultForm.patchValue({ senderID : data.wallet.senderID });
+        this.resultForm.patchValue({ recipientID : data.wallet.recipientID });
+        this.resultForm.patchValue({ authorizedPartyID : data.wallet.authorizedPartyID });
+        this.resultForm.patchValue({ recipientDN : data.wallet.recipientDN });
+        this.resultForm.patchValue({ cvc : data.wallet.cvc });
         this.resultForm.patchValue({ frozen : data.wallet.frozen });
         this.resultForm.patchValue({ disabled : data.wallet.disabled });
         this.resultForm.patchValue({ settingLastModified : data.wallet.settingLastModified });
