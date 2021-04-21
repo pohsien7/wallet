@@ -1,13 +1,18 @@
 <div class="container">
-  <h2>錢包ID查詢錢包資訊</h2>
+  <th class="f02_th">錢包ID查詢錢包資訊</th>
   <block-ui>
     <form [formGroup]="registrationForm">
-      <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
       <table>
         <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+          </th>
+        </tr>
+        <tr>
+          <th nowrap="nowrap">欲查詢之錢包ID：</th>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="欲查詢之錢包ID" formControlName="queryWalletID">
+              <input matInput #input class="form-control" formControlName="queryWalletID">
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </td>
@@ -23,19 +28,19 @@
       <form [formGroup]="resultForm">
         <table>
           <tr>
-            <th nowrap="nowrap">錢包餘額</th>
+            <th nowrap="nowrap">錢包餘額：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="balance" readonly>
               </mat-form-field>
             </td>
-            <th nowrap="nowrap">錢包目前交易總筆數</th>
+            <th nowrap="nowrap">錢包目前交易總筆數：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="totalCount" readonly>
               </mat-form-field>
             </td>
-            <th nowrap="nowrap">錢包帳務最後修改時間</th>
+            <th nowrap="nowrap">錢包帳務最後修改時間：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="statusLastModified" readonly>
@@ -44,19 +49,19 @@
           </tr>
 
           <tr>
-            <th nowrap="nowrap">錢包類型</th>
+            <th nowrap="nowrap">錢包類型︰</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="type" readonly>
               </mat-form-field>
             </td>
-            <th nowrap="nowrap">商務識別碼</th>
+            <th nowrap="nowrap">商務識別碼：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="mcc" readonly>
               </mat-form-field>
             </td>
-            <th nowrap="nowrap">錢包是否凍結</th>
+            <th nowrap="nowrap">錢包是否凍結：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="frozen" readonly>
@@ -65,13 +70,13 @@
           </tr>
 
           <tr>
-            <th nowrap="nowrap">錢包是否停用</th>
+            <th nowrap="nowrap">錢包是否停用：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="disabled" readonly>
               </mat-form-field>
             </td>
-            <th nowrap="nowrap">錢包設定最後修改時間</th>
+            <th nowrap="nowrap">錢包設定最後修改時間：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input formControlName="settingLastModified" readonly>

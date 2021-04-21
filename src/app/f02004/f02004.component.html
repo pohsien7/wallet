@@ -11,7 +11,7 @@
         <th nowrap="nowrap">錢包顯示名稱：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
+            <input matInput #input class="form-control" formControlName="dn">
             <mat-error *ngIf="dn.invalid && (dn.dirty || dn.touched)" class="alert alert-danger">
               <div *ngIf="dn.errors.required">
                 錢包顯示名稱必填
@@ -23,7 +23,7 @@
         <th>手機號碼：</th>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="手機號碼" formControlName="phoneNumber">
+            <input matInput #input class="form-control" formControlName="phoneNumber">
             <mat-error *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
               <div *ngIf="phoneNumber.errors.required">
                 行動電話必填
