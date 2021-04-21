@@ -138,15 +138,13 @@ export class F04003Component implements OnInit, AfterViewInit {
     let jsonObj = JSON.parse(jsonStr);
     console.log(this.registrationForm.value.createdate_start)
 
-    if (jsonObj.createdate_start.createdate_start != null && 
-      jsonObj.createdate_start.createdate_end != null) {
+    let startDate = this.registrationForm.value.createdate_start;
+    let endDate = this.registrationForm.value.createdate_end;
+
+    if (startDate != null && startDate != "" && endDate != null && endDate != "") {
     // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
-    let startDate = new Date(this.registrationForm.value.createdate_start);
-    let endDate = new Date(this.registrationForm.value.createdate_end);
-    
-    
-      jsonObj.createdate_start = this.datePipe.transform(startDate,"yyyy-MM-dd");
-      jsonObj.createdate_end = this.datePipe.transform(endDate,"yyyy-MM-dd");
+      jsonObj.createdate_start = this.datePipe.transform(new Date(startDate),"yyyy-MM-dd");
+      jsonObj.createdate_end = this.datePipe.transform(new Date(endDate),"yyyy-MM-dd");
     }
     let pgIndex = `${this.currentPage.pageIndex + 1}`;
     let pgSize = `${this.currentPage.pageSize}`;
@@ -168,4 +166,15 @@ export class F04003Component implements OnInit, AfterViewInit {
     console.log(JSON.stringify(this.registrationForm.value));
   }
 
+  setTimes() {
+    if (this.registrationForm.value.createdate_end == null) {
+      this.registrationForm.patchValue({createdate_end:this.registrationForm.value.createdate_start});
+      //this.testForm.setValue({endTime:this.testForm.value.startTime});
+    }
+  }ㄏ
+  // filterName:string;
+  // handleClear() {
+  //   this.filterName = '';
+    
+  // }
 }
