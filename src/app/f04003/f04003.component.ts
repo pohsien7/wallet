@@ -172,7 +172,7 @@ export class F04003Component implements OnInit, AfterViewInit {
       this.registrationForm.patchValue({createdate_end:this.registrationForm.value.createdate_start});
       //this.testForm.setValue({endTime:this.testForm.value.startTime});
     }
-  }ㄏ
+  }
   // filterName:string;
   // handleClear() {
   //   this.filterName = '';
