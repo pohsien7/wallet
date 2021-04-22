@@ -1,77 +1,82 @@
 <div class="container">
   <th class="f02_th">開立記名錢包(法人,憑證)</th>
   <block-ui>
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
-    <table>
-      <tr>
-        <th>
-          <button type="submit" mat-raised-button color="primary">送出</button>
-        </th>
-      </tr>
-      <tr>
-        <th>錢包顯示名稱：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="dn">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <th>機構名稱：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="name">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th>錢包顯示名稱：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="dn">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th>機構名稱：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="name">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
 
-      <tr>
-        <th nowrap="nowrap">營利事業統一編號：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" formControlName="ban">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <th>負責人：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" formControlName="owner">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
+            <tr>
+              <th nowrap="nowrap">營利事業統一編號：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="ban">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th>負責人：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="owner">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
 
-      <tr>
-        <th>負責人電話：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" formControlName="phoneNumber">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <th nowrap="nowrap">商戶類別碼：</th>
-        <td>
-          <mat-form-field color="accent">
-            <mat-select formControlName="mcc">
-              <mat-option *ngFor="let mcc of mccCode" [value]="mcc.value">
-                {{mcc.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </td>
-      </tr>
+            <tr>
+              <th>負責人電話：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="phoneNumber">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">商戶類別碼：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <mat-select formControlName="mcc">
+                    <mat-option *ngFor="let mcc of mccCode" [value]="mcc.value">
+                      {{mcc.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
 
-      <tr>
-        <th>公司地址：</th>
-        <td colspan="2">
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" formControlName="address">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-    </table>
-  </form>
+            <tr>
+              <th>公司地址：</th>
+              <td colspan="2">
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="address">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
   </block-ui>
 </div>

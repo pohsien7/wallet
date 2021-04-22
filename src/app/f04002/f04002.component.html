@@ -4,7 +4,7 @@
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="f04_div">
       <button type="submit" mat-raised-button color="primary">查詢</button>
-      <button type="clear" mat-raised-button color="primary">清除</button>
+      <button type="clear" mat-raised-button color="primary" (click)="cleanToEmpty()">清除</button>
     </div>
 
     <table>

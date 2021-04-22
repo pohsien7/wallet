@@ -175,4 +175,21 @@ export class F04002Component implements OnInit, AfterViewInit {
     }
   }
 
+  cleanToEmpty() {
+    this.registrationForm.patchValue({ dn : '' });
+    this.registrationForm.patchValue({ name : '' });
+    this.registrationForm.patchValue({ createdate_start : '' });
+    this.registrationForm.patchValue({ createdate_end : '' });
+    this.registrationForm.patchValue({ idNumber : '' });
+    this.registrationForm.patchValue({ phoneNumber : '' });
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 10,
+      length: null
+    };
+    this.totalCount = 0;
+    this.paginator.firstPage();
+    this.npWalletCert.data = null;
+  }
+
 }

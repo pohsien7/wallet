@@ -4,7 +4,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 mat-form-field{
-  width: 100%;
+  width: 80%;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -19,7 +19,7 @@ th {
 }
 
 .form-address{
-  width: 200%;
+  width: 150%;
 }
 
 .login-background{

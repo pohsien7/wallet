@@ -2,3 +2,24 @@
   font-size: 20px;
   padding: 20px 20px;
 }
+
+th{
+  font-size: 20px;
+}
+
+td{
+  font-size: 20px;
+}
+
+.th_title{
+  text-shadow:5px 5px 5px dimgray;
+}
+
+.matCard{
+  box-shadow: 5px 5px 5px 5px dimgray;
+}
+
+mat-card-content{
+  background-color: linen;
+}
+
