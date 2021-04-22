@@ -57,7 +57,7 @@ export class F03001Component implements OnInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.transferForm.value));
       await this.f03001Service.sendConsumer('consumer/f03001', formdata).then((data) => {
-        msg = data.statusMessage;
+        msg = data.statusCode + ':' + data.statusMessage;
       });
     }
     setTimeout(() => {
