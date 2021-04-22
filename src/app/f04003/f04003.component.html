@@ -3,7 +3,7 @@
   
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       <button type="submit" mat-raised-button color="primary">查詢</button>
-      <!-- <button type="clear" mat-raised-button color="primary" (click)="handleClear()">清除</button> -->
+      <button type="clear" mat-raised-button color="primary" (click)="handleClear()">清除</button>
 
       <table>
         <tr>
@@ -37,22 +37,6 @@
         </tr>
       
         <tr>
-          <!-- <td>
-              <mat-form-field color="accent">
-                <input matInput #inputstate [matDatepicker]="pick_start" class="form-control" placeholder="建立日期起" formControlName="createdate_start" name="filterName">
-                <mat-datepicker-toggle matSuffix [for]="pick_start"></mat-datepicker-toggle>
-                <mat-datepicker #pick_start></mat-datepicker>
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-          </td>
-          <td>
-              <mat-form-field color="accent">
-                <input matInput #inputstate [matDatepicker]="pick_end" class="form-control" placeholder="建立日期迄" formControlName="createdate_end" name="filterName">
-                <mat-datepicker-toggle matSuffix [for]="pick_end"></mat-datepicker-toggle>
-                <mat-datepicker #pick_end></mat-datepicker>
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-          </td> -->
           <td>
             <mat-form-field appearance="fill" class="example-form-field">
               <mat-label>建立日期</mat-label>
@@ -75,7 +59,7 @@
       </table>
 
       
-      <mat-table [dataSource]="npWalletPubkey" matSort (matSortChange)="changeSort($event)">
+      <mat-table [dataSource]="npWalletPubkey">
         <ng-container matColumnDef="DN">
           <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
           <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
