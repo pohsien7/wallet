@@ -75,6 +75,7 @@ import { CssSettingComponent } from './css-setting/css-setting.component';
 import { F03001confirmComponent } from './f03001/f03001confirm/f03001confirm.component';
 import { F03002confirmComponent } from './f03002/f03002confirm/f03002confirm.component';
 import { DatePipe } from '@angular/common';
+import { F04004Component } from './f04004/f04004.component';
 
 
 export const TW_FORMATS = {
@@ -147,7 +148,8 @@ export const TW_FORMATS = {
     F02006wopenComponent,
     F03001confirmComponent,
     CssSettingComponent,
-    F03002confirmComponent
+    F03002confirmComponent,
+    F04004Component
   ],
   imports: [
     BrowserModule,
