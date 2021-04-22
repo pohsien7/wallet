@@ -1,21 +1,21 @@
 <div class="container">
   <h2>開立匿名錢包查詢</h2>
 
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <button type="submit" mat-raised-button color="primary">查詢</button>
-    <button type="clear" mat-raised-button color="primary" (click)="handleClear()">清除</button>
+  <form [formGroup]="registrationForm">
+    <button type="submit" mat-raised-button color="primary" (click) = "getViewDataList()">查詢</button>
+    <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
 
     <table>
       <tr>
         <td>
           <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn" name="filterName">
+            <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
         <td>
           <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phoneNumber" name="filterName"> 
+            <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phoneNumber"> 
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>

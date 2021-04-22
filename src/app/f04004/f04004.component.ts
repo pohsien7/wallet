@@ -22,8 +22,6 @@ export class F04004Component implements OnInit {
     pageSize: ['', [Validators.maxLength(3)]]
   });
 
-  submitted = false;
-
   constructor(private fb: FormBuilder, public f04004Service: F04004Service, private datePipe: DatePipe ) { }
 
   ngOnInit(): void {
@@ -37,22 +35,6 @@ export class F04004Component implements OnInit {
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' :
     '';
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    if(!this.registrationForm.valid) {
-      alert('資料必填喔!')
-      return false;
-    } else {
-      this.currentPage = {
-        pageIndex: 0,
-        pageSize: 5,
-        length: null
-      };
-      this.paginator.firstPage();
-      this.getViewDataList();
-    }
   }
 
   totalCount: any;
@@ -80,6 +62,10 @@ export class F04004Component implements OnInit {
   }
 
   getViewDataList() {
+    if(this.registrationForm.value.dn == '' && this.registrationForm.value.phoneNumber == '' 
+      && this.registrationForm.value.createdate_start =='' && this.registrationForm.value.createdate_end ==''
+    ) { alert("請至少填寫一項"); return; }
+
     let jsonStr = JSON.stringify(this.registrationForm.value);
     let jsonObj = JSON.parse(jsonStr);
     // 處理日期  當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
@@ -108,7 +94,7 @@ export class F04004Component implements OnInit {
       this.registrationForm.patchValue({createdate_end:this.registrationForm.value.createdate_start});
     }
   }
-  handleClear() {
+  clear() {
     // this.registrationForm.reset();
     // this.registrationForm.setValue({
     this.registrationForm.patchValue({
@@ -122,7 +108,7 @@ export class F04004Component implements OnInit {
     };
     this.totalCount = 0;
     this.paginator.firstPage();
-    this.anonymousWalletData = null;
+    this.anonymousWalletData.data = null;
     
   }
 }

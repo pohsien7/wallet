@@ -30,8 +30,6 @@ export class F04003Component implements OnInit, AfterViewInit {
     pageSize: ['', [Validators.maxLength(3)]]
   });
 
-  submitted = false;
-
   constructor(private fb: FormBuilder, public f04003Service: F04003Service, private datePipe: DatePipe ) { }
 
   ngOnInit(): void {
@@ -43,24 +41,7 @@ export class F04003Component implements OnInit, AfterViewInit {
   ]);
 
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
-    '';
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    if(!this.registrationForm.valid) {
-      alert('資料必填喔!')
-      return false;
-    } else {
-      this.currentPage = {
-        pageIndex: 0,
-        pageSize: 5,
-        length: null
-      };
-      this.paginator.firstPage();
-      this.getViewDataList();
-    }
+    return this.formControl.hasError('required') ? '此為必填欄位!' : '';
   }
 
   totalCount: any;
@@ -87,7 +68,12 @@ export class F04003Component implements OnInit, AfterViewInit {
 
   }
 
-  getViewDataList() {
+  async getViewDataList() {
+    
+    if(this.registrationForm.value.dn == '' && this.registrationForm.value.name =='' && this.registrationForm.value.idName ==''
+      && this.registrationForm.value.phoneNumber == '' && this.registrationForm.value.createdate_start =='' && this.registrationForm.value.createdate_end ==''
+    ) { alert("請至少填寫一項"); return; }
+
     let jsonStr = JSON.stringify(this.registrationForm.value);
     let jsonObj = JSON.parse(jsonStr);
     // 處理日期 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
@@ -118,9 +104,7 @@ export class F04003Component implements OnInit, AfterViewInit {
     }
   }
   
-  handleClear() {
-    // this.registrationForm.reset();
-    // this.registrationForm.setValue({
+  clear() {
     this.registrationForm.patchValue({
       dn:'', name:'', idNumber:'', phoneNumber:'', 
       createdate_start:'', createdate_end:''
@@ -132,7 +116,7 @@ export class F04003Component implements OnInit, AfterViewInit {
     };
     this.totalCount = 0;
     this.paginator.firstPage();
-    this.npWalletPubkey= null;
-    
+    this.npWalletPubkey.data = null;
   }
+
 }
