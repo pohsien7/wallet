@@ -79,8 +79,13 @@ export class F04002Component implements OnInit, AfterViewInit {
 
   onSubmit() {
     this.submitted = true;
-    if(!this.registrationForm.valid) {
-      alert('資料必填喔!')
+    if( this.registrationForm.value.dn == '' &&
+        this.registrationForm.value.name == '' &&
+        this.registrationForm.value.idNumber == '' &&
+        this.registrationForm.value.phoneNumber == '' &&
+        this.registrationForm.value.createdate_start == ''
+    ) {
+      alert('請選擇一項查詢!')
       return false;
     } else {
       this.currentPage = {

@@ -4,15 +4,11 @@
 }
 
 th{
-  font-size: 20px;
+  font-size: 15px;
 }
 
 td{
-  font-size: 20px;
-}
-
-.th_title{
-  text-shadow:5px 5px 5px dimgray;
+  font-size: 15px;
 }
 
 .matCard{

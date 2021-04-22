@@ -8,59 +8,64 @@
             <button type="submit" mat-raised-button color="primary">送出</button>
           </th>
         </tr>
-        <tr>
-          <th nowrap="nowrap">交易付方錢包ID：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" formControlName="walletid">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </td>
-          <th nowrap="nowrap">交易收方錢包ID：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" formControlName="recipientid">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">交易付方錢包ID：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="walletid">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">交易收方錢包ID：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="recipientid">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
 
-        <tr>
-          <th>券幣代號：</th>
-          <td>
-            <mat-form-field color="accent">
-              <mat-select formControlName="cvc">
-                <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
-                  {{cvc.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <th>交易金額：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" formControlName="amount">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
+            <tr>
+              <th>券幣代號：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <mat-select formControlName="cvc">
+                    <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+                      {{cvc.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <th>交易金額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="amount">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
 
-        <tr>
-          <th nowrap="nowrap">(收方)銷帳編號：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" formControlName="won">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </td>
-          <th nowrap="nowrap">(付方)交易備註：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #inputstate class="form-control" formControlName="remark">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
+            <tr>
+              <th nowrap="nowrap">(收方)銷帳編號：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="won">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">(付方)交易備註：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="remark">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
       </table>
     </form>
   </block-ui>

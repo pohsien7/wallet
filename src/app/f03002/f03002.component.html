@@ -1,1 +1,55 @@
-<p>f03002 works!</p>
+<div class="container">
+  <th class="f03_th">交易收方錢包撤銷交易</th>
+  <block-ui>
+    <form [formGroup]="reverseForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">簽署指令之錢包ID：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="walletid">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">欲撤銷之交易ID：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="stxnid">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th>券幣代號：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <mat-select formControlName="cvc">
+                    <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+                      {{cvc.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">交易備註：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="remark">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>
