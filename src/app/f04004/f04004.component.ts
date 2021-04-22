@@ -19,7 +19,7 @@ interface COMB {
   templateUrl: './f04004.component.html',
   styleUrls: ['./f04004.component.css']
 })
-export class F04003Component implements OnInit, AfterViewInit {
+export class F04004Component implements OnInit, AfterViewInit {
   
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
