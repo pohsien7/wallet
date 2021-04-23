@@ -20,10 +20,6 @@ interface COMB {
 export class F02003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
-  // 之後要改打API去取得下拉內容
-  genderCode: COMB[] = [{value: 'G', viewValue: '女'}, {value: 'B', viewValue: '男'}];
-  nationCode: COMB[] = [{value: 'TW', viewValue: 'Taiwan'}, {value: 'AU', viewValue: 'Australia'}];
-
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
@@ -35,17 +31,21 @@ export class F02003Component implements OnInit {
     phoneNumber: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
   });
-
+  
+  gender: string;
+  nation: string;
+  
   submitted = false;
 
   constructor(private fb: FormBuilder, public f02003Service: F02003Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getNation();
+    this.getGender();
   }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -77,6 +77,18 @@ export class F02003Component implements OnInit {
       const childernDialogRef = this.dialog.open(F02003confirmComponent, { data: { msgStr: msg } });
     }, 500);
   }
-  
+
+  getGender() {
+    const formdata: FormData = new FormData();
+    this.f02003Service.sendConsumer('consumer/f02003/getGender', formdata).then((data) => {
+      this.gender = data.gender;
+    });
+  }
+  getNation() {
+    const formdata: FormData = new FormData();
+    this.f02003Service.sendConsumer('consumer/f02003/getNation', formdata).then((data) => {
+      this.nation = data.nation;
+    });
+  }
 
 }

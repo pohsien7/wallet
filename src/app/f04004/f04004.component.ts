@@ -56,15 +56,24 @@ export class F04004Component implements OnInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      this.getViewDataList();
+      if(!this.isFieldEmpty()) { this.getViewDataList(); }
     });
 
   }
 
-  getViewDataList() {
+  isFieldEmpty() {
     if(this.registrationForm.value.dn == '' && this.registrationForm.value.phoneNumber == '' 
       && this.registrationForm.value.createdate_start =='' && this.registrationForm.value.createdate_end ==''
-    ) { alert("請至少填寫一項"); return; }
+    ) { 
+      return true;
+    }
+  }
+
+  getViewDataList() {
+    if(this.isFieldEmpty()) { 
+      alert("請至少填寫一項"); 
+      return; 
+    } else {
 
     let jsonStr = JSON.stringify(this.registrationForm.value);
     let jsonObj = JSON.parse(jsonStr);
@@ -87,6 +96,7 @@ export class F04004Component implements OnInit {
       this.totalCount = data.totalCount;
       this.anonymousWalletData.data = data.dataMap;
     });
+  }
   }
 
   setTimes() {

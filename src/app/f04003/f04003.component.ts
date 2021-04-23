@@ -63,39 +63,48 @@ export class F04003Component implements OnInit, AfterViewInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      this.getViewDataList();
+      if(!this.isFieldEmpty()) { this.getViewDataList(); }
     });
 
   }
 
-  async getViewDataList() {
-    
-    if(this.registrationForm.value.dn == '' && this.registrationForm.value.name =='' && this.registrationForm.value.idName ==''
+  isFieldEmpty() {
+    if(this.registrationForm.value.dn == '' && this.registrationForm.value.name =='' && this.registrationForm.value.idNumber ==''
       && this.registrationForm.value.phoneNumber == '' && this.registrationForm.value.createdate_start =='' && this.registrationForm.value.createdate_end ==''
-    ) { alert("請至少填寫一項"); return; }
-
-    let jsonStr = JSON.stringify(this.registrationForm.value);
-    let jsonObj = JSON.parse(jsonStr);
-    // 處理日期 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
-    let startDate = this.registrationForm.value.createdate_start;
-    let endDate = this.registrationForm.value.createdate_end;
-    if (startDate != null && startDate != "" && endDate != null && endDate != "") {
-      jsonObj.createdate_start = this.datePipe.transform(new Date(startDate),"yyyy-MM-dd");
-      jsonObj.createdate_end = this.datePipe.transform(new Date(endDate),"yyyy-MM-dd");
+    ) { 
+      return true;
     }
-    //處理分頁
-    let pgIndex = `${this.currentPage.pageIndex + 1}`;
-    let pgSize = `${this.currentPage.pageSize}`;
-    jsonObj.pageIndex = pgIndex;
-    jsonObj.pageSize = pgSize;
+  }
 
-    const formdata: FormData = new FormData();
-    formdata.append('value', JSON.stringify(jsonObj));
-    this.f04003Service.sendConsumer('consumer/f04003', formdata).then(data => {
-      this.totalCount = data.totalCount;
-      this.npWalletPubkey.data = data.dataMap;
-    });
+  getViewDataList() {
+    
+    if(this.isFieldEmpty()) { 
+      alert("請至少填寫一項"); 
+      return; 
+    } else {
 
+      let jsonStr = JSON.stringify(this.registrationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      // 處理日期 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
+      let startDate = this.registrationForm.value.createdate_start;
+      let endDate = this.registrationForm.value.createdate_end;
+      if (startDate != null && startDate != "" && endDate != null && endDate != "") {
+        jsonObj.createdate_start = this.datePipe.transform(new Date(startDate),"yyyy-MM-dd");
+        jsonObj.createdate_end = this.datePipe.transform(new Date(endDate),"yyyy-MM-dd");
+      }
+      //處理分頁
+      let pgIndex = `${this.currentPage.pageIndex + 1}`;
+      let pgSize = `${this.currentPage.pageSize}`;
+      jsonObj.pageIndex = pgIndex;
+      jsonObj.pageSize = pgSize;
+
+      const formdata: FormData = new FormData();
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f04003Service.sendConsumer('consumer/f04003', formdata).then(data => {
+        this.totalCount = data.totalCount;
+        this.npWalletPubkey.data = data.dataMap;
+      });
+    }
   }
 
   setTimes() {

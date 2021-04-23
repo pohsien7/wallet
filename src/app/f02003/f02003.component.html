@@ -39,8 +39,8 @@
             <td>
               <mat-form-field color="accent">
                 <mat-select formControlName="nation">
-                  <mat-option *ngFor="let nation of nationCode" [value]="nation.value">
-                    {{nation.viewValue}}
+                  <mat-option *ngFor="let item of nation" [value]="item.CODE_NO">
+                    {{item.CODE_NO}}   {{item.CODE_DESC}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -52,11 +52,12 @@
             <td>
               <mat-form-field color="accent">
                 <mat-select formControlName="gender">
-                  <mat-option *ngFor="let gender of genderCode" [value]="gender.value">
-                    {{gender.viewValue}}
+                  <mat-option *ngFor="let item of gender" [value]="item.CODE_NO">
+                    {{item.CODE_DESC}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+              
             </td>
             <th nowrap="nowrap">出生日期：</th>
             <td>
