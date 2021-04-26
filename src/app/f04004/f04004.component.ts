@@ -9,7 +9,7 @@ import { F04004Service } from './f04004.service';
 @Component({
   selector: 'app-f04004',
   templateUrl: './f04004.component.html',
-  styleUrls: ['./f04004.component.css']
+  styleUrls: ['./f04004.component.css', '../../assets/css/f04.css']
 })
 export class F04004Component implements OnInit {
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
