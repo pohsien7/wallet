@@ -30,7 +30,10 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
   walletOption: sysCode[] = [{value: 'f02001', viewValue: '記名錢包 (法人，憑證)'},
                              {value: 'f02002', viewValue: '記名錢包 (自然人，憑證)'},
                              {value: 'f02003', viewValue: '記名錢包 (法人，公鑰)'},
-                             {value: 'f02004', viewValue: '匿名錢包'}];
+                             {value: 'f02004', viewValue: '匿名錢包'},
+                             {value: 'f02006', viewValue: '交易收方錢包交易檔'},
+                             {value: 'f02006_2', viewValue: '移轉自錢包CBDC檔'}
+                            ];
 
   constructor(public dialogRef: MatDialogRef<F02006wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02006Service: F02006Service) { }
 

@@ -65,14 +65,14 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="goBack(row.WALLETID)">
+        <button mat-icon-button color="primary" (click)="goBack(row.WALLETID || row.walletid)">
           <span class="material-icons">call_received</span>
         </button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="WALLETID">
       <mat-header-cell *matHeaderCellDef>錢包ID</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.WALLETID || row.walletid}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="DN">
       <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
@@ -80,7 +80,7 @@
     </ng-container>
     <ng-container matColumnDef="CREATEDATE">
       <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.CREATEDATE || row.txntime | date:'yyyy-MM-dd'}}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'DN', 'CREATEDATE' ]"></mat-header-row>
     <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'DN', 'CREATEDATE' ]"></mat-row>
