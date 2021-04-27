@@ -10,3 +10,21 @@ button{
 .f04_div{
   padding-left: 20px;
 }
+
+th{
+  font-size: 20px;
+  padding: 10px 10px 0px 10px;
+}
+
+mat-form-field{
+  width: 90%;
+}
+
+.matCard{
+  box-shadow: 5px 5px 5px 5px dimgray;
+}
+
+mat-card-content{
+  background-color: linen;
+}
+

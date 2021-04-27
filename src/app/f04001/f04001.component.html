@@ -1,65 +1,83 @@
 <div class="container">
   <th class="f04_th">開立記名錢包(法人,憑證)查詢</th>
 
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registrationForm" style="padding-left: 20px;">
     <div class="f04_div">
-      <button type="submit" mat-raised-button color="primary">查詢</button>
-      <button type="clear" mat-raised-button color="primary">清除</button>
+      <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">查詢</button>
+      <button type="clear" mat-raised-button color="primary" (click)="cleanToEmpty()">清除</button>
     </div>
-
     <table>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th>錢包顯示名稱</th>
+            <th>機構名稱</th>
+            <th>營利事業統一編號</th>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="dn">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="name">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="ban">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th>負責人</th>
+            <th>建立日期</th>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="owner">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field color="accent" class="example-form-field">
+                <!--<mat-label>建立日期</mat-label>-->
+                <mat-date-range-input [rangePicker]="rangePicker">
+                  <input matStartDate placeholder="建立日期起" formControlName="createdate_start" value="">
+                  <input matEndDate placeholder="建立日期迄" formControlName="createdate_end">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker>
+                  <mat-date-range-picker-actions>
+                    <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                    <button mat-button matDateRangePickerCancel>取消</button>
+                  </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
       <tr>
         <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="機構名稱" formControlName="name">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
+          <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+          </mat-paginator>
         </td>
       </tr>
-
-      <tr>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" placeholder="營利事業統一編號" formControlName="ban">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" placeholder="負責人" formControlName="owner">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <mat-form-field appearance="fill" class="example-form-field">
-            <mat-label>建立日期</mat-label>
-            <mat-date-range-input [rangePicker]="rangePicker">
-              <input matStartDate placeholder="建立日期起" formControlName="createdate_start" value="">
-              <input matEndDate placeholder="建立日期迄" formControlName="createdate_end">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-            <mat-date-range-picker #rangePicker>
-              <mat-date-range-picker-actions>
-                <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
-                <button mat-button matDateRangePickerCancel>取消</button>
-              </mat-date-range-picker-actions>
-            </mat-date-range-picker>
-          </mat-form-field>
-        </td>
-      </tr>
-
     </table>
-
-
+  </form>
+</div>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-dialog-content>
     <mat-table [dataSource]="jpWalletCert" matSort (matSortChange)="changeSort($event)">
       <ng-container matColumnDef="DN">
         <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
@@ -101,24 +119,13 @@
         <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
       </ng-container>
-
-      <mat-header-row *matHeaderRowDef="['DN', 'NAME', 'BAN', 'OWNER', 'PHONENUMBER', 'MCC', 'ADDRESS', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-header-row>
-      <mat-row *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'BAN', 'OWNER', 'PHONENUMBER', 'MCC', 'ADDRESS', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-row>
+      <mat-header-row
+        *matHeaderRowDef="['DN', 'NAME', 'BAN', 'OWNER', 'PHONENUMBER', 'MCC', 'ADDRESS', 'CREATEDATE', 'WALLETID', 'USERID']">
+      </mat-header-row>
+      <mat-row
+        *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'BAN', 'OWNER', 'PHONENUMBER', 'MCC', 'ADDRESS', 'CREATEDATE', 'WALLETID', 'USERID']">
+      </mat-row>
     </mat-table>
-
-    <table>
-      <tr>
-        <td>
-          <mat-paginator #paginator
-            [length]="totalCount"
-            [pageIndex]="0"
-            [pageSize]="5"
-            [pageSizeOptions]="[5, 10, 15, 50, 100]"
-            [showFirstLastButtons]="true">
-          </mat-paginator>
-        </td>
-      </tr>
-    </table>
-
-  </form>
-</div>
+  </mat-dialog-content>
+  <br>
+</cdk-virtual-scroll-viewport>

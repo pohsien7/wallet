@@ -7,6 +7,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { F04003confirmComponent } from './f04003confirm/f04003confirm.component';
 interface COMB {
   value: string;
   viewValue: string;
@@ -30,7 +32,7 @@ export class F04003Component implements OnInit, AfterViewInit {
     pageSize: ['', [Validators.maxLength(3)]]
   });
 
-  constructor(private fb: FormBuilder, public f04003Service: F04003Service, private datePipe: DatePipe ) { }
+  constructor(private fb: FormBuilder, public f04003Service: F04003Service, private datePipe: DatePipe, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
 
@@ -71,16 +73,16 @@ export class F04003Component implements OnInit, AfterViewInit {
   isFieldEmpty() {
     if(this.registrationForm.value.dn == '' && this.registrationForm.value.name =='' && this.registrationForm.value.idNumber ==''
       && this.registrationForm.value.phoneNumber == '' && this.registrationForm.value.createdate_start =='' && this.registrationForm.value.createdate_end ==''
-    ) { 
+    ) {
       return true;
     }
   }
 
   getViewDataList() {
-    
-    if(this.isFieldEmpty()) { 
-      alert("請至少填寫一項"); 
-      return; 
+
+    if(this.isFieldEmpty()) {
+      this.dialog.open(F04003confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
+      return;
     } else {
 
       let jsonStr = JSON.stringify(this.registrationForm.value);
@@ -112,10 +114,10 @@ export class F04003Component implements OnInit, AfterViewInit {
       this.registrationForm.patchValue({createdate_end:this.registrationForm.value.createdate_start});
     }
   }
-  
+
   clear() {
     this.registrationForm.patchValue({
-      dn:'', name:'', idNumber:'', phoneNumber:'', 
+      dn:'', name:'', idNumber:'', phoneNumber:'',
       createdate_start:'', createdate_end:''
     });
     this.currentPage = {

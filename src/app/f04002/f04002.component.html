@@ -1,63 +1,72 @@
-<div class="container" style="display: flex;flex-direction: column;">
+<div class="container">
   <th class="f04_th">開立記名錢包(自然人,憑證)查詢</th>
 
-  <form [formGroup]="registrationForm">
+  <form [formGroup]="registrationForm" style="padding-left: 20px;">
     <div class="f04_div">
       <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">查詢</button>
       <button type="clear" mat-raised-button color="primary" (click)="cleanToEmpty()">清除</button>
     </div>
-
     <table>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th>錢包顯示名稱</th>
+            <th>姓名</th>
+            <th nowrap="nowrap">身分證字號、護照號碼、居留證號</th>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="dn">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="name">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="idNumber">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th>手機號碼</th>
+            <th>建立日期</th>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="phoneNumber">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field color="accent" class="example-form-field">
+                <!--<mat-label>建立日期</mat-label>-->
+                <mat-date-range-input [rangePicker]="rangePicker">
+                  <input matStartDate placeholder="建立日期起" formControlName="createdate_start" value="">
+                  <input matEndDate placeholder="建立日期迄" formControlName="createdate_end">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker>
+                  <mat-date-range-picker-actions>
+                    <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                    <button mat-button matDateRangePickerCancel>取消</button>
+                  </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
       <tr>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="錢包顯示名稱" formControlName="dn">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" placeholder="姓名" formControlName="name">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" placeholder="身分證字號、護照號碼、居留證號" formControlName="idNumber">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #inputstate class="form-control" placeholder="手機號碼" formControlName="phoneNumber">
-            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <mat-form-field appearance="fill" class="example-form-field">
-            <mat-label>建立日期</mat-label>
-            <mat-date-range-input [rangePicker]="rangePicker">
-              <input matStartDate placeholder="建立日期起" formControlName="createdate_start" value="">
-              <input matEndDate placeholder="建立日期迄" formControlName="createdate_end">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-            <mat-date-range-picker #rangePicker>
-              <mat-date-range-picker-actions>
-                <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
-                <button mat-button matDateRangePickerCancel>取消</button>
-              </mat-date-range-picker-actions>
-            </mat-date-range-picker>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td td colspan="8">
+        <td colspan="2">
           <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
             [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
           </mat-paginator>
@@ -66,58 +75,60 @@
     </table>
   </form>
 </div>
-<mat-dialog-content>
-  <mat-table [dataSource]="npWalletCert">
-    <ng-container matColumnDef="DN">
-      <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="NAME">
-      <mat-header-cell *matHeaderCellDef>姓名</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.NAME }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="IDNUMBER">
-      <mat-header-cell *matHeaderCellDef>身分證字號、護照號碼、居留證號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.IDNUMBER }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="NATION">
-      <mat-header-cell *matHeaderCellDef>國籍</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.NATION }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="GENDER">
-      <mat-header-cell *matHeaderCellDef>性別</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.GENDER }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="BIRTHDAT">
-      <mat-header-cell *matHeaderCellDef>出生日期</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.BIRTHDATE }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="ADDRESS">
-      <mat-header-cell *matHeaderCellDef>戶籍地址</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.ADDRESS }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="PHONENUMBER">
-      <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.PHONENUMBER }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="CREATEDATE">
-      <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="WALLETID">
-      <mat-header-cell *matHeaderCellDef>記名錢包ID</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="USERID">
-      <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
-    </ng-container>
-
-    <mat-header-row
-      *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
-    </mat-header-row>
-    <mat-row
-      *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
-    </mat-row>
-  </mat-table>
-</mat-dialog-content>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-dialog-content>
+    <mat-table [dataSource]="npWalletCert">
+      <ng-container matColumnDef="DN">
+        <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="NAME">
+        <mat-header-cell *matHeaderCellDef>姓名</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.NAME }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="IDNUMBER">
+        <mat-header-cell *matHeaderCellDef>身分證字號、護照號碼、居留證號</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.IDNUMBER }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="NATION">
+        <mat-header-cell *matHeaderCellDef>國籍</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.NATION }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="GENDER">
+        <mat-header-cell *matHeaderCellDef>性別</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.GENDER }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="BIRTHDAT">
+        <mat-header-cell *matHeaderCellDef>出生日期</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.BIRTHDATE }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ADDRESS">
+        <mat-header-cell *matHeaderCellDef>戶籍地址</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.ADDRESS }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="PHONENUMBER">
+        <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.PHONENUMBER }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="CREATEDATE">
+        <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="WALLETID">
+        <mat-header-cell *matHeaderCellDef>記名錢包ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="USERID">
+        <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
+      </ng-container>
+      <mat-header-row
+        *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
+      </mat-header-row>
+      <mat-row
+        *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
+      </mat-row>
+    </mat-table>
+  </mat-dialog-content>
+  <br>
+</cdk-virtual-scroll-viewport>

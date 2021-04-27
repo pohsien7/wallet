@@ -44,6 +44,11 @@ export class F02004Component implements OnInit {
     });
   }
 
+  formControl = new FormControl('', [
+    Validators.required
+    // Validators.email,
+  ]);
+
   // getErrorMessage() {
   //     console.log(this.registrationForm.getError('dn'));
   //   return this.registrationForm.hasError('required') ? 'Required field' :
@@ -51,17 +56,21 @@ export class F02004Component implements OnInit {
   //   '';
   // }
 
+  getErrorMessage() {
+    return this.formControl.hasError('required') ? '此為必填欄位!' :
+    this.formControl.hasError('email') ? 'Not a valid email' :
+    '';
+  }
+
   get dn() { return this.registrationForm.get('dn'); }
   get phoneNumber() { return this.registrationForm.get('phoneNumber'); }
 
-  onSubmit() {
+  async onSubmit() {
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      alert('資料有誤!')
-      return false;
-
+      msg = '資料必填喔!';
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));

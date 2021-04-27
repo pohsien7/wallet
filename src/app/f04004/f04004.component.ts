@@ -1,10 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { F04004Service } from './f04004.service';
+import { F04004confirmComponent } from './f04004confirm/f04004confirm.component';
 
 @Component({
   selector: 'app-f04004',
@@ -22,7 +24,7 @@ export class F04004Component implements OnInit {
     pageSize: ['', [Validators.maxLength(3)]]
   });
 
-  constructor(private fb: FormBuilder, public f04004Service: F04004Service, private datePipe: DatePipe ) { }
+  constructor(private fb: FormBuilder, public f04004Service: F04004Service, private datePipe: DatePipe, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
 
@@ -62,17 +64,17 @@ export class F04004Component implements OnInit {
   }
 
   isFieldEmpty() {
-    if(this.registrationForm.value.dn == '' && this.registrationForm.value.phoneNumber == '' 
+    if(this.registrationForm.value.dn == '' && this.registrationForm.value.phoneNumber == ''
       && this.registrationForm.value.createdate_start =='' && this.registrationForm.value.createdate_end ==''
-    ) { 
+    ) {
       return true;
     }
   }
 
   getViewDataList() {
-    if(this.isFieldEmpty()) { 
-      alert("請至少填寫一項"); 
-      return; 
+    if(this.isFieldEmpty()) {
+      this.dialog.open(F04004confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
+      return;
     } else {
 
     let jsonStr = JSON.stringify(this.registrationForm.value);
@@ -89,7 +91,7 @@ export class F04004Component implements OnInit {
     let pgSize = `${this.currentPage.pageSize}`;
     jsonObj.pageIndex = pgIndex;
     jsonObj.pageSize = pgSize;
-    
+
     const formdata: FormData = new FormData();
     formdata.append('value', JSON.stringify(jsonObj));
     this.f04004Service.sendConsumer('consumer/f04004', formdata).then(data => {
@@ -108,7 +110,7 @@ export class F04004Component implements OnInit {
     // this.registrationForm.reset();
     // this.registrationForm.setValue({
     this.registrationForm.patchValue({
-      dn:'', name:'', idNumber:'', phoneNumber:'', 
+      dn:'', name:'', idNumber:'', phoneNumber:'',
       createdate_start:'', createdate_end:''
     });
     this.currentPage = {
@@ -119,6 +121,6 @@ export class F04004Component implements OnInit {
     this.totalCount = 0;
     this.paginator.firstPage();
     this.anonymousWalletData.data = null;
-    
+
   }
 }

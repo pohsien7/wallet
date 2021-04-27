@@ -1,11 +1,7 @@
-table {    
+table {
     width:50%;
 }
 
 td {
   width: 1000px;
-}
-
-mat-form-field{
-  width: 100%;
 }

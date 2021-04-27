@@ -7,6 +7,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { F04002confirmComponent } from './f04002confirm/f04002confirm.component';
 
 
 interface COMB {
@@ -17,10 +19,14 @@ interface COMB {
 @Component({
   selector: 'app-f04002',
   templateUrl: './f04002.component.html',
-  styleUrls: ['./f04002.component.css','../../assets/css/f04.css']
+  styleUrls: ['./f04002.component.css', '../../assets/css/f04.css']
 })
 export class F04002Component implements OnInit, AfterViewInit {
 
+  initData: any = [{
+    'ADDRESS': '', 'BIRTHDATE': '', 'CREATEDATE': '', 'DN': '', 'GENDER': '', 'IDNUMBER': '', 'NAME': '', 'NATION': '',
+    'PHONENUMBER': '', 'RN': '', 'USERID': '', 'WALLETID': ''
+  }];
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
@@ -60,7 +66,7 @@ export class F04002Component implements OnInit, AfterViewInit {
   useridVal: string;
 
 
-  constructor(private fb: FormBuilder, public f04002Service: F04002Service, private datePipe: DatePipe ) { }
+  constructor(private fb: FormBuilder, public f04002Service: F04002Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -74,18 +80,18 @@ export class F04002Component implements OnInit, AfterViewInit {
 
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' :
-    '';
+      '';
   }
 
   onSubmit() {
     this.submitted = true;
-    if( this.registrationForm.value.dn == '' &&
-        this.registrationForm.value.name == '' &&
-        this.registrationForm.value.idNumber == '' &&
-        this.registrationForm.value.phoneNumber == '' &&
-        this.registrationForm.value.createdate_start == ''
+    if (this.registrationForm.value.dn == '' &&
+      this.registrationForm.value.name == '' &&
+      this.registrationForm.value.idNumber == '' &&
+      this.registrationForm.value.phoneNumber == '' &&
+      this.registrationForm.value.createdate_start == ''
     ) {
-      alert('請選擇一項查詢!')
+      this.dialog.open(F04002confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
       return false;
     } else {
       this.currentPage = {
@@ -139,54 +145,61 @@ export class F04002Component implements OnInit, AfterViewInit {
   }
 
   getViewDataList() {
-    let jsonStr = JSON.stringify(this.registrationForm.value);
-    let jsonObj = JSON.parse(jsonStr);
-    console.log(this.registrationForm.value.createdate_start)
+    if (this.registrationForm.value.dn == '' && this.registrationForm.value.name == '' &&
+      this.registrationForm.value.createdate_start == '' && this.registrationForm.value.createdate_end == '' &&
+      this.registrationForm.value.idNumber == '' && this.registrationForm.value.phoneNumber == ''
+    ) {
 
-    if (this.registrationForm.value.createdate_start != null && this.registrationForm.value.createdate_start != '' &&
-    this.registrationForm.value.createdate_end != null && this.registrationForm.value.createdate_end != '') {
-    // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
-    let startDate = new Date(this.registrationForm.value.createdate_start);
-    let endDate = new Date(this.registrationForm.value.createdate_end);
+    } else {
+      let jsonStr = JSON.stringify(this.registrationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      console.log(this.registrationForm.value.createdate_start)
+
+      if (this.registrationForm.value.createdate_start != null && this.registrationForm.value.createdate_start != '' &&
+        this.registrationForm.value.createdate_end != null && this.registrationForm.value.createdate_end != '') {
+        // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
+        let startDate = new Date(this.registrationForm.value.createdate_start);
+        let endDate = new Date(this.registrationForm.value.createdate_end);
 
 
-      jsonObj.createdate_start = this.datePipe.transform(startDate,"yyyy-MM-dd");
-      jsonObj.createdate_end = this.datePipe.transform(endDate,"yyyy-MM-dd");
+        jsonObj.createdate_start = this.datePipe.transform(startDate, "yyyy-MM-dd");
+        jsonObj.createdate_end = this.datePipe.transform(endDate, "yyyy-MM-dd");
+      }
+      let pgIndex = `${this.currentPage.pageIndex + 1}`;
+      let pgSize = `${this.currentPage.pageSize}`;
+      jsonObj.pageIndex = pgIndex;
+      jsonObj.pageSize = pgSize;
+      console.log(pgIndex)
+      console.log(pgSize)
+      const formdata: FormData = new FormData();
+      formdata.append('value', JSON.stringify(jsonObj));
+
+      this.f04002Service.sendConsumer('consumer/f04002', formdata).then(data => {
+        console.log(data.dataMap)
+        console.log(data.totalCount)
+
+        this.totalCount = data.totalCount;
+        this.npWalletCert.data = data.dataMap;
+      });
+
+      console.log(JSON.stringify(this.registrationForm.value));
     }
-    let pgIndex = `${this.currentPage.pageIndex + 1}`;
-    let pgSize = `${this.currentPage.pageSize}`;
-    jsonObj.pageIndex = pgIndex;
-    jsonObj.pageSize = pgSize;
-    console.log(pgIndex)
-    console.log(pgSize)
-    const formdata: FormData = new FormData();
-    formdata.append('value', JSON.stringify(jsonObj));
-
-    this.f04002Service.sendConsumer('consumer/f04002', formdata).then(data => {
-      console.log(data.dataMap)
-      console.log(data.totalCount)
-
-      this.totalCount = data.totalCount;
-      this.npWalletCert.data = data.dataMap;
-    });
-
-    console.log(JSON.stringify(this.registrationForm.value));
   }
 
   setTimes() {
     if (this.registrationForm.value.createdate_end == null) {
-      this.registrationForm.patchValue({createdate_end:this.registrationForm.value.createdate_start});
+      this.registrationForm.patchValue({ createdate_end: this.registrationForm.value.createdate_start });
       //this.testForm.setValue({endTime:this.testForm.value.startTime});
     }
   }
 
   cleanToEmpty() {
-    this.registrationForm.patchValue({ dn : '' });
-    this.registrationForm.patchValue({ name : '' });
-    this.registrationForm.patchValue({ createdate_start : '' });
-    this.registrationForm.patchValue({ createdate_end : '' });
-    this.registrationForm.patchValue({ idNumber : '' });
-    this.registrationForm.patchValue({ phoneNumber : '' });
+    this.registrationForm.patchValue({ dn: '' });
+    this.registrationForm.patchValue({ name: '' });
+    this.registrationForm.patchValue({ createdate_start: '' });
+    this.registrationForm.patchValue({ createdate_end: '' });
+    this.registrationForm.patchValue({ idNumber: '' });
+    this.registrationForm.patchValue({ phoneNumber: '' });
     this.currentPage = {
       pageIndex: 0,
       pageSize: 10,
@@ -196,5 +209,4 @@ export class F04002Component implements OnInit, AfterViewInit {
     this.paginator.firstPage();
     this.npWalletCert.data = null;
   }
-
 }
