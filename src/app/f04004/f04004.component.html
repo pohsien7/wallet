@@ -44,33 +44,33 @@
 
     </table>
 
-    
-    <mat-table [dataSource]="anonymousWalletData">
-      <ng-container matColumnDef="DN">
-        <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="PHONENUMBER">
-        <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.PHONENUMBER }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="CREATEDATE">
-        <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="WALLETID">
-        <mat-header-cell *matHeaderCellDef>記名錢包ID</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="USERID">
-        <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
-      </ng-container>
+    <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+      <mat-table [dataSource]="anonymousWalletData">
+        <ng-container matColumnDef="DN">
+          <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="PHONENUMBER">
+          <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.PHONENUMBER }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="CREATEDATE">
+          <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="WALLETID">
+          <mat-header-cell *matHeaderCellDef>記名錢包ID</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="USERID">
+          <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-header-row>
-      <mat-row *matRowDef="let ruleParmRow; columns: ['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-row>
-    </mat-table>
-
+        <mat-header-row *matHeaderRowDef="['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-header-row>
+        <mat-row *matRowDef="let ruleParmRow; columns: ['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-row>
+      </mat-table>
+    </cdk-virtual-scroll-viewport>
     <table>
       <tr>
         <td>
