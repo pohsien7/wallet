@@ -11,29 +11,26 @@
       <mat-card class="matCard">
         <mat-card-content>
           <tr>
-            <th>錢包顯示名稱</th>
-            <th>手機號碼</th>
-            <th>建立日期</th>
-          </tr>
-          <tr>
+            <th nowrap="nowrap">錢包顯示名稱：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="dn">
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>
+            <th nowrap="nowrap">手機號碼：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #inputstate class="form-control" formControlName="phoneNumber">
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>
+            <th nowrap="nowrap">建立日期：</th>
             <td>
               <mat-form-field color="accent" class="example-form-field">
-                <mat-label>建立日期</mat-label>
                 <mat-date-range-input [rangePicker]="rangePicker">
-                  <input matStartDate placeholder="建立日期起" formControlName="createdate_start" value="">
-                  <input matEndDate placeholder="建立日期迄" formControlName="createdate_end">
+                  <input matStartDate formControlName="createdate_start" value="">
+                  <input matEndDate formControlName="createdate_end">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
                 <mat-date-range-picker #rangePicker>
@@ -47,16 +44,10 @@
           </tr>
         </mat-card-content>
       </mat-card>
-      <tr>
-        <td>
-          <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
-            [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
-          </mat-paginator>
-        </td>
-      </tr>
     </table>
   </form>
 </div>
+<br>
 <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
   <mat-table [dataSource]="anonymousWalletData">
     <ng-container matColumnDef="DN">
@@ -82,4 +73,11 @@
     <mat-header-row *matHeaderRowDef="['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-header-row>
     <mat-row *matRowDef="let ruleParmRow; columns: ['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-row>
   </mat-table>
+  <tr>
+    <td>
+      <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
 </cdk-virtual-scroll-viewport>
