@@ -70,7 +70,7 @@
       <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let ruleParmRow; columns: ['DN', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']"></mat-row>
   </mat-table>
   <tr>

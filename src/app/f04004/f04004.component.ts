@@ -121,6 +121,6 @@ export class F04004Component implements OnInit {
     this.totalCount = 0;
     this.paginator.firstPage();
     this.anonymousWalletData.data = null;
-
+    this.paginator._changePageSize(5);
   }
 }

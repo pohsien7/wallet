@@ -112,7 +112,7 @@
       <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
     </ng-container>
     <mat-header-row
-      *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
+      *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']; sticky: true">
     </mat-header-row>
     <mat-row
       *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">

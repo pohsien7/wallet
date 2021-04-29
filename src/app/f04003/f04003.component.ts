@@ -128,6 +128,7 @@ export class F04003Component implements OnInit, AfterViewInit {
     this.totalCount = 0;
     this.paginator.firstPage();
     this.npWalletPubkey.data = null;
+    this.paginator._changePageSize(5);
   }
 
 }
