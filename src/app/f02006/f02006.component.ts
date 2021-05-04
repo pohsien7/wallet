@@ -60,16 +60,16 @@ export class F02006Component implements OnInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f02006Service.sendConsumer('consumer/f02006', formdata).then((data) => {
-        console.log(data.wallet)
+        console.log(data)
         msg = data.statusMessage;
-        this.resultForm.patchValue({ senderID : data.wallet.senderID });
-        this.resultForm.patchValue({ recipientID : data.wallet.recipientID });
-        this.resultForm.patchValue({ authorizedPartyID : data.wallet.authorizedPartyID });
-        this.resultForm.patchValue({ recipientDN : data.wallet.recipientDN });
-        this.resultForm.patchValue({ cvc : data.wallet.cvc });
-        this.resultForm.patchValue({ frozen : data.wallet.frozen });
-        this.resultForm.patchValue({ disabled : data.wallet.disabled });
-        this.resultForm.patchValue({ settingLastModified : data.wallet.settingLastModified });
+        this.resultForm.patchValue({ senderID : data.ledgerState.senderID });
+        this.resultForm.patchValue({ recipientID : data.ledgerState.recipientID });
+        this.resultForm.patchValue({ authorizedPartyID : data.ledgerState.authorizedPartyID });
+        this.resultForm.patchValue({ recipientDN : data.ledgerState.recipientDN });
+        this.resultForm.patchValue({ cvc : data.ledgerState.cvc });
+        this.resultForm.patchValue({ frozen : data.ledgerState.frozen });
+        this.resultForm.patchValue({ disabled : data.ledgerState.disabled });
+        this.resultForm.patchValue({ settingLastModified : data.ledgerState.settingLastModified });
       });
     }
     setTimeout(() => {

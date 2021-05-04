@@ -1,15 +1,14 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Host, OnInit, Optional, Pipe, PipeTransform, Renderer2, Self, ViewContainerRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { F04002Service } from './f04002.service';
 import { ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent, _MatPaginatorBase } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { F04002confirmComponent } from './f04002confirm/f04002confirm.component';
-
 
 interface COMB {
   value: string;
@@ -21,12 +20,16 @@ interface COMB {
   templateUrl: './f04002.component.html',
   styleUrls: ['./f04002.component.css', '../../assets/css/f04.css']
 })
-export class F04002Component implements OnInit, AfterViewInit {
+export class F04002Component implements OnInit, AfterViewInit{
+
+  testOne: number;
+  testTwo: string;
 
   initData: any = [{
     'ADDRESS': '', 'BIRTHDATE': '', 'CREATEDATE': '', 'DN': '', 'GENDER': '', 'IDNUMBER': '', 'NAME': '', 'NATION': '',
     'PHONENUMBER': '', 'RN': '', 'USERID': '', 'WALLETID': ''
   }];
+
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
@@ -65,11 +68,13 @@ export class F04002Component implements OnInit, AfterViewInit {
   walletidVal: string;
   useridVal: string;
 
-
-  constructor(private fb: FormBuilder, public f04002Service: F04002Service, private datePipe: DatePipe, public dialog: MatDialog) { }
-
+  constructor(private fb: FormBuilder, public f04002Service: F04002Service, private datePipe: DatePipe, public dialog: MatDialog){}
   ngOnInit(): void {
-
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 5,
+      length: 5
+    };
     // this.getViewDataList();
   }
 
@@ -104,21 +109,19 @@ export class F04002Component implements OnInit, AfterViewInit {
     }
   }
 
-
-  //================================================================
   totalCount: any;
   @ViewChild('paginator', { static: true }) paginator: MatPaginator;
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
   currentSort: Sort;
   npWalletCert = new MatTableDataSource<any>();
-
   ngAfterViewInit(): void {
     this.currentPage = {
       pageIndex: 0,
       pageSize: 5,
       length: null
     };
+
     this.currentSort = {
       active: '',
       direction: ''
@@ -127,10 +130,7 @@ export class F04002Component implements OnInit, AfterViewInit {
       this.currentPage = page;
       this.getViewDataList();
     });
-
   }
-
-
 
   //================================================================
 
@@ -178,6 +178,10 @@ export class F04002Component implements OnInit, AfterViewInit {
         console.log(data.dataMap)
         console.log(data.totalCount)
 
+        if ( data.totalCount == 0 ) {
+          return this.dialog.open(F04002confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
+        }
+
         this.totalCount = data.totalCount;
         this.npWalletCert.data = data.dataMap;
       });
@@ -203,10 +207,11 @@ export class F04002Component implements OnInit, AfterViewInit {
     this.currentPage = {
       pageIndex: 0,
       pageSize: 10,
-      length: null
+      length: null,
     };
     this.totalCount = 0;
     this.paginator.firstPage();
     this.npWalletCert.data = null;
+    this.paginator._changePageSize(5);
   }
 }
