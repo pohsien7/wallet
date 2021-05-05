@@ -66,4 +66,15 @@ export class BaseService {
     });
     return await this.getMsgStr(rspCode, rspMsg);
   }
+
+  //false為驗證成功 true為失敗
+  public checkIdNumberIsValid(id: string): boolean{
+
+    return true;
+  }
+
+  public checkBanIsValid(ban: string):boolean{
+
+    return true;
+  }
 }
