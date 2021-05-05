@@ -40,7 +40,7 @@ export class F02001Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.registrationForm.get(cloumnName);
-    if (cloumnName == 'ban') { obj.setErrors({'banError': this.f02001Service.checkBanIsValid(obj.value)}); }
+    if (cloumnName == 'ban' && this.f02001Service.checkBanIsValid(obj.value)) { obj.setErrors({'banError': true}); }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
            obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? 'Eail格式錯誤' :
            obj.hasError('banError')  ? '統一編號格式錯誤' : '';
@@ -51,7 +51,7 @@ export class F02001Component implements OnInit {
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      msg = '資料必填喔!'
+      msg = '資料格式有誤，請修正!'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
