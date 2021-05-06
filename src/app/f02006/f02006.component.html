@@ -13,7 +13,7 @@
           <td>
             <mat-form-field color="accent">
               <input matInput #input class="form-control" formControlName="queryWalletID">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
             </mat-form-field>
           </td>
           <td>
@@ -27,7 +27,7 @@
           <td>
             <mat-form-field color="accent">
               <input matInput #input class="form-control" formControlName="">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              <!--<mat-error>{{getErrorMessage('')}}</mat-error>-->
             </mat-form-field>
           </td>
         </tr>

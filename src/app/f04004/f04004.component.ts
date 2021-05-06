@@ -95,6 +95,12 @@ export class F04004Component implements OnInit {
     const formdata: FormData = new FormData();
     formdata.append('value', JSON.stringify(jsonObj));
     this.f04004Service.sendConsumer('consumer/f04004', formdata).then(data => {
+
+      if ( data.totalCount == 0 ) {
+        this.clear();
+        return this.dialog.open(F04004confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
+      }
+
       this.totalCount = data.totalCount;
       this.anonymousWalletData.data = data.dataMap;
     });

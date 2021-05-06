@@ -179,6 +179,7 @@ export class F04002Component implements OnInit, AfterViewInit{
         console.log(data.totalCount)
 
         if ( data.totalCount == 0 ) {
+          this.cleanToEmpty();
           return this.dialog.open(F04002confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
         }
 

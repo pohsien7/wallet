@@ -23,18 +23,18 @@ export class F02003Component implements OnInit {
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
-    name: ['', [Validators.required, Validators.maxLength(50)]],
-    idNumber: ['', [Validators.required, Validators.maxLength(10)]],
-    nation: ['', [Validators.required, Validators.maxLength(3)]],
-    gender: ['', [Validators.required, Validators.maxLength(1)]],
-    birthDate: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-    phoneNumber: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
+    name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+    idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+    nation: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+    birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+    phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
   });
-  
+
   gender: string;
   nation: string;
-  
+
   submitted = false;
 
   constructor(private fb: FormBuilder, public f02003Service: F02003Service, private datePipe: DatePipe, public dialog: MatDialog) { }
@@ -48,10 +48,12 @@ export class F02003Component implements OnInit {
     Validators.required
   ]);
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此為必填欄位!' :
-    this.formControl.hasError('email') ? 'Not a valid email' :
-    '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.registrationForm.get(cloumnName);
+    if (cloumnName == 'idNumber' && this.f02003Service.checkIdNumberIsValid(obj.value)) { obj.setErrors({'idNumberError': true}); }
+    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+           obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? '請輸入數字' :
+           obj.hasError('idNumberError')  ? '身分證格式錯誤' : '';
   }
 
   async onSubmit() {
@@ -59,7 +61,7 @@ export class F02003Component implements OnInit {
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      msg = '資料必填喔!'
+      msg = '資料格式有誤，請修正!'
     } else {
       let jsonStr = JSON.stringify(this.registrationForm.value);
       let jsonObj = JSON.parse(jsonStr);

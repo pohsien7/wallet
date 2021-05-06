@@ -14,25 +14,25 @@ interface COMB {
 @Component({
   selector: 'app-f02002',
   templateUrl: './f02002.component.html',
-  styleUrls: ['./f02002.component.css','../../assets/css/f02.css']
+  styleUrls: ['./f02002.component.css', '../../assets/css/f02.css']
 })
 export class F02002Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   //之後API取得下拉內容
-  nationCode: COMB[] = [{value: 'TWN', viewValue: 'Taiwan'}, {value: 'JAN', viewValue: 'Japan'}, {value: 'USA', viewValue: 'USA'}];
-  genderCode: COMB[] = [{value: 'M', viewValue: '男'}, {value: 'F', viewValue: '女'}];
+  nationCode: COMB[] = [{ value: 'TWN', viewValue: 'Taiwan' }, { value: 'JAN', viewValue: 'Japan' }, { value: 'USA', viewValue: 'USA' }];
+  genderCode: COMB[] = [{ value: 'M', viewValue: '男' }, { value: 'F', viewValue: '女' }];
 
-  planModel: any = {start_time: new Date() };
+  planModel: any = { start_time: new Date() };
 
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
-    name: ['', [Validators.required, Validators.maxLength(50)]],
-    idNumber: ['', [Validators.required, Validators.maxLength(10)]],
-    nation: ['TWN', [Validators.required, Validators.maxLength(3)]],
-    gender: ['M', [Validators.required, Validators.maxLength(1)]],
-    birthDate: ['', [Validators.required, Validators.maxLength(10)]],
-    phoneNumber: ['', [Validators.required, Validators.maxLength(30)]],
+    name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+    idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+    nation: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+    birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+    phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
   });
 
@@ -48,10 +48,12 @@ export class F02002Component implements OnInit {
     // Validators.email,
   ]);
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此為必填欄位!' :
-    this.formControl.hasError('email') ? 'Not a valid email' :
-    '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.registrationForm.get(cloumnName);
+    if (cloumnName == 'idNumber' && this.f02002Service.checkIdNumberIsValid(obj.value)) { obj.setErrors({ 'idNumberError': true }); }
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+      obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern') ? '請輸入數字' :
+        obj.hasError('idNumberError') ? '身分證格式錯誤' : '';
   }
 
   // 參考範例: https://ej2.syncfusion.com/angular/documentation/datepicker/how-to/json-data-binding/
@@ -59,14 +61,14 @@ export class F02002Component implements OnInit {
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
-    if(!this.registrationForm.valid) {
-      msg = '資料必填喔!'
+    if (!this.registrationForm.valid) {
+      msg = '資料格式有誤，請修正!'
     } else {
       // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
       let jsonStr = JSON.stringify(this.registrationForm.value);
       let jsonObj = JSON.parse(jsonStr);
       let selectedDate = new Date(this.registrationForm.value.birthDate);
-      jsonObj.birthDate = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
+      jsonObj.birthDate = this.datePipe.transform(selectedDate, "yyyy-MM-dd");
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
@@ -86,15 +88,9 @@ export class F02002Component implements OnInit {
 
   setTimes() {
     if (this.testForm.value.endTime == null) {
-      this.testForm.patchValue({endTime:this.testForm.value.startTime});
+      this.testForm.patchValue({ endTime: this.testForm.value.startTime });
       //this.testForm.setValue({endTime:this.testForm.value.startTime});
     }
-  }
-
-  test(){
-    let startDate = new Date(this.testForm.value.startTime);
-    let endDate = new Date(this.testForm.value.endTime);
-    alert(this.datePipe.transform(startDate,"yyyy-MM-dd") + "," + this.datePipe.transform(endDate,"yyyy-MM-dd"));
   }
 }
 

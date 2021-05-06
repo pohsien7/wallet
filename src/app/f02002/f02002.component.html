@@ -15,14 +15,14 @@
             <td>
               <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="dn">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error>{{getErrorMessage('dn')}}</mat-error>
               </mat-form-field>
             </td>
             <th nowrap="nowrap">姓名：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="name">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error>{{getErrorMessage('name')}}</mat-error>
               </mat-form-field>
             </td>
           </tr>
@@ -31,7 +31,7 @@
             <td>
               <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="idNumber">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error>{{getErrorMessage('idNumber')}}</mat-error>
               </mat-form-field>
             </td>
             <th nowrap="nowrap">國籍：</th>
@@ -63,6 +63,7 @@
                 <input matInput [matDatepicker]="picker" formControlName="birthDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error>{{getErrorMessage('birthDate')}}</mat-error>
               </mat-form-field>
             </td>
           </tr>
@@ -72,7 +73,7 @@
             <td>
               <mat-form-field color="accent">
                 <input matInput #inputstate class="form-control" formControlName="phoneNumber">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error>{{getErrorMessage('phoneNumber')}}</mat-error>
               </mat-form-field>
             </td>
           </tr>
@@ -82,7 +83,7 @@
             <td colspan="2">
               <mat-form-field color="accent" class="form-address">
                 <input matInput #inputstate class="form-control" formControlName="address">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error>{{getErrorMessage('address')}}</mat-error>
               </mat-form-field>
             </td>
           </tr>

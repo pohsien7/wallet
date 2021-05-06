@@ -172,6 +172,11 @@ export class F04001Component implements OnInit, AfterViewInit {
         console.log(data.dataMap)
         console.log(data.totalCount)
 
+        if ( data.totalCount == 0 ) {
+          this.cleanToEmpty();
+          return this.dialog.open(F04001confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
+        }
+
         this.totalCount = data.totalCount;
         this.jpWalletCert.data = data.dataMap;
       });

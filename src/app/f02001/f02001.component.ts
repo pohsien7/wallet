@@ -26,7 +26,7 @@ export class F02001Component implements OnInit {
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
     ban: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     owner: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-    phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+    phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10), Validators.pattern('^[0-9]+$')]],
     mcc: ['C1234', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
     address: ['', [Validators.required,  Validators.maxLength(128)]]
   });
@@ -42,7 +42,7 @@ export class F02001Component implements OnInit {
     let obj = this.registrationForm.get(cloumnName);
     if (cloumnName == 'ban' && this.f02001Service.checkBanIsValid(obj.value)) { obj.setErrors({'banError': true}); }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? 'Eail格式錯誤' :
+           obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? '請輸入數字' :
            obj.hasError('banError')  ? '統一編號格式錯誤' : '';
   }
 

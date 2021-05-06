@@ -12,19 +12,19 @@ interface COMB {
 @Component({
   selector: 'app-f03001',
   templateUrl: './f03001.component.html',
-  styleUrls: ['./f03001.component.css','../../assets/css/f03.css']
+  styleUrls: ['./f03001.component.css', '../../assets/css/f03.css']
 })
 export class F03001Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{value: '0901', viewValue: '0901'}, {value: '0902', viewValue: '0902'}];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0902', viewValue: '0902' }];
 
   transferForm: FormGroup = this.fb.group({
     walletid: ['', [Validators.maxLength(30)]],
     recipientid: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
-    amount: ['', [Validators.required]],
+    amount: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     won: ['', [Validators.required]],
     remark: ['', [Validators.required]]
   });
@@ -41,18 +41,18 @@ export class F03001Component implements OnInit {
     // Validators.email,
   ]);
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此為必填欄位!' :
-    this.formControl.hasError('email') ? 'Not a valid email' :
-    '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.transferForm.get(cloumnName);
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+      obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern') ? '請輸入數字' : '';
   }
 
   async onSubmit() {
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
-    if(!this.transferForm.valid) {
-      msg = '資料必填喔!'
+    if (!this.transferForm.valid) {
+      msg = '資料格式有誤，請修正!'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.transferForm.value));
