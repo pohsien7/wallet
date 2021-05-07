@@ -1,3 +1,4 @@
+import { TestPipe } from './f04002/testPipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -149,7 +150,8 @@ export const TW_FORMATS = {
     F03001confirmComponent,
     CssSettingComponent,
     F03002confirmComponent,
-    F04004Component
+    F04004Component,
+    TestPipe
   ],
   imports: [
     BrowserModule,

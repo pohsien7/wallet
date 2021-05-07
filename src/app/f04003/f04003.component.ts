@@ -103,6 +103,12 @@ export class F04003Component implements OnInit, AfterViewInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
       this.f04003Service.sendConsumer('consumer/f04003', formdata).then(data => {
+
+        if ( data.totalCount == 0 ) {
+          this.clear();
+          return this.dialog.open(F04003confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
+        }
+
         this.totalCount = data.totalCount;
         this.npWalletPubkey.data = data.dataMap;
       });
@@ -128,6 +134,7 @@ export class F04003Component implements OnInit, AfterViewInit {
     this.totalCount = 0;
     this.paginator.firstPage();
     this.npWalletPubkey.data = null;
+    this.paginator._changePageSize(5);
   }
 
 }

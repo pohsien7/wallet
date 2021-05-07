@@ -71,7 +71,7 @@
     <mat-table [dataSource]="npWalletCert">
       <ng-container matColumnDef="DN">
         <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{(row.DN.length > 14) ? ((row.DN).slice(0, 14) + '...') : row.DN}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="NAME">
         <mat-header-cell *matHeaderCellDef>姓名</mat-header-cell>
@@ -95,11 +95,14 @@
       </ng-container>
       <ng-container matColumnDef="ADDRESS">
         <mat-header-cell *matHeaderCellDef>戶籍地址</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.ADDRESS }}</mat-cell>
+        <mat-cell *matCellDef="let row" title="{{row.ADDRESS}}">{{(row.ADDRESS.length > 14) ? ((row.ADDRESS).slice(0,
+          14) + '...') : row.ADDRESS}}
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="PHONENUMBER">
         <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.PHONENUMBER }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.PHONENUMBER }}
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="CREATEDATE">
         <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
@@ -114,7 +117,7 @@
         <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
       </ng-container>
       <mat-header-row
-        *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
+        *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']; sticky: true">
       </mat-header-row>
       <mat-row
         *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
@@ -128,4 +131,11 @@
       </mat-paginator>
     </td>
   </tr>
+  <br>
 </cdk-virtual-scroll-viewport>
+<h2>Power Boost Calculator</h2>
+<div>Normal power: <input [(ngModel)]="testOne"></div>
+<div>Boost factor: <input [(ngModel)]="testTwo"></div>
+<p>
+  Super Hero Power: {{testOne | testPipe: testTwo}}
+</p>

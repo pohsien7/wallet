@@ -34,32 +34,25 @@ export class F02004Component implements OnInit {
     this.registrationForm =
     this.fb.group({
       dn : new FormControl('' ,[
-        Validators.required
+        Validators.maxLength(30)
       ]),
       phoneNumber : new FormControl('' ,[
         Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10)
+        Validators.minLength(5),
+        Validators.maxLength(30),
+        Validators.pattern('^[0-9]+$')
       ])
     });
   }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
-  // getErrorMessage() {
-  //     console.log(this.registrationForm.getError('dn'));
-  //   return this.registrationForm.hasError('required') ? 'Required field' :
-  //   this.registrationForm.hasError('minlength') ? '太短' :
-  //   '';
-  // }
-
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此為必填欄位!' :
-    this.formControl.hasError('email') ? 'Not a valid email' :
-    '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.registrationForm.get(cloumnName);
+    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+           obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? '請輸入數字' : '';
   }
 
   get dn() { return this.registrationForm.get('dn'); }
@@ -70,7 +63,7 @@ export class F02004Component implements OnInit {
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      msg = '資料必填喔!';
+      msg = '資料格式有誤，請修正!';
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));

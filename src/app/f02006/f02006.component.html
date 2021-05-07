@@ -2,13 +2,18 @@
   <th class="f02_th">交易ID查詢自機構開立之錢包帳本紀錄</th>
   <block-ui>
     <form [formGroup]="registrationForm">
-      <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
       <table>
         <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+          </th>
+        </tr>
+        <tr>
+          <th nowrap="nowrap">欲查詢之錢包ID：</th>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="欲查詢之交易ID" formControlName="queryWalletID">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              <input matInput #input class="form-control" formControlName="queryWalletID">
+              <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
             </mat-form-field>
           </td>
           <td>
@@ -16,10 +21,13 @@
               <span class="material-icons">view_list</span>
             </button>
           </td>
+        </tr>
+        <tr>
+          <th>券幣代號：</th>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="券幣代號" formControlName="">
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              <input matInput #input class="form-control" formControlName="">
+              <!--<mat-error>{{getErrorMessage('')}}</mat-error>-->
             </mat-form-field>
           </td>
         </tr>

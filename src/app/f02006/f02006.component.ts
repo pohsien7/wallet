@@ -16,7 +16,7 @@ export class F02006Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   registrationForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.maxLength(30)]]
+    queryWalletID: ['', [Validators.required, Validators.minLength(25), Validators.maxLength(25)]]
   });
 
   resultForm: FormGroup = this.fb.group({
@@ -46,8 +46,10 @@ export class F02006Component implements OnInit {
     Validators.required
   ]);
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此為必填欄位!' : '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.registrationForm.get(cloumnName);
+    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+           obj.hasError('minlength') ? '長度過短' : '';
   }
 
   async sendCBDC() {
@@ -55,21 +57,21 @@ export class F02006Component implements OnInit {
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
-      msg = '資料必填喔!'
+      msg = '資料格式有誤，請修正!'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f02006Service.sendConsumer('consumer/f02006', formdata).then((data) => {
-        console.log(data.wallet)
+        console.log(data)
         msg = data.statusMessage;
-        this.resultForm.patchValue({ senderID : data.wallet.senderID });
-        this.resultForm.patchValue({ recipientID : data.wallet.recipientID });
-        this.resultForm.patchValue({ authorizedPartyID : data.wallet.authorizedPartyID });
-        this.resultForm.patchValue({ recipientDN : data.wallet.recipientDN });
-        this.resultForm.patchValue({ cvc : data.wallet.cvc });
-        this.resultForm.patchValue({ frozen : data.wallet.frozen });
-        this.resultForm.patchValue({ disabled : data.wallet.disabled });
-        this.resultForm.patchValue({ settingLastModified : data.wallet.settingLastModified });
+        this.resultForm.patchValue({ senderID : data.ledgerState.senderID });
+        this.resultForm.patchValue({ recipientID : data.ledgerState.recipientID });
+        this.resultForm.patchValue({ authorizedPartyID : data.ledgerState.authorizedPartyID });
+        this.resultForm.patchValue({ recipientDN : data.ledgerState.recipientDN });
+        this.resultForm.patchValue({ cvc : data.ledgerState.cvc });
+        this.resultForm.patchValue({ frozen : data.ledgerState.frozen });
+        this.resultForm.patchValue({ disabled : data.ledgerState.disabled });
+        this.resultForm.patchValue({ settingLastModified : data.ledgerState.settingLastModified });
       });
     }
     setTimeout(() => {

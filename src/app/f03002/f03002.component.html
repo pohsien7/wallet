@@ -16,14 +16,14 @@
               <td>
                 <mat-form-field color="accent">
                   <input matInput #input class="form-control" formControlName="walletid">
-                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                  <mat-error>{{getErrorMessage('walletid')}}</mat-error>
                 </mat-form-field>
               </td>
               <th nowrap="nowrap">欲撤銷之交易ID：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #input class="form-control" formControlName="stxnid">
-                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                  <mat-error>{{getErrorMessage('stxnid')}}</mat-error>
                 </mat-form-field>
               </td>
             </tr>
@@ -43,7 +43,7 @@
               <td>
                 <mat-form-field color="accent">
                   <input matInput #inputstate class="form-control" formControlName="remark">
-                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                  <mat-error>{{getErrorMessage('remark')}}</mat-error>
                 </mat-form-field>
               </td>
             </tr>

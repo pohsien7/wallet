@@ -39,10 +39,9 @@ export class F03002Component implements OnInit {
     // Validators.email,
   ]);
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此為必填欄位!' :
-    this.formControl.hasError('email') ? 'Not a valid email' :
-    '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.reverseForm.get(cloumnName);
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' : "" ;
   }
 
   async onSubmit() {
@@ -50,7 +49,7 @@ export class F03002Component implements OnInit {
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.reverseForm.valid) {
-      msg = '資料必填喔!'
+      msg = '資料格式有誤，請修正!'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.reverseForm.value));
