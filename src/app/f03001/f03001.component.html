@@ -42,7 +42,9 @@
               <th>交易金額：</th>
               <td>
                 <mat-form-field color="accent">
-                  <input matInput #inputstate class="form-control" formControlName="amount">
+                  <input matInput #inputstate class="form-control" formControlName="amount"
+                  [value]="model | toNumber | formatNumber : model > 100 " [(ngModel)]="model"
+                  (keypress)="numberOnly($event)">
                   <mat-error>{{getErrorMessage('amount')}}</mat-error>
                 </mat-form-field>
               </td>

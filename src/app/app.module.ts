@@ -77,6 +77,9 @@ import { F03001confirmComponent } from './f03001/f03001confirm/f03001confirm.com
 import { F03002confirmComponent } from './f03002/f03002confirm/f03002confirm.component';
 import { DatePipe } from '@angular/common';
 import { F04004Component } from './f04004/f04004.component';
+import { FormatNumberPipe,ToNumberPipe } from './f03001/customFormatterPipe';
+import { DecimalPipe } from '@angular/common';
+import { F04003shopComponent } from './f04003/f04003shop/f04003shop.component';
 
 
 export const TW_FORMATS = {
@@ -151,7 +154,10 @@ export const TW_FORMATS = {
     CssSettingComponent,
     F03002confirmComponent,
     F04004Component,
-    TestPipe
+    TestPipe,
+    FormatNumberPipe,
+    ToNumberPipe,
+    F04003shopComponent
   ],
   imports: [
     BrowserModule,
@@ -170,7 +176,8 @@ export const TW_FORMATS = {
     BnNgIdleService,
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
-    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
+    DecimalPipe
   ],
   bootstrap: [AppComponent]
 })

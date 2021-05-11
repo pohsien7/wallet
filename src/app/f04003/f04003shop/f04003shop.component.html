@@ -1,0 +1,34 @@
+<div class="container">
+  <th class="f04_th">註冊</th>
+  <mat-card class="matCard">
+    <mat-card-content>
+      <form [formGroup]="registrationShopForm" (ngSubmit)="onSubmit()" #form="ngForm" style="padding-left: 20px;">
+        <table>
+          <tr>
+            <th>
+              <button type="submit" mat-raised-button color="primary">註冊商家</button>
+            </th>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">統一編號：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="shopId">
+                <mat-error>{{getErrorMessage('shopId')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">商家名稱：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="shopName">
+                <mat-error>{{getErrorMessage('shopName')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

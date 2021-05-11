@@ -1,0 +1,45 @@
+/* mat-row{
+  align-items: stretch;
+} */
+
+.mat-column-NAME {
+  flex: 0 0 6%;
+}
+
+.mat-column-IDNUMBER {
+  flex: 0 0 13%;
+}
+
+.mat-column-NATION {
+  flex: 0 0 4%;
+}
+
+.mat-column-GENDER {
+  flex: 0 0 4%;
+}
+
+.mat-column-BIRTHDAT {
+  flex: 0 0 6%;
+}
+
+.mat-column-PHONENUMBER {
+  flex: 0 0 6%;
+}
+
+.mat-column-CREATEDATE {
+  flex: 0 0 6%;
+}
+
+.mat-column-WALLETID {
+  flex: 0 0 15%;
+}
+
+mat-header-cell{
+  position: sticky;
+}
+
+.addr-hover:hover .addr{
+  visibility: visible;
+}
+
+

@@ -35,7 +35,6 @@ export class F02002Component implements OnInit {
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
   });
-
   submitted = false;
 
   constructor(private fb: FormBuilder, public f02002Service: F02002Service, private datePipe: DatePipe, public dialog: MatDialog) { }
@@ -92,6 +91,14 @@ export class F02002Component implements OnInit {
       //this.testForm.setValue({endTime:this.testForm.value.startTime});
     }
   }
+
+  // numberOnly(event: { which: any; keyCode: any; }): boolean {
+  //   const charCode = (event.which) ? event.which : event.keyCode;
+  //   if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
 }
 
 

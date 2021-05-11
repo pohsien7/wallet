@@ -1,3 +1,4 @@
+import { F04003shopComponent } from './f04003shop/f04003shop.component';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -30,6 +31,10 @@ export class F04003Component implements OnInit, AfterViewInit {
     createdate_end: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]]
+  });
+
+  removeShopForm: FormGroup = this.fb.group({
+    walletId: ['']
   });
 
   constructor(private fb: FormBuilder, public f04003Service: F04003Service, private datePipe: DatePipe, public dialog: MatDialog ) { }
@@ -79,7 +84,6 @@ export class F04003Component implements OnInit, AfterViewInit {
   }
 
   getViewDataList() {
-
     if(this.isFieldEmpty()) {
       this.dialog.open(F04003confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
       return;
@@ -137,4 +141,24 @@ export class F04003Component implements OnInit, AfterViewInit {
     this.paginator._changePageSize(5);
   }
 
+  getSetShop(id: string){
+    let dialogRef = this.dialog.open(F04003shopComponent, {
+      data:{
+        walletId: id
+      }
+    });
+  }
+
+  async getRemoveShop(id: string){
+    const formdata: FormData = new FormData();
+    this.removeShopForm.patchValue( { walletId: id } );
+    formdata.append('value', JSON.stringify(this.removeShopForm.value));
+    await this.f04003Service.sendConsumer('consumer/f04003RemoveShop', formdata).then((data) => {
+      this.dialog.open(F04003confirmComponent, { data: { msgStr: data.result } });
+    });
+  }
+
+  test(){
+    this.dialog.open(F04003confirmComponent, { data: { testText: "111" } });
+  }
 }

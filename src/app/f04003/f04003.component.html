@@ -67,6 +67,19 @@
 <br>
 <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
   <mat-table [dataSource]="npWalletPubkey">
+
+    <ng-container matColumnDef="SETTING">
+      <mat-header-cell *matHeaderCellDef><u></u></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.SHOPFLAG == 'Y'; else elseTemplate">
+          <button mat-raised-button color="warn" (click)="getRemoveShop(row.WALLETID)">取消商家</button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button mat-raised-button color="primary" (click)="getSetShop(row.WALLETID)">註冊商家</button>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="DN">
       <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
@@ -111,11 +124,23 @@
       <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="SHOPFLAG">
+      <mat-header-cell *matHeaderCellDef>商家flag註記</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.SHOPFLAG }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="SHOPID">
+      <mat-header-cell *matHeaderCellDef>統編</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.SHOPID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="SHOPNAME">
+      <mat-header-cell *matHeaderCellDef>商家名稱</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.SHOPNAME }}</mat-cell>
+    </ng-container>
     <mat-header-row
-      *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']; sticky: true">
+      *matHeaderRowDef="['SETTING', 'DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'SHOPFLAG', 'SHOPID', 'SHOPNAME']; sticky: true">
     </mat-header-row>
     <mat-row
-      *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
+      *matRowDef="let ruleParmRow; columns: ['SETTING', 'DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'SHOPFLAG', 'SHOPID', 'SHOPNAME']">
     </mat-row>
   </mat-table>
   <tr>
