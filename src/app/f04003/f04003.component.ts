@@ -150,15 +150,12 @@ export class F04003Component implements OnInit, AfterViewInit {
   }
 
   async getRemoveShop(id: string){
-    const formdata: FormData = new FormData();
-    this.removeShopForm.patchValue( { walletId: id } );
-    formdata.append('value', JSON.stringify(this.removeShopForm.value));
-    await this.f04003Service.sendConsumer('consumer/f04003RemoveShop', formdata).then((data) => {
-      this.dialog.open(F04003confirmComponent, { data: { msgStr: data.result } });
-    });
-  }
-
-  test(){
-    this.dialog.open(F04003confirmComponent, { data: { testText: "111" } });
+    // const formdata: FormData = new FormData();
+    // this.removeShopForm.patchValue( { walletId: id } );
+    // formdata.append('value', JSON.stringify(this.removeShopForm.value));
+    // await this.f04003Service.sendConsumer('consumer/f04003RemoveShop', formdata).then((data) => {
+    //   this.dialog.open(F04003confirmComponent, { data: { msgStr: data.result } });
+    // });
+    this.dialog.open(F04003confirmComponent, { data: { msgStr: "check", wallet: id} });
   }
 }

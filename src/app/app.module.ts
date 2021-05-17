@@ -1,3 +1,4 @@
+import { F04003confirmComponent } from './f04003/f04003confirm/f04003confirm.component';
 import { TestPipe } from './f04002/testPipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -157,7 +158,8 @@ export const TW_FORMATS = {
     TestPipe,
     FormatNumberPipe,
     ToNumberPipe,
-    F04003shopComponent
+    F04003shopComponent,
+    F04003confirmComponent
   ],
   imports: [
     BrowserModule,
