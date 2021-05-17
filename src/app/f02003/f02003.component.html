@@ -1,10 +1,11 @@
 <div class="container">
   <th class="f02_th">開立記名錢包(自然人,公鑰)</th>
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+  <form [formGroup]="registrationForm" style="padding-left: 20px;">
     <table>
       <tr>
         <th>
-          <button type="submit" mat-raised-button color="primary">送出</button>
+          <button mat-raised-button color="primary" style="margin-right: 5px;" (click)="onSubmit()">送出</button>
+          <button mat-raised-button color="primary" [(disabled)]="disabled" (click)="getAuthorize()">授權扣款</button>
         </th>
       </tr>
       <br>

@@ -81,6 +81,9 @@ import { F04004Component } from './f04004/f04004.component';
 import { FormatNumberPipe,ToNumberPipe } from './f03001/customFormatterPipe';
 import { DecimalPipe } from '@angular/common';
 import { F04003shopComponent } from './f04003/f04003shop/f04003shop.component';
+import { F03003Component } from './f03003/f03003.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { F03003confirmComponent } from './f03003/f03003confirm/f03003confirm.component';
 
 
 export const TW_FORMATS = {
@@ -159,7 +162,9 @@ export const TW_FORMATS = {
     FormatNumberPipe,
     ToNumberPipe,
     F04003shopComponent,
-    F04003confirmComponent
+    F04003confirmComponent,
+    F03003Component,
+    F03003confirmComponent
   ],
   imports: [
     BrowserModule,
@@ -179,6 +184,7 @@ export const TW_FORMATS = {
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
     { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
     DecimalPipe
   ],
   bootstrap: [AppComponent]

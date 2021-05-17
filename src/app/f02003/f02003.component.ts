@@ -1,3 +1,4 @@
+import { F03003Component } from './../f03003/f03003.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,8 @@ interface COMB {
 })
 export class F02003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-
+  disabled : string = "true";
+  walletId : string;
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
@@ -71,6 +73,10 @@ export class F02003Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02003Service.sendConsumer('consumer/f02003', formdata).then((data) => {
         msg = data.statusMessage;
+        if ( msg == "Success" ) {
+          this.disabled = "false";
+          this.walletId = data.walletID
+        }
       });
       console.log(JSON.stringify(this.registrationForm.value));
     }
@@ -91,6 +97,11 @@ export class F02003Component implements OnInit {
     this.f02003Service.sendConsumer('consumer/f02003/getNation', formdata).then((data) => {
       this.nation = data.nation;
     });
+  }
+
+  getAuthorize() {
+    console.log(this.walletId);
+    this.dialog.open(F03003Component,{ data: { walletId : this.walletId }});
   }
 
 }

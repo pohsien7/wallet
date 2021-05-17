@@ -1,0 +1,63 @@
+<div class="container">
+  <th class="f03_th">授權扣款</th>
+  <form [formGroup]="authorizaionForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+    <table>
+      <tr>
+        <th>
+          <button type="submit" mat-raised-button color="primary" style="margin-right: 5px;">送出</button>
+        </th>
+      </tr>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th>授權合約ID：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="authID">
+                <mat-error>{{getErrorMessage('authID')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">授權之作業名稱：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="operation">
+                <mat-error>{{getErrorMessage('operation')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">授權方錢包ID：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="walletID" value="{data.walletId}">
+                <mat-error>{{getErrorMessage('walletID')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">授權收款方總庫/錢包ID：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="recipientID">
+                <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th>備註：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="remark">
+                <mat-error>{{getErrorMessage('remark')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th></th>
+            <td></td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+
