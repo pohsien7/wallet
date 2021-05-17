@@ -1,3 +1,4 @@
+import { F02007confirmComponent } from './f02007/f02007confirm/f02007confirm.component';
 import { F04003confirmComponent } from './f04003/f04003confirm/f04003confirm.component';
 import { TestPipe } from './f04002/testPipe';
 import { BrowserModule } from '@angular/platform-browser';
@@ -91,6 +92,9 @@ import { F02008Component } from './f02008/f02008.component';
 import { F02008confirmComponent } from './f02008/f02008confirm/f02008confirm.component';
 import { F02008wopenComponent } from './f02008/f02008wopen/f02008wopen.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { F02007Component } from './f02007/f02007.component';
+
+
 
 export const TW_FORMATS = {
   parse: {
@@ -177,6 +181,9 @@ export const TW_FORMATS = {
     F02008Component,
     F02008confirmComponent,
     F02008wopenComponent
+    F02007Component,
+    F02007confirmComponent,
+    F02008Component
   ],
   imports: [
     BrowserModule,
