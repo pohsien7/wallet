@@ -59,5 +59,4 @@ export class F03003Component implements OnInit {
       const childernDialogRef = this.dialog.open(F03003confirmComponent, { data: { msgStr: msg } });
     }, 500);
   }
-
 }
