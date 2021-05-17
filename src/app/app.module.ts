@@ -1,3 +1,4 @@
+import { F02007confirmComponent } from './f02007/f02007confirm/f02007confirm.component';
 import { F04003confirmComponent } from './f04003/f04003confirm/f04003confirm.component';
 import { TestPipe } from './f04002/testPipe';
 import { BrowserModule } from '@angular/platform-browser';
@@ -87,6 +88,8 @@ import { F03003confirmComponent } from './f03003/f03003confirm/f03003confirm.com
 import { F03004wopenComponent } from './f03004/f03004wopen/f03004wopen.component';
 import { F03004confirmComponent } from './f03004/f03004confirm/f03004confirm.component';
 import { F03004Component } from './f03004/f03004.component';
+import { F02007Component } from './f02007/f02007.component';
+import { F02008Component } from './f02008/f02008.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -169,7 +172,10 @@ export const TW_FORMATS = {
     F03004confirmComponent,
     F03003Component,
     F03003confirmComponent,
-    F03004wopenComponent
+    F03004wopenComponent,
+    F02007Component,
+    F02007confirmComponent,
+    F02008Component
   ],
   imports: [
     BrowserModule,
