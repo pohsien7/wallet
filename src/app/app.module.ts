@@ -180,7 +180,7 @@ export const TW_FORMATS = {
     F03004wopenComponent,
     F02008Component,
     F02008confirmComponent,
-    F02008wopenComponent
+    F02008wopenComponent,
     F02007Component,
     F02007confirmComponent,
     F02008Component
