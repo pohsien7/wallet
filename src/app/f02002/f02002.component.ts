@@ -29,8 +29,8 @@ export class F02002Component implements OnInit {
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-    nation: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
+    nation: ['', [Validators.required, Validators.maxLength(3)]],
+    gender: ['', [Validators.required, Validators.maxLength(1)]],
     birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]]
@@ -61,6 +61,7 @@ export class F02002Component implements OnInit {
     this.submitted = true;
     this.blockUI.start('Loading...');
     if (!this.registrationForm.valid) {
+      console.log("判斷格式="+this.registrationForm.value.nation+","+this.registrationForm.value.gender);
       msg = '資料格式有誤，請修正!'
     } else {
       // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
