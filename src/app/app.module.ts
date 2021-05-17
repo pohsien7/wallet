@@ -81,6 +81,10 @@ import { F04004Component } from './f04004/f04004.component';
 import { FormatNumberPipe,ToNumberPipe } from './f03001/customFormatterPipe';
 import { DecimalPipe } from '@angular/common';
 import { F04003shopComponent } from './f04003/f04003shop/f04003shop.component';
+import { F03004Component } from './f03004/f03004.component';
+import { F03004confirmComponent } from './f03004/f03004confirm/f03004confirm.component';
+import { F03003Component } from './f03003/f03003.component';
+import { F03003confirmComponent } from './f03003/f03003confirm/f03003confirm.component';
 
 
 export const TW_FORMATS = {
@@ -159,7 +163,11 @@ export const TW_FORMATS = {
     FormatNumberPipe,
     ToNumberPipe,
     F04003shopComponent,
-    F04003confirmComponent
+    F04003confirmComponent,
+    F03004Component,
+    F03004confirmComponent,
+    F03003Component,
+    F03003confirmComponent
   ],
   imports: [
     BrowserModule,
