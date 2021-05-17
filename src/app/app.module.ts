@@ -80,6 +80,7 @@ import { DatePipe } from '@angular/common';
 import { F04004Component } from './f04004/f04004.component';
 import { FormatNumberPipe,ToNumberPipe } from './f03001/customFormatterPipe';
 import { DecimalPipe } from '@angular/common';
+
 import { F04003shopComponent } from './f04003/f04003shop/f04003shop.component';
 import { F03004Component } from './f03004/f03004.component';
 import { F03004confirmComponent } from './f03004/f03004confirm/f03004confirm.component';
@@ -89,7 +90,7 @@ import { F03004wopenComponent } from './f03004/f03004wopen/f03004wopen.component
 import { F02008Component } from './f02008/f02008.component';
 import { F02008confirmComponent } from './f02008/f02008confirm/f02008confirm.component';
 import { F02008wopenComponent } from './f02008/f02008wopen/f02008wopen.component';
-
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export const TW_FORMATS = {
   parse: {
@@ -195,6 +196,7 @@ export const TW_FORMATS = {
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
     { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
     DecimalPipe
   ],
   bootstrap: [AppComponent]
