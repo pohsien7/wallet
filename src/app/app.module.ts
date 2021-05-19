@@ -95,6 +95,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { F02007Component } from './f02007/f02007.component';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { QrcodeconfirmComponent } from './qrcode/qrcodeconfirm/qrcodeconfirm.component';
+import { F03005Component } from './f03005/f03005.component';
+import { F03006Component } from './f03006/f03006.component';
+import { F03005confirmComponent } from './f03005/f03005confirm/f03005confirm.component';
+import { F03006confirmComponent } from './f03006/f03006confirm/f03006confirm.component';
+import { F03005wopenComponent } from './f03005/f03005wopen/f03005wopen.component';
+import { F03006wopenComponent } from './f03006/f03006wopen/f03006wopen.component';
 
 
 
@@ -188,7 +194,13 @@ export const TW_FORMATS = {
     F02007confirmComponent,
     F02008Component,
     QrcodeComponent,
-    QrcodeconfirmComponent
+    QrcodeconfirmComponent,
+    F03005Component,
+    F03006Component,
+    F03005confirmComponent,
+    F03006confirmComponent,
+    F03005wopenComponent,
+    F03006wopenComponent
   ],
   imports: [
     BrowserModule,
