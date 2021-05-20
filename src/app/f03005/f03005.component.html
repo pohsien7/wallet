@@ -1,11 +1,12 @@
 <div class="container">
     <th class="f03_th">動態產生OTP支付條碼</th>
     <block-ui>
-      <form [formGroup]="requestHmacForm">
+      <form [formGroup]="generateBarcodeForm" >
         <table>
             <tr>
               <th>
                 <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+                <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
               </th>
             </tr>
             <tr>

@@ -22,7 +22,7 @@ export class F03005Component implements OnInit {
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0902', viewValue: '0902' }];
 
-  requestHmacForm: FormGroup = this.fb.group({
+  generateBarcodeForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(23)]],
     cvc: ['0901', [Validators.required]],
   })
@@ -41,7 +41,7 @@ export class F03005Component implements OnInit {
   ]);
 
   getErrorMessage(cloumnName: string) {
-    let obj = this.requestHmacForm.get(cloumnName);
+    let obj = this.generateBarcodeForm.get(cloumnName);
     return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' : "" ;
   }
 
@@ -49,11 +49,11 @@ export class F03005Component implements OnInit {
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
-    if(!this.requestHmacForm.valid) {
+    if(!this.generateBarcodeForm.valid) {
       msg = '資料格式有誤，請修正!'
     } else {
       const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(this.requestHmacForm.value));
+      formdata.append('value', JSON.stringify(this.generateBarcodeForm.value));
       await this.f03005Service.sendConsumer('consumer/f03005', formdata).then((data) => {
         msg = data.statusMessage;
         this.resultForm.patchValue({ barcode : data.barcode });
@@ -68,13 +68,17 @@ export class F03005Component implements OnInit {
 
   getList() {
     const dialogRef = this.dialog.open(F03005wopenComponent, {
-      data: { queryWalletID: this.requestHmacForm.value.queryWalletID },
+      data: { queryWalletID: this.generateBarcodeForm.value.queryWalletID },
       minHeight: '100vh'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
-        this.requestHmacForm.patchValue({ queryWalletID : result.value });
+        this.generateBarcodeForm.patchValue({ queryWalletID : result.value });
       }
     });
+  }
+
+  clear() {
+    this.generateBarcodeForm.reset();
   }
 }
