@@ -10,3 +10,7 @@
 mat-card-content{
   background-color: linen;
 }
+
+button{
+  margin-right: 5px;
+}
