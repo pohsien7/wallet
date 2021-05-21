@@ -16,7 +16,7 @@ export class F02005Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   registrationForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(25), Validators.maxLength(25)]]
+    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(25)]]
   });
 
   resultForm: FormGroup = this.fb.group({

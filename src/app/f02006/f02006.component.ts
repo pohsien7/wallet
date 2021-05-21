@@ -16,7 +16,8 @@ export class F02006Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   registrationForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(25), Validators.maxLength(25)]]
+    queryTxnID: ['', [Validators.required, Validators.minLength(40), Validators.maxLength(40)]],
+    cvc: ['0901', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
   });
 
   resultForm: FormGroup = this.fb.group({
@@ -82,12 +83,12 @@ export class F02006Component implements OnInit {
 
   getList() {
     const dialogRef = this.dialog.open(F02006wopenComponent, {
-      data: { queryWalletID: this.registrationForm.value.queryWalletID },
+      data: { queryTxnID: this.registrationForm.value.queryTxnID },
       minHeight: '100vh'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
-        this.registrationForm.patchValue({ queryWalletID : result.value });
+        this.registrationForm.patchValue({ queryTxnID : result.value });
       }
     });
   }

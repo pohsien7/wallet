@@ -59,7 +59,7 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      this.getWalletId();
+      this.getTxnId();
     });
   }
 
@@ -78,7 +78,7 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
     this.walletIdSource.data = null;
   }
 
-  async getWalletId() {
+  async getTxnId() {
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
     //1.處理日期
@@ -115,7 +115,7 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
     }
   }
 
-  goBack(walletId: string) {
-    this.dialogRef.close({ event:'success', value: walletId });
+  goBack(txnId: string) {
+    this.dialogRef.close({ event:'success', value: txnId });
   }
 }

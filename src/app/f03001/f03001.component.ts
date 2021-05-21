@@ -21,12 +21,12 @@ export class F03001Component implements OnInit {
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0902', viewValue: '0902' }];
 
   transferForm: FormGroup = this.fb.group({
-    walletid: ['', [Validators.maxLength(30)]],
-    recipientid: ['', [Validators.required]],
+    walletid: ['B-822-2021051522253801', [Validators.maxLength(30)]],
+    recipientid: ['B-822-1871533110902675', [Validators.required]],
     cvc: ['0901', [Validators.required]],
-    amount: ['', [Validators.required, Validators.maxLength(10)]],
-    won: ['', [Validators.required]],
-    remark: ['', [Validators.required]]
+    amount: ['1', [Validators.required, Validators.maxLength(10)]],
+    won: ['*', [Validators.required]],
+    remark: ['*', [Validators.required]]
   });
   model:number = this.transferForm.value.amount;
   submitted = false;
@@ -58,9 +58,8 @@ export class F03001Component implements OnInit {
       this.transferForm.patchValue({ amount : parseInt(this.transform(this.transferForm.value.amount)) });
       formdata.append('value', JSON.stringify(this.transferForm.value));
       await this.f03001Service.sendConsumer('consumer/f03001', formdata).then((data) => {
-        msg = data.statusCode + ':' + data.statusMessage;
+        msg = data.statusMessage;
       });
-      this.clear();
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking

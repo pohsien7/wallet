@@ -9,11 +9,11 @@
           </th>
         </tr>
         <tr>
-          <th nowrap="nowrap">欲查詢之錢包ID：</th>
+          <th nowrap="nowrap">欲查詢之交易ID：</th>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" formControlName="queryWalletID">
-              <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
+              <input matInput #input class="form-control" formControlName="queryTxnID">
+              <mat-error>{{getErrorMessage('queryTxnID')}}</mat-error>
             </mat-form-field>
           </td>
           <td>
@@ -26,8 +26,8 @@
           <th>券幣代號：</th>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" formControlName="">
-              <!--<mat-error>{{getErrorMessage('')}}</mat-error>-->
+              <input matInput #input class="form-control" formControlName="cvc">
+              <mat-error>{{getErrorMessage('cvc')}}</mat-error>
             </mat-form-field>
           </td>
         </tr>
