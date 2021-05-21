@@ -98,6 +98,7 @@ export class F03001Component implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result != null && result.event == 'success') {
           this.transferForm.patchValue({ walletid: result.value });
+          this.transferForm.patchValue({ pk : result.valuePk });
         }
       });
     } else {
@@ -108,7 +109,6 @@ export class F03001Component implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result != null && result.event == 'success') {
           this.transferForm.patchValue({ recipientid: result.value });
-          this.transferForm.patchValue({ pk : result.valuePk });
         }
       });
     }
