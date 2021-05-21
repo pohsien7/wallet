@@ -21,8 +21,8 @@ export class F03002Component implements OnInit {
   cvcCode: COMB[] = [{value: '0901', viewValue: '0901'}, {value: '0901', viewValue: '0901'}];
 
   reverseForm: FormGroup = this.fb.group({
-    walletid: ['', [Validators.maxLength(30)]],
-    stxnid: ['', [Validators.required]],
+    walletid: ['B-822-2021052111115845', [Validators.maxLength(30)]],
+    stxnid: ['B-822-2021052112290198-1621602301281-568', [Validators.required]],
     cvc: ['0901', [Validators.required]],
     remark: ['', [Validators.required]]
   })
