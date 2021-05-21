@@ -1,1 +1,87 @@
-<p>f02010 works!</p>
+<div class="container">
+    <th class="f02_th">透過號碼條碼移轉付方錢包</th>
+    <block-ui>
+        <form [formGroup]="numberPayForm" style="padding-left: 20px;">
+            <table>
+                <tr>
+                    <th nowrap="nowrap">
+                        <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+                    </th>
+                </tr>
+                <br>
+                <mat-card class="matCard">
+                    <mat-card-content>
+                        <tr>
+                            <th nowrap="nowrap">交易收方ID（特店或ATM錢包ID）：</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input class="form-control" formControlName="recipientID">
+                                    <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <button mat-icon-button color="primary" (click)="getList()">
+                                    <span class="material-icons">view_list</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th nowrap="nowrap">券幣代號：</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <mat-select formControlName="cvc">
+                                        <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+                                            {{cvc.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">交易金額 (單位：仟元)</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="amount"> 
+                                </mat-form-field>
+                            </td>                                                     
+                        </tr>
+                        <tr>
+                            <th nowrap="nowrap">通路代號</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="channelcode">
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">付方錢包支付號碼</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="payablenumber">
+                                </mat-form-field>
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <th nowrap="nowrap">付方號碼支付驗證碼</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="verificationcode">
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">(收方)銷帳編號</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="won">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th nowrap="nowrap">交易備註</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="remark">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </mat-card-content>
+                </mat-card>
+            </table>
+        </form>
+    </block-ui>
+</div>

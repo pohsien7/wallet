@@ -20,10 +20,10 @@ export class F03005Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0902', viewValue: '0902' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
 
   generateBarcodeForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(23)]],
+    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]],
     cvc: ['0901', [Validators.required]],
   })
   resultForm: FormGroup = this.fb.group({
