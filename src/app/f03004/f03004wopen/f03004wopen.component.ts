@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { F03004Service } from '../f03004.service';
+import { F03004confirmComponent } from '../f03004confirm/f03004confirm.component';
 
 interface sysCode {
   value: string;
@@ -27,12 +28,12 @@ export class F03004wopenComponent implements OnInit, AfterViewInit {
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'f02001', viewValue: '記名錢包 (法人，憑證)'},
-                             {value: 'f02002', viewValue: '記名錢包 (自然人，憑證)'},
-                             {value: 'f02003', viewValue: '記名錢包 (法人，公鑰)'},
-                             {value: 'f02004', viewValue: '匿名錢包'}];
+  walletOption: sysCode[] = [{value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
+                             {value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
+                             {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (法人，公鑰)'},
+                             {value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'}];
 
-  constructor(public dialogRef: MatDialogRef<F03004wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03004Service: F03004Service) { }
+  constructor(public dialogRef: MatDialogRef<F03004wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03004Service: F03004Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -98,6 +99,9 @@ export class F03004wopenComponent implements OnInit, AfterViewInit {
     this.f03004Service.getWalletIdList('/consumer/f03004fn01', jsonString).subscribe(data => {
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
+      if ( this.totalCount == 0 ) {
+        this.dialog.open(F03004confirmComponent, { data: { msgStr: "查無錢包" } });
+      }
     });
   }
 
@@ -116,6 +120,6 @@ export class F03004wopenComponent implements OnInit, AfterViewInit {
   }
 
   goBack(walletId: string) {
-    this.dialogRef.close({ event:'success', value: walletId });
+    this.dialogRef.close({ event:'success', value: walletId , valueWalletType: this.searchForm.value.walletType });
   }
 }

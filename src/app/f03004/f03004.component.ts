@@ -18,9 +18,10 @@ interface COMB {
 })
 export class F03004Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-  
+
   requestHmacForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(23)]]
+    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(23)]],
+    walletType:[]
   })
   resultForm: FormGroup = this.fb.group({
     hmacKey : ['', []]
@@ -69,6 +70,7 @@ export class F03004Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.requestHmacForm.patchValue({ queryWalletID : result.value });
+        this.requestHmacForm.patchValue({ walletType: result.valueWalletType });
       }
     });
   }
