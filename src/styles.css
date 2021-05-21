@@ -23,6 +23,10 @@ th {
   width: 150%;
 }
 
+.form-id{
+  width: 100%;
+}
+
 .login-background{
   background-image: url(src\assets\images\ctbcLogo.png);
   background-repeat:no-repeat;

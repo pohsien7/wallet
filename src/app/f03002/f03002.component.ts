@@ -4,6 +4,7 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { F03001Service } from '../f03001/f03001.service';
 import { MatDialog } from '@angular/material/dialog';
 import { F03002confirmComponent } from './f03002confirm/f03002confirm.component';
+import { F03002wopenComponent } from './f03002wopen/f03002wopen.component';
 
 interface COMB {
   value: string;
@@ -21,8 +22,8 @@ export class F03002Component implements OnInit {
   cvcCode: COMB[] = [{value: '0901', viewValue: '0901'}, {value: '0901', viewValue: '0901'}];
 
   reverseForm: FormGroup = this.fb.group({
-    walletid: ['B-822-2021052111115845', [Validators.maxLength(30)]],
-    stxnid: ['B-822-2021052112290198-1621602301281-568', [Validators.required]],
+    walletid: ['', [Validators.maxLength(30)]],
+    stxnid: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
     remark: ['', [Validators.required]]
   })
@@ -61,5 +62,18 @@ export class F03002Component implements OnInit {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F03002confirmComponent, { data: { msgStr: msg } });
     }, 500);
+  }
+
+  getList() {
+    const dialogRef = this.dialog.open(F03002wopenComponent, {
+      //data: { walletId: this.reverseForm.value.recipientID },
+      minHeight: '100vh'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null && result.event == 'success') {
+        this.reverseForm.patchValue({ walletid : result.recipientID });
+        this.reverseForm.patchValue({ stxnid : result.txnID });
+      }
+    });
   }
 }
