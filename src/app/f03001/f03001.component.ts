@@ -27,7 +27,8 @@ export class F03001Component implements OnInit {
     cvc: ['0901', [Validators.required]],
     amount: ['1', [Validators.required, Validators.maxLength(10)]],
     won: ['*', [Validators.required]],
-    remark: ['*', [Validators.required]]
+    remark: ['*', [Validators.required]],
+    pk:['']
   });
   model: number = this.transferForm.value.amount;
   submitted = false;
@@ -107,6 +108,7 @@ export class F03001Component implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result != null && result.event == 'success') {
           this.transferForm.patchValue({ recipientid: result.value });
+          this.transferForm.patchValue({ pk : result.valuePk });
         }
       });
     }
