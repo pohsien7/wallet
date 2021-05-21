@@ -30,10 +30,12 @@ export class F02006Component implements OnInit {
     senderBalance: ['', []],
     recipientBalance: ['', []],
     senderSN: ['', []],
-
+    recipientSN: ['', []],
     won: ['', []],
     remark: ['', []],
-    txnTime: ['', []]
+    txnTime: ['', []],
+    result: ['', []],
+    paymentMethod: ['', []]
   });
 
   submitted = false;
@@ -63,16 +65,22 @@ export class F02006Component implements OnInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f02006Service.sendConsumer('consumer/f02006', formdata).then((data) => {
-        console.log(data)
         msg = data.statusMessage;
         this.resultForm.patchValue({ senderID : data.ledgerState.senderID });
         this.resultForm.patchValue({ recipientID : data.ledgerState.recipientID });
         this.resultForm.patchValue({ authorizedPartyID : data.ledgerState.authorizedPartyID });
         this.resultForm.patchValue({ recipientDN : data.ledgerState.recipientDN });
         this.resultForm.patchValue({ cvc : data.ledgerState.cvc });
-        this.resultForm.patchValue({ frozen : data.ledgerState.frozen });
-        this.resultForm.patchValue({ disabled : data.ledgerState.disabled });
-        this.resultForm.patchValue({ settingLastModified : data.ledgerState.settingLastModified });
+        this.resultForm.patchValue({ amount : data.ledgerState.amount });
+        this.resultForm.patchValue({ senderBalance : data.ledgerState.senderBalance });
+        this.resultForm.patchValue({ recipientBalance : data.ledgerState.recipientBalance });
+        this.resultForm.patchValue({ senderSN : data.ledgerState.senderSN });
+        this.resultForm.patchValue({ recipientSN : data.ledgerState.recipientSN });
+        this.resultForm.patchValue({ won : data.ledgerState.won });
+        this.resultForm.patchValue({ remark : data.ledgerState.remark });
+        this.resultForm.patchValue({ txnTime : data.ledgerState.txnTime });
+        this.resultForm.patchValue({ result : data.ledgerState.result });
+        this.resultForm.patchValue({ paymentMethod : data.ledgerState.paymentMethod });
       });
     }
     setTimeout(() => {

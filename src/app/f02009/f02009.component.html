@@ -1,1 +1,66 @@
-<p>f02009 works!</p>
+<div class="container">
+  <th class="f03_th">透過OTP條碼移轉付方錢包</th>
+  <form [formGroup]="barcodePayForm" style="padding-left: 20px;">
+    <table>
+      <tr>
+        <th>
+          <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+        </th>
+      </tr>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th nowrap="nowrap">交易收方ID(特店錢包ID)：</th>
+            <td nowrap="nowrap">
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="recipientID">
+                <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="getList()">
+                <span class="material-icons">view_list</span>
+              </button>
+            </td>
+            <th nowrap="nowrap">交易金額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="amount">
+                  <mat-error>{{getErrorMessage('amount')}}</mat-error>
+                </mat-form-field>
+              </td>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">付方錢包支付條碼：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="barcode">
+                <mat-error>{{getErrorMessage('barcode')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">(收方)銷帳編號：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="won">
+                <mat-error>{{getErrorMessage('won')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">交易備註：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="remark">
+                <mat-error>{{getErrorMessage('remark')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+

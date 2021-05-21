@@ -1,11 +1,11 @@
 <div class="container">
   <th class="f03_th">移轉自錢包之CBDC</th>
   <block-ui>
-    <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+    <form [formGroup]="transferForm" style="padding-left: 20px;">
       <table>
         <tr>
           <th>
-            <button type="submit" mat-raised-button color="primary">送出</button>
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
           </th>
         </tr>
         <br>
@@ -13,18 +13,30 @@
           <mat-card-content>
             <tr>
               <th nowrap="nowrap">交易付方錢包ID：</th>
-              <td>
-                <mat-form-field color="accent">
+              <td nowrap="nowrap">
+                <mat-form-field color="accent" class="form-address">
                   <input matInput #input class="form-control" formControlName="walletid">
                   <mat-error>{{getErrorMessage('walletid')}}</mat-error>
                 </mat-form-field>
               </td>
-              <th nowrap="nowrap">交易收方錢包ID：</th>
               <td>
-                <mat-form-field color="accent">
+                <button mat-icon-button color="primary" (click)="getList('walletid')">
+                  <span class="material-icons">view_list</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th nowrap="nowrap">交易收方錢包ID：</th>
+              <td nowrap="nowrap">
+                <mat-form-field color="accent" class="form-address">
                   <input matInput #input class="form-control" formControlName="recipientid">
                   <mat-error>{{getErrorMessage('recipientid')}}</mat-error>
                 </mat-form-field>
+              </td>
+              <td>
+                <button mat-icon-button color="primary" (click)="getList('recipientid')">
+                  <span class="material-icons">view_list</span>
+                </button>
               </td>
             </tr>
 

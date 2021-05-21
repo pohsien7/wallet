@@ -1,20 +1,21 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { F02009Service } from '../f02009.service';
+import { F03001Service } from '../f03001.service';
+import { F03001confirmComponent } from '../f03001confirm/f03001confirm.component';
 interface sysCode {
   value: string;
   viewValue: string;
 }
 @Component({
-  templateUrl: './f02009wopen.component.html',
-  styleUrls: ['./f02009wopen.component.css']
+  templateUrl: './f03001wopen.component.html',
+  styleUrls: ['./f03001wopen.component.css']
 })
-export class F02009wopenComponent implements OnInit {
+export class F03001wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
     walletType: ['', [Validators.required]],
@@ -26,11 +27,10 @@ export class F02009wopenComponent implements OnInit {
   });
 
   walletOption: sysCode[] = [{value: 'f02001', viewValue: '記名錢包 (法人，憑證)'},
-                             {value: 'f02002', viewValue: '記名錢包 (自然人，憑證)'},
-                             {value: 'f02003', viewValue: '記名錢包 (法人，公鑰)'},
-                             {value: 'f02004', viewValue: '匿名錢包'}];
-
-  constructor(public dialogRef: MatDialogRef<F02009wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02009Service: F02009Service) { }
+  {value: 'f02002', viewValue: '記名錢包 (自然人，憑證)'},
+  {value: 'f02003', viewValue: '記名錢包 (法人，公鑰)'},
+  {value: 'f02004', viewValue: '匿名錢包'}];
+  constructor(public dialogRef: MatDialogRef<F03001wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03001Service: F03001Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -91,9 +91,12 @@ export class F02009wopenComponent implements OnInit {
     jsonObj.perPage = perPage;
     //3.轉回字串
     let jsonString :string = JSON.stringify(jsonObj);
-    this.f02009Service.getWalletIdList('/consumer/f02009fn01', jsonString).subscribe(data => {
+    this.f03001Service.getWalletIdList('/consumer/f03001fn01', jsonString).subscribe(data => {
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
+      if ( this.totalCount == 0 ) {
+        this.dialog.open(F03001confirmComponent, { data: { msgStr: "查無錢包" } });
+      }
     });
   }
 
