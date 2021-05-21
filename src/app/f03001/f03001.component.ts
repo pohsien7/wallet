@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { F03001Service } from './f03001.service';
 import { F03001confirmComponent } from './f03001confirm/f03001confirm.component';
+import { F03001wopenComponent } from './f03001wopen/f03001wopen.component';
 
 interface COMB {
   value: string;
@@ -21,14 +22,14 @@ export class F03001Component implements OnInit {
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0902', viewValue: '0902' }];
 
   transferForm: FormGroup = this.fb.group({
-    walletid: ['B-822-2021051522253801', [Validators.maxLength(30)]],
-    recipientid: ['B-822-1871533110902675', [Validators.required]],
+    walletid: ['', [Validators.maxLength(30)]],
+    recipientid: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
     amount: ['1', [Validators.required, Validators.maxLength(10)]],
     won: ['*', [Validators.required]],
     remark: ['*', [Validators.required]]
   });
-  model:number = this.transferForm.value.amount;
+  model: number = this.transferForm.value.amount;
   submitted = false;
 
   constructor(private fb: FormBuilder, public f03001Service: F03001Service, public dialog: MatDialog) { }
@@ -54,12 +55,16 @@ export class F03001Component implements OnInit {
     if (!this.transferForm.valid) {
       msg = '資料格式有誤，請修正!'
     } else {
-      const formdata: FormData = new FormData();
-      this.transferForm.patchValue({ amount : parseInt(this.transform(this.transferForm.value.amount)) });
-      formdata.append('value', JSON.stringify(this.transferForm.value));
-      await this.f03001Service.sendConsumer('consumer/f03001', formdata).then((data) => {
-        msg = data.statusMessage;
-      });
+      if (this.transferForm.value.walletid == this.transferForm.value.recipientid) {
+        msg = '錢包ID不可重複!'
+      } else {
+        const formdata: FormData = new FormData();
+        this.transferForm.patchValue({ amount: parseInt(this.transform(this.transferForm.value.amount)) });
+        formdata.append('value', JSON.stringify(this.transferForm.value));
+        await this.f03001Service.sendConsumer('consumer/f03001', formdata).then((data) => {
+          msg = data.statusMessage;
+        });
+      }
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
@@ -79,8 +84,32 @@ export class F03001Component implements OnInit {
     return value && value.toString().replace(/,/g, '') || '';
   }
 
-  clear(){
+  clear() {
     this.transferForm.reset();
+  }
+
+  getList(id: string) {
+    if (id == 'walletid') {
+      const dialogRef = this.dialog.open(F03001wopenComponent, {
+        data: { walletID: this.transferForm.value.walletid },
+        minHeight: '100vh'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != null && result.event == 'success') {
+          this.transferForm.patchValue({ walletid: result.value });
+        }
+      });
+    } else {
+      const dialogRef = this.dialog.open(F03001wopenComponent, {
+        data: { walletID: this.transferForm.value.recipientid },
+        minHeight: '100vh'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != null && result.event == 'success') {
+          this.transferForm.patchValue({ recipientid: result.value });
+        }
+      });
+    }
   }
 
 }

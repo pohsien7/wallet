@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
 
 @Injectable({
@@ -7,4 +8,9 @@ import { BaseService } from '../base.service';
 })
 export class F03001Service extends BaseService {
   constructor(protected httpClient: HttpClient) { super(httpClient); }
+  getWalletIdList(baseUrl: string, jsonString: string): Observable<any> {
+    const formdata: FormData = new FormData();
+    formdata.append('value', jsonString);
+    return this.postFormData(baseUrl, formdata);
+  }
 }
