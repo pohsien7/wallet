@@ -17,7 +17,7 @@ export class F02008Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   upgradeWalletForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(23)]],
+    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]],
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
