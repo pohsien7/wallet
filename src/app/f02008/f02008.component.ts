@@ -17,7 +17,7 @@ export class F02008Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   upgradeWalletForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]],
+    queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
@@ -47,7 +47,7 @@ export class F02008Component implements OnInit {
     let obj = this.upgradeWalletForm.get(cloumnName);
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
            obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? '請輸入數字' :
-           obj.hasError('idNumberError')  ? '身分證格式錯誤' : '';  
+           obj.hasError('idNumberError')  ? '身分證格式錯誤' : '';
   }
 
   async sendCBDC() {
@@ -67,7 +67,7 @@ export class F02008Component implements OnInit {
       // formdata.append('value', JSON.stringify(this.upgradeWalletForm.value));
       await this.f02008Service.sendConsumer('consumer/f02008', formdata).then((data) => {
         msg = data.statusMessage;
-        
+
       });
     }
     setTimeout(() => {
@@ -99,7 +99,7 @@ export class F02008Component implements OnInit {
         this.upgradeWalletForm.patchValue({ queryWalletID : result.value });
         this.upgradeWalletForm.patchValue({ dn : result.name });
         this.upgradeWalletForm.patchValue({ userId : result.userId });
-        
+
       }
     });
   }
