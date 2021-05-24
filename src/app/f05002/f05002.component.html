@@ -1,1 +1,93 @@
-<p>f05002 works!</p>
+<div class="container">
+    <th class="f04_th">交易收方錢包撤銷交易查詢</th>
+  
+    <form [formGroup]="reverseSearchForm" style="padding-left: 20px;">
+      <div class="f04_div">
+        <button type="submit" mat-raised-button color="primary" (click)="getViewDataList()">查詢</button>
+        <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+      </div>
+      <table>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">簽署指令之錢包ID：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="walletID">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">欲撤銷之交易ID：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="stxnID">
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">交易日期：</th>
+              <td>
+                <mat-form-field color="accent" class="example-form-field">
+                  <mat-date-range-input [rangePicker]="rangePicker">
+                    <input matStartDate formControlName="txntime_start" value="">
+                    <input matEndDate formControlName="txntime_end">
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #rangePicker>
+                    <mat-date-range-picker-actions>
+                      <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                      <button mat-button matDateRangePickerCancel>取消</button>
+                    </mat-date-range-picker-actions>
+                  </mat-date-range-picker>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </div>
+  <br>
+  <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+    <mat-table [dataSource]="reversesearchData">
+      <ng-container matColumnDef="WALLETID">
+        <mat-header-cell *matHeaderCellDef>簽署指令之錢包ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.walletid }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="STXNID">
+        <mat-header-cell *matHeaderCellDef>欲撤銷之交易ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.stxnid }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="CVC">
+        <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.cvc }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="REMARK">
+        <mat-header-cell *matHeaderCellDef>(付方)交易備註</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.remark }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="TXNID">
+        <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.txnid }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="RESULT">
+        <mat-header-cell *matHeaderCellDef>交易結果</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.result }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="TXNTIME">
+        <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.txntime | date: 'yyyy-MM-dd' }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['WALLETID', 'STXNID', 'CVC', 'REMARK', 'TXNID', 'RESULT', 'TXNTIME']; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let ruleParmRow; columns: ['WALLETID', 'STXNID', 'CVC', 'REMARK', 'TXNID', 'RESULT', 'TXNTIME']"></mat-row>
+    </mat-table>
+    <tr>
+      <td>
+        <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+        </mat-paginator>
+      </td>
+    </tr>
+  </cdk-virtual-scroll-viewport>
+  
