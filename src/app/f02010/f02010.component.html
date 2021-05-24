@@ -14,7 +14,7 @@
                         <tr>
                             <th nowrap="nowrap">交易收方ID（特店或ATM錢包ID）：</th>
                             <td>
-                                <mat-form-field color="accent">
+                                <mat-form-field color="accent" class="form-id">
                                     <input matInput #input class="form-control" formControlName="recipientID">
                                     <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
                                 </mat-form-field>
@@ -39,9 +39,9 @@
                             <th nowrap="nowrap">交易金額 (單位：仟元)</th>
                             <td>
                                 <mat-form-field color="accent">
-                                    <input matInput #input formControlName="amount"> 
+                                    <input matInput #input formControlName="amount">
                                 </mat-form-field>
-                            </td>                                                     
+                            </td>
                         </tr>
                         <tr>
                             <th nowrap="nowrap">通路代號</th>
@@ -55,7 +55,7 @@
                                 <mat-form-field color="accent">
                                     <input matInput #input formControlName="payablenumber">
                                 </mat-form-field>
-                            </td>                            
+                            </td>
                         </tr>
                         <tr>
                             <th nowrap="nowrap">付方號碼支付驗證碼</th>

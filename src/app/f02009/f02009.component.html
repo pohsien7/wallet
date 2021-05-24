@@ -1,5 +1,5 @@
 <div class="container">
-  <th class="f03_th">透過OTP條碼移轉付方錢包</th>
+  <th class="f02_th">透過OTP條碼移轉付方錢包</th>
   <form [formGroup]="barcodePayForm" style="padding-left: 20px;">
     <table>
       <tr>
@@ -13,7 +13,7 @@
           <tr>
             <th nowrap="nowrap">交易收方ID(特店錢包ID)：</th>
             <td nowrap="nowrap">
-              <mat-form-field color="accent">
+              <mat-form-field color="accent" class="form-id">
                 <input matInput #input class="form-control" formControlName="recipientID">
                 <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
               </mat-form-field>
