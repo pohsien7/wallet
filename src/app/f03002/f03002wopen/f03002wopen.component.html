@@ -6,6 +6,21 @@
         <button mat-icon-button color="primary" (click)="getMyWallet()">
           <span class="material-icons">search</span>
         </button>
+        <br>
+        <button mat-icon-button color="primary" (click)="cleanToEmpty()">
+          <span class="material-icons">clear_all</span>
+        </button>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>交易類型</mat-label>
+          <mat-select formControlName="transType" (click)="cleanToEmpty()">
+            <mat-option *ngFor="let code of transOption" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
       </td>
     </tr>
     <tr>

@@ -17,7 +17,7 @@ export class F02009Component implements OnInit {
   barcodePayForm: FormGroup = this.fb.group({
     recipientID:['',[Validators.required, Validators.maxLength(23)]],
     amount:['',[Validators.required, Validators.maxLength(18),Validators.pattern('^[0-9]+$')]],
-    barcode:['',[Validators.required, Validators.maxLength(18)]],
+    barcode:['',[Validators.required, Validators.maxLength(40)]],
     won:[''],
     remark:['']
 
