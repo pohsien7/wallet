@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { F03002Service } from '../f03002.service';
 import { F03002confirmComponent } from '../f03002confirm/f03002confirm.component';
-
+interface sysCode {
+  value: string;
+  viewValue: string;
+}
 @Component({
   templateUrl: './f03002wopen.component.html',
   styleUrls: ['./f03002wopen.component.css']
@@ -14,9 +17,12 @@ import { F03002confirmComponent } from '../f03002confirm/f03002confirm.component
 export class F03002wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
+    transType: ['', [Validators.required]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
+
+  transOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: '移轉自錢包之CBDC'}];
 
   constructor(public dialogRef: MatDialogRef<F03002wopenComponent>, private fb: FormBuilder, private f03002Service: F03002Service, public dialog: MatDialog) { }
 
@@ -48,6 +54,14 @@ export class F03002wopenComponent implements OnInit {
     });
   }
 
+  formControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  getErrorMessage() {
+    return this.formControl.hasError('required') ? '此為必填欄位!' : '';
+  }
+
   async getMyWallet() {
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
@@ -69,5 +83,17 @@ export class F03002wopenComponent implements OnInit {
 
   goBack(recipientID: string,txnID: string) {
     this.dialogRef.close({ event:'success', recipientID: recipientID , txnID: txnID });
+  }
+
+  cleanToEmpty() {
+    this.searchForm.patchValue({ walletType : '' });
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 10,
+      length: null
+    };
+    this.totalCount = 0;
+    this.paginator.firstPage();
+    this.myWalletSource.data = null;
   }
 }

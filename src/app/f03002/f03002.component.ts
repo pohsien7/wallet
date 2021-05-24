@@ -67,7 +67,8 @@ export class F03002Component implements OnInit {
   getList() {
     const dialogRef = this.dialog.open(F03002wopenComponent, {
       //data: { walletId: this.reverseForm.value.recipientID },
-      minHeight: '100vh'
+      minHeight: '100vh',
+      width: '50%'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
