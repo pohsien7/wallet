@@ -24,7 +24,8 @@ export class F03006Component implements OnInit {
     walletID:['',[Validators.required, Validators.maxLength(23)]],
     cvc:['',[Validators.required ,Validators.maxLength(4)]],
     amount:['',[Validators.required, Validators.maxLength(18),Validators.pattern('^[0-9]+$')]],
-    payableNumber:['']
+    payableNumber:[''],
+    walletType:[]
   });
 
   constructor(private fb: FormBuilder, public f03006Service: F03006Service, public dialog: MatDialog) { }
@@ -73,6 +74,7 @@ export class F03006Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.payableNumberForm.patchValue({ walletID : result.value });
+        this.payableNumberForm.patchValue({ walletType: result.valueWalletType });
       }
     });
   }

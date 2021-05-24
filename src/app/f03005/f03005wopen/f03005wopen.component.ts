@@ -120,6 +120,6 @@ export class F03005wopenComponent implements OnInit, AfterViewInit {
   }
 
   goBack(walletId: string) {
-    this.dialogRef.close({ event:'success', value: walletId });
+    this.dialogRef.close({ event:'success', value: walletId , valueWalletType: this.searchForm.value.walletType });
   }
 }
