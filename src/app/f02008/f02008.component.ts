@@ -21,7 +21,7 @@ export class F02008Component implements OnInit {
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-    nation: ['', [Validators.required]],
+    nation: ['TWN', [Validators.required]],
     gender: ['', [Validators.required]],
     birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
