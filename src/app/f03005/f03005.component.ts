@@ -29,7 +29,8 @@ export class F03005Component implements OnInit {
     walletType:[]
   })
   resultForm: FormGroup = this.fb.group({
-    hmacKey : ['', []]
+    barcode : ['', []],
+    expireTime : ['', []]
   });
   constructor(private fb: FormBuilder, public f03005Service: F03005Service, public dialog: MatDialog) { }
 
