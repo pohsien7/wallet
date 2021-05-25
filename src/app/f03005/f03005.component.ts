@@ -19,11 +19,12 @@ interface COMB {
 export class F03005Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
+  barcodeImage: string;
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
 
   generateBarcodeForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]],
+    queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     cvc: ['0901', [Validators.required]],
     walletType:[]
   })
@@ -57,8 +58,10 @@ export class F03005Component implements OnInit {
       formdata.append('value', JSON.stringify(this.generateBarcodeForm.value));
       await this.f03005Service.sendConsumer('consumer/f03005', formdata).then((data) => {
         msg = data.statusMessage;
+        console.log(data);
         this.resultForm.patchValue({ barcode : data.barcode });
         this.resultForm.patchValue({ expireTime : data.expireTime });
+        this.barcodeImage= 'data:image/jpeg;base64,' + data.barcodeImage;
       });
     }
     setTimeout(() => {

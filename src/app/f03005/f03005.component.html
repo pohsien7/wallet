@@ -40,13 +40,14 @@
           <mat-card class="matCard">
             <mat-card-content>
               <tr>
-                <th nowrap="nowrap">支付條碼</th>
+                <th nowrap="nowrap">支付條碼：</th>
                 <td>
+                  <img [src]="barcodeImage">
                   <mat-form-field color="accent">
-                    <input matInput #input formControlName="barcode" >
+                    <input matInput #input formControlName="barcode" readonly>
                   </mat-form-field>
                 </td>
-                <th nowrap="nowrap">條碼有效時間</th>
+                <th nowrap="nowrap">條碼有效時間：</th>
                 <td>
                   <mat-form-field color="accent">
                     <input matInput #input formControlName="expireTime" >
@@ -59,4 +60,3 @@
       </form>
     </block-ui>
   </div>
-  

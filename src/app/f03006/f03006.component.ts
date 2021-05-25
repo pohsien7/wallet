@@ -24,8 +24,11 @@ export class F03006Component implements OnInit {
     walletID:['',[Validators.required, Validators.maxLength(23)]],
     cvc:['',[Validators.required ,Validators.maxLength(4)]],
     amount:['',[Validators.required, Validators.maxLength(18),Validators.pattern('^[0-9]+$')]],
-    payableNumber:[''],
     walletType:[]
+  });
+
+  resultForm: FormGroup = this.fb.group({
+    payableNumber : ['', []]
   });
 
   constructor(private fb: FormBuilder, public f03006Service: F03006Service, public dialog: MatDialog) { }
@@ -56,7 +59,7 @@ export class F03006Component implements OnInit {
       formdata.append('value', JSON.stringify(this.payableNumberForm.value));
       this.f03006Service.sendConsumer('consumer/f03006', formdata).then((data) => {
         msg = data.statusMessage;
-        this.payableNumberForm.patchValue({ payableNumber : data.payableNumber });
+        this.resultForm.patchValue({ payableNumber : data.payableNumber });
       });
       console.log(JSON.stringify(this.payableNumberForm.value));
     }
