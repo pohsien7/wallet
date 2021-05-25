@@ -23,12 +23,13 @@ export class F03005Component implements OnInit {
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
 
   generateBarcodeForm: FormGroup = this.fb.group({
-    queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]],
+    queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     cvc: ['0901', [Validators.required]],
     walletType:[]
   })
   resultForm: FormGroup = this.fb.group({
-    hmacKey : ['', []]
+    barcode : ['', []],
+    expireTime : ['', []]
   });
   constructor(private fb: FormBuilder, public f03005Service: F03005Service, public dialog: MatDialog) { }
 

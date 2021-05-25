@@ -18,12 +18,12 @@ interface COMB {
 })
 export class F02010Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-  
+
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
 
   numberPayForm: FormGroup = this.fb.group({
-    recipientID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]],
+    recipientID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     cvc: ['0901', [Validators.required]],
     amount: ['', [Validators.required]],
     channelcode: ['', [Validators.required]],
@@ -32,7 +32,7 @@ export class F02010Component implements OnInit {
     won: [''],
     remark: ['']
   })
-  
+
   constructor(private fb: FormBuilder, public f02010Service: F02010Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -60,7 +60,7 @@ export class F02010Component implements OnInit {
       formdata.append('value', JSON.stringify(this.numberPayForm.value));
       await this.f02010Service.sendConsumer('consumer/f02010', formdata).then((data) => {
         msg = data.statusMessage;
-        
+
       });
     }
     setTimeout(() => {
