@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { F02005Service } from '../f02005.service';
+import { F02005confirmComponent } from '../f02005confirm/f02005confirm.component';
 
 interface sysCode {
   value: string;
@@ -30,9 +31,10 @@ export class F02005wopenComponent implements OnInit, AfterViewInit {
   walletOption: sysCode[] = [{value: 'f02001', viewValue: '記名錢包 (法人，憑證)'},
                              {value: 'f02002', viewValue: '記名錢包 (自然人，憑證)'},
                              {value: 'f02003', viewValue: '記名錢包 (法人，公鑰)'},
-                             {value: 'f02004', viewValue: '匿名錢包'}];
+                             {value: 'f02004', viewValue: '匿名錢包'},
+                             {value: 'f02007', viewValue: '中介機構錢包'}];
 
-  constructor(public dialogRef: MatDialogRef<F02005wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02005Service: F02005Service) { }
+  constructor(public dialogRef: MatDialogRef<F02005wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02005Service: F02005Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -98,6 +100,9 @@ export class F02005wopenComponent implements OnInit, AfterViewInit {
     this.f02005Service.getWalletIdList('/consumer/f02005fn01', jsonString).subscribe(data => {
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
+      if ( this.totalCount == 0 ) {
+        this.dialog.open(F02005confirmComponent, { data: { msgStr: "查無錢包" } });
+      }
     });
   }
 
