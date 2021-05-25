@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { F03005Component } from '../f03005/f03005.component';
 import { F02009Service } from './f02009.service';
 import { F02009confirmComponent } from './f02009confirm/f02009confirm.component';
 import { F02009wopenComponent } from './f02009wopen/f02009wopen.component';
@@ -68,6 +69,18 @@ export class F02009Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.barcodePayForm.patchValue({ recipientID : result.value });
+      }
+    });
+  }
+
+  getBarcode() {
+    const dialogRef = this.dialog.open(F03005Component, {
+      data: { f02009 : "getBarcode" },
+      minHeight: '100vh'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null && result.event == 'success') {
+        this.barcodePayForm.patchValue({ barcode : result.barcode });
       }
     });
   }

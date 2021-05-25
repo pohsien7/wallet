@@ -1,8 +1,8 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { F03005Service } from '../f03005/f03005.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { F03005confirmComponent } from './f03005confirm/f03005confirm.component';
 import { F03005wopenComponent } from './f03005wopen/f03005wopen.component';
 
@@ -20,6 +20,8 @@ export class F03005Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   barcodeImage: string;
+  getBarcodeForF02009: string;
+
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
 
@@ -32,9 +34,10 @@ export class F03005Component implements OnInit {
     barcode : ['', []],
     expireTime : ['', []]
   });
-  constructor(private fb: FormBuilder, public f03005Service: F03005Service, public dialog: MatDialog) { }
+  constructor(public dialogRef: MatDialogRef<F03005Component>, private fb: FormBuilder, public f03005Service: F03005Service, public dialog: MatDialog,@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.getBarcodeForF02009 =  this.data.f02009;
   }
 
   submitted = false;
@@ -63,6 +66,9 @@ export class F03005Component implements OnInit {
         this.resultForm.patchValue({ barcode : data.barcode });
         this.resultForm.patchValue({ expireTime : data.expireTime });
         this.barcodeImage= 'data:image/jpeg;base64,' + data.barcodeImage;
+        if (this.getBarcodeForF02009 == "getBarcode") {
+          this.dialogRef.close({ barcode: data.barcode });
+        }
       });
     }
     setTimeout(() => {
