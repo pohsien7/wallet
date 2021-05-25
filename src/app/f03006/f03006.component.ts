@@ -18,6 +18,8 @@ interface COMB {
 export class F03006Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
+  payableNumberImage: string;
+
   cvcCode: COMB[] = [{value: '0901', viewValue: '0901'}, {value: '0901', viewValue: '0901'}];
 
   payableNumberForm: FormGroup = this.fb.group({
@@ -60,6 +62,7 @@ export class F03006Component implements OnInit {
       this.f03006Service.sendConsumer('consumer/f03006', formdata).then((data) => {
         msg = data.statusMessage;
         this.resultForm.patchValue({ payableNumber : data.payableNumber });
+        this.payableNumberImage= 'data:image/jpeg;base64,' + data.payableNumberImage;
       });
       console.log(JSON.stringify(this.payableNumberForm.value));
     }

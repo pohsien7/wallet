@@ -53,6 +53,7 @@
           <tr>
             <th nowrap="nowrap">支付號碼：</th>
             <td>
+              <img [src]="payableNumberImage">
               <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="payableNumber" readonly>
               </mat-form-field>
