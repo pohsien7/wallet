@@ -35,7 +35,8 @@ export class F02006Component implements OnInit {
     remark: ['', []],
     txnTime: ['', []],
     result: ['', []],
-    paymentMethod: ['', []]
+    paymentMethod: ['', []],
+    insID: ['', []]
   });
 
   submitted = false;
@@ -81,6 +82,7 @@ export class F02006Component implements OnInit {
         this.resultForm.patchValue({ txnTime : data.ledgerState.txnTime });
         this.resultForm.patchValue({ result : data.ledgerState.result });
         this.resultForm.patchValue({ paymentMethod : data.ledgerState.paymentMethod });
+        this.resultForm.patchValue({ insID : data.ledgerState.insID });
       });
     }
     setTimeout(() => {

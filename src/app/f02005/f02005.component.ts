@@ -27,7 +27,12 @@ export class F02005Component implements OnInit {
     mcc: ['', []],
     frozen: ['', []],
     disabled: ['', []],
-    settingLastModified: ['', []]
+    settingLastModified: ['', []],
+    dn: ['', []],
+    certTxnLimit: ['', []],
+    keyTxnLimit: ['', []],
+    cvc: ['', []],
+    createTime: ['', []]
   });
 
   submitted = false;
@@ -58,6 +63,7 @@ export class F02005Component implements OnInit {
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f02005Service.sendConsumer('consumer/f02005', formdata).then((data) => {
         msg = data.statusMessage;
+        console.log(data)
         this.resultForm.patchValue({ balance : data.wallet.balance });
         this.resultForm.patchValue({ totalCount : data.wallet.totalCount });
         this.resultForm.patchValue({ statusLastModified : data.wallet.statusLastModified });
@@ -66,6 +72,11 @@ export class F02005Component implements OnInit {
         this.resultForm.patchValue({ frozen : data.wallet.frozen });
         this.resultForm.patchValue({ disabled : data.wallet.disabled });
         this.resultForm.patchValue({ settingLastModified : data.wallet.settingLastModified });
+        this.resultForm.patchValue({ dn : data.wallet.dn });
+        this.resultForm.patchValue({ certTxnLimit : data.wallet.certTxnLimit });
+        this.resultForm.patchValue({ keyTxnLimit : data.wallet.keyTxnLimit });
+        this.resultForm.patchValue({ cvc : data.wallet.cvc });
+        this.resultForm.patchValue({ createTime : data.wallet.createTime });
       });
     }
     setTimeout(() => {

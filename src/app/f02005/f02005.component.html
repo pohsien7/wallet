@@ -56,7 +56,7 @@
                   <input matInput #input formControlName="type" readonly>
                 </mat-form-field>
               </td>
-              <th nowrap="nowrap">商務識別碼：</th>
+              <th nowrap="nowrap">商務類別碼：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #input formControlName="mcc" readonly>
@@ -83,7 +83,46 @@
                   <input matInput #input formControlName="settingLastModified" readonly>
                 </mat-form-field>
               </td>
-              <th></th>
+              <th nowrap="nowrap">錢包顯示名稱：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="dn" readonly>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th nowrap="nowrap">錢包憑證單筆交易上限金額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="certTxnLimit" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">錢包私鑰單筆交易上限金額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="keyTxnLimit" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">錢包已開通之券幣代號陣列：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="cvc" readonly>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th nowrap="nowrap">錢包創建時間：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="createTime" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap"></th>
+              <td>
+              </td>
+              <th nowrap="nowrap"></th>
               <td>
               </td>
             </tr>
