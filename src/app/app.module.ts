@@ -91,7 +91,7 @@ import { F03004wopenComponent } from './f03004/f03004wopen/f03004wopen.component
 import { F02008Component } from './f02008/f02008.component';
 import { F02008confirmComponent } from './f02008/f02008confirm/f02008confirm.component';
 import { F02008wopenComponent } from './f02008/f02008wopen/f02008wopen.component';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { F02007Component } from './f02007/f02007.component';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { QrcodeconfirmComponent } from './qrcode/qrcodeconfirm/qrcodeconfirm.component';
@@ -247,6 +247,7 @@ export const TW_FORMATS = {
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
     { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
     { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {}},
     DecimalPipe
   ],
   bootstrap: [AppComponent]
