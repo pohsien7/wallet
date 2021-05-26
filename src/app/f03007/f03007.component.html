@@ -15,7 +15,7 @@
                 <th nowrap="nowrap">簽署指令之錢包ID：</th>
                 <td>
                   <mat-form-field color="accent" class="form-id">
-                    <input matInput #input class="form-control" formControlName="walletID">
+                    <input matInput #input class="form-control" formControlName="walletID" readonly>
                     <mat-error>{{getErrorMessage('walletID')}}</mat-error>
                   </mat-form-field>
                 </td>
@@ -41,7 +41,7 @@
                   </mat-form-field>
                 </td>
               </tr>
-              
+
               <tr>
                 <th nowrap="nowrap">交易付方ID：</th>
                 <td>
@@ -89,4 +89,3 @@
       </form>
     </block-ui>
   </div>
-  

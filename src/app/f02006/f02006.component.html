@@ -12,7 +12,7 @@
           <th nowrap="nowrap">欲查詢之交易ID：</th>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" formControlName="queryTxnID">
+              <input matInput #input class="form-control" formControlName="queryTxnID" readonly>
               <mat-error>{{getErrorMessage('queryTxnID')}}</mat-error>
             </mat-form-field>
           </td>

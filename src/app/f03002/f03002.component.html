@@ -22,7 +22,7 @@
               <th nowrap="nowrap">欲撤銷之交易ID：</th>
               <td>
                 <mat-form-field color="accent" class="form-id">
-                  <input matInput #input class="form-control" formControlName="stxnid">
+                  <input matInput #input class="form-control" formControlName="stxnid" readonly>
                   <mat-error>{{getErrorMessage('stxnid')}}</mat-error>
                 </mat-form-field>
               </td>

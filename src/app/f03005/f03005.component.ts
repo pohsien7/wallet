@@ -67,6 +67,7 @@ export class F03005Component implements OnInit {
         this.resultForm.patchValue({ expireTime : data.expireTime });
         this.barcodeImage= 'data:image/jpeg;base64,' + data.barcodeImage;
         if (this.getBarcodeForF02009 == "getBarcode") {
+          msg = '支付條碼取得成功!'
           this.dialogRef.close({ event:'success',barcode: data.barcode });
         }
       });

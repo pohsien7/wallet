@@ -5,6 +5,7 @@ import { F02010Service } from '../f02010/f02010.service';
 import { MatDialog } from '@angular/material/dialog';
 import { F02010confirmComponent } from './f02010confirm/f02010confirm.component';
 import { F02010wopenComponent } from './f02010wopen/f02010wopen.component';
+import { F03006Component } from '../f03006/f03006.component';
 
 interface COMB {
   value: string;
@@ -29,7 +30,9 @@ export class F02010Component implements OnInit {
     channelcode: ['N001', [Validators.required]],
     payablenumber: ['', [Validators.required]],
     won: ['*'],
-    remark: ['']
+    remark: [''],
+    walletID: [''],
+    walletType: ['']
   })
 
   constructor(private fb: FormBuilder, public f02010Service: F02010Service, public dialog: MatDialog) { }
@@ -76,6 +79,20 @@ export class F02010Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.numberPayForm.patchValue({ recipientID : result.value });
+      }
+    });
+  }
+
+  getPayablenumber() {
+    const dialogRef = this.dialog.open(F03006Component, {
+      data: { f02010 : "getPayablenumber" },
+      minHeight: '100vh'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null && result.event == 'success') {
+        this.numberPayForm.patchValue({ payablenumber : result.payablenumber });
+        this.numberPayForm.patchValue({ walletID : result.walletID });
+        this.numberPayForm.patchValue({ walletType : result.walletType });
       }
     });
   }

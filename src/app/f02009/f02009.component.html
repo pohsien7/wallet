@@ -14,7 +14,7 @@
             <th nowrap="nowrap">交易收方ID(特店錢包ID)：</th>
             <td nowrap="nowrap">
               <mat-form-field color="accent" class="form-id">
-                <input matInput #input class="form-control" formControlName="recipientID">
+                <input matInput #input class="form-control" formControlName="recipientID" readonly>
                 <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
               </mat-form-field>
             </td>
@@ -36,7 +36,7 @@
             <th nowrap="nowrap">付方錢包支付條碼：</th>
             <td>
               <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="barcode">
+                <input matInput #input class="form-control" formControlName="barcode" readonly>
                 <mat-error>{{getErrorMessage('barcode')}}</mat-error>
               </mat-form-field>
             </td>
