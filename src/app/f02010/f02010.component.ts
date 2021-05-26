@@ -25,11 +25,10 @@ export class F02010Component implements OnInit {
   numberPayForm: FormGroup = this.fb.group({
     recipientID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     cvc: ['0901', [Validators.required]],
-    amount: ['', [Validators.required]],
-    channelcode: ['', [Validators.required]],
+    amount: ['1', [Validators.required]],
+    channelcode: ['N001', [Validators.required]],
     payablenumber: ['', [Validators.required]],
-    verificationcode: ['', [Validators.required]],
-    won: [''],
+    won: ['*'],
     remark: ['']
   })
 
