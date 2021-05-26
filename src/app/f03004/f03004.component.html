@@ -12,7 +12,7 @@
               <th nowrap="nowrap">欲查詢之錢包ID：</th>
               <td>
                 <mat-form-field color="accent">
-                  <input matInput #input class="form-control" formControlName="queryWalletID">
+                  <input matInput #input class="form-control" formControlName="queryWalletID" readonly>
                   <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
                 </mat-form-field>
               </td>

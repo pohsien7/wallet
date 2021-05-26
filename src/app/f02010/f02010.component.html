@@ -15,7 +15,7 @@
                             <th nowrap="nowrap">交易收方ID（特店或ATM錢包ID）：</th>
                             <td>
                                 <mat-form-field color="accent" class="form-id">
-                                    <input matInput #input class="form-control" formControlName="recipientID">
+                                    <input matInput #input class="form-control" formControlName="recipientID" readonly>
                                     <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
                                 </mat-form-field>
                             </td>
@@ -53,8 +53,13 @@
                             <th nowrap="nowrap">付方錢包支付號碼</th>
                             <td>
                                 <mat-form-field color="accent">
-                                    <input matInput #input formControlName="payablenumber">
+                                    <input matInput #input formControlName="payablenumber" readonly>
                                 </mat-form-field>
+                            </td>
+                            <td>
+                              <button mat-icon-button color="primary" (click)="getPayablenumber()">
+                                <span class="material-icons">view_list</span>
+                              </button>
                             </td>
                         </tr>
                         <tr>
