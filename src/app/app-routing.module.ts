@@ -19,6 +19,8 @@ import { F03004Component } from './f03004/f03004.component';
 import { F03005Component } from './f03005/f03005.component';
 import { F03006Component } from './f03006/f03006.component';
 import { F03007Component } from './f03007/f03007.component';
+import { F03008Component } from './f03008/f03008.component';
+import { F03009Component } from './f03009/f03009.component';
 
 import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
@@ -150,6 +152,14 @@ const routes: Routes = [
       {
         path: 'F03007',
         component: F03007Component
+      },
+      {
+        path: 'F03008',
+        component: F03008Component
+      },
+      {
+        path: 'F03009',
+        component: F03009Component
       },
       {
         path: 'F04001',
