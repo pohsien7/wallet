@@ -75,7 +75,7 @@ export class F03005Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F03005confirmComponent, { data: { msgStr: msg } });
-    }, 500);
+    }, 3000);
   }
 
   getList() {

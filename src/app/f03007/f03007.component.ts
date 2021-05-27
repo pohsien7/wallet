@@ -27,7 +27,7 @@ export class F03007Component implements OnInit {
     operation: ['withdraw', [Validators.required, Validators.maxLength(30)]],
     senderID: ['', [Validators.required, Validators.maxLength(23)]],
     recipientID: ['', [Validators.required, Validators.maxLength(23)]],
-    
+
     amount: ['1', [Validators.required, Validators.maxLength(18)]],
     won: ['*', [Validators.required]],
     remark: ['*', [Validators.required]],
@@ -72,7 +72,7 @@ export class F03007Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F03007confirmComponent, { data: { msgStr: msg } });
-    }, 500);
+    }, 3000);
   }
 
   numberOnly(event: { which: any; keyCode: any; }): boolean {
