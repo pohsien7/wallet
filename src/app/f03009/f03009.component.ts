@@ -58,15 +58,19 @@ export class F03009Component implements OnInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f03009Service.sendConsumer('consumer/f03009', formdata).then((data) => {
-        msg = data.statusMessage;
-        this.resultForm.patchValue({ balance : data.ledgerState.balance });
-        this.resultForm.patchValue({ totalCount : data.ledgerState.totalCount });
-        this.resultForm.patchValue({ canBeDistributed : data.ledgerState.canBeDistributed });
-        this.resultForm.patchValue({ canUse : data.ledgerState.canUse });
-        this.resultForm.patchValue({ canAccept : data.ledgerState.canAccept });
-        this.resultForm.patchValue({ canRedeem : data.ledgerState.canRedeem });
-        this.resultForm.patchValue({ lastModified : data.ledgerState.lastModified });
-        this.resultForm.patchValue({ recipientBalance : data.ledgerState.recipientBalance });
+        console.log(data)
+        if (data.statusCode == "0000") {
+          this.resultForm.patchValue({ balance : data.ledgerState.balance });
+          this.resultForm.patchValue({ totalCount : data.ledgerState.totalCount });
+          this.resultForm.patchValue({ canBeDistributed : data.ledgerState.canBeDistributed });
+          this.resultForm.patchValue({ canUse : data.ledgerState.canUse });
+          this.resultForm.patchValue({ canAccept : data.ledgerState.canAccept });
+          this.resultForm.patchValue({ canRedeem : data.ledgerState.canRedeem });
+          this.resultForm.patchValue({ lastModified : data.ledgerState.lastModified });
+          this.resultForm.patchValue({ recipientBalance : data.ledgerState.recipientBalance });
+        } else {
+          msg = data.statusMessage;
+        }
       });
     }
     setTimeout(() => {
