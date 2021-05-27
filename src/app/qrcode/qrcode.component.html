@@ -1,1 +1,52 @@
-<p>qrcode works!</p>
+
+<div class="container">
+  <th class="">產製QRCODE</th>
+  <block-ui>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <td nowrap>錢包ID：</td>
+              <td>
+                <mat-form-field color="">
+                  <input matInput #input class="form-control" formControlName="id">
+                  <mat-error>{{getErrorMessage('id')}}</mat-error>
+                </mat-form-field>
+              </td>
+
+            </tr>
+              <td nowrap>錢包名稱：</td>
+              <td>
+                <mat-form-field color="">
+                  <input matInput #input class="form-control" formControlName="name">
+                <mat-error>{{getErrorMessage('name')}}</mat-error>
+                </mat-form-field>
+              </td>
+
+            <tr>
+              <td nowrap>金額：</td>
+              <td>
+                <mat-form-field color="">
+                  <input matInput #inputstate class="form-control" formControlName="money">
+                  <mat-error>{{getErrorMessage('money')}}</mat-error>
+                </mat-form-field>
+              </td>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>
+<div>
+<img [src]="imageSource">
+</div>
+
+
+

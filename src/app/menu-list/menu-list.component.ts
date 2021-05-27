@@ -1,4 +1,5 @@
 import { CssSettingComponent } from './../css-setting/css-setting.component';
+import { QrcodeComponent } from './../qrcode/qrcode.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -23,5 +24,9 @@ export class MenuListComponent {
 
   setting() {
     this.dialog.open( CssSettingComponent );
+  }
+
+  qrcode(){
+    this.dialog.open( QrcodeComponent );
   }
 }

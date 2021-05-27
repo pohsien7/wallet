@@ -26,6 +26,7 @@
     "@angular/router": "^11.0.9",
     "bn-ng-idle": "^1.0.1",
     "bootstrap": "^4.6.0",
+    "domsanitizer": "^0.2.3",
     "jquery": "^3.5.1",
     "material-design-icons": "^3.0.1",
     "material-icons": "^0.6.2",
