@@ -1,1 +1,65 @@
-<p>f03008 works!</p>
+<div class="container">
+  <th class="f02_th">查詢自錢包資訊</th>
+  <block-ui>
+    <form [formGroup]="searchWalletInforForm">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+          </th>
+        </tr>
+        <tr>
+          <th nowrap="nowrap">欲查詢之錢包ID：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" formControlName="queryWalletID" readonly>
+              <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-icon-button color="primary" (click)="getList()">
+              <span class="material-icons">view_list</span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <form [formGroup]="resultForm" style="padding-left: 20px;">
+      <table>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">錢包顯示名稱：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="dn" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">錢包餘額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="balance" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">錢包目前交易總筆數：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="totalCount" readonly>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th nowrap="nowrap">錢包帳務最後修改時間：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="statusLastModified" readonly>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>

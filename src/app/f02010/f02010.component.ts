@@ -90,7 +90,7 @@ export class F02010Component implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
-        this.numberPayForm.patchValue({ payablenumber : result.payablenumber });
+        this.numberPayForm.patchValue({ payablenumber : result.payableNumber });
         this.numberPayForm.patchValue({ walletID : result.walletID });
         this.numberPayForm.patchValue({ walletType : result.walletType });
       }
