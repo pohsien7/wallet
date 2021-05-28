@@ -98,19 +98,17 @@ export class F03010Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
         msg = data.statusMessage;
-        if ( data.ledgerStateList.length == 0 ) {
+        if ( data.ledgerStateList.length == 0 || data.ledgerStateList.length == null ) {
           this.clear();
           return this.dialog.open(F03010confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
         }
         console.log(data.ledgerStateList.length);
         this.totalCount = data.ledgerStateList.length;
         this.ledgerStateListData.data = data.ledgerStateList;
+        this.currentPage.pageSize = 5;
+        this.currentPage.pageIndex = 0;
       });
     }
-    setTimeout(() => {
-      this.blockUI.stop(); // Stop blocking
-      const childernDialogRef = this.dialog.open(F03010confirmComponent, { data: { msgStr: msg } });
-    }, 3000);
   }
 
   getList() {
