@@ -56,17 +56,14 @@ export class F03007Component implements OnInit {
     if (!this.deductForm.valid) {
       msg = '資料格式有誤，請修正!'
     } else {
-      if (this.deductForm.value.walletID == this.deductForm.value.recipientID) {
-        msg = '錢包ID不可重複!'
-      } else {
         const formdata: FormData = new FormData();
         this.deductForm.patchValue({ amount: parseInt(this.transform(this.deductForm.value.amount)) });
         formdata.append('value', JSON.stringify(this.deductForm.value));
         await this.f03007Service.sendConsumer('consumer/f03007', formdata).then((data) => {
           msg = data.statusMessage;
         });
-      }
     }
+
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F03007confirmComponent, { data: { msgStr: msg } });

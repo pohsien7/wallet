@@ -1,33 +1,35 @@
 <div class="container">
   <th class="f02_th">開立匿名錢包</th>
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
-    <table>
-      <tr>
-        <th>
-          <button type="submit" mat-raised-button color="primary">送出</button>
-        </th>
-      </tr>
-      <br>
-      <mat-card class="matCard">
-        <mat-card-content>
-          <tr>
-            <th nowrap="nowrap">錢包顯示名稱：</th>
-            <td>
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="dn">
-                <mat-error>{{getErrorMessage('dn')}}</mat-error>
-              </mat-form-field>
-            </td>
-            <th>手機號碼：</th>
-            <td>
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="phoneNumber">
-                <mat-error>{{getErrorMessage('phoneNumber')}}</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-        </mat-card-content>
-      </mat-card>
-    </table>
-  </form>
+  <block-ui>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">錢包顯示名稱：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="dn">
+                  <mat-error>{{getErrorMessage('dn')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th>手機號碼：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="phoneNumber">
+                  <mat-error>{{getErrorMessage('phoneNumber')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
 </div>
