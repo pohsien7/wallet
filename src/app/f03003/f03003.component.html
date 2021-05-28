@@ -1,27 +1,21 @@
 <div class="container">
   <th class="f03_th">授權扣款</th>
-  <form [formGroup]="authorizaionForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+  <form [formGroup]="authorizaionForm" style="padding-left: 20px;">
     <table>
       <tr>
         <th>
-          <button type="submit" mat-raised-button color="primary" style="margin-right: 5px;">送出</button>
+          <button type="submit" mat-raised-button color="primary" style="margin-right: 5px;"
+            (click)="onSubmit()">送出</button>
         </th>
       </tr>
       <br>
       <mat-card class="matCard">
         <mat-card-content>
           <tr>
-            <th>授權合約ID：</th>
-            <td>
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="authID">
-                <mat-error>{{getErrorMessage('authID')}}</mat-error>
-              </mat-form-field>
-            </td>
             <th nowrap="nowrap">授權之作業名稱：</th>
             <td>
               <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="operation">
+                <input matInput #input class="form-control" formControlName="operation" readonly>
                 <mat-error>{{getErrorMessage('operation')}}</mat-error>
               </mat-form-field>
             </td>
@@ -30,17 +24,30 @@
           <tr>
             <th nowrap="nowrap">授權方錢包ID：</th>
             <td>
-              <mat-form-field color="accent">
-                <input matInput #inputstate class="form-control" formControlName="walletID" value="{data.walletId}">
+              <mat-form-field color="accent" class="form-id">
+                <input matInput #inputstate class="form-control" formControlName="walletID" value="{data.walletId}" readonly>
                 <mat-error>{{getErrorMessage('walletID')}}</mat-error>
               </mat-form-field>
             </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="getList('1')">
+                <span class="material-icons">view_list</span>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
             <th nowrap="nowrap">授權收款方總庫/錢包ID：</th>
             <td>
-              <mat-form-field color="accent">
-                <input matInput #inputstate class="form-control" formControlName="recipientID">
+              <mat-form-field color="accent" class="form-id">
+                <input matInput #inputstate class="form-control" formControlName="recipientID" readonly>
                 <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
               </mat-form-field>
+            </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="getList('2')">
+                <span class="material-icons">view_list</span>
+              </button>
             </td>
           </tr>
 

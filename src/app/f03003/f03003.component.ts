@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { F03003Service } from './f03003.service';
 import { F03003confirmComponent } from './f03003confirm/f03003confirm.component';
+import { F03003wopenComponent } from './f03003wopen/f03003wopen.component';
 
 @Component({
   selector: 'app-f03003',
@@ -14,11 +15,11 @@ export class F03003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   authorizaionForm: FormGroup = this.fb.group({
-    authID:['',[Validators.required, Validators.maxLength(30)]],
-    operation:['',[Validators.required ,Validators.maxLength(30)]],
-    walletID:['',[Validators.required, Validators.maxLength(22)]],
-    recipientID:['',[Validators.required, Validators.maxLength(22)]],
-    remark:['',[Validators.required, Validators.maxLength(30)]]
+    operation:['withdraw',[Validators.required ,Validators.maxLength(30)]],
+    walletID:['',[Validators.required, Validators.maxLength(23)]],
+    recipientID:['',[Validators.required, Validators.maxLength(23)]],
+    remark:['',[Validators.required, Validators.maxLength(30)]],
+    walletType:['']
   });
 
   submitted = false;
@@ -58,5 +59,30 @@ export class F03003Component implements OnInit {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F03003confirmComponent, { data: { msgStr: msg } });
     }, 3000);
+  }
+
+  getList(num: string) {
+    if ( num == '1') {
+      const dialogRef = this.dialog.open(F03003wopenComponent, {
+        data: { queryWalletID: this.authorizaionForm.value.walletID , num: num },
+        minHeight: '100vh'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != null && result.event == 'success') {
+          this.authorizaionForm.patchValue({ walletID : result.value });
+          this.authorizaionForm.patchValue({ walletType : result.walletType });
+        }
+      });
+    } else {
+      const dialogRef = this.dialog.open(F03003wopenComponent, {
+        data: { queryWalletID: this.authorizaionForm.value.walletID , num: num },
+        minHeight: '100vh'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != null && result.event == 'success') {
+          this.authorizaionForm.patchValue({ recipientID : result.value });
+        }
+      });
+    }
   }
 }
