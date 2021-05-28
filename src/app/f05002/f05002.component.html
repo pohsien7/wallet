@@ -18,6 +18,11 @@
                   <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
               </td>
+              <td>
+                <button mat-icon-button color="primary" (click)="getList()">
+                  <span class="material-icons">view_list</span>
+                </button>
+              </td>
               <th nowrap="nowrap">欲撤銷之交易ID：</th>
               <td>
                 <mat-form-field color="accent">

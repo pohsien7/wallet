@@ -7,6 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { F05002Service } from './f05002.service';
 import { F05002confirmComponent } from './f05002confirm/f05002confirm.component';
+import { F05002wopenComponent } from './f05002wopen/f05002wopen.component';
 
 @Component({
   selector: 'app-f05002',
@@ -111,6 +112,19 @@ export class F05002Component implements OnInit {
     if (this.reverseSearchForm.value.txntime_end == null) {
       this.reverseSearchForm.patchValue({txntime_end:this.reverseSearchForm.value.txntime_start});
     }
+  }
+
+  getList() {
+    const dialogRef = this.dialog.open(F05002wopenComponent, {
+      data: { walletID: this.reverseSearchForm.value.walletid },
+      minHeight: '100vh'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null && result.event == 'success') {
+        this.reverseSearchForm.patchValue({ walletID: result.value });
+        this.reverseSearchForm.patchValue({ stxnID: result.stxnID });
+      }
+    });
   }
 
   clear() {
