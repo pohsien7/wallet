@@ -107,7 +107,8 @@ export class F03010Component implements OnInit {
       await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
         msg = data.statusMessage;
         console.log(data);
-        this.ledgerStateListData = data;
+        this.ledgerStateListData = data.listIndex;
+        this.totalCount = data.length;
       });
     }
   }
