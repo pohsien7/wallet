@@ -70,7 +70,7 @@ export class F01001Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F01001confirmComponent, { data: { msgStr: msg } });
-    }, 3000);
+    }, 1500);
   }
 
   numberOnly(event: { which: any; keyCode: any; }): boolean {

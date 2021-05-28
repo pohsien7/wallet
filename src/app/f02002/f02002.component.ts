@@ -78,7 +78,7 @@ export class F02002Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop();
       const childernDialogRef = this.dialog.open(F02002confirmComponent, { data: { msgStr: msg } });
-    }, 3000);
+    }, 1500);
   }
 
   testForm: FormGroup = this.fb.group({

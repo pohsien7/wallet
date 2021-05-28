@@ -73,7 +73,7 @@ export class F02008Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02008confirmComponent, { data: { msgStr: msg } });
-    }, 3000);
+    }, 1500);
   }
 
   getGender() {

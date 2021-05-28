@@ -20,7 +20,7 @@ interface COMB {
   styleUrls: ['./f03011.component.css', '../../assets/css/f04.css']
 })
 export class F03011Component implements OnInit {
-  
+
   @BlockUI() blockUI: NgBlockUI;
 
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
@@ -68,7 +68,7 @@ export class F03011Component implements OnInit {
 
   isFieldEmpty() {
     if(this.queryWalletLedgerForm.value.walletID == '' && this.queryWalletLedgerForm.value.queryTxnID == ''
-      && this.queryWalletLedgerForm.value.cvc =='' 
+      && this.queryWalletLedgerForm.value.cvc ==''
     ) {
       return true;
     }
@@ -108,7 +108,7 @@ export class F03011Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F03011confirmComponent, { data: { msgStr: msg } });
-    }, 3000);
+    }, 1500);
   }
 
   getList(id: string) {
@@ -130,5 +130,5 @@ export class F03011Component implements OnInit {
       walletID:'', queryTxnID:'', cvc:''
     });
   }
-    
+
 }
