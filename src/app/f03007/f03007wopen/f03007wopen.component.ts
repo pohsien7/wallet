@@ -23,13 +23,11 @@ export class F03007wopenComponent implements OnInit {
     endTime: ['', [ ]],
     dn: ['', [ ]],
     page: ['', [ ]],
-    perPage: ['', [ ]]
+    perPage: ['', [ ]],
+
   });
 
-  walletOption: sysCode[] = [{value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
-  {value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
-  {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (法人，公鑰)'},
-  {value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'}];
+  walletOption: sysCode[] = [{value: 'AUTHORIZE', viewValue: 'AUTHORIZE'}];
   constructor(public dialogRef: MatDialogRef<F03007wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03007Service: F03007Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -114,7 +112,12 @@ export class F03007wopenComponent implements OnInit {
     }
   }
 
-  goBack(walletId: string) {
-    this.dialogRef.close({ event:'success', value: walletId , valueWalletType: this.searchForm.value.walletType });
+  goBack(authID: string, senderID: string, recipientID: string) {
+    this.dialogRef.close({
+      event:'success',
+      value: authID ,
+      senderID: senderID,
+      recipientID: recipientID
+    });
   }
 }

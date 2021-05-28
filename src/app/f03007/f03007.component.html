@@ -1,91 +1,84 @@
 <div class="container">
-    <th class="f03_th">錢包扣款</th>
-    <block-ui>
-      <form [formGroup]="deductForm" style="padding-left: 20px;">
-        <table>
-          <tr>
-            <th>
-              <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
-            </th>
-          </tr>
-          <br>
-          <mat-card class="matCard">
-            <mat-card-content>
-              <tr>
-                <th nowrap="nowrap">簽署指令之錢包ID：</th>
-                <td>
-                  <mat-form-field color="accent" class="form-id">
-                    <input matInput #input class="form-control" formControlName="walletID" readonly>
-                    <mat-error>{{getErrorMessage('walletID')}}</mat-error>
-                  </mat-form-field>
-                </td>
-                <td>
-                  <button mat-icon-button color="primary" (click)="getList()">
-                    <span class="material-icons">view_list</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th nowrap="nowrap">授權合約ID：</th>
-                <td>
-                  <mat-form-field color="accent" class="form-id">
-                    <input matInput #input class="form-control" formControlName="authID">
-                    <mat-error>{{getErrorMessage('authID')}}</mat-error>
-                  </mat-form-field>
-                </td>
-                <th nowrap="nowrap">授權之作業名稱：</th>
-                <td>
-                  <mat-form-field color="accent">
-                    <input matInput #inputstate class="form-control" formControlName="operation">
-                    <mat-error>{{getErrorMessage('operation')}}</mat-error>
-                  </mat-form-field>
-                </td>
-              </tr>
+  <th class="f03_th">錢包扣款</th>
+  <block-ui>
+    <form [formGroup]="deductForm" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">授權合約ID：</th>
+              <td>
+                <mat-form-field color="accent" class="form-id">
+                  <input matInput #input class="form-control" formControlName="authID">
+                  <mat-error>{{getErrorMessage('authID')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <button mat-icon-button color="primary" (click)="getList()">
+                  <span class="material-icons">view_list</span>
+                </button>
+              </td>
+              <th nowrap="nowrap">授權之作業名稱：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="operation">
+                  <mat-error>{{getErrorMessage('operation')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
 
-              <tr>
-                <th nowrap="nowrap">交易付方ID：</th>
-                <td>
-                  <mat-form-field color="accent">
-                    <input matInput #inputstate class="form-control" formControlName="senderID">
-                    <mat-error>{{getErrorMessage('senderID')}}</mat-error>
-                  </mat-form-field>
-                </td>
-                <th nowrap="nowrap">交易收方ID：</th>
-                <td>
-                  <mat-form-field color="accent">
-                    <input matInput #inputstate class="form-control" formControlName="recipientID">
-                    <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
-                  </mat-form-field>
-                </td>
+            <tr>
+              <th nowrap="nowrap">交易付方ID：</th>
+              <td>
+                <mat-form-field color="accent" class="form-id">
+                  <input matInput #inputstate class="form-control" formControlName="senderID">
+                  <mat-error>{{getErrorMessage('senderID')}}</mat-error>
+                </mat-form-field>
+              </td>
             </tr>
             <tr>
-                <th nowrap="nowrap">交易金額：</th>
-                <td>
-                  <mat-form-field color="accent">
-                    <input matInput #inputstate class="form-control" formControlName="amount">
-                    <mat-error>{{getErrorMessage('amount')}}</mat-error>
-                  </mat-form-field>
-                </td>
-                <th nowrap="nowrap">(收方)銷帳編號：</th>
-                <td>
-                  <mat-form-field color="accent">
-                    <input matInput #inputstate class="form-control" formControlName="won">
-                    <mat-error>{{getErrorMessage('won')}}</mat-error>
-                  </mat-form-field>
-                </td>
-              </tr>
+              <th nowrap="nowrap">交易收方ID：</th>
+              <td>
+                <mat-form-field color="accent" class="form-id">
+                  <input matInput #inputstate class="form-control" formControlName="recipientID">
+                  <mat-error>{{getErrorMessage('recipientID')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
             <tr>
-                <th nowrap="nowrap">備註：</th>
-                <td>
-                  <mat-form-field color="accent">
-                    <input matInput #inputstate class="form-control" formControlName="remark">
-                    <mat-error>{{getErrorMessage('remark')}}</mat-error>
-                  </mat-form-field>
-                </td>
-              </tr>
-            </mat-card-content>
-          </mat-card>
-        </table>
-      </form>
-    </block-ui>
-  </div>
+              <th nowrap="nowrap">交易金額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="amount">
+                  <mat-error>{{getErrorMessage('amount')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">(收方)銷帳編號：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="won">
+                  <mat-error>{{getErrorMessage('won')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th nowrap="nowrap">備註：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="remark">
+                  <mat-error>{{getErrorMessage('remark')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>

@@ -22,7 +22,6 @@ export class F03007Component implements OnInit {
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
 
   deductForm: FormGroup = this.fb.group({
-    walletID: ['', [Validators.required, Validators.maxLength(23)]],
     authID: ['', [Validators.required, Validators.maxLength(30)]],
     operation: ['withdraw', [Validators.required, Validators.maxLength(30)]],
     senderID: ['', [Validators.required, Validators.maxLength(23)]],
@@ -30,8 +29,7 @@ export class F03007Component implements OnInit {
 
     amount: ['1', [Validators.required, Validators.maxLength(18)]],
     won: ['*', [Validators.required]],
-    remark: ['*', [Validators.required]],
-    walletType:[]
+    remark: ['*', [Validators.required]]
   });
   model: number = this.deductForm.value.amount;
   submitted = false;
@@ -98,8 +96,9 @@ export class F03007Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result != null && result.event == 'success') {
-          this.deductForm.patchValue({ walletID: result.value });
-          this.deductForm.patchValue({ walletType: result.valueWalletType });
+          this.deductForm.patchValue({ authID: result.value });
+          this.deductForm.patchValue({ senderID: result.senderID });
+          this.deductForm.patchValue({ recipientID: result.recipientID });
         }
       });
   }
