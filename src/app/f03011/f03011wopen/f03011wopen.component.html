@@ -1,1 +1,87 @@
-<p>f03011wopen works!</p>
+<div class="container">
+    <form [formGroup]="searchForm">
+      <table>
+        <tr>
+          <td>
+            <button mat-icon-button color="primary" (click)="getWalletId()">
+              <span class="material-icons">search</span>
+            </button>
+            <br>
+            <button mat-icon-button color="primary" (click)="cleanToEmpty()">
+              <span class="material-icons">clear_all</span>
+            </button>
+          </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>錢包類型</mat-label>
+              <mat-select formControlName="transType" (click)="cleanToEmpty()">
+                <mat-option *ngFor="let code of walletOption" [value]="code.value">
+                  {{code.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>建立日期</mat-label>
+              <mat-date-range-input [rangePicker]="rangePicker">
+                <input matStartDate placeholder="起" formControlName="startTime">
+                <input matEndDate placeholder="訖" formControlName="endTime">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                  <button mat-raised-button color="primary" matDateRangePickerApply (click)="setEndTimes()">確認</button>
+                  <button mat-button matDateRangePickerCancel>取消</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>錢包顯示名稱</mat-label>
+              <input matInput #input class="form-control" formControlName="dn">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <mat-paginator #paginator
+                 [length]="totalCount"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 15, 50, 100]"
+                 [showFirstLastButtons]="true">
+            </mat-paginator>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <hr>
+  <mat-dialog-content>
+    <mat-table [dataSource]="walletIdSource">
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="goBack(row.WALLETID, row.TXNID)">
+            <span class="material-icons">call_received</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="WALLETID">
+        <mat-header-cell *matHeaderCellDef>錢包ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="TXNID">
+        <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.TXNID }}</mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'TXNID' ]"></mat-header-row>
+      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'TXNID' ]"></mat-row>
+    </mat-table>
+  </mat-dialog-content>
+  
+  

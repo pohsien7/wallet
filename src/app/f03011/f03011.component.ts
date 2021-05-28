@@ -8,6 +8,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { F03011Service } from './f03011.service';
 import { F03011confirmComponent } from './f03011confirm/f03011confirm.component';
+import { F03011wopenComponent } from './f03011wopen/f03011wopen.component';
 
 interface COMB {
   value: string;
@@ -28,7 +29,8 @@ export class F03011Component implements OnInit {
   queryWalletLedgerForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.maxLength(25)]],
     queryTxnID: ['', []],
-    cvc: ['', [Validators.maxLength(4)]]
+    cvc: ['0901', [Validators.maxLength(4)]],
+    transType: []
   });
 
   resultForm: FormGroup = this.fb.group({
@@ -97,6 +99,7 @@ export class F03011Component implements OnInit {
           this.resultForm.patchValue({ txnTime : data.ledgerState.txnTime });
           this.resultForm.patchValue({ result : data.ledgerState.result });
           this.resultForm.patchValue({ paymentMethod : data.ledgerState.paymentMethod });
+          msg = data.statusMessage;
         } else {
           msg = data.statusMessage;
         }
@@ -108,10 +111,18 @@ export class F03011Component implements OnInit {
     }, 3000);
   }
 
-  setTimes() {
-    if (this.queryWalletLedgerForm.value.txntime_end == null) {
-      this.queryWalletLedgerForm.patchValue({txntime_end:this.queryWalletLedgerForm.value.txntime_start});
-    }
+  getList(id: string) {
+    const dialogRef = this.dialog.open(F03011wopenComponent, {
+      data: { walletID: this.queryWalletLedgerForm.value.walletid },
+      minHeight: '100vh'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null && result.event == 'success') {
+        this.queryWalletLedgerForm.patchValue({ walletID: result.value });
+        this.queryWalletLedgerForm.patchValue({ queryTxnID: result.txnID });
+        this.queryWalletLedgerForm.patchValue({ transType: result.valueTransType });
+      }
+    });
   }
 
   clear() {
