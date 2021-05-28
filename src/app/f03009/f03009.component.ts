@@ -9,7 +9,7 @@ import { F03009wopenComponent } from './f03009wopen/f03009wopen.component';
 @Component({
   selector: 'app-f03009',
   templateUrl: './f03009.component.html',
-  styleUrls: ['./f03009.component.css','../../assets/css/f02.css']
+  styleUrls: ['./f03009.component.css','../../assets/css/f03.css']
 })
 export class F03009Component implements OnInit {
 

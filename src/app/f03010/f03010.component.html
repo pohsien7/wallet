@@ -1,1 +1,131 @@
-<p>f03010 works!</p>
+<div class="container">
+  <th class="f03_th">透過日期範圍查詢自錢包帳本記錄列表</th>
+  <form [formGroup]="queryForm" style="padding-left: 20px;">
+    <div class="f04_div">
+      <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">查詢</button>
+      <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+    </div>
+    <table>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th nowrap="nowrap">錢包ID：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="walletID" readonly>
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="getList()">
+                <span class="material-icons">view_list</span>
+              </button>
+            </td>
+            <th nowrap="nowrap">券幣代號：</th>
+            <td>
+                <mat-form-field color="accent">
+                    <mat-select formControlName="cvc">
+                        <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+                            {{cvc.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">查詢日期：</th>
+            <td>
+              <mat-form-field color="accent" class="example-form-field">
+                <!--<mat-label>建立日期</mat-label>-->
+                <mat-date-range-input [rangePicker]="rangePicker">
+                  <input matStartDate formControlName="startTime" value="">
+                  <input matEndDate formControlName="endTime">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker>
+                  <mat-date-range-picker-actions>
+                    <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                    <button mat-button matDateRangePickerCancel>取消</button>
+                  </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+<br>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-table [dataSource]="ledgerStateListData">
+    <ng-container matColumnDef="txnID">
+      <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.txnID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="senderID">
+      <mat-header-cell *matHeaderCellDef>交易付方ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.senderID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="recipientID">
+      <mat-header-cell *matHeaderCellDef>交易收方ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.recipientID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="authorizedAgencyID">
+      <mat-header-cell *matHeaderCellDef>交易被授權中介機構ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.authorizedAgencyID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="recipientDN">
+      <mat-header-cell *matHeaderCellDef>交易收方顯示名稱</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.recipientDN }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cvc">
+      <mat-header-cell *matHeaderCellDef>請求訊息中指令物件之cvc</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.cvc }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>交易金額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.amount }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="balance">
+      <mat-header-cell *matHeaderCellDef>錢包餘額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.balance }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sn">
+      <mat-header-cell *matHeaderCellDef>交易序號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.sn }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="won">
+      <mat-header-cell *matHeaderCellDef>銷帳編號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.won }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="remark">
+      <mat-header-cell *matHeaderCellDef>交易備註</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.remark }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="txnTime">
+      <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.txnTime }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="result">
+      <mat-header-cell *matHeaderCellDef>移轉結果</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.result }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="paymentMethod">
+      <mat-header-cell *matHeaderCellDef>付款方式</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.paymentMethod }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="['txnID', 'senderID', 'recipientID', 'authorizedAgencyID', 'recipientDN', 'cvc', 'amount', 'balance', 'sn', 'won', 'remark', 'txnTime', 'result', 'paymentMethod']; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let ruleParmRow; columns: ['txnID', 'senderID', 'recipientID', 'authorizedAgencyID', 'recipientDN', 'cvc', 'amount', 'balance', 'sn', 'won', 'remark', 'txnTime', 'result', 'paymentMethod']"></mat-row>
+  </mat-table>
+  <tr>
+    <td>
+      <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</cdk-virtual-scroll-viewport>
+
