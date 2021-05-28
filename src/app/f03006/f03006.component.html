@@ -1,66 +1,68 @@
 <div class="container">
   <th class="f03_th">動態產製支付條碼</th>
-  <form [formGroup]="payableNumberForm" style="padding-left: 20px;">
-    <table>
-      <tr>
-        <th nowrap="nowrap">
-          <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
-          <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
-        </th>
-      </tr>
-      <br>
+  <block-ui>
+    <form [formGroup]="payableNumberForm" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th nowrap="nowrap">
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+            <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+          </th>
+        </tr>
+        <br>
 
-      <tr>
-        <th nowrap="nowrap">錢包ID：</th>
-        <td nowrap="nowrap">
-          <mat-form-field color="accent" class="form-id">
-            <input matInput #input class="form-control" formControlName="walletID" readonly>
-            <mat-error>{{getErrorMessage('walletID')}}</mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <button mat-icon-button color="primary" (click)="getList()">
-            <span class="material-icons">view_list</span>
-          </button>
-        </td>
-        <th nowrap="nowrap">券幣代號：</th>
-        <td>
-          <mat-form-field color="accent">
-            <mat-select formControlName="cvc">
-              <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
-                {{cvc.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </td>
-      </tr>
+        <tr>
+          <th nowrap="nowrap">錢包ID：</th>
+          <td nowrap="nowrap">
+            <mat-form-field color="accent" class="form-id">
+              <input matInput #input class="form-control" formControlName="walletID" readonly>
+              <mat-error>{{getErrorMessage('walletID')}}</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-icon-button color="primary" (click)="getList()">
+              <span class="material-icons">view_list</span>
+            </button>
+          </td>
+          <th nowrap="nowrap">券幣代號：</th>
+          <td>
+            <mat-form-field color="accent">
+              <mat-select formControlName="cvc">
+                <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+                  {{cvc.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
 
-      <tr>
-        <th nowrap="nowrap">交易金額：</th>
-        <td>
-          <mat-form-field color="accent">
-            <input matInput #input class="form-control" formControlName="amount">
-            <mat-error>{{getErrorMessage('amount')}}</mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-    </table>
-  </form>
-  <form [formGroup]="resultForm" style="padding-left: 20px;">
-    <table>
-      <mat-card class="matCard">
-        <mat-card-content>
-          <tr>
-            <th nowrap="nowrap">支付號碼：</th>
-            <td>
-              <img [src]="payableNumberImage" style="padding-top: 5%;">
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="payableNumber" readonly>
-              </mat-form-field>
-            </td>
-          </tr>
-        </mat-card-content>
-      </mat-card>
-    </table>
-  </form>
+        <tr>
+          <th nowrap="nowrap">交易金額：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" formControlName="amount">
+              <mat-error>{{getErrorMessage('amount')}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <form [formGroup]="resultForm" style="padding-left: 20px;">
+      <table>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">支付號碼：</th>
+              <td>
+                <img [src]="payableNumberImage" style="padding-top: 5%;">
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="payableNumber" readonly>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
 </div>

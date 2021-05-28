@@ -1,50 +1,51 @@
 <div class="container">
-    <th class="f02_th">升級匿名錢包為記名錢包</th>
-        <tr>
-            <th>
-                <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
-            </th>
-        </tr>
-        <br>
+  <th class="f02_th">升級匿名錢包為記名錢包</th>
+  <tr>
+    <th>
+      <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+    </th>
+  </tr>
+  <br>
+  <block-ui>
     <form [formGroup]="upgradeWalletForm" style="padding-left: 20px;">
       <table>
         <mat-card class="matCard">
           <mat-card-content>
             <tr>
-                <th nowrap="nowrap">欲查詢之匿名錢包ID：</th>
-                <td>
-                  <mat-form-field color="accent" class="form-id">
-                    <input matInput #input class="form-control" formControlName="queryWalletID" readonly>
-                    <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
-                  </mat-form-field>
-                </td>
-                <td>
-                    <button mat-icon-button color="primary" (click)="getList()">
-                      <span class="material-icons">view_list</span>
-                    </button>
-                </td>
-                <td>
-                    <!-- <mat-form-field > -->
-                        <input matInput #input class="form-control" formControlName="userId" hidden="true">
-                        <!-- <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error> -->
-                      <!-- </mat-form-field> -->
-                </td>
+              <th nowrap="nowrap">欲查詢之匿名錢包ID：</th>
+              <td>
+                <mat-form-field color="accent" class="form-id">
+                  <input matInput #input class="form-control" formControlName="queryWalletID" readonly>
+                  <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <button mat-icon-button color="primary" (click)="getList()">
+                  <span class="material-icons">view_list</span>
+                </button>
+              </td>
+              <td>
+                <!-- <mat-form-field > -->
+                <input matInput #input class="form-control" formControlName="userId" hidden="true">
+                <!-- <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error> -->
+                <!-- </mat-form-field> -->
+              </td>
             </tr>
             <tr>
-                <th>錢包顯示名稱：</th>
-                <td>
-                    <mat-form-field color="accent">
-                        <input matInput #input class="form-control" formControlName="dn" readonly>
-                        <mat-error>{{getErrorMessage('dn')}}</mat-error>
-                    </mat-form-field>
-                </td>
-                <th>姓名：</th>
-                <td>
-                    <mat-form-field color="accent">
-                    <input matInput #input class="form-control" formControlName="name">
-                    <mat-error>{{getErrorMessage('name')}}</mat-error>
-                    </mat-form-field>
-                </td>
+              <th>錢包顯示名稱：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="dn" readonly>
+                  <mat-error>{{getErrorMessage('dn')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th>姓名：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="name">
+                  <mat-error>{{getErrorMessage('name')}}</mat-error>
+                </mat-form-field>
+              </td>
             </tr>
 
             <tr>
@@ -60,7 +61,7 @@
                 <mat-form-field color="accent">
                   <mat-select formControlName="nation">
                     <mat-option *ngFor="let item of nation" [value]="item.CODE_NO">
-                      {{item.CODE_NO}}   {{item.CODE_DESC}}
+                      {{item.CODE_NO}} {{item.CODE_DESC}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -113,4 +114,5 @@
         </mat-card>
       </table>
     </form>
-  </div>
+  </block-ui>
+</div>
