@@ -30,6 +30,8 @@ export class F03010Component implements OnInit {
     cvc: ['0901', [Validators.required]],
     startTime: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     endTime: ['', [Validators.maxLength(10), Validators.minLength(10)]],
+    pageIndex: ['', [Validators.maxLength(3)]],
+    pageSize: ['', [Validators.maxLength(3)]],
     walletType: ['']
   });
 
@@ -84,29 +86,34 @@ export class F03010Component implements OnInit {
   async onSubmit() {
     let msg = '';
     this.submitted = true;
-    this.blockUI.start('Loading...');
     if(!this.queryForm.valid) {
       msg = '資料格式有誤，請修正!'
     } else {
+      //處理日期
       let jsonStr = JSON.stringify(this.queryForm.value);
       let jsonObj = JSON.parse(jsonStr);
       let startTime = new Date(this.queryForm.value.startTime);
       let endTime = new Date(this.queryForm.value.endTime);
       jsonObj.startTime = this.datePipe.transform(startTime,"yyyy-MM-dd");
       jsonObj.endTime = this.datePipe.transform(endTime,"yyyy-MM-dd");
+      //處理分頁
+      let pgIndex = `${this.currentPage.pageIndex + 1}`;
+      let pgSize = `${this.currentPage.pageSize}`;
+      jsonObj.pageIndex = pgIndex;
+      jsonObj.pageSize = pgSize;
+
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
       await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
         msg = data.statusMessage;
-        if ( data.ledgerStateList.length == 0 || data.ledgerStateList.length == null ) {
+        if ( data.ledgerStateList.length == 0 ) {
           this.clear();
-          return this.dialog.open(F03010confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
+          return this.dialog.open(F03010confirmComponent, { data: { msgStr: '未查詢到相關紀錄，請填寫正確查詢資料!' } });
+        } else {
+          console.log(data.ledgerStateList.length);
+          this.totalCount = data.ledgerStateList.length;
+          this.ledgerStateListData.data = data.ledgerStateList;
         }
-        console.log(data.ledgerStateList.length);
-        this.totalCount = data.ledgerStateList.length;
-        this.ledgerStateListData.data = data.ledgerStateList;
-        this.currentPage.pageSize = 5;
-        this.currentPage.pageIndex = 0;
       });
     }
   }
