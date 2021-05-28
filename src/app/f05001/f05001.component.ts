@@ -7,6 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { F05001Service } from './f05001.service';
 import { F05001confirmComponent } from './f05001confirm/f05001confirm.component';
+import { F05001wopenComponent } from './f05001wopen/f05001wopen.component';
 
 @Component({
   selector: 'app-f05001',
@@ -113,6 +114,19 @@ export class F05001Component implements OnInit {
     if (this.myWalletTransferForm.value.txntime_end == null) {
       this.myWalletTransferForm.patchValue({txntime_end:this.myWalletTransferForm.value.txntime_start});
     }
+  }
+
+  getList() {
+    const dialogRef = this.dialog.open(F05001wopenComponent, {
+      data: { walletID: this.myWalletTransferForm.value.walletid },
+      minHeight: '100vh'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null && result.event == 'success') {
+        this.myWalletTransferForm.patchValue({ walletID: result.value });
+        this.myWalletTransferForm.patchValue({ recipientID: result.recipientID });
+      }
+    });
   }
 
   clear() {
