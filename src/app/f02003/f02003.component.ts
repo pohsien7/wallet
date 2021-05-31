@@ -21,6 +21,10 @@ interface COMB {
 })
 export class F02003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
+
+  nationCode: COMB[] = [{ value: 'TWN', viewValue: 'Taiwan' }, { value: 'JAN', viewValue: 'Japan' }, { value: 'USA', viewValue: 'USA' }];
+  genderCode: COMB[] = [{ value: 'M', viewValue: '男' }, { value: 'F', viewValue: '女' }];
+
   disabled : string = "true";
   walletId : string;
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
@@ -43,8 +47,8 @@ export class F02003Component implements OnInit {
   constructor(private fb: FormBuilder, public f02003Service: F02003Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getNation();
-    this.getGender();
+    //this.getNation();
+    //this.getGender();
   }
 
   formControl = new FormControl('', [
