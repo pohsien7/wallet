@@ -41,7 +41,9 @@ export class F02004Component implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(30),
         Validators.pattern('^[0-9]+$')
-      ])
+      ]),
+      balanceLimit: ['10000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+      keyTxnLimit: ['3000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]]
     });
   }
 
@@ -64,6 +66,8 @@ export class F02004Component implements OnInit {
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
       msg = '資料格式有誤，請修正!';
+    } else if ( parseInt(this.registrationForm.value.balanceLimit) <= parseInt(this.registrationForm.value.keyTxnLimit) ) {
+      msg = '交易限額不可大於或等於餘額限額'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));

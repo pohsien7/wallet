@@ -54,7 +54,7 @@ export class F02001Component implements OnInit {
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
       msg = '資料格式有誤，請修正!'
-    } else if ( parseInt(this.registrationForm.value.balanceLimit) < parseInt(this.registrationForm.value.certTxnLimit) ) {
+    } else if ( parseInt(this.registrationForm.value.balanceLimit) <= parseInt(this.registrationForm.value.certTxnLimit) ) {
       msg = '交易限額不可大於或等於餘額限額'
     } else {
       const formdata: FormData = new FormData();
