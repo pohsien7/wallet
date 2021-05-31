@@ -28,14 +28,19 @@ export class F03010Component implements OnInit {
   queryForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
-    startTime: ['', [Validators.maxLength(10), Validators.minLength(10)]],
-    endTime: ['', [Validators.maxLength(10), Validators.minLength(10)]],
+    startTime: ['', [Validators.required,Validators.maxLength(10), Validators.minLength(10)]],
+    endTime: ['', [Validators.required,Validators.maxLength(10), Validators.minLength(10)]],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]],
     walletType: ['']
   });
 
   ngOnInit(): void {
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 5,
+      length: 5
+    };
   }
 
   formControl = new FormControl('', [
@@ -133,10 +138,17 @@ export class F03010Component implements OnInit {
   }
 
   clear() {
-    // this.registrationForm.reset();
-    // this.registrationForm.setValue({
     this.queryForm.patchValue({
       walletID:'', startTime:'', endTime:'', walletType:''
     });
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 10,
+      length: null,
+    };
+    this.totalCount = 0;
+    this.paginator.firstPage();
+    this.ledgerStateListData.data = null;
+    this.paginator._changePageSize(5);
   }
 }
