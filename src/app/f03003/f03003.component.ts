@@ -18,7 +18,7 @@ export class F03003Component implements OnInit {
     operation:['withdraw',[Validators.required ,Validators.maxLength(30)]],
     walletID:['',[Validators.required, Validators.maxLength(23)]],
     recipientID:['',[Validators.required, Validators.maxLength(23)]],
-    remark:['',[Validators.required, Validators.maxLength(30)]],
+    remark:['',[Validators.maxLength(30)]],
     walletType:['']
   });
 
