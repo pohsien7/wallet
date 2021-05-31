@@ -81,7 +81,7 @@
       </ng-container>
       <ng-container matColumnDef="TXNTIME">
         <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.txntime | date: 'short' }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.txntime | date: 'medium' }}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="['WALLETID', 'STXNID', 'CVC', 'REMARK', 'TXNID', 'RESULT', 'TXNTIME']; sticky: true"></mat-header-row>
