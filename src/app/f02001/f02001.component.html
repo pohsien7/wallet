@@ -66,14 +66,14 @@
             </tr>
 
             <tr>
-              <th>錢包餘額限額：</th>
+              <th>錢包餘額限額 (單位：元)：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #inputstate class="form-control" formControlName="balanceLimit">
                   <mat-error>{{getErrorMessage('balanceLimit')}}</mat-error>
                 </mat-form-field>
               </td>
-              <th nowrap="nowrap">使用憑證之單筆交易限額：</th>
+              <th nowrap="nowrap">使用憑證之單筆交易限額 (單位：元)：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #inputstate class="form-control" formControlName="certTxnLimit">
