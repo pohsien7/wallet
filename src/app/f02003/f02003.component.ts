@@ -36,7 +36,7 @@ export class F02003Component implements OnInit {
     gender: ['', [Validators.required]],
     birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
-    address: ['', [Validators.required, Validators.maxLength(128)]]
+    address: ['', [Validators.required, Validators.maxLength(128)]],
   });
 
   gender: string;
@@ -106,7 +106,7 @@ export class F02003Component implements OnInit {
 
   getAuthorize() {
     console.log(this.walletId);
-    this.dialog.open(F03003Component,{ data: { walletId : this.walletId }});
+    this.dialog.open(F03003Component,{ data: { walletId : this.walletId , walletType: 'NPWALLET_PUBKEY' }});
   }
 
 }

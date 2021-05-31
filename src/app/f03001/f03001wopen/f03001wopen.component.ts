@@ -28,7 +28,7 @@ export class F03001wopenComponent implements OnInit {
 
   walletOption: sysCode[] = [{value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
   {value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
-  {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (法人，公鑰)'},
+  {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (自然人，公鑰)'},
   {value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'}];
   constructor(public dialogRef: MatDialogRef<F03001wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03001Service: F03001Service, public dialog: MatDialog) { }
 

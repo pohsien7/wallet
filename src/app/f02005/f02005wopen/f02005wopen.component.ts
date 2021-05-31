@@ -30,7 +30,7 @@ export class F02005wopenComponent implements OnInit, AfterViewInit {
 
   walletOption: sysCode[] = [{value: 'f02001', viewValue: '記名錢包 (法人，憑證)'},
                              {value: 'f02002', viewValue: '記名錢包 (自然人，憑證)'},
-                             {value: 'f02003', viewValue: '記名錢包 (法人，公鑰)'},
+                             {value: 'f02003', viewValue: '記名錢包 (自然人，公鑰)'},
                              {value: 'f02004', viewValue: '匿名錢包'},
                              {value: 'f02007', viewValue: '中介機構錢包'}];
 

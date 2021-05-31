@@ -29,7 +29,7 @@ export class F02002Component implements OnInit {
     dn: ['', [Validators.maxLength(30)]],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-    nation: ['', [Validators.required, Validators.maxLength(3)]],
+    nation: ['TWN', [Validators.required, Validators.maxLength(3)]],
     gender: ['', [Validators.required, Validators.maxLength(1)]],
     birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],

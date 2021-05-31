@@ -30,7 +30,7 @@ export class F03008wopenComponent implements OnInit {
 
   walletOption: sysCode[] = [{value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
                              {value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
-                             {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (法人，公鑰)'},
+                             {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (自然人，公鑰)'},
                              {value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'},
                              {value: 'INTERMEDIARIES_WALLET', viewValue: '中介機構錢包'}];
 

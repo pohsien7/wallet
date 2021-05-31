@@ -28,6 +28,7 @@ export class F03003Component implements OnInit {
 
   ngOnInit(): void {
     this.authorizaionForm.patchValue({walletID : this.data.walletId});
+    this.authorizaionForm.patchValue({walletType: this.data.walletType});
   }
 
   formControl = new FormControl('', [

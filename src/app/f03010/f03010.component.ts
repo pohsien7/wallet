@@ -17,7 +17,7 @@ interface COMB {
 @Component({
   selector: 'app-f03010',
   templateUrl: './f03010.component.html',
-  styleUrls: ['./f03010.component.css','../../assets/css/f03.css']
+  styleUrls: ['./f03010.component.css', '../../assets/css/f03.css']
 })
 export class F03010Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
@@ -28,8 +28,8 @@ export class F03010Component implements OnInit {
   queryForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
-    startTime: ['', [Validators.required,Validators.maxLength(10), Validators.minLength(10)]],
-    endTime: ['', [Validators.required,Validators.maxLength(10), Validators.minLength(10)]],
+    startTime: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+    endTime: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]],
     walletType: ['']
@@ -72,49 +72,57 @@ export class F03010Component implements OnInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      if(!this.isFieldEmpty()) { this.onSubmit(); }
+      this.getViewDataList();
     });
 
   }
-
-  isFieldEmpty() {
-    if(this.queryForm.value.walletID == '' && this.queryForm.value.cvc == ''
-      && this.queryForm.value.startTime =='' && this.queryForm.value.endTime ==''
-    ) {
-      return true;
-    }
-  }
-
-
   submitted = false;
 
   async onSubmit() {
-    let msg = '';
     this.submitted = true;
-    if(!this.queryForm.valid) {
-      msg = '資料格式有誤，請修正!'
-    } else {
-      //處理日期
-      let jsonStr = JSON.stringify(this.queryForm.value);
-      let jsonObj = JSON.parse(jsonStr);
-      let startTime = new Date(this.queryForm.value.startTime);
-      let endTime = new Date(this.queryForm.value.endTime);
-      jsonObj.startTime = this.datePipe.transform(startTime,"yyyy-MM-dd");
-      jsonObj.endTime = this.datePipe.transform(endTime,"yyyy-MM-dd");
-      //處理分頁
-      let pgIndex = `${this.currentPage.pageIndex + 1}`;
-      let pgSize = `${this.currentPage.pageSize}`;
-      jsonObj.pageIndex = pgIndex;
-      jsonObj.pageSize = pgSize;
+    this.currentPage = {
+      pageIndex: 0,
+      pageSize: 5,
+      length: null
+    };
+    this.paginator.firstPage();
+    this.getViewDataList();
+  }
 
-      const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(jsonObj));
-      await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
-        msg = data.statusMessage;
-        console.log(data);
-        this.ledgerStateListData = data.listIndex;
-        this.totalCount = data.length;
-      });
+  async getViewDataList() {
+    if (this.queryForm.value.dn == '' && this.queryForm.value.name == '' &&
+      this.queryForm.value.createdate_start == '' && this.queryForm.value.createdate_end == '' &&
+      this.queryForm.value.ban == '' && this.queryForm.value.owner == ''
+    ) {
+
+    } else {
+      let msg = '';
+      this.submitted = true;
+      if (!this.queryForm.valid) {
+        msg = '資料格式有誤，請修正!'
+      } else {
+        //處理日期
+        let jsonStr = JSON.stringify(this.queryForm.value);
+        let jsonObj = JSON.parse(jsonStr);
+        let startTime = new Date(this.queryForm.value.startTime);
+        let endTime = new Date(this.queryForm.value.endTime);
+        jsonObj.startTime = this.datePipe.transform(startTime, "yyyy-MM-dd");
+        jsonObj.endTime = this.datePipe.transform(endTime, "yyyy-MM-dd");
+        //處理分頁
+        let pgIndex = `${this.currentPage.pageIndex + 1}`;
+        let pgSize = `${this.currentPage.pageSize}`;
+        jsonObj.pageIndex = pgIndex;
+        jsonObj.pageSize = pgSize;
+
+        const formdata: FormData = new FormData();
+        formdata.append('value', JSON.stringify(jsonObj));
+        await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
+          msg = data.statusMessage;
+          console.log(data);
+          this.ledgerStateListData = data.listIndex;
+          this.totalCount = data.length;
+        });
+      }
     }
   }
 
@@ -125,21 +133,21 @@ export class F03010Component implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
-        this.queryForm.patchValue({ walletID : result.value });
-        this.queryForm.patchValue({ walletType : result.walletType });
+        this.queryForm.patchValue({ walletID: result.value });
+        this.queryForm.patchValue({ walletType: result.walletType });
       }
     });
   }
 
   setTimes() {
     if (this.queryForm.value.endTime == null) {
-      this.queryForm.patchValue({endTime:this.queryForm.value.startTime});
+      this.queryForm.patchValue({ endTime: this.queryForm.value.startTime });
     }
   }
 
   clear() {
     this.queryForm.patchValue({
-      walletID:'', startTime:'', endTime:'', walletType:''
+      walletID: '', startTime: '', endTime: '', walletType: ''
     });
     this.currentPage = {
       pageIndex: 0,

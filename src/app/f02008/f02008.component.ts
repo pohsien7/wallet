@@ -6,6 +6,10 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { F02008Service } from './f02008.service';
 import { F02008confirmComponent } from './f02008confirm/f02008confirm.component';
 import { F02008wopenComponent } from './f02008wopen/f02008wopen.component';
+interface COMB {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-f02008',
@@ -15,6 +19,9 @@ import { F02008wopenComponent } from './f02008wopen/f02008wopen.component';
 export class F02008Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
+
+  nationCode: COMB[] = [{ value: 'TWN', viewValue: 'Taiwan' }, { value: 'JAN', viewValue: 'Japan' }, { value: 'USA', viewValue: 'USA' }];
+  genderCode: COMB[] = [{ value: 'M', viewValue: '男' }, { value: 'F', viewValue: '女' }];
 
   upgradeWalletForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
@@ -35,8 +42,8 @@ export class F02008Component implements OnInit {
   constructor(private fb: FormBuilder, public f02008Service: F02008Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getNation();
-    this.getGender();
+    //this.getNation();
+    //this.getGender();
   }
 
   formControl = new FormControl('', [
