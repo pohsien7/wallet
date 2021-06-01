@@ -2,13 +2,11 @@
   <th class="f01_th">交易ID查詢自總庫帳本記錄</th>
   <block-ui>
     <form [formGroup]="queryVaultLedgerForm" style="padding-left: 20px;">
+      <div class="f01_div">
+        <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+        <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+      </div>
       <table>
-        <tr>
-          <th>
-            <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
-            <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
-          </th>
-        </tr>
         <br>
         <tr>
           <th nowrap="nowrap">中介機構總庫ID：</th>

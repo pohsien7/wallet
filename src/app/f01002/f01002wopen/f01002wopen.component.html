@@ -65,23 +65,22 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" (click)="goBack(row.WALLETID, row.TXNID)">
+          <button mat-icon-button color="primary" (click)="goBack(row.RECIPIENTID, row.TXNID)">
             <span class="material-icons">call_received</span>
           </button>
         </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="WALLETID">
+      <ng-container matColumnDef="RECIPIENTID">
         <mat-header-cell *matHeaderCellDef>錢包ID</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.RECIPIENTID }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="TXNID">
         <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.TXNID }}</mat-cell>
       </ng-container>
-      
-      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'TXNID' ]"></mat-header-row>
-      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'TXNID' ]"></mat-row>
+
+      <mat-header-row *matHeaderRowDef="['actions', 'RECIPIENTID', 'TXNID' ]"></mat-header-row>
+      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'RECIPIENTID', 'TXNID' ]"></mat-row>
     </mat-table>
   </mat-dialog-content>
-  
-  
+
