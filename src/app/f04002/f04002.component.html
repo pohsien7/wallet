@@ -116,11 +116,19 @@
         <mat-header-cell *matHeaderCellDef>用戶錢包帳號</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="BALANCELIMIT">
+        <mat-header-cell *matHeaderCellDef>錢包餘額限額</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.BALANCELIMIT }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="CERTTXNLIMIT">
+        <mat-header-cell *matHeaderCellDef>使用憑證之單筆交易限額</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.CERTTXNLIMIT }}</mat-cell>
+      </ng-container>
       <mat-header-row
-        *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']; sticky: true">
+        *matHeaderRowDef="['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'BALANCELIMIT', 'CERTTXNLIMIT']; sticky: true">
       </mat-header-row>
       <mat-row
-        *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID']">
+        *matRowDef="let ruleParmRow; columns: ['DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'BALANCELIMIT', 'CERTTXNLIMIT']">
       </mat-row>
     </mat-table>
   </mat-dialog-content>

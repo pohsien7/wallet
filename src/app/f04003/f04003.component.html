@@ -136,11 +136,19 @@
       <mat-header-cell *matHeaderCellDef>商家名稱</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.SHOPNAME }}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="BALANCELIMIT">
+      <mat-header-cell *matHeaderCellDef>錢包餘額限額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.BALANCELIMIT }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="KEYTXNLIMIT">
+      <mat-header-cell *matHeaderCellDef>公私鑰單筆交易限額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.KEYTXNLIMIT }}</mat-cell>
+    </ng-container>
     <mat-header-row
-      *matHeaderRowDef="['SETTING', 'DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'SHOPFLAG', 'SHOPID', 'SHOPNAME']; sticky: true">
+      *matHeaderRowDef="['SETTING', 'DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'SHOPFLAG', 'SHOPID', 'SHOPNAME', 'BALANCELIMIT', 'KEYTXNLIMIT']; sticky: true">
     </mat-header-row>
     <mat-row
-      *matRowDef="let ruleParmRow; columns: ['SETTING', 'DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'SHOPFLAG', 'SHOPID', 'SHOPNAME']">
+      *matRowDef="let ruleParmRow; columns: ['SETTING', 'DN', 'NAME', 'IDNUMBER', 'NATION', 'GENDER', 'BIRTHDAT', 'ADDRESS', 'PHONENUMBER', 'CREATEDATE', 'WALLETID', 'USERID', 'SHOPFLAG', 'SHOPID', 'SHOPNAME', 'BALANCELIMIT', 'KEYTXNLIMIT']">
     </mat-row>
   </mat-table>
   <tr>
