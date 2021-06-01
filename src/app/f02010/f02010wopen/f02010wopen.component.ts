@@ -27,10 +27,11 @@ export class F02010wopenComponent implements OnInit, AfterViewInit {
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'f02001', viewValue: '記名錢包 (法人，憑證)'},
-                             {value: 'f02002', viewValue: '記名錢包 (自然人，憑證)'},
-                             {value: 'f02003', viewValue: '記名錢包 (自然人，公鑰)'},
-                             {value: 'f02004', viewValue: '匿名錢包'}];
+  walletOption: sysCode[] = [
+                             //{value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
+                             //{value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
+                             {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (自然人，公鑰)'}];
+                             //{value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'}];
 
   constructor(public dialogRef: MatDialogRef<F02010wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02010Service: F02010Service) { }
 
