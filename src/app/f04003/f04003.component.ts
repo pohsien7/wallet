@@ -142,10 +142,13 @@ export class F04003Component implements OnInit, AfterViewInit {
   }
 
   getSetShop(id: string){
-    let dialogRef = this.dialog.open(F04003shopComponent, {
+    const dialogRef = this.dialog.open(F04003shopComponent, {
       data:{
         walletId: id
       }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.clear();
     });
   }
 
@@ -156,6 +159,10 @@ export class F04003Component implements OnInit, AfterViewInit {
     // await this.f04003Service.sendConsumer('consumer/f04003RemoveShop', formdata).then((data) => {
     //   this.dialog.open(F04003confirmComponent, { data: { msgStr: data.result } });
     // });
-    this.dialog.open(F04003confirmComponent, { data: { msgStr: "check", wallet: id} });
+    const dialogRef = this.dialog.open(F04003confirmComponent, { data: { msgStr: "check", wallet: id} });
+    dialogRef.afterClosed().subscribe(result => {
+      this.clear();
+    });
+
   }
 }
