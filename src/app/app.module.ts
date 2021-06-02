@@ -282,7 +282,6 @@ export const TW_FORMATS = {
     F02011confirmComponent,
     F03012Component,
     F03012confirmComponent,
-    F03012wopneComponent,
     F03012wopenComponent,
     F02012Component,
     F02012confirmComponent,
