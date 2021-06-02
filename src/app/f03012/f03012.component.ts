@@ -13,7 +13,7 @@ interface COMB {
 @Component({
   selector: 'app-f03012',
   templateUrl: './f03012.component.html',
-  styleUrls: ['./f03012.component.css', '../../assets/css/f03.css']
+  styleUrls: ['./f03012.component.css','../../assets/css/f03.css']
 })
 export class F03012Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
