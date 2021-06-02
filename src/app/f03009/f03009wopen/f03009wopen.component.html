@@ -38,12 +38,6 @@
               </mat-date-range-picker>
             </mat-form-field>
           </td>
-          <td>
-            <mat-form-field appearance="fill">
-              <mat-label>錢包顯示名稱</mat-label>
-              <input matInput #input class="form-control" formControlName="dn">
-            </mat-form-field>
-          </td>
         </tr>
         <tr>
           <td colspan="4">
@@ -74,16 +68,11 @@
         <mat-header-cell *matHeaderCellDef>錢包ID</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="DN">
-        <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
-      </ng-container>
       <ng-container matColumnDef="CREATEDATE">
         <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
       </ng-container>
-      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'DN', 'CREATEDATE' ]"></mat-header-row>
-      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'DN', 'CREATEDATE' ]"></mat-row>
+      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'CREATEDATE' ]"></mat-header-row>
+      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'CREATEDATE' ]"></mat-row>
     </mat-table>
   </mat-dialog-content>
-  

@@ -21,15 +21,11 @@ export class F03009wopenComponent implements OnInit {
     walletType: ['', [Validators.required]],
     startTime: ['', [ ]],
     endTime: ['', [ ]],
-    dn: ['', [ ]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
-                             {value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
-                             {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (自然人，公鑰)'},
-                             {value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'}];
+  walletOption: sysCode[] = [{value: 'WALLET_CV', viewValue: 'WALLET_CV'}];
   constructor(public dialogRef: MatDialogRef<F03009wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03009Service: F03009Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {

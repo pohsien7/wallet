@@ -27,7 +27,9 @@ export class F02011wopenComponent implements OnInit, AfterViewInit {
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'f02004', viewValue: '匿名錢包'}];
+  walletOption: sysCode[] = [{value: 'J', viewValue: '記名錢包 (法人，憑證)'},
+                             {value: 'N', viewValue: '記名錢包 (自然人，憑證)'},
+                             {value: 'P', viewValue: '記名錢包 (自然人，公鑰)'}];
 
   constructor(public dialogRef: MatDialogRef<F02011wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02005Service: F02011Service) { }
 
@@ -113,6 +115,6 @@ export class F02011wopenComponent implements OnInit, AfterViewInit {
   }
 
   goBack(walletId: string, dn: string, userId: string) {
-    this.dialogRef.close({ event:'success', value: walletId, name: dn, userId: userId });
+    this.dialogRef.close({ event:'success', value: walletId, name: dn, userId: userId, walletType: this.searchForm.value.walletType });
   }
 }
