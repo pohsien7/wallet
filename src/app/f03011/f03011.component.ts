@@ -17,7 +17,7 @@ interface COMB {
 @Component({
   selector: 'app-f03011',
   templateUrl: './f03011.component.html',
-  styleUrls: ['./f03011.component.css', '../../assets/css/f04.css']
+  styleUrls: ['./f03011.component.css', '../../assets/css/f03.css']
 })
 export class F03011Component implements OnInit {
 
