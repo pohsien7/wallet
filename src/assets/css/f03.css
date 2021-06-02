@@ -14,3 +14,15 @@ mat-card-content{
 button{
   margin-right: 5px;
 }
+
+.f03_div{
+  padding-left: 20px;
+}
+
+th{
+  font-size: 15px;
+}
+
+mat-form-field{
+  width: 90%;
+}
