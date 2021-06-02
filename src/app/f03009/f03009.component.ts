@@ -17,7 +17,7 @@ export class F03009Component implements OnInit {
 
   registrationForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
-    cvc: ['0901', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
+    cvc: ['R001', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
     walletType:[]
   });
 
