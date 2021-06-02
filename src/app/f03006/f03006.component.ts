@@ -25,8 +25,8 @@ export class F03006Component implements OnInit {
 
   payableNumberForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required, Validators.maxLength(23)]],
-    cvc: ['', [Validators.required, Validators.maxLength(4)]],
-    amount: ['', [Validators.required, Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    cvc: ['0901', [Validators.required, Validators.maxLength(4)]],
+    amount: ['1', [Validators.required, Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     walletType: []
   });
 

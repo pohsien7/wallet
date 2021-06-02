@@ -138,6 +138,14 @@ import { F02011wopenComponent } from './f02011/f02011wopen/f02011wopen.component
 import { F02011confirmComponent } from './f02011/f02011confirm/f02011confirm.component';
 import { F03012Component } from './f03012/f03012.component';
 import { F03012confirmComponent } from './f03012/f03012confirm/f03012confirm.component';
+import { F03012wopneComponent } from './f03012/f03012wopne/f03012wopne.component';
+import { F03012wopenComponent } from './f03012/f03012wopen/f03012wopen.component';
+import { F02012Component } from './f02012/f02012.component';
+import { F02012confirmComponent } from './f02012/f02012confirm/f02012confirm.component';
+import { F02012wopenComponent } from './f02012/f02012wopen/f02012wopen.component';
+import { F03013Component } from './f03013/f03013.component';
+import { F03013wopenComponent } from './f03013/f03013wopen/f03013wopen.component';
+import { F03013confirmComponent } from './f03013/f03013confirm/f03013confirm.component';
 
 
 
@@ -274,7 +282,15 @@ export const TW_FORMATS = {
     F02011wopenComponent,
     F02011confirmComponent,
     F03012Component,
-    F03012confirmComponent
+    F03012confirmComponent,
+    F03012wopneComponent,
+    F03012wopenComponent,
+    F02012Component,
+    F02012confirmComponent,
+    F02012wopenComponent,
+    F03013Component,
+    F03013wopenComponent,
+    F03013confirmComponent
   ],
   imports: [
     BrowserModule,
