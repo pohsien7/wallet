@@ -59,14 +59,14 @@ export class F03009Component implements OnInit {
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f03009Service.sendConsumer('consumer/f03009', formdata).then((data) => {
         if (data.statusCode == "0000") {
-          this.resultForm.patchValue({ balance : data.ledgerState.balance });
-          this.resultForm.patchValue({ totalCount : data.ledgerState.totalCount });
-          this.resultForm.patchValue({ canBeDistributed : data.ledgerState.canBeDistributed });
-          this.resultForm.patchValue({ canUse : data.ledgerState.canUse });
-          this.resultForm.patchValue({ canAccept : data.ledgerState.canAccept });
-          this.resultForm.patchValue({ canRedeem : data.ledgerState.canRedeem });
-          this.resultForm.patchValue({ lastModified : data.ledgerState.lastModified });
-          this.resultForm.patchValue({ recipientBalance : data.ledgerState.recipientBalance });
+          this.resultForm.patchValue({ balance : data.walletCVInfo.balance });
+          this.resultForm.patchValue({ totalCount : data.walletCVInfo.totalCount });
+          this.resultForm.patchValue({ canBeDistributed : data.walletCVInfo.canBeDistributed });
+          this.resultForm.patchValue({ canUse : data.walletCVInfo.canUse });
+          this.resultForm.patchValue({ canAccept : data.walletCVInfo.canAccept });
+          this.resultForm.patchValue({ canRedeem : data.walletCVInfo.canRedeem });
+          this.resultForm.patchValue({ lastModified : data.walletCVInfo.lastModified });
+          this.resultForm.patchValue({ recipientBalance : data.walletCVInfo.recipientBalance });
           msg = data.statusMessage;
         } else {
           msg = data.statusMessage;
