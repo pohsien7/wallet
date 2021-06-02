@@ -117,10 +117,13 @@ export class F03010Component implements OnInit {
         const formdata: FormData = new FormData();
         formdata.append('value', JSON.stringify(jsonObj));
         await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
-          msg = data.statusMessage;
           console.log(data);
-          this.ledgerStateListData = data.listIndex;
-          this.totalCount = data.length;
+          if ( data.listIndex == "error") {
+            this.dialog.open(F03010confirmComponent, { data: {msgStr: "查無紀錄"} })
+          } else {
+            this.ledgerStateListData = data.listIndex;
+            this.totalCount = data.length;
+          }
         });
       }
     }
