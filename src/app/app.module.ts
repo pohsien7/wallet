@@ -138,7 +138,6 @@ import { F02011wopenComponent } from './f02011/f02011wopen/f02011wopen.component
 import { F02011confirmComponent } from './f02011/f02011confirm/f02011confirm.component';
 import { F03012Component } from './f03012/f03012.component';
 import { F03012confirmComponent } from './f03012/f03012confirm/f03012confirm.component';
-import { F03012wopneComponent } from './f03012/f03012wopne/f03012wopne.component';
 import { F03012wopenComponent } from './f03012/f03012wopen/f03012wopen.component';
 import { F02012Component } from './f02012/f02012.component';
 import { F02012confirmComponent } from './f02012/f02012confirm/f02012confirm.component';
