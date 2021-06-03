@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -28,8 +29,8 @@ export class F03010Component implements OnInit {
   queryForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
-    startTime: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-    endTime: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+    startTime: [''],
+    endTime: [''],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]],
     walletType: ['']
@@ -102,29 +103,39 @@ export class F03010Component implements OnInit {
         msg = '資料格式有誤，請修正!'
       } else {
         //處理日期
-        let jsonStr = JSON.stringify(this.queryForm.value);
-        let jsonObj = JSON.parse(jsonStr);
-        let startTime = new Date(this.queryForm.value.startTime);
-        let endTime = new Date(this.queryForm.value.endTime);
-        jsonObj.startTime = this.datePipe.transform(startTime, "yyyy-MM-dd");
-        jsonObj.endTime = this.datePipe.transform(endTime, "yyyy-MM-dd");
-        //處理分頁
-        let pgIndex = `${this.currentPage.pageIndex + 1}`;
-        let pgSize = `${this.currentPage.pageSize}`;
-        jsonObj.pageIndex = pgIndex;
-        jsonObj.pageSize = pgSize;
+        if ( this.dateControlEnd.value-this.dateControlStart.value < 0 ) {
+          msg = '開始日期不能大於結束日期';
+          this.dialog.open(F03010confirmComponent, { data: {msgStr: msg} })
+        } else if ( this.dateControlMinMax.value - this.dateControlEnd.value < 0 || this.dateControlMinMax.value - this.dateControlStart.value < 0){
+          msg = '日期不能超過現在時間';
+          this.dialog.open(F03010confirmComponent, { data: {msgStr: msg} })
+        } else {
+          let jsonStr = JSON.stringify(this.queryForm.value);
+          let jsonObj = JSON.parse(jsonStr);
+          //let startTime = new Date(this.queryForm.value.startTime);
+          //let endTime = new Date(this.queryForm.value.endTime);
+          let startTime = new Date(this.dateControlStart.value);
+          let endTime = new Date(this.dateControlEnd.value);
+          jsonObj.startTime = this.datePipe.transform(startTime, "yyyy-MM-dd HH:mm");
+          jsonObj.endTime = this.datePipe.transform(endTime, "yyyy-MM-dd HH:mm");
+          //處理分頁
+          let pgIndex = `${this.currentPage.pageIndex + 1}`;
+          let pgSize = `${this.currentPage.pageSize}`;
+          jsonObj.pageIndex = pgIndex;
+          jsonObj.pageSize = pgSize;
 
-        const formdata: FormData = new FormData();
-        formdata.append('value', JSON.stringify(jsonObj));
-        await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
-          console.log(data);
-          if ( data.listIndex == "error") {
-            this.dialog.open(F03010confirmComponent, { data: {msgStr: "查無紀錄"} })
-          } else {
-            this.ledgerStateListData = data.listIndex;
-            this.totalCount = data.length;
-          }
-        });
+          const formdata: FormData = new FormData();
+          formdata.append('value', JSON.stringify(jsonObj));
+          await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
+            console.log(data);
+            if ( data.listIndex == "error") {
+              this.dialog.open(F03010confirmComponent, { data: {msgStr: "查無紀錄"} })
+            } else {
+              this.ledgerStateListData = data.listIndex;
+              this.totalCount = data.length;
+            }
+          });
+        }
       }
     }
   }
@@ -161,5 +172,21 @@ export class F03010Component implements OnInit {
     this.paginator.firstPage();
     this.ledgerStateListData.data = null;
     this.paginator._changePageSize(5);
+
   }
+
+  //time test
+  public dateControlStart = new FormControl(new Date());
+  public dateControlEnd = new FormControl(new Date());
+  public dateControlMinMax = new FormControl(new Date());
+  public minDate: moment.Moment;
+  public maxDate: moment.Moment;
+  public disabled = false;
+  public showSpinners = true;
+  public showSeconds = false;
+  public stepHour = 1;
+  public stepMinute = 1;
+  public stepSecond = 1;
+  public touchUi = false;
+  public color: ThemePalette = 'primary';
 }

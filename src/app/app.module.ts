@@ -145,6 +145,8 @@ import { F02012wopenComponent } from './f02012/f02012wopen/f02012wopen.component
 import { F03013Component } from './f03013/f03013.component';
 import { F03013wopenComponent } from './f03013/f03013wopen/f03013wopen.component';
 import { F03013confirmComponent } from './f03013/f03013confirm/f03013confirm.component';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 
 
 
@@ -302,6 +304,8 @@ export const TW_FORMATS = {
     MaterialModule,
     FlexLayoutModule,
     BlockUIModule.forRoot(),
+    NgxMatDatetimePickerModule,
+    NgxMatMomentModule
   ],
   providers: [
     BnNgIdleService,
