@@ -19,7 +19,7 @@ interface COMB {
 export class F01001Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0902', viewValue: '0902' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '數位貨幣' }, { value: 'R001', viewValue: '專用款' }, { value: 'R002', viewValue: '數位券' }];
 
   transferForm: FormGroup = this.fb.group({
     vaultID: ['B-822', [Validators.maxLength(30)]],
