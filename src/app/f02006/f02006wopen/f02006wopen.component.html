@@ -38,12 +38,6 @@
             </mat-date-range-picker>
           </mat-form-field>
         </td>
-        <td>
-          <mat-form-field appearance="fill">
-            <mat-label>錢包顯示名稱</mat-label>
-            <input matInput #input class="form-control" formControlName="dn">
-          </mat-form-field>
-        </td>
       </tr>
       <tr>
         <td colspan="4">
@@ -65,7 +59,7 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="goBack(row.TXNID || row.txnid)">
+        <button mat-icon-button color="primary" (click)="goBack(row.TXNID || row.txnid ,row.CVC || row.cvc)">
           <span class="material-icons">call_received</span>
         </button>
       </mat-cell>
@@ -74,15 +68,15 @@
       <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.TXNID || row.txnid}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="DN">
-      <mat-header-cell *matHeaderCellDef>錢包顯示名稱</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.DN }}</mat-cell>
+    <ng-container matColumnDef="CVC">
+      <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.CVC || row.cvc}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="TXNTIME">
       <mat-header-cell *matHeaderCellDef>交易日期</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.TXNTIME || row.txntime | date:'yyyy-MM-dd'}}</mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="['actions', 'TXNID', 'DN', 'TXNTIME' ]"></mat-header-row>
-    <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'TXNID', 'DN', 'TXNTIME' ]"></mat-row>
+    <mat-header-row *matHeaderRowDef="['actions', 'TXNID', 'CVC','TXNTIME' ]"></mat-header-row>
+    <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'TXNID', 'CVC', 'TXNTIME' ]"></mat-row>
   </mat-table>
 </mat-dialog-content>

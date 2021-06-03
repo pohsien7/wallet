@@ -17,7 +17,7 @@ export class F02006Component implements OnInit {
 
   registrationForm: FormGroup = this.fb.group({
     queryTxnID: ['', [Validators.required]],
-    cvc: ['0901', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
+    cvc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
   });
 
   resultForm: FormGroup = this.fb.group({
@@ -99,6 +99,11 @@ export class F02006Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.registrationForm.patchValue({ queryTxnID : result.value });
+        if ( result.cvc == '901') {
+          this.registrationForm.patchValue({ cvc : '0'+result.cvc });
+        } else {
+          this.registrationForm.patchValue({ cvc : result.cvc });
+        }
       }
     });
   }

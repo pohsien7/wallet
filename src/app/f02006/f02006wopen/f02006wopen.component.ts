@@ -22,7 +22,6 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
     walletType: ['', [Validators.required]],
     startTime: ['', [ ]],
     endTime: ['', [ ]],
-    dn: ['', [ ]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
@@ -64,7 +63,6 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
   }
 
   cleanToEmpty() {
-    this.searchForm.patchValue({ dn : '' });
     this.searchForm.patchValue({ walletType : '' });
     this.searchForm.patchValue({ startTime : '' });
     this.searchForm.patchValue({ endTime : '' });
@@ -115,7 +113,7 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
     }
   }
 
-  goBack(txnId: string) {
-    this.dialogRef.close({ event:'success', value: txnId });
+  goBack(txnId: string, cvc: string) {
+    this.dialogRef.close({ event:'success', value: txnId , cvc: cvc });
   }
 }
