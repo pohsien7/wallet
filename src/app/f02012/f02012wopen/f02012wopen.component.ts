@@ -22,12 +22,11 @@ export class F02012wopenComponent implements OnInit, AfterViewInit {
     walletType: ['', [Validators.required]],
     startTime: ['', [ ]],
     endTime: ['', [ ]],
-    dn: ['', [ ]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'f02004', viewValue: '匿名錢包'}];
+  walletOption: sysCode[] = [{value: 'WALLET_CV', viewValue: 'WALLET_CV'}];
 
   constructor(public dialogRef: MatDialogRef<F02012wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02005Service: F02012Service) { }
 
@@ -61,7 +60,6 @@ export class F02012wopenComponent implements OnInit, AfterViewInit {
   }
 
   cleanToEmpty() {
-    this.searchForm.patchValue({ dn : '' });
     this.searchForm.patchValue({ walletType : '' });
     this.searchForm.patchValue({ startTime : '' });
     this.searchForm.patchValue({ endTime : '' });
@@ -112,9 +110,9 @@ export class F02012wopenComponent implements OnInit, AfterViewInit {
     }
   }
 
-  goBack(walletId: string, dn: string, userId: string, cvc: string, canBeDistributed: string, canUse: string,
+  goBack(walletId: string, cvc: string, canBeDistributed: string, canUse: string,
     canAccept: string, canRedeem:string, remark: string) {
-    this.dialogRef.close({ event:'success', value: walletId, name: dn, userId: userId, cvc: cvc,
+    this.dialogRef.close({ event:'success', value: walletId,cvc: cvc,
     canBeDistributed: canBeDistributed, canUse: canUse, canAccept:canAccept, canRedeem:canRedeem, remark:remark });
   }
 }

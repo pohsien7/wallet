@@ -20,7 +20,6 @@ export class F02012Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
   canBeDistributedCode: COMB[] = [{ value: 'true', viewValue: '是' }, { value: 'false', viewValue: '否' }];
   canUseCode: COMB[] = [{ value: 'true', viewValue: '是' }, { value: 'false', viewValue: '否' }];
   canAcceptCode: COMB[] = [{ value: 'true', viewValue: '是' }, { value: 'false', viewValue: '否' }];
@@ -33,16 +32,14 @@ export class F02012Component implements OnInit {
     canUse: ['', [Validators.required, Validators.maxLength(50)]],
     canAccept: ['', [Validators.required, Validators.maxLength(30)]],
     canRedeem: ['', [Validators.required, Validators.maxLength(5)]],
-    remark: ['', [Validators.maxLength(128)]],
-    userId: [''],
-    walletType: ['']
+    remark: ['', [Validators.maxLength(128)]]
   });
   submitted = false;
 
   constructor(private fb: FormBuilder, public f02012Service: F02012Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    
+
   }
 
   formControl = new FormControl('', [
@@ -87,9 +84,6 @@ export class F02012Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.updateCVForm.patchValue({ queryWalletID : result.value });
-        this.updateCVForm.patchValue({ dn : result.name });
-        this.updateCVForm.patchValue({ userId : result.userId });
-        this.updateCVForm.patchValue({ walletType : result.walletType });
         this.updateCVForm.patchValue({ cvc : result.cvc });
         this.updateCVForm.patchValue({ canBeDistributed : result.canBeDistributed });
         this.updateCVForm.patchValue({ canUse : result.canUse });
