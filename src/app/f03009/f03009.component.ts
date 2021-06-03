@@ -17,8 +17,7 @@ export class F03009Component implements OnInit {
 
   registrationForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
-    cvc: ['R001', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-    walletType:[]
+    cvc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
   });
 
   resultForm: FormGroup = this.fb.group({
@@ -87,8 +86,7 @@ export class F03009Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.registrationForm.patchValue({ queryWalletID : result.value });
-        this.registrationForm.patchValue({ walletType : result.valueWalletType });
-        console.log(result.valueWalletType)
+        this.registrationForm.patchValue({ cvc : result.cvc });
       }
     });
   }
