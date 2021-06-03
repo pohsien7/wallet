@@ -17,14 +17,11 @@ interface COMB {
 export class F03013Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{value: '1123', viewValue: '1123'}];
-
   redeemCVForm: FormGroup = this.fb.group({
     walletID: [''],
-    cvc: ['1123', [Validators.required, Validators.maxLength(4)]],
+    cvc: ['', [Validators.required, Validators.maxLength(4)]],
     amount: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    remark: ['*', [, Validators.maxLength(30)]],
-    walletType: []
+    remark: ['*', [, Validators.maxLength(30)]]
   });
 
   submitted = false;
@@ -73,7 +70,7 @@ export class F03013Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.redeemCVForm.patchValue({ walletID : result.value });
-        this.redeemCVForm.patchValue({ walletType : result.walletType });
+        this.redeemCVForm.patchValue({ cvc : result.cvc });
       }
     });
   }

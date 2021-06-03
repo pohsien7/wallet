@@ -26,14 +26,11 @@
               </td>
             </tr>
             <tr>
-              <th nowrap="nowrap">券幣代號：</th>
+              <th>券幣代號：</th>
               <td>
                 <mat-form-field color="accent">
-                  <mat-select formControlName="cvc">
-                    <mat-option *ngFor="let item of cvcCode" [value]="item.value">
-                      {{item.viewValue}}
-                    </mat-option>
-                  </mat-select>
+                  <input matInput #input class="form-control" formControlName="cvc" readonly>
+                  <mat-error>{{getErrorMessage('cvc')}}</mat-error>
                 </mat-form-field>
               </td>
               <th>贖回金額：</th>
