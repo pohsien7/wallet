@@ -29,7 +29,8 @@ export class F02013wopenComponent implements OnInit, AfterViewInit {
 
   walletOption: sysCode[] = [{value: 'J', viewValue: '記名錢包 (法人，憑證)'},
                              {value: 'N', viewValue: '記名錢包 (自然人，憑證)'},
-                             {value: 'P', viewValue: '記名錢包 (自然人，公鑰)'}];
+                             {value: 'P', viewValue: '記名錢包 (自然人，公鑰)'},
+                             {value: 'A', viewValue: '匿名錢包'}];
 
   constructor(public dialogRef: MatDialogRef<F02013wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02005Service: F02013Service) { }
 
