@@ -77,7 +77,6 @@ export class F02013Component implements OnInit {
       if (result != null && result.event == 'success') {
         this.updateWalletForm.patchValue({ queryWalletID : result.value });
         this.updateWalletForm.patchValue({ dn : result.name });
-        this.updateWalletForm.patchValue({ remark : result.remark });
         this.updateWalletForm.patchValue({ userId : result.userId });
         this.updateWalletForm.patchValue({ walletType : result.walletType });
 
