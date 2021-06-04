@@ -115,7 +115,7 @@ export class F02013wopenComponent implements OnInit, AfterViewInit {
     }
   }
 
-  goBack(walletId: string, dn: string, remark: string, userId: string) {
-    this.dialogRef.close({ event:'success', value: walletId, name: dn, remark: remark, userId: userId, walletType: this.searchForm.value.walletType });
+  goBack(walletId: string, dn: string, userId: string) {
+    this.dialogRef.close({ event:'success', value: walletId, name: dn, userId: userId, walletType: this.searchForm.value.walletType });
   }
 }
