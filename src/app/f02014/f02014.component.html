@@ -1,1 +1,111 @@
-<p>f02014 works!</p>
+<div class="container">
+  <th class="f02_th">開立記名錢包(自然人,憑證)</th>
+  <block-ui>
+    <form [formGroup]="updateForm" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">錢包ID：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="walletID" readonly>
+                  <mat-error>{{getErrorMessage('walletID')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <button mat-icon-button color="primary" (click)="getList()">
+                  <span class="material-icons">view_list</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th nowrap="nowrap">姓名：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="name">
+                  <mat-error>{{getErrorMessage('name')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">身分證字號、護照號碼、居留證號：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="idNumber">
+                  <mat-error>{{getErrorMessage('idNumber')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th nowrap="nowrap">國籍：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <mat-select formControlName="nation">
+                    <mat-option *ngFor="let nation of nationCode" [value]="nation.value">
+                      {{nation.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <th>性別：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of genderCode" [value]="gender.value">
+                      {{gender.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th nowrap="nowrap">出生日期：</th>
+              <td>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" formControlName="birthDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>{{getErrorMessage('birthDate')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <th>手機號碼：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="phoneNumber">
+                  <mat-error>{{getErrorMessage('phoneNumber')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th>戶籍地址：</th>
+              <td colspan="2">
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="address">
+                  <mat-error>{{getErrorMessage('address')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th>備註：</th>
+              <td colspan="2">
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="remark">
+                  <mat-error>{{getErrorMessage('remark')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>
