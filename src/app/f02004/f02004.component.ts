@@ -18,13 +18,18 @@ interface COMB {
 })
 export class F02004Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
+  display = false;
 
   // 之後要改打API去取得下拉內容
   mccCode: COMB[] = [{value: 'MCC1', viewValue: 'MCC1'}, {value: 'MCC2', viewValue: 'MCC2'}];
 
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
 
-  registrationForm: FormGroup;
+  registrationForm: FormGroup = this.fb.group({
+    statusCode: ['',[]],
+    statusMessage: ['',[]],
+    walletID: ['',[]]
+  });
 
   submitted = false;
 
@@ -43,7 +48,10 @@ export class F02004Component implements OnInit {
         Validators.pattern('^[0-9]+$')
       ]),
       balanceLimit: ['10000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-      keyTxnLimit: ['3000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]]
+      keyTxnLimit: ['3000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+      statusCode: ['',[]],
+      statusMessage: ['',[]],
+      walletID: ['',[]]
     });
   }
 
@@ -73,6 +81,10 @@ export class F02004Component implements OnInit {
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       this.f02004Service.sendConsumer('consumer/f02004', formdata).then((data) => {
         msg = data.statusMessage;
+        this.display = true;
+        this.registrationForm.patchValue({statusCode: data.statusCode});
+        this.registrationForm.patchValue({statusMessage: data.statusMessage});
+        this.registrationForm.patchValue({walletID: data.walletID});
       });
       console.log(JSON.stringify(this.registrationForm.value));
     }
