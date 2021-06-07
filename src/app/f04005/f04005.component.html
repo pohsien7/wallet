@@ -1,1 +1,138 @@
-<p>f04005 works!</p>
+<div class="container">
+  <th class="f04_th">查詢虛擬錢包會員資訊(偉康)</th>
+
+  <form [formGroup]="cdbcUserInfoForm" style="padding-left: 20px;">
+    <div class="f04_div">
+      <button type="submit" mat-raised-button color="primary" (click)="getViewDataList()"> 查詢</button>
+      <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+    </div>
+    <table>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th nowrap="nowrap">會員帳號：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="userID">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th>會員姓名：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="userName">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">身分證號：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="userPid">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th>手機號碼：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #inputstate class="form-control" formControlName="userPhone">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">註冊時間：</th>
+            <td>
+              <mat-form-field color="accent" class="example-form-field">
+                <mat-date-range-input [rangePicker]="rangePicker">
+                  <input matStartDate formControlName="createdate_start" value="">
+                  <input matEndDate formControlName="createdate_end">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker>
+                  <mat-date-range-picker-actions>
+                    <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                    <button mat-button matDateRangePickerCancel>取消</button>
+                  </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+<br>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-table [dataSource]="cdbcUserInfo">
+
+    <ng-container matColumnDef="SETTING">
+      <mat-header-cell *matHeaderCellDef><u></u></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.IS_MERCHANT == 'Y'; else elseTemplate">
+          <button mat-raised-button color="warn" (click)="getRemoveShop(row.WALLET_ACCOUNT)">取消商家</button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button mat-raised-button color="primary" (click)="getSetShop(row.WALLET_ACCOUNT)">註冊商家</button>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="USER_ID">
+      <mat-header-cell *matHeaderCellDef>會員帳號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.USER_ID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="WALLET_ACCOUNT">
+      <mat-header-cell *matHeaderCellDef>虛擬錢包帳號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.WALLET_ACCOUNT }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="USER_NAME">
+      <mat-header-cell *matHeaderCellDef>會員姓名</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.USER_NAME }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="USER_PHONE">
+      <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.USER_PHONE }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="USER_BIRTH">
+      <mat-header-cell *matHeaderCellDef>生日</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.USER_BIRTH }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="USER_EMAIL">
+      <mat-header-cell *matHeaderCellDef>電子郵件</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.USER_EMAIL }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="USER_PID">
+      <mat-header-cell *matHeaderCellDef>身分證號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.USER_PID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ADDRESS">
+      <mat-header-cell *matHeaderCellDef>戶籍地址</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.ADDRESS }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CREATE_TIME">
+      <mat-header-cell *matHeaderCellDef>註冊時間</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.CREATE_TIME }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="IS_MERCHANT">
+      <mat-header-cell *matHeaderCellDef>是否為商家</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.IS_MERCHANT }}</mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['SETTING', 'USER_ID', 'WALLET_ACCOUNT', 'USER_NAME', 'USER_PHONE', 'USER_BIRTH', 'USER_EMAIL', 'USER_PID', 'ADDRESS', 'CREATE_TIME', 'IS_MERCHANT']; sticky: true">
+    </mat-header-row>
+    <mat-row
+      *matRowDef="let ruleParmRow; columns: ['SETTING', 'USER_ID', 'WALLET_ACCOUNT', 'USER_NAME', 'USER_PHONE', 'USER_BIRTH', 'USER_EMAIL', 'USER_PID', 'ADDRESS', 'CREATE_TIME', 'IS_MERCHANT']">
+    </mat-row>
+  </mat-table>
+  <tr>
+    <td>
+      <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</cdk-virtual-scroll-viewport>
+
