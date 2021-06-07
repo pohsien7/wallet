@@ -35,6 +35,11 @@ export class F02008Component implements OnInit {
     address: ['', [Validators.required, Validators.maxLength(128)]],
     userId: ['']
   });
+
+  getImfornationForm: FormGroup = this.fb.group({
+    queryWalletID: ['']
+  });
+
   gender: string;
   nation: string;
   submitted = false;
@@ -106,9 +111,27 @@ export class F02008Component implements OnInit {
         this.upgradeWalletForm.patchValue({ queryWalletID : result.value });
         this.upgradeWalletForm.patchValue({ dn : result.name });
         this.upgradeWalletForm.patchValue({ userId : result.userId });
-
+        this.upgradeWalletForm.patchValue({ phoneNumber : result.phoneNumber});
       }
     });
   }
 
+  getImfornation(){
+    if ( this.upgradeWalletForm.value.queryWalletID.length == 23 && this.upgradeWalletForm.value.phoneNumber == '' ) {
+      this.getImfornationForm.patchValue({ queryWalletID: this.upgradeWalletForm.value.queryWalletID });
+      let jsonStr = JSON.stringify(this.getImfornationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      const formdata: FormData = new FormData();
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f02008Service.sendConsumer('consumer/f02008Imfornaion', formdata).then((data) => {
+        if ( data == null) {
+          this.dialog.open(F02008confirmComponent, { data: { msgStr: "錢包ID有誤" } });
+        } else {
+          this.upgradeWalletForm.patchValue({ dn : data.DN });
+          this.upgradeWalletForm.patchValue({ userId : data.USERID });
+          this.upgradeWalletForm.patchValue({ phoneNumber : data.PHONENUMBER});
+        }
+      });
+    }
+  }
 }
