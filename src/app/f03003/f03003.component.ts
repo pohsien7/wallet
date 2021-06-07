@@ -16,10 +16,14 @@ export class F03003Component implements OnInit {
 
   authorizaionForm: FormGroup = this.fb.group({
     operation:['withdraw',[Validators.required ,Validators.maxLength(30)]],
-    walletID:['',[Validators.required, Validators.maxLength(23)]],
+    walletID:['',[Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     recipientID:['',[Validators.required, Validators.maxLength(23)]],
     remark:['',[Validators.maxLength(30)]],
     walletType:['']
+  });
+
+  checkForm: FormGroup = this.fb.group({
+    walletID: ['']
   });
 
   submitted = false;
@@ -82,6 +86,21 @@ export class F03003Component implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result != null && result.event == 'success') {
           this.authorizaionForm.patchValue({ recipientID : result.value });
+        }
+      });
+    }
+  }
+
+  checkID(){
+    if ( this.authorizaionForm.value.walletID.length == 23 ) {
+      this.checkForm.patchValue({ walletID: this.authorizaionForm.value.walletID });
+      let jsonStr = JSON.stringify(this.checkForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      const formdata: FormData = new FormData();
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f03003Service.sendConsumer('consumer/f03003CheckID', formdata).then((data) => {
+        if ( data == null) {
+          this.dialog.open(F03003confirmComponent, { data: { msgStr: "錢包ID有誤" } });
         }
       });
     }

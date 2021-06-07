@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (click)="checkID()">
   <th class="f01_th">移轉自總庫之CBDC</th>
   <block-ui>
     <form [formGroup]="transferForm" style="padding-left: 20px;">
@@ -24,7 +24,7 @@
               <th nowrap="nowrap">交易收方ID：</th>
               <td nowrap="nowrap">
                 <mat-form-field color="accent" class="form-id">
-                  <input matInput #input class="form-control" formControlName="recipientid" readonly>
+                  <input matInput #input class="form-control" formControlName="recipientid" (mouseleave)="checkID()">
                   <mat-error>{{getErrorMessage('recipientid')}}</mat-error>
                 </mat-form-field>
               </td>
