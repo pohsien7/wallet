@@ -22,6 +22,11 @@ export class F02010Component implements OnInit {
 
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
+  channelCode: COMB[] = [{ value: 'A001', viewValue: 'ATM提款' },
+                         { value: 'M001', viewValue: '實體消費' },
+                         { value: 'N001', viewValue: '網路消費' },
+                         { value: 'N002', viewValue: '網路繳費' },
+                         { value: 'N003', viewValue: '網路繳稅' } ];
 
   numberPayForm: FormGroup = this.fb.group({
     recipientID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],

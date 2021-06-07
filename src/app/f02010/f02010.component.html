@@ -47,7 +47,11 @@
                             <th nowrap="nowrap">通路代號</th>
                             <td>
                                 <mat-form-field color="accent">
-                                    <input matInput #input formControlName="channelcode">
+                                    <mat-select formControlName="channelcode">
+                                      <mat-option *ngFor="let channel of channelCode" [value]="channel.value">
+                                          {{channel.viewValue}}
+                                      </mat-option>
+                                  </mat-select>
                                 </mat-form-field>
                             </td>
                             <th nowrap="nowrap">付方錢包支付號碼</th>
