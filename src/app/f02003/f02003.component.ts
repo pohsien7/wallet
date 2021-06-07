@@ -71,6 +71,7 @@ export class F02003Component implements OnInit {
   async onSubmit() {
     let msg = '';
     this.submitted = true;
+    this.display = false;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
       msg = '資料格式有誤，請修正!'
@@ -85,7 +86,7 @@ export class F02003Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02003Service.sendConsumer('consumer/f02003', formdata).then((data) => {
         msg = data.statusMessage;
-        this.display = true;
+        
         if ( msg == "Success" ) {
           this.disabled = "false";
           this.walletId = data.walletID
@@ -99,6 +100,7 @@ export class F02003Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02003confirmComponent, { data: { msgStr: msg } });
+      this.display = true;
     }, 1500);
   }
 
