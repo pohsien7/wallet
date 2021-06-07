@@ -70,6 +70,7 @@ export class F02004Component implements OnInit {
 
   async onSubmit() {
     let msg = '';
+    this.display = false;
     this.submitted = true;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
@@ -81,7 +82,7 @@ export class F02004Component implements OnInit {
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       this.f02004Service.sendConsumer('consumer/f02004', formdata).then((data) => {
         msg = data.statusMessage;
-        this.display = true;
+        
         this.registrationForm.patchValue({statusCode: data.statusCode});
         this.registrationForm.patchValue({statusMessage: data.statusMessage});
         this.registrationForm.patchValue({walletID: data.walletID});
@@ -91,6 +92,8 @@ export class F02004Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02004confirmComponent, { data: { msgStr: msg } });
+      this.display = true;
     }, 1500);
+    
   }
 }

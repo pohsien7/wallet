@@ -64,6 +64,7 @@ export class F02002Component implements OnInit {
   async onSubmit() {
     let msg = '';
     this.submitted = true;
+    this.display = false;
     this.blockUI.start('Loading...');
     if (!this.registrationForm.valid) {
       console.log("判斷格式="+this.registrationForm.value.nation+","+this.registrationForm.value.gender);
@@ -80,7 +81,7 @@ export class F02002Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
         msg = data.statusMessage;
-        this.display = true;
+        
         this.registrationForm.patchValue({statusCode: data.statusCode});
         this.registrationForm.patchValue({statusMessage: data.statusMessage});
         this.registrationForm.patchValue({walletID: data.walletID});
@@ -89,6 +90,7 @@ export class F02002Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop();
       const childernDialogRef = this.dialog.open(F02002confirmComponent, { data: { msgStr: msg } });
+      this.display = true;
     }, 1500);
   }
 

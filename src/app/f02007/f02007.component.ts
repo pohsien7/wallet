@@ -15,7 +15,10 @@ export class F02007Component implements OnInit {
   display = false;
   registrationForm: FormGroup = this.fb.group({
     // userID: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]],
-    dn: ['', [Validators.maxLength(30)]]
+    dn: ['', [Validators.maxLength(30)]],
+    statusCode: ['',[]],
+    statusMessage: ['',[]],
+    walletID: ['',[]]
   });
 
   submitted = false;
@@ -37,6 +40,7 @@ export class F02007Component implements OnInit {
   async onSubmit() {
     let msg = '';
     this.submitted = true;
+    this.display = false;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
       msg = '資料格式有誤，請修正!'
@@ -47,7 +51,7 @@ export class F02007Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02007Service.sendConsumer('consumer/f02007', formdata).then((data) => {
         msg = data.statusMessage;
-        this.display = true;
+        
         this.registrationForm.patchValue({statusCode: data.statusCode});
         this.registrationForm.patchValue({statusMessage: data.statusMessage});
         this.registrationForm.patchValue({walletID: data.walletID});
@@ -57,6 +61,8 @@ export class F02007Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02007confirmComponent, { data: { msgStr: msg } });
+      this.display = true;
     }, 1500);
+    
   }
 }
