@@ -12,7 +12,7 @@ import { F02007confirmComponent } from './f02007confirm/f02007confirm.component'
 })
 export class F02007Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-
+  display = false;
   registrationForm: FormGroup = this.fb.group({
     // userID: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]],
     dn: ['', [Validators.maxLength(30)]]
@@ -47,6 +47,10 @@ export class F02007Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02007Service.sendConsumer('consumer/f02007', formdata).then((data) => {
         msg = data.statusMessage;
+        this.display = true;
+        this.registrationForm.patchValue({statusCode: data.statusCode});
+        this.registrationForm.patchValue({statusMessage: data.statusMessage});
+        this.registrationForm.patchValue({walletID: data.walletID});
       });
       console.log(JSON.stringify(this.registrationForm.value));
     }
