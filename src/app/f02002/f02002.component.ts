@@ -18,7 +18,7 @@ interface COMB {
 })
 export class F02002Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-
+  display = false;
   //之後API取得下拉內容
   nationCode: COMB[] = [{ value: 'TWN', viewValue: 'Taiwan' }, { value: 'JAN', viewValue: 'Japan' }, { value: 'USA', viewValue: 'USA' }];
   genderCode: COMB[] = [{ value: 'M', viewValue: '男' }, { value: 'F', viewValue: '女' }];
@@ -35,7 +35,10 @@ export class F02002Component implements OnInit {
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]],
     balanceLimit: ['9000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    certTxnLimit: ['2000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]]
+    certTxnLimit: ['2000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    statusCode: ['',[]],
+    statusMessage: ['',[]],
+    walletID: ['',[]]
   });
   submitted = false;
 
@@ -77,6 +80,10 @@ export class F02002Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
         msg = data.statusMessage;
+        this.display = true;
+        this.registrationForm.patchValue({statusCode: data.statusCode});
+        this.registrationForm.patchValue({statusMessage: data.statusMessage});
+        this.registrationForm.patchValue({walletID: data.walletID});
       });
     }
     setTimeout(() => {
