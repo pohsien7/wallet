@@ -26,12 +26,7 @@ export class F03011wopenComponent implements OnInit {
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: 'TRANSFER'},
-  {value: 'reverse', viewValue: 'REVERSE'},
-  {value: 'deduct', viewValue: 'DEDUCT'}
-  // {value: 'issueCV', viewValue: 'ISSUECV'},
-  // {value: 'redeemCV', viewValue: 'REDEEMCV'}
-  ];
+  walletOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: 'TRANSFER'}, {value: 'reverse', viewValue: 'REVERSE'}];
   constructor(public dialogRef: MatDialogRef<F03011wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03011Service: F03011Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {

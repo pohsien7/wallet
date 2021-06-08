@@ -25,7 +25,7 @@ export class F03002Component implements OnInit {
     walletid: ['', [Validators.maxLength(30)]],
     stxnid: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
-    remark: ['', [Validators.required]]
+    remark: ['', []]
   })
 
   constructor(private fb: FormBuilder, public f03001Service: F03001Service, public dialog: MatDialog) { }
