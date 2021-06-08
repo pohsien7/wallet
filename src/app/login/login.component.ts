@@ -11,6 +11,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  hide = true;
   no = '';
   pwd = '';
   private bnIdle: BnNgIdleService = null;
