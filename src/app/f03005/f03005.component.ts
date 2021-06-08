@@ -20,6 +20,7 @@ export class F03005Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   barcodeImage: string;
+  qrcodeImage: string;
   getBarcodeForF02009: string;
 
   // 之後要改打API去取得下拉內容
@@ -66,6 +67,7 @@ export class F03005Component implements OnInit {
         this.resultForm.patchValue({ barcode : data.barcode });
         this.resultForm.patchValue({ expireTime : data.expireTime });
         this.barcodeImage= 'data:image/jpeg;base64,' + data.barcodeImage;
+        this.qrcodeImage= 'data:image/jpeg;base64,' + data.qrcodeImage;
         if (this.getBarcodeForF02009 == "getBarcode") {
           msg = '支付條碼取得成功!'
           this.dialogRef.close({ event:'success',barcode: data.barcode });
