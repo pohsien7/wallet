@@ -19,7 +19,6 @@ export class BaseService {
   };
 
   protected postHttpClient(baseUrl: string) {
-    alert(environment.allowOrigin)
     return this.httpClient.post<any>(environment.allowOrigin + '/' + baseUrl, this.httpOptions);
   }
 
