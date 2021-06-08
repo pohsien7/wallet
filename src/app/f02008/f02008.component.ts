@@ -57,9 +57,25 @@ export class F02008Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.upgradeWalletForm.get(cloumnName);
+    if ( cloumnName == 'queryWalletID' && this.upgradeWalletForm.value.queryWalletID.length == 23 ) {
+      this.getImfornationForm.patchValue({ queryWalletID: this.upgradeWalletForm.value.queryWalletID });
+      let jsonStr = JSON.stringify(this.getImfornationForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      const formdata: FormData = new FormData();
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f02008Service.sendConsumer('consumer/f02008Imfornaion', formdata).then((data) => {
+        if ( data == null) {
+          obj.setErrors({ 'queryWalletIDError': true })
+        } else {
+          this.upgradeWalletForm.patchValue({ dn : data.DN });
+          this.upgradeWalletForm.patchValue({ userId : data.USERID });
+          this.upgradeWalletForm.patchValue({ phoneNumber : data.PHONENUMBER});
+        }
+      });
+    }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
            obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? '請輸入數字' :
-           obj.hasError('idNumberError')  ? '身分證格式錯誤' : '';
+           obj.hasError('idNumberError')  ? '身分證格式錯誤' : obj.hasError('queryWalletIDError')  ? '錢包ID錯誤' : '';
   }
 
   async sendCBDC() {
@@ -114,24 +130,5 @@ export class F02008Component implements OnInit {
         this.upgradeWalletForm.patchValue({ phoneNumber : result.phoneNumber});
       }
     });
-  }
-
-  getImfornation(){
-    if ( this.upgradeWalletForm.value.queryWalletID.length == 23 && this.upgradeWalletForm.value.phoneNumber == '' ) {
-      this.getImfornationForm.patchValue({ queryWalletID: this.upgradeWalletForm.value.queryWalletID });
-      let jsonStr = JSON.stringify(this.getImfornationForm.value);
-      let jsonObj = JSON.parse(jsonStr);
-      const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(jsonObj));
-      this.f02008Service.sendConsumer('consumer/f02008Imfornaion', formdata).then((data) => {
-        if ( data == null) {
-          this.dialog.open(F02008confirmComponent, { data: { msgStr: "錢包ID有誤" } });
-        } else {
-          this.upgradeWalletForm.patchValue({ dn : data.DN });
-          this.upgradeWalletForm.patchValue({ userId : data.USERID });
-          this.upgradeWalletForm.patchValue({ phoneNumber : data.PHONENUMBER});
-        }
-      });
-    }
   }
 }

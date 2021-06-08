@@ -1,4 +1,4 @@
-<div class="container" (click)="checkID()">
+<div class="container">
   <th class="f03_th">授權扣款</th>
   <block-ui>
   <form [formGroup]="authorizaionForm" style="padding-left: 20px;">
@@ -26,7 +26,7 @@
             <th nowrap="nowrap">授權方錢包ID：</th>
             <td>
               <mat-form-field color="accent" class="form-id">
-                <input matInput #inputstate class="form-control" formControlName="walletID" value="{data.walletId}" (mouseleave)="checkID()">
+                <input matInput #inputstate class="form-control" formControlName="walletID" value="{data.walletId}">
                 <mat-error>{{getErrorMessage('walletID')}}</mat-error>
               </mat-form-field>
             </td>

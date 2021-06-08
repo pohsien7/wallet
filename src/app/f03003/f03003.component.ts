@@ -41,8 +41,20 @@ export class F03003Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.authorizaionForm.get(cloumnName);
+    if ( cloumnName == 'walletID' && this.authorizaionForm.value.walletID.length == 23 ) {
+      this.checkForm.patchValue({ walletID: this.authorizaionForm.value.walletID });
+      let jsonStr = JSON.stringify(this.checkForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      const formdata: FormData = new FormData();
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f03003Service.sendConsumer('consumer/f03003CheckID', formdata).then((data) => {
+        if ( data == null) {
+          obj.setErrors({ 'WalletIDError': true })
+        }
+      });
+    }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : '';
+           obj.hasError('minlength') ? '長度過短' : obj.hasError('WalletIDError')  ? '錢包ID錯誤' : '';
   }
 
   async onSubmit(){
@@ -86,21 +98,6 @@ export class F03003Component implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result != null && result.event == 'success') {
           this.authorizaionForm.patchValue({ recipientID : result.value });
-        }
-      });
-    }
-  }
-
-  checkID(){
-    if ( this.authorizaionForm.value.walletID.length == 23 ) {
-      this.checkForm.patchValue({ walletID: this.authorizaionForm.value.walletID });
-      let jsonStr = JSON.stringify(this.checkForm.value);
-      let jsonObj = JSON.parse(jsonStr);
-      const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(jsonObj));
-      this.f03003Service.sendConsumer('consumer/f03003CheckID', formdata).then((data) => {
-        if ( data == null) {
-          this.dialog.open(F03003confirmComponent, { data: { msgStr: "錢包ID有誤" } });
         }
       });
     }

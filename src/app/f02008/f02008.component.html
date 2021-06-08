@@ -1,4 +1,4 @@
-<div class="container" (click)="getImfornation()">
+<div class="container">
   <th class="f02_th">升級匿名錢包為記名錢包</th>
   <tr>
     <th>
@@ -15,7 +15,7 @@
               <th nowrap="nowrap">欲查詢之匿名錢包ID：</th>
               <td>
                 <mat-form-field color="accent" class="form-id">
-                  <input matInput #input class="form-control" formControlName="queryWalletID" (mouseleave)="getImfornation()">
+                  <input matInput #input class="form-control" formControlName="queryWalletID">
                   <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
                 </mat-form-field>
               </td>
