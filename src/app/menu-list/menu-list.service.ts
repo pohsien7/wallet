@@ -21,7 +21,7 @@ export class MenuListService extends BaseService {
     this.route.queryParams.subscribe(params => {
       this.empNo = params['empNo'];
     });
-    const baseURL = 'FunctionList?strEmpID=' + this.empNo;
+    const baseURL = 'GetMenu?strEmpID=' + this.empNo;
     return this.postHttpClient(baseURL);
   }
 

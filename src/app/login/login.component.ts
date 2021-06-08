@@ -18,7 +18,7 @@ export class LoginComponent {
 
   async onClickMe(): Promise<void>  {
     this.bnIdle = new BnNgIdleService();
-    if (await this.loginService.initData(this.no)) {
+    if (await this.loginService.initData(this.no, this.pwd)) {
       this.router.navigate(['./home'], { queryParams: { empNo: this.no } });
       this.bnIdle.startWatching(60*30).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) { this.routerGoUrl(); }

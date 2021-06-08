@@ -8,11 +8,11 @@
       <form orm class="example-form">
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="員工編號" [(ngModel)]="no" name="account">
+            <input matInput placeholder="員工編號" [(ngModel)]="no" name="account" required>
           </mat-form-field>
           <br>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="員工密碼" [(ngModel)]="pwd" name="password">
+            <input matInput placeholder="員工密碼" [(ngModel)]="pwd" name="password" required>
           </mat-form-field>
         </mat-card-content>
         <button mat-stroked-button color="primary" class="btn-block" (click)="onClickMe()">登入</button>

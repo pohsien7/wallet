@@ -16,15 +16,18 @@ export class LoginService extends BaseService {
   Condition: sysCode[] = null;
   constructor(protected httpClient: HttpClient) { super(httpClient); }
 
-  private async checkEmpNoPromise(empNo: String) {
-    const baseURL = 'FunctionList?strEmpID=' + empNo;
-    return await this.postHttpClient(baseURL).toPromise();
+  private async checkEmpNoPromise(empNo: string, empPwd: string) {
+    const formdata: FormData = new FormData();
+    formdata.append('strEmpID', empNo);
+    formdata.append('strEmpPD', empPwd);
+    const baseURL = 'LoginCheck';
+    return await this.postFormData(baseURL, formdata).toPromise();
   }
 
-  public async initData(empNo: String): Promise<boolean> {
+  public async initData(empNo: string, empPwd: string): Promise<boolean> {
     let isOk: boolean = false;
-    const data = await this.checkEmpNoPromise(empNo).then((data) => {
-      isOk = (data.rspCode === '0000' && data.rspMsg === '成功');
+    const data = await this.checkEmpNoPromise(empNo, empPwd).then((data) => {
+      isOk = (data.rspCode === '0000' && data.rspMsg === '登入成功');
     })
     .catch((error) => {
       console.log("Promise rejected with " + JSON.stringify(error));
