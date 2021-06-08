@@ -21,7 +21,7 @@ interface COMB {
 })
 export class F02003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-
+  display = false;
   nationCode: COMB[] = [{ value: 'TWN', viewValue: 'Taiwan' }, { value: 'JAN', viewValue: 'Japan' }, { value: 'USA', viewValue: 'USA' }];
   genderCode: COMB[] = [{ value: 'M', viewValue: '男' }, { value: 'F', viewValue: '女' }];
 
@@ -38,7 +38,10 @@ export class F02003Component implements OnInit {
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]],
     balanceLimit: ['10000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    keyTxnLimit: ['3000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]]
+    keyTxnLimit: ['3000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    statusCode: ['',[]],
+    statusMessage: ['',[]],
+    walletID: ['',[]]
   });
 
   gender: string;
@@ -68,6 +71,7 @@ export class F02003Component implements OnInit {
   async onSubmit() {
     let msg = '';
     this.submitted = true;
+    this.display = false;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
       msg = '資料格式有誤，請修正!'
@@ -82,16 +86,21 @@ export class F02003Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02003Service.sendConsumer('consumer/f02003', formdata).then((data) => {
         msg = data.statusMessage;
+        
         if ( msg == "Success" ) {
           this.disabled = "false";
           this.walletId = data.walletID
         }
+        this.registrationForm.patchValue({statusCode: data.statusCode});
+        this.registrationForm.patchValue({statusMessage: data.statusMessage});
+        this.registrationForm.patchValue({walletID: data.walletID});
       });
       console.log(JSON.stringify(this.registrationForm.value));
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02003confirmComponent, { data: { msgStr: msg } });
+      this.display = true;
     }, 1500);
   }
 

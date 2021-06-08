@@ -110,6 +110,35 @@
             </tr>
           </mat-card-content>
         </mat-card>
+
+        <br>
+        <mat-card class="matCard" *ngIf="display;">
+          <mat-card-content>
+            <tr>
+              <th>狀態代碼：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="statusCode">
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">狀態訊息：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="statusMessage">
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th>錢包ID：</th>
+              <td colspan="2">
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="walletID">
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
       </table>
     </form>
   </block-ui>

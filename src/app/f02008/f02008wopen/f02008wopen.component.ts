@@ -112,7 +112,7 @@ export class F02008wopenComponent implements OnInit, AfterViewInit {
     }
   }
 
-  goBack(walletId: string, dn: string, userId: string) {
-    this.dialogRef.close({ event:'success', value: walletId, name: dn, userId: userId });
+  goBack(walletId: string, dn: string, userId: string, phoneNumber: string) {
+    this.dialogRef.close({ event:'success', value: walletId, name: dn, userId: userId, phoneNumber: phoneNumber });
   }
 }

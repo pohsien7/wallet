@@ -14,7 +14,7 @@
               <th nowrap="nowrap">錢包ID：</th>
               <td>
                 <mat-form-field color="accent">
-                  <input matInput #input class="form-control" formControlName="walletID" readonly>
+                  <input matInput #input class="form-control" formControlName="walletID">
                   <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
               </td>
@@ -36,21 +36,30 @@
             </tr>
 
             <tr>
-              <th nowrap="nowrap">查詢日期：</th>
+              <th nowrap="nowrap">開始時間:</th>
               <td>
-                <mat-form-field color="accent" class="example-form-field">
-                  <!--<mat-label>建立日期</mat-label>-->
-                  <mat-date-range-input [rangePicker]="rangePicker">
-                    <input matStartDate formControlName="startTime" value="">
-                    <input matEndDate formControlName="endTime">
-                  </mat-date-range-input>
-                  <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                  <mat-date-range-picker #rangePicker>
-                    <mat-date-range-picker-actions>
-                      <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
-                      <button mat-button matDateRangePickerCancel>取消</button>
-                    </mat-date-range-picker-actions>
-                  </mat-date-range-picker>
+                <mat-form-field>
+                  <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
+                    [formControl]="dateControlStart" [min]="minDate" [max]="maxDate" [disabled]="disabled">
+                  <mat-datepicker-toggle matSuffix [for]="picker">
+                  </mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                    [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+                    [color]="color">
+                  </ngx-mat-datetime-picker>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">結束時間:</th>
+              <td>
+                <mat-form-field>
+                  <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Choose a date"
+                    [formControl]="dateControlEnd" [min]="minDate" [max]="maxDate" [disabled]="disabled">
+                  <mat-datepicker-toggle matSuffix [for]="picker1">
+                  </mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #picker1 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                    [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+                    [color]="color">
+                  </ngx-mat-datetime-picker>
                 </mat-form-field>
               </td>
             </tr>

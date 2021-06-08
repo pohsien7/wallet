@@ -145,6 +145,20 @@ import { F02012wopenComponent } from './f02012/f02012wopen/f02012wopen.component
 import { F03013Component } from './f03013/f03013.component';
 import { F03013wopenComponent } from './f03013/f03013wopen/f03013wopen.component';
 import { F03013confirmComponent } from './f03013/f03013confirm/f03013confirm.component';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { F02014wopenComponent } from './f02014/f02014wopen/f02014wopen.component';
+import { F02014confirmComponent } from './f02014/f02014confirm/f02014confirm.component';
+import { F02014Component } from './f02014/f02014.component';
+import { F02013wopenComponent } from './f02013/f02013wopen/f02013wopen.component';
+import { F02013confirmComponent } from './f02013/f02013confirm/f02013confirm.component';
+import { F02013Component } from './f02013/f02013.component';
+import { F02015Component } from './f02015/f02015.component';
+import { F02015wopenComponent } from './f02015/f02015wopen/f02015wopen.component';
+import { F02015confirmComponent } from './f02015/f02015confirm/f02015confirm.component';
+import { F04005Component } from './f04005/f04005.component';
+import { F04005confirmComponent } from './f04005/f04005confirm/f04005confirm.component';
+
 
 
 
@@ -288,7 +302,18 @@ export const TW_FORMATS = {
     F02012wopenComponent,
     F03013Component,
     F03013wopenComponent,
-    F03013confirmComponent
+    F03013confirmComponent,
+    F02013Component,
+    F02013confirmComponent,
+    F02013wopenComponent,
+    F02014Component,
+    F02014confirmComponent,
+    F02014wopenComponent,
+    F02015Component,
+    F02015wopenComponent,
+    F02015confirmComponent,
+    F04005Component,
+    F04005confirmComponent
   ],
   imports: [
     BrowserModule,
@@ -302,6 +327,8 @@ export const TW_FORMATS = {
     MaterialModule,
     FlexLayoutModule,
     BlockUIModule.forRoot(),
+    NgxMatDatetimePickerModule,
+    NgxMatMomentModule
   ],
   providers: [
     BnNgIdleService,

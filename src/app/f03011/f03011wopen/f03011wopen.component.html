@@ -78,10 +78,12 @@
         <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.TXNID }}</mat-cell>
       </ng-container>
-      
-      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'TXNID' ]"></mat-header-row>
-      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'TXNID' ]"></mat-row>
+      <ng-container matColumnDef="CVC">
+        <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.CVC }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'TXNID', 'CVC' ]"></mat-header-row>
+      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'TXNID', 'CVC' ]"></mat-row>
     </mat-table>
   </mat-dialog-content>
-  
-  
+

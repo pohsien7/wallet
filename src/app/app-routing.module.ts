@@ -14,6 +14,9 @@ import { F02009Component } from './f02009/f02009.component';
 import { F02010Component } from './f02010/f02010.component';
 import { F02011Component } from './f02011/f02011.component';
 import { F02012Component } from './f02012/f02012.component';
+import { F02013Component } from './f02013/f02013.component';
+import { F02014Component } from './f02014/f02014.component';
+import { F02015Component } from './f02015/f02015.component';
 import { F03001Component } from './f03001/f03001.component';
 import { F03002Component } from './f03002/f03002.component';
 import { F03003Component } from './f03003/f03003.component';
@@ -32,6 +35,7 @@ import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
 import { F04003Component } from './f04003/f04003.component';
 import { F04004Component } from './f04004/f04004.component';
+import { F04005Component } from './f04005/f04005.component';
 import { F05001Component } from './f05001/f05001.component';
 import { F05002Component } from './f05002/f05002.component';
 import { F05003Component } from './f05003/f05003.component';
@@ -140,6 +144,18 @@ const routes: Routes = [
         component: F02012Component
       },
       {
+        path: 'F02013',
+        component: F02013Component
+      },
+      {
+        path: 'F02014',
+        component: F02014Component
+      },
+      {
+        path: 'F02015',
+        component: F02015Component
+      },
+      {
         path: 'F03001',
         component: F03001Component
       },
@@ -210,6 +226,10 @@ const routes: Routes = [
       {
         path: 'F04004',
         component: F04004Component
+      },
+      {
+        path: 'F04005',
+        component: F04005Component
       },
       {
         path: 'F05001',

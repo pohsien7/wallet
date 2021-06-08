@@ -15,7 +15,7 @@
                 <th nowrap="nowrap">錢包ID：</th>
                 <td>
                   <mat-form-field color="accent" class="form-id">
-                    <input matInput #input class="form-control" formControlName="queryWalletID" readonly>
+                    <input matInput #input class="form-control" formControlName="queryWalletID">
                     <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
                   </mat-form-field>
                 </td>
@@ -24,9 +24,6 @@
                     <span class="material-icons">view_list</span>
                   </button>
                 </td>
-                <!-- <td>
-                  <input matInput #input class="form-control" formControlName="userId" hidden="true">
-                </td> -->
               </tr>
               <tr>
                 <th nowrap="nowrap">券幣代號：</th>
@@ -50,7 +47,7 @@
                   </mat-form-field>
                 </td>
               </tr>
-  
+
               <tr>
                 <th nowrap="nowrap">可否使用券幣：</th>
                 <td>
@@ -73,7 +70,7 @@
                   </mat-form-field>
                 </td>
               </tr>
-  
+
               <tr>
                 <th nowrap="nowrap">可否將券幣兑回CBDC：</th>
                 <td>
@@ -93,11 +90,10 @@
                   </mat-form-field>
                 </td>
               </tr>
-  
+
             </mat-card-content>
           </mat-card>
         </table>
       </form>
     </block-ui>
   </div>
-  

@@ -15,7 +15,7 @@
               <th nowrap="nowrap">總庫ID：</th>
               <td nowrap="nowrap">
                 <mat-form-field color="accent" class="form-id">
-                  <input matInput #input class="form-control" formControlName="vaultID" readonly>
+                  <input matInput #input class="form-control" formControlName="vaultID">
                   <mat-error>{{getErrorMessage('vaultID')}}</mat-error>
                 </mat-form-field>
               </td>
@@ -24,7 +24,7 @@
               <th nowrap="nowrap">交易收方ID：</th>
               <td nowrap="nowrap">
                 <mat-form-field color="accent" class="form-id">
-                  <input matInput #input class="form-control" formControlName="recipientid" readonly>
+                  <input matInput #input class="form-control" formControlName="recipientid">
                   <mat-error>{{getErrorMessage('recipientid')}}</mat-error>
                 </mat-form-field>
               </td>

@@ -35,6 +35,11 @@ export class F02008Component implements OnInit {
     address: ['', [Validators.required, Validators.maxLength(128)]],
     userId: ['']
   });
+
+  // getImfornationForm: FormGroup = this.fb.group({
+  //   queryWalletID: ['']
+  // });
+
   gender: string;
   nation: string;
   submitted = false;
@@ -52,6 +57,22 @@ export class F02008Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.upgradeWalletForm.get(cloumnName);
+    // if ( cloumnName == 'queryWalletID' && this.upgradeWalletForm.value.queryWalletID.length == 23 ) {
+    //   this.getImfornationForm.patchValue({ queryWalletID: this.upgradeWalletForm.value.queryWalletID });
+    //   let jsonStr = JSON.stringify(this.getImfornationForm.value);
+    //   let jsonObj = JSON.parse(jsonStr);
+    //   const formdata: FormData = new FormData();
+    //   formdata.append('value', JSON.stringify(jsonObj));
+    //   this.f02008Service.sendConsumer('consumer/f02008Imfornaion', formdata).then((data) => {
+    //     if ( data == null) {
+    //       obj.setErrors({ 'queryWalletIDError': true })
+    //     } else {
+    //       this.upgradeWalletForm.patchValue({ dn : data.DN });
+    //       this.upgradeWalletForm.patchValue({ userId : data.USERID });
+    //       this.upgradeWalletForm.patchValue({ phoneNumber : data.PHONENUMBER});
+    //     }
+    //   });
+    // }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
            obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? '請輸入數字' :
            obj.hasError('idNumberError')  ? '身分證格式錯誤' : '';
@@ -106,9 +127,8 @@ export class F02008Component implements OnInit {
         this.upgradeWalletForm.patchValue({ queryWalletID : result.value });
         this.upgradeWalletForm.patchValue({ dn : result.name });
         this.upgradeWalletForm.patchValue({ userId : result.userId });
-
+        this.upgradeWalletForm.patchValue({ phoneNumber : result.phoneNumber});
       }
     });
   }
-
 }

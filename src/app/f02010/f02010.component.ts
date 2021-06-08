@@ -22,6 +22,11 @@ export class F02010Component implements OnInit {
 
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
+  channelCode: COMB[] = [{ value: 'A001', viewValue: 'ATM提款' },
+                         { value: 'M001', viewValue: '實體消費' },
+                         { value: 'N001', viewValue: '網路消費' },
+                         { value: 'N002', viewValue: '網路繳費' },
+                         { value: 'N003', viewValue: '網路繳稅' } ];
 
   numberPayForm: FormGroup = this.fb.group({
     recipientID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
@@ -34,6 +39,10 @@ export class F02010Component implements OnInit {
     walletID: [''],
     walletType: ['']
   })
+
+  checkForm: FormGroup = this.fb.group({
+    recipientID: ['']
+  });
 
   constructor(private fb: FormBuilder, public f02010Service: F02010Service, public dialog: MatDialog) { }
 
@@ -48,7 +57,20 @@ export class F02010Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.numberPayForm.get(cloumnName);
-    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' : "" ;
+    if ( cloumnName == 'recipientID' && this.numberPayForm.value.recipientid.length == 23 ) {
+      this.checkForm.patchValue({ recipientID: this.numberPayForm.value.recipientID });
+      let jsonStr = JSON.stringify(this.checkForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      const formdata: FormData = new FormData();
+      formdata.append('value', JSON.stringify(jsonObj));
+      this.f02010Service.sendConsumer('consumer/f02010CheckID', formdata).then((data) => {
+        if ( data == null) {
+          obj.setErrors({ 'WalletIDError': true })
+        }
+      });
+    }
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+           obj.hasError('WalletIDError')  ? '錢包ID錯誤' : '';
   }
 
   async sendCBDC() {

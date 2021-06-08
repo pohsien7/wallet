@@ -17,7 +17,7 @@ interface COMB {
 })
 export class F02001Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-
+  display = false;
   // 之後要改打API去取得下拉內容
   mccCode: COMB[] = [{value: 'C1234', viewValue: 'C1234'}, {value: 'C1234', viewValue: 'C1234'}];
 
@@ -30,7 +30,10 @@ export class F02001Component implements OnInit {
     mcc: ['C1234', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
     address: ['', [Validators.required,  Validators.maxLength(128)]],
     balanceLimit: ['9000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    certTxnLimit: ['2000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]]
+    certTxnLimit: ['2000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    statusCode: ['',[]],
+    statusMessage: ['',[]],
+    walletID: ['',[]]
   });
 
   submitted = false;
@@ -51,6 +54,7 @@ export class F02001Component implements OnInit {
   async onSubmit() {
     let msg = '';
     this.submitted = true;
+    this.display = false;
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
       msg = '資料格式有誤，請修正!'
@@ -61,11 +65,16 @@ export class F02001Component implements OnInit {
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f02001Service.sendConsumer('consumer/f02001', formdata).then((data) => {
         msg = data.statusMessage;
+        
+        this.registrationForm.patchValue({statusCode: data.statusCode});
+        this.registrationForm.patchValue({statusMessage: data.statusMessage});
+        this.registrationForm.patchValue({walletID: data.walletID});
       });
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02001confirmComponent, { data: { msgStr: msg } });
+      this.display = true;
     }, 1500);
   }
 }

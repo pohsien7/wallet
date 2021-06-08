@@ -18,13 +18,13 @@ interface COMB {
 export class F03012Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{value: '1123', viewValue: '1123'}];
-  cvTypeCode: COMB[] = [{value: 'C', viewValue: 'C'}];
+  cvcCode: COMB[] = [{ value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
+  cvTypeCode: COMB[] = [{value: 'C', viewValue: '專用款'}, {value: 'C', viewValue: '數位券'}];
 
   issueCVForm: FormGroup = this.fb.group({
-    walletID: [''],
-    cvc: ['1123', [Validators.required, Validators.maxLength(4)]],
-    cvType: ['C', [Validators.required, Validators.maxLength(1)]],
+    walletID: ['BI-822-2021052415340988'],
+    cvc: ['', [Validators.required, Validators.maxLength(4)]],
+    cvType: ['', [Validators.required, Validators.maxLength(1)]],
     amount: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     remark: ['*', [, Validators.maxLength(30)]]
   });

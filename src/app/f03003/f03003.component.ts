@@ -16,11 +16,15 @@ export class F03003Component implements OnInit {
 
   authorizaionForm: FormGroup = this.fb.group({
     operation:['withdraw',[Validators.required ,Validators.maxLength(30)]],
-    walletID:['',[Validators.required, Validators.maxLength(23)]],
+    walletID:['',[Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     recipientID:['',[Validators.required, Validators.maxLength(23)]],
     remark:['',[Validators.maxLength(30)]],
     walletType:['']
   });
+
+  // checkForm: FormGroup = this.fb.group({
+  //   walletID: ['']
+  // });
 
   submitted = false;
 
@@ -37,8 +41,20 @@ export class F03003Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.authorizaionForm.get(cloumnName);
+    // if ( cloumnName == 'walletID' && this.authorizaionForm.value.walletID.length == 23 ) {
+    //   this.checkForm.patchValue({ walletID: this.authorizaionForm.value.walletID });
+    //   let jsonStr = JSON.stringify(this.checkForm.value);
+    //   let jsonObj = JSON.parse(jsonStr);
+    //   const formdata: FormData = new FormData();
+    //   formdata.append('value', JSON.stringify(jsonObj));
+    //   this.f03003Service.sendConsumer('consumer/f03003CheckID', formdata).then((data) => {
+    //     if ( data == null) {
+    //       obj.setErrors({ 'WalletIDError': true })
+    //     }
+    //   });
+    // }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : '';
+           obj.hasError('minlength') ? '長度過短' :  '';
   }
 
   async onSubmit(){

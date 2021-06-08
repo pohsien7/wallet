@@ -65,7 +65,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" (click)="goBack(row.WALLETID, row.DN, row.USERID)">
+          <button mat-icon-button color="primary" (click)="goBack(row.WALLETID, row.DN, row.USERID, row.PHONENUMBER)">
             <span class="material-icons">call_received</span>
           </button>
         </mat-cell>
@@ -86,8 +86,11 @@
         <mat-header-cell *matHeaderCellDef>使用者ID</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.USERID }}</mat-cell>
       </ng-container>
-      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'DN', 'CREATEDATE', 'USERID' ]"></mat-header-row>
-      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'DN', 'CREATEDATE', 'USERID' ]"></mat-row>
+      <ng-container matColumnDef="PHONENUMBER">
+        <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.PHONENUMBER }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'DN', 'CREATEDATE', 'USERID' ,'PHONENUMBER' ]"></mat-header-row>
+      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'DN', 'CREATEDATE', 'USERID', 'PHONENUMBER' ]"></mat-row>
     </mat-table>
   </mat-dialog-content>
-  

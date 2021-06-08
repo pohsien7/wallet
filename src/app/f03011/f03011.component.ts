@@ -24,8 +24,6 @@ export class F03011Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
-
-  // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   queryWalletLedgerForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.maxLength(25)]],
     queryTxnID: ['', []],
