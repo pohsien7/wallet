@@ -50,8 +50,13 @@ export class F02006Component implements OnInit {
     Validators.required
   ]);
 
-  getErrorMessage(cloumnName: string) {
+  async getErrorMessage(cloumnName: string) {
     let obj = this.registrationForm.get(cloumnName);
+    if ( cloumnName == 'queryTxnID' && this.registrationForm.value.queryTxnID.length == 42 ) {
+      await this.f02006Service.get("RM",this.registrationForm.value.queryTxnID).then((data) =>{
+        console.log(data);
+      });
+    }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
            obj.hasError('minlength') ? '長度過短' : '';
   }

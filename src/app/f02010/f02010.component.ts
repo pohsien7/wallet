@@ -57,20 +57,7 @@ export class F02010Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.numberPayForm.get(cloumnName);
-    if ( cloumnName == 'recipientID' && this.numberPayForm.value.recipientid.length == 23 ) {
-      this.checkForm.patchValue({ recipientID: this.numberPayForm.value.recipientID });
-      let jsonStr = JSON.stringify(this.checkForm.value);
-      let jsonObj = JSON.parse(jsonStr);
-      const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(jsonObj));
-      this.f02010Service.sendConsumer('consumer/f02010CheckID', formdata).then((data) => {
-        if ( data == null) {
-          obj.setErrors({ 'WalletIDError': true })
-        }
-      });
-    }
-    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('WalletIDError')  ? '錢包ID錯誤' : '';
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' : '';
   }
 
   async sendCBDC() {
