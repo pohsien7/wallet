@@ -18,6 +18,7 @@ export class F03002wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
     transType: ['', [Validators.required]],
+    recipientid: ['', [Validators.maxLength(23), Validators.minLength(23)]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
@@ -81,8 +82,8 @@ export class F03002wopenComponent implements OnInit {
     });
   }
 
-  goBack(recipientID: string,txnID: string) {
-    this.dialogRef.close({ event:'success', recipientID: recipientID , txnID: txnID });
+  goBack(recipientID: string, txnID: string, cvc: string) {
+    this.dialogRef.close({ event:'success', recipientID: recipientID , txnID: txnID, cvc: cvc });
   }
 
   cleanToEmpty() {

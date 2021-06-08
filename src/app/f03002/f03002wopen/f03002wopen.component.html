@@ -22,6 +22,12 @@
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </td>
+      <td>
+        <mat-form-field appearance="fill" class="form-id">
+          <mat-label>交易收方錢包ID</mat-label>
+          <input matInput #input class="form-control" formControlName="recipientid">
+        </mat-form-field>
+      </td>
     </tr>
     <tr>
       <td colspan="4">
@@ -39,7 +45,7 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="goBack(row.RECIPIENTID,row.TXNID)">
+        <button mat-icon-button color="primary" (click)="goBack(row.RECIPIENTID, row.TXNID, row.CVC)">
           <span class="material-icons">call_received</span>
         </button>
       </mat-cell>
@@ -48,19 +54,23 @@
       <mat-header-cell *matHeaderCellDef>交易收方錢包ID</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.RECIPIENTID }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="AMOUNT">
+    <ng-container matColumnDef="TXNID">
       <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.TXNID }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="TXNID">
+    <ng-container matColumnDef="AMOUNT">
       <mat-header-cell *matHeaderCellDef>交易金額</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.AMOUNT }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CVC">
+      <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.CVC }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="TXNTIME">
       <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.TXNTIME }}</mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'TXNTIME' ]"></mat-header-row>
-    <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'TXNTIME' ]"></mat-row>
+    <mat-header-row *matHeaderRowDef="['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'CVC', 'TXNTIME' ]"></mat-header-row>
+    <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'CVC', 'TXNTIME' ]"></mat-row>
   </mat-table>
 </mat-dialog-content>

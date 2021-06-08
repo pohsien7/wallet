@@ -37,11 +37,8 @@
               <th>券幣代號：</th>
               <td>
                 <mat-form-field color="accent">
-                  <mat-select formControlName="cvc">
-                    <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
-                      {{cvc.viewValue}}
-                    </mat-option>
-                  </mat-select>
+                  <input matInput #input class="form-control" formControlName="cvc" readonly>
+                  <mat-error>{{getErrorMessage('cvc')}}</mat-error>
                 </mat-form-field>
               </td>
               <th nowrap="nowrap">交易備註：</th>

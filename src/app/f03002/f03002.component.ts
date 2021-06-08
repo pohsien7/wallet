@@ -5,26 +5,18 @@ import { F03001Service } from '../f03001/f03001.service';
 import { MatDialog } from '@angular/material/dialog';
 import { F03002confirmComponent } from './f03002confirm/f03002confirm.component';
 import { F03002wopenComponent } from './f03002wopen/f03002wopen.component';
-
-interface COMB {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-f03002',
   templateUrl: './f03002.component.html',
   styleUrls: ['./f03002.component.css','../../assets/css/f03.css']
 })
+
 export class F03002Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-  //之後API取得下拉內容
-  cvcCode: COMB[] = [{value: '0901', viewValue: '0901'}, {value: '0901', viewValue: '0901'}];
-
   reverseForm: FormGroup = this.fb.group({
     walletid: ['', [Validators.maxLength(30)]],
     stxnid: ['', [Validators.required]],
-    cvc: ['0901', [Validators.required]],
+    cvc: ['', [Validators.required]],
     remark: ['', []]
   })
 
@@ -37,7 +29,6 @@ export class F03002Component implements OnInit {
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage(cloumnName: string) {
@@ -61,6 +52,10 @@ export class F03002Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F03002confirmComponent, { data: { msgStr: msg } });
+      this.reverseForm.patchValue({ walletid : '' });
+      this.reverseForm.patchValue({ stxnid : '' });
+      this.reverseForm.patchValue({ cvc : '' });
+      this.reverseForm.patchValue({ remark : '' });
     }, 1500);
   }
 
@@ -74,6 +69,7 @@ export class F03002Component implements OnInit {
       if (result != null && result.event == 'success') {
         this.reverseForm.patchValue({ walletid : result.recipientID });
         this.reverseForm.patchValue({ stxnid : result.txnID });
+        this.reverseForm.patchValue({ cvc : result.cvc });
       }
     });
   }
