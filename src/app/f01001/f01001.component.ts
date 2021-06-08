@@ -31,9 +31,9 @@ export class F01001Component implements OnInit {
     walletType:[]
   });
 
-  checkForm: FormGroup = this.fb.group({
-    recipientid: ['']
-  });
+  // checkForm: FormGroup = this.fb.group({
+  //   recipientid: ['']
+  // });
 
   model: number = this.transferForm.value.amount;
   submitted = false;
@@ -50,20 +50,20 @@ export class F01001Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.transferForm.get(cloumnName);
-    if ( cloumnName == 'recipientid' && this.transferForm.value.recipientid.length == 23 ) {
-      this.checkForm.patchValue({ recipientid: this.transferForm.value.recipientid });
-      let jsonStr = JSON.stringify(this.checkForm.value);
-      let jsonObj = JSON.parse(jsonStr);
-      const formdata: FormData = new FormData();
-      formdata.append('value', JSON.stringify(jsonObj));
-      this.f01001Service.sendConsumer('consumer/f01001CheckID', formdata).then((data) => {
-        if ( data == null) {
-          obj.setErrors({ 'WalletIDError': true })
-        }
-      });
-    }
+    // if ( cloumnName == 'recipientid' && this.transferForm.value.recipientid.length == 23 ) {
+    //   this.checkForm.patchValue({ recipientid: this.transferForm.value.recipientid });
+    //   let jsonStr = JSON.stringify(this.checkForm.value);
+    //   let jsonObj = JSON.parse(jsonStr);
+    //   const formdata: FormData = new FormData();
+    //   formdata.append('value', JSON.stringify(jsonObj));
+    //   this.f01001Service.sendConsumer('consumer/f01001CheckID', formdata).then((data) => {
+    //     if ( data == null) {
+    //       obj.setErrors({ 'WalletIDError': true })
+    //     }
+    //   });
+    // }
     return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-      obj.hasError('minlength') ? '長度過短' : obj.hasError('WalletIDError')  ? '錢包ID錯誤' : '';
+      obj.hasError('minlength') ? '長度過短' : '';
   }
 
   async onSubmit() {

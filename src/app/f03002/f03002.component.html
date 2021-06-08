@@ -15,14 +15,14 @@
               <th nowrap="nowrap">簽署指令之錢包ID：</th>
               <td>
                 <mat-form-field color="accent" class="form-id">
-                  <input matInput #input class="form-control" formControlName="walletid" readonly>
+                  <input matInput #input class="form-control" formControlName="walletid">
                   <mat-error>{{getErrorMessage('walletid')}}</mat-error>
                 </mat-form-field>
               </td>
               <th nowrap="nowrap">欲撤銷之交易ID：</th>
               <td>
                 <mat-form-field color="accent" class="form-id">
-                  <input matInput #input class="form-control" formControlName="stxnid" readonly>
+                  <input matInput #input class="form-control" formControlName="stxnid">
                   <mat-error>{{getErrorMessage('stxnid')}}</mat-error>
                 </mat-form-field>
               </td>
