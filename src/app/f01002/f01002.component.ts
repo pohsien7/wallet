@@ -19,7 +19,7 @@ export class F01002Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' },{value: 'R001', viewValue: 'R001'},{value: 'R002', viewValue: 'R002'}];
 
   queryVaultLedgerForm: FormGroup = this.fb.group({
     walletID: ['B-822', [Validators.maxLength(25)]],
