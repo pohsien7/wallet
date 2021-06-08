@@ -19,6 +19,7 @@ export class F03007wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
     walletType: ['', [Validators.required]],
+    walletID: ['', []],
     startTime: ['', [ ]],
     endTime: ['', [ ]],
     dn: ['', [ ]],
@@ -60,6 +61,7 @@ export class F03007wopenComponent implements OnInit {
   cleanToEmpty() {
     this.searchForm.patchValue({ dn : '' });
     this.searchForm.patchValue({ walletType : '' });
+    this.searchForm.patchValue({ walletID : '' });
     this.searchForm.patchValue({ startTime : '' });
     this.searchForm.patchValue({ endTime : '' });
     this.currentPage = {

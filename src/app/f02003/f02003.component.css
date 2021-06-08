@@ -1,11 +1,4 @@
-/* table {
-    width:50%;
+#invisibleStatusMessage {
+  white-space: pre-line; 
+  color: transparent;
 }
-
-td {
-  width: 1000px;
-}
-
-mat-form-field{
-  width: 100%;
-} */

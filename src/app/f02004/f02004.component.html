@@ -19,7 +19,7 @@
                   <mat-error>{{getErrorMessage('dn')}}</mat-error>
                 </mat-form-field>
               </td>
-              <th>手機號碼：</th>
+              <th nowrap="nowrap">手機號碼：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #input class="form-control" formControlName="phoneNumber">
@@ -29,7 +29,7 @@
             </tr>
 
             <tr>
-              <th>錢包餘額限額 (單位：元)：</th>
+              <th nowrap="nowrap">錢包餘額限額 (單位：元)：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #inputstate class="form-control" formControlName="balanceLimit">
@@ -51,30 +51,34 @@
         <mat-card class="matCard" *ngIf="display;">
           <mat-card-content>
             <tr>
-              <th>狀態代碼：</th>
+              <th nowrap="nowrap">狀態代碼：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #inputstate class="form-control" formControlName="statusCode">
                 </mat-form-field>
               </td>
-              <th>狀態訊息：</th>
-              <td colspan="2">
-                <mat-form-field color="accent">
+              <td></td>
+            </tr>
+            <tr>
+              <th nowrap="nowrap">狀態訊息：</th>
+              <td>
+                <mat-form-field color="accent" [ngStyle]="{'width.px': width}">
                   <input matInput #inputstate class="form-control" formControlName="statusMessage">
                 </mat-form-field>
               </td>
+              <td></td>
             </tr>
-
             <tr>
-              <th>錢包ID：</th>
-              <td colspan="2">
-                <mat-form-field color="accent">
+              <th nowrap="nowrap">錢包ID：</th>
+              <td>
+                <mat-form-field color="accent" [ngStyle]="{'width.px': width}">
                   <input matInput #inputstate class="form-control" formControlName="walletID">
                 </mat-form-field>
               </td>
             </tr>
           </mat-card-content>
         </mat-card>
+        <span #invisibleText id="invisibleStatusMessage"> {{ statusMessage }} </span>
       </table>
     </form>
   </block-ui>

@@ -1,3 +1,5 @@
+import { ElementRef } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -18,7 +20,10 @@ interface COMB {
 })
 export class F02004Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
+  @ViewChild('invisibleText') invTextER: ElementRef;
   display = false;
+  width: number = 300;
+  statusMessage: string = '';
 
   // 之後要改打API去取得下拉內容
   mccCode: COMB[] = [{value: 'MCC1', viewValue: 'MCC1'}, {value: 'MCC2', viewValue: 'MCC2'}];
@@ -70,6 +75,7 @@ export class F02004Component implements OnInit {
 
   async onSubmit() {
     let msg = '';
+    let dataMsg = '';
     this.display = false;
     this.submitted = true;
     this.blockUI.start('Loading...');
@@ -82,18 +88,33 @@ export class F02004Component implements OnInit {
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       this.f02004Service.sendConsumer('consumer/f02004', formdata).then((data) => {
         msg = data.statusMessage;
-        
+        dataMsg = data.statusMessage;
         this.registrationForm.patchValue({statusCode: data.statusCode});
         this.registrationForm.patchValue({statusMessage: data.statusMessage});
         this.registrationForm.patchValue({walletID: data.walletID});
+        this.statusMessage = data.statusMessage;
+        this.resizeInput(data.statusMessage);
       });
       console.log(JSON.stringify(this.registrationForm.value));
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02004confirmComponent, { data: { msgStr: msg } });
-      this.display = true;
+      if (dataMsg != "") {this.display = true; }
     }, 1500);
     
   }
+
+  resizeInput(inputText) {
+    setTimeout ( () =>{
+      const minWidth = 200;
+      if (this.invTextER.nativeElement.offsetWidth > minWidth) {
+        this.width = this.invTextER.nativeElement.offsetWidth + 50;
+      } else {
+        this.width = minWidth;
+      }
+    }, 0);
+  }
+  
+
 }

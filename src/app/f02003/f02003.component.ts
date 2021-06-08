@@ -7,6 +7,8 @@ import { FormControl } from '@angular/forms';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { F02003Service } from './f02003.service';
 import { F02003confirmComponent } from './f02003confirm/f02003confirm.component';
+import { ElementRef } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
 
 interface COMB {
@@ -21,6 +23,9 @@ interface COMB {
 })
 export class F02003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
+  @ViewChild('invisibleText') invTextER: ElementRef;
+  width: number = 300;
+  statusMessage: string = '';
   display = false;
   nationCode: COMB[] = [{ value: 'TWN', viewValue: 'Taiwan' }, { value: 'JAN', viewValue: 'Japan' }, { value: 'USA', viewValue: 'USA' }];
   genderCode: COMB[] = [{ value: 'M', viewValue: '男' }, { value: 'F', viewValue: '女' }];
@@ -70,6 +75,7 @@ export class F02003Component implements OnInit {
 
   async onSubmit() {
     let msg = '';
+    let dataMsg = '';
     this.submitted = true;
     this.display = false;
     this.blockUI.start('Loading...');
@@ -86,7 +92,7 @@ export class F02003Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02003Service.sendConsumer('consumer/f02003', formdata).then((data) => {
         msg = data.statusMessage;
-        
+        dataMsg = data.statusMessage;
         if ( msg == "Success" ) {
           this.disabled = "false";
           this.walletId = data.walletID
@@ -94,13 +100,15 @@ export class F02003Component implements OnInit {
         this.registrationForm.patchValue({statusCode: data.statusCode});
         this.registrationForm.patchValue({statusMessage: data.statusMessage});
         this.registrationForm.patchValue({walletID: data.walletID});
+        this.statusMessage = data.statusMessage;
+        this.resizeInput(data.statusMessage);
       });
       console.log(JSON.stringify(this.registrationForm.value));
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F02003confirmComponent, { data: { msgStr: msg } });
-      this.display = true;
+      if (dataMsg != "") {this.display = true; }
     }, 1500);
   }
 
@@ -122,4 +130,14 @@ export class F02003Component implements OnInit {
     this.dialog.open(F03003Component,{ data: { walletId : this.walletId , walletType: 'NPWALLET_PUBKEY' }});
   }
 
+  resizeInput(inputText) {
+    setTimeout ( () =>{
+      const minWidth = 200;
+      if (this.invTextER.nativeElement.offsetWidth > minWidth) {
+        this.width = this.invTextER.nativeElement.offsetWidth + 50;
+      } else {
+        this.width = minWidth;
+      }
+    }, 0);
+  }
 }

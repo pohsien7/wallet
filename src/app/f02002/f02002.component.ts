@@ -5,6 +5,8 @@ import { F02002Service } from './f02002.service';
 import { DatePipe } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { MatDialog } from '@angular/material/dialog';
+import { ElementRef } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
 interface COMB {
   value: string;
@@ -18,6 +20,9 @@ interface COMB {
 })
 export class F02002Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
+  @ViewChild('invisibleText') invTextER: ElementRef;
+  width: number = 300;
+  statusMessage: string = '';
   display = false;
   //之後API取得下拉內容
   nationCode: COMB[] = [{ value: 'TWN', viewValue: 'Taiwan' }, { value: 'JAN', viewValue: 'Japan' }, { value: 'USA', viewValue: 'USA' }];
@@ -63,6 +68,7 @@ export class F02002Component implements OnInit {
   // 參考範例: https://ej2.syncfusion.com/angular/documentation/datepicker/how-to/json-data-binding/
   async onSubmit() {
     let msg = '';
+    let dataMsg = '';
     this.submitted = true;
     this.display = false;
     this.blockUI.start('Loading...');
@@ -81,16 +87,18 @@ export class F02002Component implements OnInit {
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02002Service.sendConsumer('consumer/f02002', formdata).then((data) => {
         msg = data.statusMessage;
-        
+        dataMsg = data.statusMessage;
         this.registrationForm.patchValue({statusCode: data.statusCode});
         this.registrationForm.patchValue({statusMessage: data.statusMessage});
         this.registrationForm.patchValue({walletID: data.walletID});
+        this.statusMessage = data.statusMessage;
+        this.resizeInput(data.statusMessage);
       });
     }
     setTimeout(() => {
       this.blockUI.stop();
       const childernDialogRef = this.dialog.open(F02002confirmComponent, { data: { msgStr: msg } });
-      this.display = true;
+      if (dataMsg != "") {this.display = true; }
     }, 1500);
   }
 
@@ -106,13 +114,16 @@ export class F02002Component implements OnInit {
     }
   }
 
-  // numberOnly(event: { which: any; keyCode: any; }): boolean {
-  //   const charCode = (event.which) ? event.which : event.keyCode;
-  //   if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  resizeInput(inputText) {
+    setTimeout ( () =>{
+      const minWidth = 200;
+      if (this.invTextER.nativeElement.offsetWidth > minWidth) {
+        this.width = this.invTextER.nativeElement.offsetWidth + 50;
+      } else {
+        this.width = minWidth;
+      }
+    }, 0);
+  }
 }
 
 
