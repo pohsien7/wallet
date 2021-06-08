@@ -111,7 +111,7 @@ export class F03011wopenComponent implements OnInit {
     }
   }
 
-  goBack(walletId: string, txnID: string) {
-    this.dialogRef.close({ event:'success', value: walletId , txnID: txnID, valueTransType: this.searchForm.value.transType });
+  goBack(walletId: string, txnID: string, cvc: string) {
+    this.dialogRef.close({ event:'success', value: walletId , txnID: txnID, cvc: cvc, valueTransType: this.searchForm.value.transType });
   }
 }

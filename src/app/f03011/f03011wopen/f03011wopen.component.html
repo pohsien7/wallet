@@ -65,7 +65,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" (click)="goBack(row.WALLETID, row.TXNID)">
+          <button mat-icon-button color="primary" (click)="goBack(row.WALLETID, row.TXNID, row.CVC)">
             <span class="material-icons">call_received</span>
           </button>
         </mat-cell>

@@ -22,20 +22,17 @@
             </td>
             <th nowrap="nowrap">券幣代號：</th>
             <td>
-            <mat-form-field color="accent">
-                <mat-select formControlName="cvc">
-                <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
-                    {{cvc.viewValue}}
-                </mat-option>
-                </mat-select>
-            </mat-form-field>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="cvc" readonly>
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
             </td>
             <th nowrap="nowrap">查詢之交易ID：</th>
             <td>
-                <mat-form-field color="accent">
+              <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="queryTxnID">
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
+              </mat-form-field>
             </td>
         </tr>
       </table>

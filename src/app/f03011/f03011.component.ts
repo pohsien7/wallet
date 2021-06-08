@@ -22,12 +22,10 @@ interface COMB {
 export class F03011Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
-
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
   queryWalletLedgerForm: FormGroup = this.fb.group({
-    walletID: ['', [Validators.maxLength(25)]],
-    queryTxnID: ['', []],
-    cvc: ['0901', [Validators.maxLength(4)]],
+    walletID: ['', [Validators.required, Validators.maxLength(25)]],
+    queryTxnID: ['', [Validators.required]],
+    cvc: ['', [Validators.required, Validators.maxLength(4)]],
     transType: []
   });
 
@@ -116,6 +114,7 @@ export class F03011Component implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
+        this.queryWalletLedgerForm.patchValue({ cvc: result.cvc });
         this.queryWalletLedgerForm.patchValue({ walletID: result.value });
         this.queryWalletLedgerForm.patchValue({ queryTxnID: result.txnID });
         this.queryWalletLedgerForm.patchValue({ transType: result.valueTransType });
