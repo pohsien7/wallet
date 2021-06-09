@@ -23,7 +23,7 @@ export class F02009Component implements OnInit {
     remark:['']
 
   });
-
+  display = false;
   constructor(private fb: FormBuilder, public f02009Service: F02009Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -83,6 +83,19 @@ export class F02009Component implements OnInit {
         this.barcodePayForm.patchValue({ barcode : result.barcode });
       }
     });
+  }
+
+  check() {
+    if (this.barcodePayForm.value.recipientID.length == 23) {
+      this.f02009Service.get("N", this.barcodePayForm.value.recipientID).then((data) => {
+        if (data.IDerror == "error") {
+          this.display = true;
+        } else {
+          this.display = false;
+          this.barcodePayForm.patchValue({ cvc: data.CVC });
+        }
+      });
+    }
   }
 
 }
