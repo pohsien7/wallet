@@ -16,7 +16,7 @@ export class F02006Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   registrationForm: FormGroup = this.fb.group({
-    queryTxnID: ['', [Validators.required]],
+    queryTxnID: ['', [Validators.required, Validators.minLength(42), Validators.maxLength(42)]],
     cvc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
   });
 
@@ -39,6 +39,7 @@ export class F02006Component implements OnInit {
     insID: ['', []]
   });
 
+  display = false;
   submitted = false;
 
   constructor(private fb: FormBuilder, public f02006Service: F02006Service, public dialog: MatDialog) { }
@@ -52,11 +53,6 @@ export class F02006Component implements OnInit {
 
   async getErrorMessage(cloumnName: string) {
     let obj = this.registrationForm.get(cloumnName);
-    if ( cloumnName == 'queryTxnID' && this.registrationForm.value.queryTxnID.length == 42 ) {
-      await this.f02006Service.get("RM",this.registrationForm.value.queryTxnID).then((data) =>{
-        console.log(data);
-      });
-    }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
            obj.hasError('minlength') ? '長度過短' : '';
   }
@@ -103,14 +99,24 @@ export class F02006Component implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
+        this.display = false;
         this.registrationForm.patchValue({ queryTxnID : result.value });
-        if ( result.cvc == '901') {
-          this.registrationForm.patchValue({ cvc : '0'+result.cvc });
-        } else {
-          this.registrationForm.patchValue({ cvc : result.cvc });
-        }
+        this.registrationForm.patchValue({ cvc : result.cvc });
       }
     });
   }
 
+  getCvc(){
+    if ( this.registrationForm.value.queryTxnID.length == 42 ) {
+      this.f02006Service.get("RM",this.registrationForm.value.queryTxnID).then((data) =>{
+        console.log(data);
+        if ( data.IDerror == "error"){
+          this.display = true;
+        } else {
+          this.display = false;
+          this.registrationForm.patchValue({ cvc: data.CVC});
+        }
+      });
+    }
+  }
 }
