@@ -15,11 +15,8 @@
               <th nowrap="nowrap">MCC：</th>
               <td>
                 <mat-form-field color="accent">
-                  <mat-select formControlName="mcc">
-                    <mat-option *ngFor="let mcc of mccCode" [value]="mcc.value">
-                      {{mcc.viewValue}}
-                    </mat-option>
-                  </mat-select>
+                  <input matInput #input class="form-control" formControlName="mcc">
+                  <mat-error>{{getErrorMessage('mcc')}}</mat-error>
                 </mat-form-field>
               </td>
               <th nowrap="nowrap">錢包顯示名稱：</th>
