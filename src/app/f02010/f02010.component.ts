@@ -40,10 +40,7 @@ export class F02010Component implements OnInit {
     walletType: ['']
   })
 
-  checkForm: FormGroup = this.fb.group({
-    recipientID: ['']
-  });
-
+  display = false;
   constructor(private fb: FormBuilder, public f02010Service: F02010Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -104,5 +101,17 @@ export class F02010Component implements OnInit {
         this.numberPayForm.patchValue({ walletType : result.walletType });
       }
     });
+  }
+
+  check() {
+    if (this.numberPayForm.value.recipientID.length == 23) {
+      this.f02010Service.get("N", this.numberPayForm.value.recipientID).then((data) => {
+        if (data.IDerror == "error") {
+          this.display = true;
+        } else {
+          this.display = false;
+        }
+      });
+    }
   }
 }

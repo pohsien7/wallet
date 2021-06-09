@@ -15,7 +15,7 @@
               <th nowrap="nowrap">錢包ID：</th>
               <td>
                 <mat-form-field color="accent">
-                  <input matInput #input class="form-control" formControlName="walletID">
+                  <input matInput #input class="form-control" formControlName="walletID" (blur)="get()">
                   <mat-error>{{getErrorMessage('walletID')}}</mat-error>
                 </mat-form-field>
               </td>
@@ -24,6 +24,7 @@
                   <span class="material-icons">view_list</span>
                 </button>
               </td>
+              <td *ngIf="display;"><font color="red">非自然人ID</font></td>
             </tr>
             <tr>
               <th nowrap="nowrap">姓名：</th>

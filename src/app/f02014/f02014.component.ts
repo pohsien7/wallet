@@ -24,7 +24,7 @@ export class F02014Component implements OnInit {
   planModel: any = { start_time: new Date() };
 
   updateForm: FormGroup = this.fb.group({
-    walletID: [''],
+    walletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     walletType: [''],
     name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     idNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
@@ -36,7 +36,7 @@ export class F02014Component implements OnInit {
     remark: ['*', [, Validators.maxLength(30)]]
   });
   submitted = false;
-
+  display = false;
   constructor(private fb: FormBuilder, public f02014Service: F02014Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -97,5 +97,24 @@ export class F02014Component implements OnInit {
         this.updateForm.patchValue({ address : result.address });
       }
     });
+  }
+
+  get() {
+    if (this.updateForm.value.walletID.length == 23) {
+      this.f02014Service.get("NN", this.updateForm.value.walletID).then((data) => {
+        if (data.IDerror == "error") {
+          this.display = true;
+        } else {
+          this.display = false;
+          this.updateForm.patchValue({ name : data.NAME });
+          this.updateForm.patchValue({ idNumber : data.IDNUMBER });
+          this.updateForm.patchValue({ nation : data.NATION });
+          this.updateForm.patchValue({ gender : data.GENDER });
+          this.updateForm.patchValue({ birthDate : data.BIRTHDATE });
+          this.updateForm.patchValue({ phoneNumber : data.PHONENUMBER });
+          this.updateForm.patchValue({ address : data.ADDRESS });
+        }
+      });
+    }
   }
 }

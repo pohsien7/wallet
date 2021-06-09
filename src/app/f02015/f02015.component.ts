@@ -9,7 +9,7 @@ import { F02015wopenComponent } from './f02015wopen/f02015wopen.component';
 @Component({
   selector: 'app-f02015',
   templateUrl: './f02015.component.html',
-  styleUrls: ['./f02015.component.css','../../assets/css/f02.css']
+  styleUrls: ['./f02015.component.css', '../../assets/css/f02.css']
 })
 export class F02015Component implements OnInit {
 
@@ -22,7 +22,7 @@ export class F02015Component implements OnInit {
   });
 
   resultForm: FormGroup = this.fb.group({
-    authID : ['', []],
+    authID: ['', []],
     operation: ['', []],
     senderID: ['', []],
     authorizedAgencyID: ['', []],
@@ -46,30 +46,33 @@ export class F02015Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.queryWalletAuthorizationForm.get(cloumnName);
-    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : '';
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+      obj.hasError('minlength') ? '長度過短' : '';
   }
 
   async sendCBDC() {
+    this.clear();
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
-    if(!this.queryWalletAuthorizationForm.valid) {
+    if (!this.queryWalletAuthorizationForm.valid) {
       msg = '資料格式有誤，請修正!'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.queryWalletAuthorizationForm.value));
       await this.f02015Service.sendConsumer('consumer/f02015', formdata).then((data) => {
         msg = data.statusMessage;
-        this.resultForm.patchValue({ authID : data.authorizations[0].authID });
-        this.resultForm.patchValue({ operation : data.authorizations[0].operation });
-        this.resultForm.patchValue({ senderID : data.authorizations[0].senderID });
-        this.resultForm.patchValue({ authorizedAgencyID : data.authorizations[0].authorizedAgencyID });
-        this.resultForm.patchValue({ recipientID : data.authorizations[0].recipientID });
-        this.resultForm.patchValue({ remark : data.authorizations[0].remark });
-        this.resultForm.patchValue({ voidRemark : data.authorizations[0].voidRemark });
-        this.resultForm.patchValue({ status : data.authorizations[0].status });
-        this.resultForm.patchValue({ createTime : data.authorizations[0].createTime });
+        if (data.statusMessage == 'Success') {
+          this.resultForm.patchValue({ authID: data.authorizations[0].authID });
+          this.resultForm.patchValue({ operation: data.authorizations[0].operation });
+          this.resultForm.patchValue({ senderID: data.authorizations[0].senderID });
+          this.resultForm.patchValue({ authorizedAgencyID: data.authorizations[0].authorizedAgencyID });
+          this.resultForm.patchValue({ recipientID: data.authorizations[0].recipientID });
+          this.resultForm.patchValue({ remark: data.authorizations[0].remark });
+          this.resultForm.patchValue({ voidRemark: data.authorizations[0].voidRemark });
+          this.resultForm.patchValue({ status: data.authorizations[0].status });
+          this.resultForm.patchValue({ createTime: data.authorizations[0].createTime });
+        }
       });
     }
     setTimeout(() => {
@@ -85,10 +88,22 @@ export class F02015Component implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
-        this.queryWalletAuthorizationForm.patchValue({ walletID : result.walletID });
-        this.queryWalletAuthorizationForm.patchValue({ authID : result.authID });
-        this.queryWalletAuthorizationForm.patchValue({ operation : result.operation });
+        this.queryWalletAuthorizationForm.patchValue({ walletID: result.walletID });
+        this.queryWalletAuthorizationForm.patchValue({ authID: result.authID });
+        this.queryWalletAuthorizationForm.patchValue({ operation: result.operation });
       }
     });
+  }
+
+  clear() {
+    this.resultForm.patchValue({ authID: '' });
+    this.resultForm.patchValue({ operation: '' });
+    this.resultForm.patchValue({ senderID: '' });
+    this.resultForm.patchValue({ authorizedAgencyID: '' });
+    this.resultForm.patchValue({ recipientID: '' });
+    this.resultForm.patchValue({ remark: '' });
+    this.resultForm.patchValue({ voidRemark: '' });
+    this.resultForm.patchValue({ status: '' });
+    this.resultForm.patchValue({ createTime: '' });
   }
 }
