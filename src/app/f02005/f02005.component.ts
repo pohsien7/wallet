@@ -53,6 +53,7 @@ export class F02005Component implements OnInit {
   }
 
   async sendCBDC() {
+    this.clear();
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
@@ -63,20 +64,21 @@ export class F02005Component implements OnInit {
       formdata.append('value', JSON.stringify(this.registrationForm.value));
       await this.f02005Service.sendConsumer('consumer/f02005', formdata).then((data) => {
         msg = data.statusMessage;
-        console.log(data)
-        this.resultForm.patchValue({ balance : data.wallet.balance });
-        this.resultForm.patchValue({ totalCount : data.wallet.totalCount });
-        this.resultForm.patchValue({ statusLastModified : data.wallet.statusLastModified });
-        this.resultForm.patchValue({ type : data.wallet.type });
-        this.resultForm.patchValue({ mcc : data.wallet.mcc });
-        this.resultForm.patchValue({ frozen : data.wallet.frozen });
-        this.resultForm.patchValue({ disabled : data.wallet.disabled });
-        this.resultForm.patchValue({ settingLastModified : data.wallet.settingLastModified });
-        this.resultForm.patchValue({ dn : data.wallet.dn });
-        this.resultForm.patchValue({ certTxnLimit : data.wallet.certTxnLimit });
-        this.resultForm.patchValue({ keyTxnLimit : data.wallet.keyTxnLimit });
-        this.resultForm.patchValue({ cvc : data.wallet.cvc });
-        this.resultForm.patchValue({ createTime : data.wallet.createTime });
+        if (data.statusMessage == 'Success') {
+          this.resultForm.patchValue({ balance : data.wallet.balance });
+          this.resultForm.patchValue({ totalCount : data.wallet.totalCount });
+          this.resultForm.patchValue({ statusLastModified : data.wallet.statusLastModified });
+          this.resultForm.patchValue({ type : data.wallet.type });
+          this.resultForm.patchValue({ mcc : data.wallet.mcc });
+          this.resultForm.patchValue({ frozen : data.wallet.frozen });
+          this.resultForm.patchValue({ disabled : data.wallet.disabled });
+          this.resultForm.patchValue({ settingLastModified : data.wallet.settingLastModified });
+          this.resultForm.patchValue({ dn : data.wallet.dn });
+          this.resultForm.patchValue({ certTxnLimit : data.wallet.certTxnLimit });
+          this.resultForm.patchValue({ keyTxnLimit : data.wallet.keyTxnLimit });
+          this.resultForm.patchValue({ cvc : data.wallet.cvc });
+          this.resultForm.patchValue({ createTime : data.wallet.createTime });
+        }   
       });
     }
     setTimeout(() => {
@@ -94,6 +96,24 @@ export class F02005Component implements OnInit {
       if (result != null && result.event == 'success') {
         this.registrationForm.patchValue({ queryWalletID : result.value });
       }
+    });
+  }
+
+  clear(){
+    this.resultForm.patchValue({
+      balance: "",
+      totalCount: "",
+      statusLastModified: "",
+      type: "",
+      mcc: "",
+      frozen: "",
+      disabled: "",
+      settingLastModified: "",
+      dn: "",
+      certTxnLimit: "",
+      keyTxnLimit: "",
+      cvc: "",
+      createTime: ""
     });
   }
 

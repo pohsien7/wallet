@@ -6,13 +6,14 @@
         <tr>
           <th>
             <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+            <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
           </th>
         </tr>
         <tr>
           <th nowrap="nowrap">欲查詢之交易ID：</th>
           <td>
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" formControlName="queryTxnID">
+            <mat-form-field color="accent" class="form-id">
+              <input matInput #input class="form-control" formControlName="queryTxnID" (blur)="getCvc()">
               <mat-error>{{getErrorMessage('queryTxnID')}}</mat-error>
             </mat-form-field>
           </td>
@@ -21,6 +22,7 @@
               <span class="material-icons">view_list</span>
             </button>
           </td>
+          <td *ngIf="display;"><font color="red">交易ID有誤</font></td>
         </tr>
         <tr>
           <th>券幣代號：</th>

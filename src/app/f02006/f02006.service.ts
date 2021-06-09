@@ -16,7 +16,7 @@ export class F02006Service extends BaseService {
   }
 
   public async get(checkString: string, ID: string) {
-    const baseURL = 'tableList?checkString=' + checkString + '&ID='+ID;
+    const baseURL = 'tableList?checkString=' + checkString + '&sendID='+ID;
     return await this.postHttpClient(baseURL).toPromise();
   }
 }
