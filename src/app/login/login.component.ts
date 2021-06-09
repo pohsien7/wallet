@@ -36,6 +36,9 @@ export class LoginComponent {
     this.bnIdle.stopTimer();
     this.router.navigate(['./logOut']);
     alert('閒置過久已登出');
+  }
 
+  public goBarcode() {
+    this.router.navigate(['./barcode']);
   }
 }

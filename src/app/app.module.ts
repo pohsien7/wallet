@@ -95,7 +95,6 @@ import { F02008wopenComponent } from './f02008/f02008wopen/f02008wopen.component
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { F02007Component } from './f02007/f02007.component';
 import { QrcodeComponent } from './qrcode/qrcode.component';
-import { QrcodeconfirmComponent } from './qrcode/qrcodeconfirm/qrcodeconfirm.component';
 import { F03005Component } from './f03005/f03005.component';
 import { F03006Component } from './f03006/f03006.component';
 import { F03005confirmComponent } from './f03005/f03005confirm/f03005confirm.component';
@@ -159,6 +158,7 @@ import { F02015confirmComponent } from './f02015/f02015confirm/f02015confirm.com
 import { F04005Component } from './f04005/f04005.component';
 import { F04005confirmComponent } from './f04005/f04005confirm/f04005confirm.component';
 import { LoginconfirmComponent } from './login/loginconfirm/loginconfirm.component';
+import { BarcodetestComponent } from './barcodetest/barcodetest.component';
 
 
 
@@ -253,7 +253,6 @@ export const TW_FORMATS = {
     F02007confirmComponent,
     F02008Component,
     QrcodeComponent,
-    QrcodeconfirmComponent,
     F03005Component,
     F03006Component,
     F03005confirmComponent,
@@ -315,7 +314,8 @@ export const TW_FORMATS = {
     F02015confirmComponent,
     F04005Component,
     F04005confirmComponent,
-    LoginconfirmComponent
+    LoginconfirmComponent,
+    BarcodetestComponent
   ],
   imports: [
     BrowserModule,

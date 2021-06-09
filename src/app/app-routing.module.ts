@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BarcodetestComponent } from './barcodetest/barcodetest.component';
 import { F01001Component } from './f01001/f01001.component';
 import { F01002Component } from './f01002/f01002.component';
 import { F02001Component } from './f02001/f02001.component';
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent
+  },
+  {
+    path: 'barcode',
+    component: BarcodetestComponent
   },
   {
     path: 'logIn',
