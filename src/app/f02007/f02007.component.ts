@@ -22,10 +22,9 @@ export class F02007Component implements OnInit {
   width: number = 300;
   statusMessage: string = '';
   display = false;
-  mccCode: COMB[] = [{ value: 'C1234', viewValue: '等待中信' }, { value: 'C4321', viewValue: '提供資料' }];
   registrationForm: FormGroup = this.fb.group({
-    mcc: ['C1234', [Validators.required]],
-    dn: ['', [Validators.maxLength(30)]],
+    mcc: ['', [Validators.required,Validators.maxLength(5)]],
+    dn: ['', [Validators.required,Validators.maxLength(30)]],
     statusCode: ['',[]],
     statusMessage: ['',[]],
     walletID: ['',[]]

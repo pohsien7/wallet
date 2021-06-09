@@ -24,7 +24,6 @@ export class F02001Component implements OnInit {
   statusMessage: string = '';
   display = false;
   // 之後要改打API去取得下拉內容
-  mccCode: COMB[] = [{value: 'C1234', viewValue: 'C1234'}, {value: 'C1234', viewValue: 'C1234'}];
 
   registrationForm: FormGroup = this.fb.group({
     dn: ['', [Validators.maxLength(30)]],
@@ -32,7 +31,7 @@ export class F02001Component implements OnInit {
     ban: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     owner: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10), Validators.pattern('^[0-9]+$')]],
-    mcc: ['C1234', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+    mcc: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
     address: ['', [Validators.required,  Validators.maxLength(128)]],
     balanceLimit: ['9000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     certTxnLimit: ['2000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
