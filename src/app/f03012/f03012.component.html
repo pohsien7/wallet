@@ -39,8 +39,8 @@
               <th>欲發行券幣種類：</th>
               <td>
                 <mat-form-field color="accent">
-                  <mat-select formControlName="cvType">
-                    <mat-option *ngFor="let item of cvTypeCode" [value]="item.value">
+                  <mat-select formControlName="cvtype">
+                    <mat-option *ngFor="let item of cvtypeCode" [value]="item.value">
                       {{item.viewValue}}
                     </mat-option>
                   </mat-select>
@@ -56,6 +56,17 @@
                   <mat-error>{{getErrorMessage('amount')}}</mat-error>
                 </mat-form-field>
               </td>
+              <th>兌回期限</th>
+              <td>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="redeemDeadline">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>{{getErrorMessage('redeemDeadline')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
               <th nowrap="nowrap">備註</th>
               <td>
                 <mat-form-field color="accent">
@@ -63,6 +74,7 @@
                   <mat-error>{{getErrorMessage('remark')}}</mat-error>
                 </mat-form-field>
               </td>
+
             </tr>
           </mat-card-content>
         </mat-card>
