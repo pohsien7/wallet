@@ -58,6 +58,7 @@ export class F02006Component implements OnInit {
   }
 
   async sendCBDC() {
+    this.clear();
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
@@ -120,5 +121,24 @@ export class F02006Component implements OnInit {
         }
       });
     }
+  }
+
+  clear() {
+    this.resultForm.patchValue({ senderID: ''});
+    this.resultForm.patchValue({ recipientID: '' });
+    this.resultForm.patchValue({ authorizedPartyID: '' });
+    this.resultForm.patchValue({ recipientDN: '' });
+    this.resultForm.patchValue({ cvc: '' });
+    this.resultForm.patchValue({ amount: '' });
+    this.resultForm.patchValue({ senderBalance: '' });
+    this.resultForm.patchValue({ recipientBalance: '' });
+    this.resultForm.patchValue({ senderSN: '' });
+    this.resultForm.patchValue({ recipientSN: '' });
+    this.resultForm.patchValue({ won: '' });
+    this.resultForm.patchValue({ remark: '' });
+    this.resultForm.patchValue({ txnTime: '' });
+    this.resultForm.patchValue({ result: '' });
+    this.resultForm.patchValue({ paymentMethod: '' });
+    this.resultForm.patchValue({ insID: '' });
   }
 }
