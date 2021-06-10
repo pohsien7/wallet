@@ -32,7 +32,7 @@ export class F03004Component implements OnInit {
   }
 
   submitted = false;
-
+  display = false;
   formControl = new FormControl('', [
     Validators.required
   ]);
@@ -73,5 +73,17 @@ export class F03004Component implements OnInit {
         this.requestHmacForm.patchValue({ walletType: result.valueWalletType });
       }
     });
+  }
+
+  check() {
+    if (this.requestHmacForm.value.queryWalletID.length == 23) {
+      this.f03004Service.get("JNNA", this.requestHmacForm.value.queryWalletID).then((data) => {
+        if (data.IDerror == "error") {
+          this.display = true;
+        } else {
+          this.display = false;
+        }
+      });
+    }
   }
 }
