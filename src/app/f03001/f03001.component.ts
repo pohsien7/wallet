@@ -19,7 +19,7 @@ export class F03001Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0902', viewValue: '0902' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
 
   transferForm: FormGroup = this.fb.group({
     walletid: ['', [Validators.maxLength(30)]],
