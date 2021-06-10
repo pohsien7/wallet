@@ -73,6 +73,7 @@ export class F03004Component implements OnInit {
         this.requestHmacForm.patchValue({ walletType: result.valueWalletType });
       }
     });
+    this.display = false;
   }
 
   check() {

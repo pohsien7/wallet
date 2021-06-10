@@ -23,7 +23,7 @@
             <th nowrap="nowrap">券幣代號：</th>
             <td>
               <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="cvc" readonly>
+                <input matInput #input class="form-control" formControlName="cvc">
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>

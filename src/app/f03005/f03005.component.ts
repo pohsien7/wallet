@@ -91,6 +91,7 @@ export class F03005Component implements OnInit {
         this.generateBarcodeForm.patchValue({ walletType: result.valueWalletType });
       }
     });
+    this.display = false;
   }
 
   clear() {

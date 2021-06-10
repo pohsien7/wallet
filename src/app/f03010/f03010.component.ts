@@ -23,7 +23,7 @@ interface COMB {
 export class F03010Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
   constructor(private fb: FormBuilder, public f03010Service: F03010Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   queryForm: FormGroup = this.fb.group({
