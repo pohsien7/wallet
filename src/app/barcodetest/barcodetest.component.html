@@ -35,23 +35,25 @@
           </tr>
         </table>
     </form>
-    <form [formGroup]="resultForm" style="padding-left: 20px;" style="height: 300%;">
+    <form [formGroup]="resultForm" style="padding-left: 30px;" style="height: 300%;">
       <table>
         <mat-card class="matCard">
           <mat-card-content>
             <tr>
               <th nowrap="nowrap">支付條碼：</th>
               <td>
-                <img [src]="qrcodeImage" style="padding-top: 5%;">
-                <img [src]="barcodeImage" style="padding-top: 5%;">
-                <mat-form-field color="accent">
+                <div>
+                <img [src]="qrcodeImage" style="padding-top: 5%; padding-left: 5%;">
+                <img [src]="barcodeImage" style="padding-top: 5%;padding-left: 5%;">
+                <mat-form-field color="accent" style="width: 105%;">
                   <input matInput #input formControlName="barcode" readonly>
                 </mat-form-field>
+                </div>
               </td>
               <th nowrap="nowrap">條碼有效時間：</th>
               <td>
                 <mat-form-field color="accent">
-                  <input matInput #input formControlName="expireTime" >
+                  <input matInput #input formControlName="expireTime" readonly>
                 </mat-form-field>
               </td>
             </tr>
