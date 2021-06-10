@@ -24,7 +24,7 @@ export class F03005Component implements OnInit {
   getBarcodeForF02009: string;
 
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
 
   generateBarcodeForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
@@ -42,7 +42,7 @@ export class F03005Component implements OnInit {
   }
 
   submitted = false;
-
+  display = false;
   formControl = new FormControl('', [
     Validators.required
   ]);
@@ -95,5 +95,17 @@ export class F03005Component implements OnInit {
 
   clear() {
     this.generateBarcodeForm.reset();
+  }
+
+  check() {
+    if (this.generateBarcodeForm.value.queryWalletID.length == 23) {
+      this.f03005Service.get("JNNA", this.generateBarcodeForm.value.queryWalletID).then((data) => {
+        if (data.IDerror == "error") {
+          this.display = true;
+        } else {
+          this.display = false;
+        }
+      });
+    }
   }
 }
