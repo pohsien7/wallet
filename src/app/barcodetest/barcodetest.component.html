@@ -1,1 +1,63 @@
-<p>barcodetest works!</p>
+<div class="container">
+  <th class="f03_th">動態產生OTP支付條碼</th>
+  <block-ui>
+    <form [formGroup]="generateBarcodeForm" >
+      <table>
+          <tr>
+            <th nowrap="nowrap">
+              <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+              <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+            </th>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">錢包ID：</th>
+            <td>
+
+              <mat-form-field color="accent">
+                <mat-select formControlName="queryWalletID">
+                  <mat-option *ngFor="let id of walletItCode" [value]="id.value">
+                    {{id.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+
+            <th nowrap="nowrap">券幣代號：</th>
+            <td>
+              <mat-form-field color="accent">
+                  <mat-select formControlName="cvc">
+                    <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+                      {{cvc.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </td>
+          </tr>
+        </table>
+    </form>
+    <form [formGroup]="resultForm" style="padding-left: 20px;" style="height: 300%;">
+      <table>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">支付條碼：</th>
+              <td>
+                <img [src]="qrcodeImage" style="padding-top: 5%;">
+                <img [src]="barcodeImage" style="padding-top: 5%;">
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="barcode" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">條碼有效時間：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="expireTime" >
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>
