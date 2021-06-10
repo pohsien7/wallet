@@ -6,13 +6,14 @@
         <tr>
           <th>
             <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+            <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
           </th>
         </tr>
         <tr>
           <th nowrap="nowrap">欲查詢之錢包ID：</th>
           <td>
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" formControlName="queryWalletID">
+              <input matInput #input class="form-control" formControlName="queryWalletID" (blur)="check()">
               <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
             </mat-form-field>
           </td>
@@ -21,6 +22,7 @@
               <span class="material-icons">view_list</span>
             </button>
           </td>
+          <td *ngIf="display;"><font color="red">錢包ID有誤</font></td>
         </tr>
       </table>
     </form>

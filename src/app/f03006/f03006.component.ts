@@ -21,7 +21,7 @@ export class F03006Component implements OnInit {
   payableNumberImage: string;
   getPayablenumberForF02010: string;
 
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: '0901', viewValue: '0901' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
 
   payableNumberForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required, Validators.maxLength(23)]],
@@ -41,7 +41,7 @@ export class F03006Component implements OnInit {
   }
 
   submitted = false;
-
+  display = false;
   formControl = new FormControl('', [
     Validators.required
   ]);
@@ -93,9 +93,22 @@ export class F03006Component implements OnInit {
         this.payableNumberForm.patchValue({ walletType: result.valueWalletType });
       }
     });
+    this.display = false;
   }
 
   clear() {
     this.payableNumberForm.reset();
+  }
+
+  check() {
+    if (this.payableNumberForm.value.walletID.length == 23) {
+      this.f03006Service.get("JNNA", this.payableNumberForm.value.walletID).then((data) => {
+        if (data.IDerror == "error") {
+          this.display = true;
+        } else {
+          this.display = false;
+        }
+      });
+    }
   }
 }

@@ -127,5 +127,4 @@ export class F03011Component implements OnInit {
       walletID:'', queryTxnID:'', cvc:''
     });
   }
-
 }
