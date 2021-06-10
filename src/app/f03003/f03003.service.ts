@@ -13,4 +13,9 @@ export class F03003Service extends BaseService {
     formdata.append('value', jsonString);
     return this.postFormData(baseUrl, formdata);
   }
+
+  public async get(checkString: string, ID: string) {
+    const baseURL = 'tableList?checkString=' + checkString + '&sendID='+ID;
+    return await this.postHttpClient(baseURL).toPromise();
+  }
 }

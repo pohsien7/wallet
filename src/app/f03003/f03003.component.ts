@@ -25,7 +25,8 @@ export class F03003Component implements OnInit {
   // checkForm: FormGroup = this.fb.group({
   //   walletID: ['']
   // });
-
+  display1 = false;
+  display2 = false;
   submitted = false;
 
   constructor(private fb: FormBuilder, public f03003Service: F03003Service, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -90,6 +91,7 @@ export class F03003Component implements OnInit {
           this.authorizaionForm.patchValue({ walletType : result.walletType });
         }
       });
+      this.display1 = false;
     } else {
       const dialogRef = this.dialog.open(F03003wopenComponent, {
         data: { queryWalletID: this.authorizaionForm.value.walletID , num: num },
@@ -100,6 +102,31 @@ export class F03003Component implements OnInit {
           this.authorizaionForm.patchValue({ recipientID : result.value });
         }
       });
+      this.display2 = false;
+    }
+  }
+
+  check(choose: string) {
+    if ( choose == '1' ) {
+      if (this.authorizaionForm.value.walletID.length == 23) {
+        this.f03003Service.get("JNNA", this.authorizaionForm.value.walletID).then((data) => {
+          if (data.IDerror == "error") {
+            this.display1 = true;
+          } else {
+            this.display1 = false;
+          }
+        });
+      }
+    } else {  
+      if (this.authorizaionForm.value.recipientID.length == 23) {
+        this.f03003Service.get("JNNA", this.authorizaionForm.value.recipientID).then((data) => {
+          if (data.IDerror == "error") {
+            this.display2 = false;
+          } else {
+            this.display2 = true;
+          }
+        });
+      }
     }
   }
 }
