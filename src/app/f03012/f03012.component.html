@@ -1,5 +1,5 @@
 <div class="container">
-  <th class="f03_th">中介機構錢包向券幣專庫請領券幣</th>
+  <th class="f03_th">中介機構發行券幣給用戶</th>
   <block-ui>
     <form [formGroup]="issueCVForm" style="padding-left: 20px;">
       <table>
@@ -36,7 +36,7 @@
                   </mat-select>
                 </mat-form-field>
               </td>
-              <th>欲發行券幣種類：</th>
+              <th nowrap="nowrap">欲發行券幣種類：</th>
               <td>
                 <mat-form-field color="accent">
                   <mat-select formControlName="cvtype">
@@ -49,14 +49,14 @@
             </tr>
 
             <tr>
-              <th>請領金額：</th>
+              <th nowrap="nowrap">請領金額：</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #inputstate class="form-control" formControlName="amount">
                   <mat-error>{{getErrorMessage('amount')}}</mat-error>
                 </mat-form-field>
               </td>
-              <th>兌回期限</th>
+              <th nowrap="nowrap">兌回期限</th>
               <td>
                 <mat-form-field>
                   <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="redeemDeadline">
