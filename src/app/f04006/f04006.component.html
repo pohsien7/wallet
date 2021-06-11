@@ -1,1 +1,63 @@
-<p>f04006 works!</p>
+<div class="container">
+  <th class="f04_th">票券兌換日期查詢</th>
+
+  <form [formGroup]="registrationForm" style="padding-left: 20px;">
+    <div class="f04_div">
+      <button type="submit" mat-raised-button color="primary" (click)="getViewDataList()"> 查詢</button>
+      <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+    </div>
+    <table>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th nowrap="nowrap">票券名稱：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="cvc">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+<br>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-table [dataSource]="npWalletPubkey">
+
+    <ng-container matColumnDef="setting">
+      <mat-header-cell *matHeaderCellDef><u></u></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container>
+          <button mat-raised-button color="primary" (click)="edit(row.cvc)">編輯</button>
+        </ng-container>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cvc">
+      <mat-header-cell *matHeaderCellDef>票券名稱</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.cvc }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="deadlineDate">
+      <mat-header-cell *matHeaderCellDef>兌換期限</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.deadlineDate }}</mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['setting','cvc','deadlineDate']; sticky: true">
+    </mat-header-row>
+    <mat-row
+      *matRowDef="let ruleParmRow; columns: ['setting','cvc','deadlineDate']">
+    </mat-row>
+  </mat-table>
+  <tr>
+    <td>
+      <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</cdk-virtual-scroll-viewport>

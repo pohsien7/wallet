@@ -21,7 +21,8 @@
                 </mat-select>
               </mat-form-field>
             </td>
-
+          </tr>
+          <tr>
             <th nowrap="nowrap">券幣代號：</th>
             <td>
               <mat-form-field color="accent">
@@ -35,12 +36,11 @@
           </tr>
         </table>
     </form>
-    <form [formGroup]="resultForm" style="padding-left: 30px;" style="height: 300%;">
+    <form [formGroup]="resultForm" style="padding-left: 30px;">
       <table>
         <mat-card class="matCard">
           <mat-card-content>
             <tr>
-              <th nowrap="nowrap">支付條碼：</th>
               <td>
                 <div>
                 <img [src]="qrcodeImage" style="padding-top: 5%; padding-left: 3%;">
@@ -50,10 +50,11 @@
                 </mat-form-field>
                 </div>
               </td>
-              <th nowrap="nowrap">條碼有效時間：</th>
+            </tr>
+            <tr>
               <td>
-                <mat-form-field color="accent">
-                  <input matInput #input formControlName="expireTime" readonly>
+                <mat-form-field color="accent" style="width: 100%;">
+                  <input matInput #input formControlName="expireTime"  readonly>
                 </mat-form-field>
               </td>
             </tr>

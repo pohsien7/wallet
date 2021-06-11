@@ -1,1 +1,8 @@
-<p>f04006confirm works!</p>
+<ng-container *ngIf="data.msgStr == 'check'; else elseTemplate">
+  <div>確認是否取消：</div>
+  <button mat-raised-button color="primary" (click)="remove(data.wallet)">是</button>
+  <button mat-raised-button color="primary" (click)="close()">否</button>
+</ng-container>
+<ng-template #elseTemplate>
+  <p>{{ data.msgStr }}</p>
+</ng-template>

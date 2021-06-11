@@ -78,10 +78,10 @@ export class BarcodetestComponent implements OnInit {
         }
       });
     }
-    setTimeout(() => {
+    // setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
-      const childernDialogRef = this.dialog.open(BarcodetestConfirmComponent, { data: { msgStr: msg } });
-    }, 1500);
+      // const childernDialogRef = this.dialog.open(BarcodetestConfirmComponent, { data: { msgStr: msg } });
+    // }, 1500);
   }
 
   getList() {
