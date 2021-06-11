@@ -164,6 +164,7 @@ import { F04006confirmComponent } from './f04006/f04006confirm/f04006confirm.com
 import { F03014Component } from './f03014/f03014.component';
 import { F03014confirmComponent } from './f03014/f03014confirm/f03014confirm.component';
 import { F03014wopenComponent } from './f03014/f03014wopen/f03014wopen.component';
+import { F04006shopComponent } from './f04006/f04006shop/f04006shop.component';
 
 
 
@@ -325,7 +326,8 @@ export const TW_FORMATS = {
     F04006confirmComponent,
     F03014Component,
     F03014confirmComponent,
-    F03014wopenComponent
+    F03014wopenComponent,
+    F04006shopComponent
   ],
   imports: [
     BrowserModule,

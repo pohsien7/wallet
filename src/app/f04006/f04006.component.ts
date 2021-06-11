@@ -1,4 +1,3 @@
-import { F04006shopComponent } from './f04006shop/f04006shop.component';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -10,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { F04006confirmComponent } from './f04006confirm/f04006confirm.component';
+import { F04006shopComponent } from './f04006shop/f04006shop.component';
 interface COMB {
   value: string;
   viewValue: string;
