@@ -21,7 +21,7 @@ export class F03012Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   cvcCode: COMB[] = [{ value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
-  cvtypeCode: COMB[] = [{value: 'C', viewValue: '專用款'}, {value: 'C', viewValue: '數位券'}];
+  cvtypeCode: COMB[] = [{value: 'C', viewValue: '專用款'}, {value: 'V', viewValue: '數位券'}];
   minDate:Date;
 
   issueCVForm: FormGroup = this.fb.group({
