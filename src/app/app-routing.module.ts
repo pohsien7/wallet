@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BarcodetestComponent } from './barcodetest/barcodetest.component';
 import { F01001Component } from './f01001/f01001.component';
 import { F01002Component } from './f01002/f01002.component';
+import { F01003Component } from './f01003/f01003.component';
 import { F02001Component } from './f02001/f02001.component';
 import { F02002Component } from './f02002/f02002.component';
 import { F02003Component } from './f02003/f02003.component';
@@ -101,6 +102,10 @@ const routes: Routes = [
       {
         path: 'F01002',
         component: F01002Component
+      },
+      {
+        path: 'F01003',
+        component: F01003Component
       },
       {
         path: 'F02001',
