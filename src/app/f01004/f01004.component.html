@@ -1,1 +1,113 @@
-<p>f01004 works!</p>
+<div class="container">
+    <th class="f01_th">交易ID查詢自總庫帳本記錄</th>
+    <block-ui>
+        <form [formGroup]="queryVaultIDForm" style="padding-left: 20px;">
+            <div class="f01_div">
+                <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+            </div>
+            <table>
+                <br>
+                <tr>
+                    <th nowrap="nowrap">中介機構總庫ID：</th>
+                    <td nowrap="nowrap">
+                        <mat-form-field color="accent" class="form-id">
+                            <input matInput #input class="form-control" formControlName="vaultID">
+                            <mat-error>{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <form [formGroup]="resultForm" style="padding-left: 20px;">
+            <table>
+                <mat-card class="matCard">
+                    <mat-card-content>
+                        <tr>
+                            <th nowrap="nowrap">總庫ID</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="vaultID" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">總庫顯示名稱</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="dn" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">總庫餘額</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="balance" readonly>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th nowrap="nowrap">總庫目前交易總筆數</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="totalCount" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">總庫帳務最後修改時間</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="statusLastModified" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">最新總庫憑證敘號</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="vaultcertSN" readonly>
+                                </mat-form-field>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <th nowrap="nowrap">最新機構憑證序號</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="agencycertSN" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">總庫是否凍結</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="frozen" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">總庫是否停用</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="disabled" readonly>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th nowrap="nowrap">總庫已開通之券幣代號陣列</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="cvc" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">總庫創建時間</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="createTime" readonly>
+                                </mat-form-field>
+                            </td>
+                            <th nowrap="nowrap">總庫設定最後修改時間</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #input formControlName="settingLastModified" readonly>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </mat-card-content>
+                </mat-card>
+            </table>
+        </form>
+    </block-ui>
+</div>
