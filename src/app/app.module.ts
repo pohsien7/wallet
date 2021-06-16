@@ -175,6 +175,9 @@ import { F01005confirmComponent } from './f01005/f01005confirm/f01005confirm.com
 import { F02016Component } from './f02016/f02016.component';
 import { F02016wopenComponent } from './f02016/f02016wopen/f02016wopen.component';
 import { F02016confirmComponent } from './f02016/f02016confirm/f02016confirm.component';
+import { F02017Component } from './f02017/f02017.component';
+import { F02017wopenComponent } from './f02017/f02017wopen/f02017wopen.component';
+import { F02017confirmComponent } from './f02017/f02017confirm/f02017confirm.component';
 
 
 
@@ -347,7 +350,10 @@ export const TW_FORMATS = {
     F01005confirmComponent,
     F02016Component,
     F02016wopenComponent,
-    F02016confirmComponent
+    F02016confirmComponent,
+    F02017Component,
+    F02017wopenComponent,
+    F02017confirmComponent
   ],
   imports: [
     BrowserModule,
