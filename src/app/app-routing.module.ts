@@ -21,6 +21,7 @@ import { F02012Component } from './f02012/f02012.component';
 import { F02013Component } from './f02013/f02013.component';
 import { F02014Component } from './f02014/f02014.component';
 import { F02015Component } from './f02015/f02015.component';
+import { F02016Component } from './f02016/f02016.component';
 import { F03001Component } from './f03001/f03001.component';
 import { F03002Component } from './f03002/f03002.component';
 import { F03003Component } from './f03003/f03003.component';
@@ -176,6 +177,10 @@ const routes: Routes = [
       {
         path: 'F02015',
         component: F02015Component
+      },
+      {
+        path: 'F02016',
+        component: F02016Component
       },
       {
         path: 'F03001',
