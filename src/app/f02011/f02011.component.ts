@@ -87,6 +87,7 @@ export class F02011Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.activateCVForm.patchValue({ queryWalletID : result.value });
+        this.activateCVForm.patchValue({ walletType : result.walletType });
       }
     });
   }
