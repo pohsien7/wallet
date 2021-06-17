@@ -85,11 +85,10 @@ export class F04006Component implements OnInit, AfterViewInit {
       let jsonStr = JSON.stringify(this.registrationForm.value);
       let jsonObj = JSON.parse(jsonStr);
       // 處理日期 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
-      let startDate = this.registrationForm.value.createdate_start;
-      let endDate = this.registrationForm.value.createdate_end;
-      if (startDate != null && startDate != "" && endDate != null && endDate != "") {
-        jsonObj.createdate_start = this.datePipe.transform(new Date(startDate),"yyyy-MM-dd");
-        jsonObj.createdate_end = this.datePipe.transform(new Date(endDate),"yyyy-MM-dd");
+      let deadlineDate = this.registrationForm.value.deadlineDate;
+
+      if (deadlineDate != null) {
+        jsonObj.deadlineDate = this.datePipe.transform(new Date(deadlineDate),"yyyy-MM-dd");
       }
       //處理分頁
       let pgIndex = `${this.currentPage.pageIndex + 1}`;
@@ -104,7 +103,7 @@ export class F04006Component implements OnInit, AfterViewInit {
 
         if ( data.totalCount == 0 ) {
           this.clear();
-          return this.dialog.open(F04006confirmComponent, { data: { msgStr: '未查詢到相關錢包，請填寫正確查詢資料!' } });
+          return this.dialog.open(F04006confirmComponent, { data: { msgStr: '查無此數位券!' } });
         }
 
         console.log(data.dataMap);

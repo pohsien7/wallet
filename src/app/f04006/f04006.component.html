@@ -11,7 +11,7 @@
       <mat-card class="matCard">
         <mat-card-content>
           <tr>
-            <th nowrap="nowrap">票券名稱：</th>
+            <th nowrap="nowrap">票券代號：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="cvc">
@@ -39,12 +39,12 @@
     </ng-container>
 
     <ng-container matColumnDef="cvc">
-      <mat-header-cell *matHeaderCellDef>票券名稱</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>票券代號</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.cvc }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="deadlineDate">
       <mat-header-cell *matHeaderCellDef>兌換期限</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.deadlineDate }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{row.deadlineDate | date:'yyyy-MM-dd'}}</mat-cell>
     </ng-container>
     <mat-header-row
       *matHeaderRowDef="['setting','cvc','deadlineDate']; sticky: true">

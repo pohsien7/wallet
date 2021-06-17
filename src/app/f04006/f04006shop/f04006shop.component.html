@@ -1,1 +1,29 @@
-<p>f04006shop works!</p>
+<div class="container">
+  <th class="f04_th"></th>
+
+  <mat-card class="matCard">
+    <mat-card-content>
+      <form  [formGroup]="registrationShopForm" (ngSubmit)="onSubmit()" #form="ngForm" style="padding-left: 20px;">
+        <table>
+          <tr>
+            <th>
+              <button type="submit" mat-raised-button color="primary">確定</button>
+            </th>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">兌回期限：</th>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="deadlineDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>{{getErrorMessage('deadlineDate')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
