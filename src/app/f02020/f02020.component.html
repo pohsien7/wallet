@@ -1,1 +1,102 @@
-<p>f02020 works!</p>
+<div class="container">
+    <th class="f02_th">中介機構查詢自機構被授權記錄</th>
+    <block-ui>
+      <form [formGroup]="queryWalletAuthorizationForm">
+        <table>
+          <tr>
+            <th>
+              <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+              <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+            </th>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">授權合約ID：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="authID">
+                <mat-error>{{getErrorMessage('authID')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="getList()">
+                <span class="material-icons">view_list</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <form [formGroup]="resultForm" style="padding-left: 20px;">
+        <table>
+          <mat-card class="matCard">
+            <mat-card-content>
+              <tr>
+                <th nowrap="nowrap">授權合約ID</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="authID" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">授權之作業名稱</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="operation" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">交易授權方錢包ID</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="senderID" readonly>
+                  </mat-form-field>
+                </td>
+              </tr>
+  
+              <tr>
+                <th nowrap="nowrap">交易被授權中介機構ID</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="authorizedAgencyID" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">授權收款方總庫/錢包ID</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="recipientID" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">授權備註</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="remark" readonly>
+                  </mat-form-field>
+                </td>
+  
+              </tr>
+  
+              <tr>
+                <th nowrap="nowrap">取消授權備註</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="voidRemark" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">授權狀態</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="status" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">授權創建時間</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="createTime" readonly>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </mat-card-content>
+          </mat-card>
+        </table>
+      </form>
+    </block-ui>
+  </div>
+  
+  
