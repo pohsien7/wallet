@@ -98,44 +98,42 @@ export class F03010Component implements OnInit {
     } else {
       let msg = '';
       this.submitted = true;
-      if (!this.queryForm.valid) {
-        msg = '資料格式有誤，請修正!'
+      //處理日期
+      if (this.dateControlEnd.value - this.dateControlStart.value < 0) {
+        msg = '開始日期不能大於結束日期';
+        this.dialog.open(F03010confirmComponent, { data: { msgStr: msg } })
+      } else if (this.dateControlMinMax.value - this.dateControlEnd.value < 0 || this.dateControlMinMax.value - this.dateControlStart.value < 0) {
+        msg = '日期不能超過現在時間';
+        this.dialog.open(F03010confirmComponent, { data: { msgStr: msg } })
       } else {
-        //處理日期
-        if ( this.dateControlEnd.value-this.dateControlStart.value < 0 ) {
-          msg = '開始日期不能大於結束日期';
-          this.dialog.open(F03010confirmComponent, { data: {msgStr: msg} })
-        } else if ( this.dateControlMinMax.value - this.dateControlEnd.value < 0 || this.dateControlMinMax.value - this.dateControlStart.value < 0){
-          msg = '日期不能超過現在時間';
-          this.dialog.open(F03010confirmComponent, { data: {msgStr: msg} })
-        } else {
-          let jsonStr = JSON.stringify(this.queryForm.value);
-          let jsonObj = JSON.parse(jsonStr);
-          //let startTime = new Date(this.queryForm.value.startTime);
-          //let endTime = new Date(this.queryForm.value.endTime);
-          let startTime = new Date(this.dateControlStart.value);
-          let endTime = new Date(this.dateControlEnd.value);
-          jsonObj.startTime = this.datePipe.transform(startTime, "yyyy-MM-dd HH:mm");
-          jsonObj.endTime = this.datePipe.transform(endTime, "yyyy-MM-dd HH:mm");
-          //處理分頁
-          let pgIndex = `${this.currentPage.pageIndex + 1}`;
-          let pgSize = `${this.currentPage.pageSize}`;
-          jsonObj.pageIndex = pgIndex;
-          jsonObj.pageSize = pgSize;
+        let jsonStr = JSON.stringify(this.queryForm.value);
+        let jsonObj = JSON.parse(jsonStr);
+        //let startTime = new Date(this.queryForm.value.startTime);
+        //let endTime = new Date(this.queryForm.value.endTime);
+        let startTime = new Date(this.dateControlStart.value);
+        let endTime = new Date(this.dateControlEnd.value);
+        jsonObj.startTime = this.datePipe.transform(startTime, "yyyy-MM-dd HH:mm");
+        jsonObj.endTime = this.datePipe.transform(endTime, "yyyy-MM-dd HH:mm");
+        //處理分頁
+        let pgIndex = `${this.currentPage.pageIndex + 1}`;
+        let pgSize = `${this.currentPage.pageSize}`;
+        jsonObj.pageIndex = pgIndex;
+        jsonObj.pageSize = pgSize;
 
-          const formdata: FormData = new FormData();
-          formdata.append('value', JSON.stringify(jsonObj));
-          await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
-            if ( data.listIndex == "error") {
-              this.dialog.open(F03010confirmComponent, { data: {msgStr: "查無紀錄"} })
-            } else if ( data.listIndex == "IDerror" ) {
-              this.dialog.open(F03010confirmComponent, { data: {msgStr: "錢包ID有誤"} })
-            } else {
-              this.ledgerStateListData = data.listIndex;
-              this.totalCount = data.length;
-            }
-          });
-        }
+        const formdata: FormData = new FormData();
+        formdata.append('value', JSON.stringify(jsonObj));
+        await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
+          if (data.listIndex == "error") {
+            this.dialog.open(F03010confirmComponent, { data: { msgStr: "查無紀錄" } })
+          } else if (data.listIndex == "IDerror") {
+            this.dialog.open(F03010confirmComponent, { data: { msgStr: "錢包ID有誤" } })
+          } else if (data.listIndex == "timeerror") {
+            this.dialog.open(F03010confirmComponent, { data: { msgStr: "請填寫時間" } })
+          } else {
+            this.ledgerStateListData = data.listIndex;
+            this.totalCount = data.length;
+          }
+        });
       }
     }
   }
