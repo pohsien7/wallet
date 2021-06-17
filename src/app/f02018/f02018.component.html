@@ -1,1 +1,104 @@
-<p>f02018 works!</p>
+<div class="container">
+    <th class="f02_th">中介機構查詢自機構錢包資訊</th>
+    <block-ui>
+      <form [formGroup]="registrationForm">
+        <table>
+          <tr>
+            <th>
+              <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+            </th>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">欲查詢之錢包ID：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="queryWalletID">
+                <mat-error>{{getErrorMessage('queryWalletID')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="getList()">
+                <span class="material-icons">view_list</span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th>券幣代號：</th>
+            <td>
+              <mat-form-field color="accent">
+                <mat-select formControlName="cvc">
+                <mat-option *ngFor="let code of cvcCode" [value]="code.value">
+                    {{code.viewValue}}
+                </mat-option>
+                </mat-select>
+                <mat-error>{{getErrorMessage('cvc')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <form [formGroup]="resultForm" style="padding-left: 20px;">
+        <table>
+          <mat-card class="matCard">
+            <mat-card-content>
+              <tr>
+                <th nowrap="nowrap">錢包券幣餘額</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="balance" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">錢包目前券幣交易總筆數</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="totalCount" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">可否領取券幣</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="canBeDistributed" readonly>
+                  </mat-form-field>
+                </td>
+              </tr>
+
+              <tr>
+                <th nowrap="nowrap">可否使用券幣</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="canUse" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">可否接受券幣</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="canAccept" readonly>
+                  </mat-form-field>
+                </td>
+                <th nowrap="nowrap">可否將券幣兌回CBDC</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="canRedeem" readonly>
+                  </mat-form-field>
+                </td>
+
+              </tr>
+
+              <tr>
+                <th nowrap="nowrap">錢包最後修改時間</th>
+                <td>
+                  <mat-form-field color="accent">
+                    <input matInput #input formControlName="lastModified" readonly>
+                  </mat-form-field>
+                </td>
+                <th></th>
+                <td></td>
+                <th></th>
+                <td></td>
+              </tr>
+            </mat-card-content>
+          </mat-card>
+        </table>
+      </form>
+    </block-ui>
+  </div>
