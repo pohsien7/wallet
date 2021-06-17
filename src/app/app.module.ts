@@ -181,6 +181,11 @@ import { F02017confirmComponent } from './f02017/f02017confirm/f02017confirm.com
 import { F02018Component } from './f02018/f02018.component';
 import { F02018wopenComponent } from './f02018/f02018wopen/f02018wopen.component';
 import { F02018confirmComponent } from './f02018/f02018confirm/f02018confirm.component';
+import { F02019Component } from './f02019/f02019.component';
+import { F02019confirmComponent } from './f02019/f02019confirm/f02019confirm.component';
+import { F02019wopenComponent } from './f02019/f02019wopen/f02019wopen.component';
+import { F02019child1Component } from './f02019/f02019child1/f02019child1.component';
+import { F02019child2Component } from './f02019/f02019child2/f02019child2.component';
 
 
 
@@ -359,7 +364,12 @@ export const TW_FORMATS = {
     F02017confirmComponent,
     F02018Component,
     F02018wopenComponent,
-    F02018confirmComponent
+    F02018confirmComponent,
+    F02019Component,
+    F02019confirmComponent,
+    F02019wopenComponent,
+    F02019child1Component,
+    F02019child2Component
   ],
   imports: [
     BrowserModule,
