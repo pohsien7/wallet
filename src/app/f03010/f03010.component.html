@@ -39,7 +39,7 @@
               <th nowrap="nowrap">開始時間:</th>
               <td>
                 <mat-form-field>
-                  <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
+                  <input matInput [ngxMatDatetimePicker]="picker"
                     [formControl]="dateControlStart" [min]="minDate" [max]="maxDate" [disabled]="disabled">
                   <mat-datepicker-toggle matSuffix [for]="picker">
                   </mat-datepicker-toggle>
@@ -52,7 +52,7 @@
               <th nowrap="nowrap">結束時間:</th>
               <td>
                 <mat-form-field>
-                  <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Choose a date"
+                  <input matInput [ngxMatDatetimePicker]="picker1"
                     [formControl]="dateControlEnd" [min]="minDate" [max]="maxDate" [disabled]="disabled">
                   <mat-datepicker-toggle matSuffix [for]="picker1">
                   </mat-datepicker-toggle>

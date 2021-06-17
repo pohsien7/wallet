@@ -92,10 +92,9 @@ export class F03010Component implements OnInit {
 
   async getViewDataList() {
     if (this.queryForm.value.dn == '' && this.queryForm.value.name == '' &&
-      this.queryForm.value.createdate_start == '' && this.queryForm.value.createdate_end == '' &&
+      this.queryForm.value.startTime == '' && this.queryForm.value.endTime == '' &&
       this.queryForm.value.ban == '' && this.queryForm.value.owner == ''
     ) {
-
     } else {
       let msg = '';
       this.submitted = true;
@@ -127,9 +126,10 @@ export class F03010Component implements OnInit {
           const formdata: FormData = new FormData();
           formdata.append('value', JSON.stringify(jsonObj));
           await this.f03010Service.sendConsumer('consumer/f03010', formdata).then((data) => {
-            console.log(data);
             if ( data.listIndex == "error") {
               this.dialog.open(F03010confirmComponent, { data: {msgStr: "查無紀錄"} })
+            } else if ( data.listIndex == "IDerror" ) {
+              this.dialog.open(F03010confirmComponent, { data: {msgStr: "錢包ID有誤"} })
             } else {
               this.ledgerStateListData = data.listIndex;
               this.totalCount = data.length;
@@ -172,7 +172,8 @@ export class F03010Component implements OnInit {
     this.paginator.firstPage();
     this.ledgerStateListData.data = null;
     this.paginator._changePageSize(5);
-
+    this.dateControlStart = new FormControl(new Date());
+    this.dateControlEnd = new FormControl(new Date());
   }
 
   //time test
