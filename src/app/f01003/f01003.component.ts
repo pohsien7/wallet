@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { F03012Service } from './f03012.service';
-import { F03012confirmComponent } from './f03012confirm/f03012confirm.component';
-import { F03012wopenComponent } from './f03012wopen/f03012wopen.component';
+import { F01003Service } from './f01003.service';
+import { F01003confirmComponent } from './f01003confirm/f01003confirm.component';
+import { F01003wopenComponent } from './f01003wopen/f01003wopen.component';
 import { DatePipe } from '@angular/common';
 
 
@@ -13,11 +13,11 @@ interface COMB {
   viewValue: string;
 }
 @Component({
-  selector: 'app-f03012',
-  templateUrl: './f03012.component.html',
-  styleUrls: ['./f03012.component.css','../../assets/css/f03.css']
+  selector: 'app-f01003',
+  templateUrl: './f01003.component.html',
+  styleUrls: ['./f01003.component.css','../../assets/css/f03.css']
 })
-export class F03012Component implements OnInit {
+export class F01003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   cvcCode: COMB[] = [{ value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
@@ -25,7 +25,6 @@ export class F03012Component implements OnInit {
   minDate:Date;
 
   issueCVForm: FormGroup = this.fb.group({
-    walletID: ['BI-822-2021052415340988'],
     cvc: ['', [Validators.required, Validators.maxLength(4)]],
     cvtype: ['', [Validators.required, Validators.maxLength(1)]],
     amount: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
@@ -35,7 +34,7 @@ export class F03012Component implements OnInit {
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, private datePipe: DatePipe, public f03012Service: F03012Service, public dialog: MatDialog) { this.minDate = new Date(); }
+  constructor(private fb: FormBuilder, private datePipe: DatePipe, public f01003Service: F01003Service, public dialog: MatDialog) { this.minDate = new Date(); }
 
   ngOnInit(): void {
   }
@@ -63,27 +62,15 @@ export class F03012Component implements OnInit {
       jsonObj.redeemDeadline = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
-      this.f03012Service.sendConsumer('consumer/f03012', formdata).then((data) => {
+      this.f01003Service.sendConsumer('consumer/f01003', formdata).then((data) => {
         msg = data.statusMessage;
       });
 
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
-      const childernDialogRef = this.dialog.open(F03012confirmComponent, { data: { msgStr: msg } });
+      const childernDialogRef = this.dialog.open(F01003confirmComponent, { data: { msgStr: msg } });
     }, 1500);
   }
 
-  getList() {
-    const dialogRef = this.dialog.open(F03012wopenComponent, {
-      //data: { walletId: this.reverseForm.value.recipientID },
-      minHeight: '100vh',
-      width: '50%'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != null && result.event == 'success') {
-        this.issueCVForm.patchValue({ walletID : result.value });
-      }
-    });
-  }
 }

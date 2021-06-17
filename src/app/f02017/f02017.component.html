@@ -1,0 +1,50 @@
+<div class="container">
+    <th class="f02_th">中介機構為終端用戶新增記名錢包之公鑰</th>
+    <block-ui>
+        <form [formGroup]="ExtendPubkeyForm" style="padding-left: 20px;">
+            <table>
+                <tr>
+                    <th>
+                        <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+                    </th>
+                </tr>
+                <br>
+                <mat-card class="matCard">
+                    <mat-card-content>
+
+                        <tr>
+                            <th nowrap="nowrap">記名/匿名錢包ID：</th>
+                            <td>
+                                <mat-form-field color="accent" class="form-id">
+                                    <input matInput #input class="form-control" formControlName="walletID">
+                                    <mat-error>{{getErrorMessage('walletID')}}</mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <button mat-icon-button color="primary" (click)="getList()">
+                                    <span class="material-icons">view_list</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th nowrap="nowrap">新公私鑰單筆交易限額 (單位：元)：</th>
+                            <td>
+                              <mat-form-field color="accent">
+                                <input matInput #inputstate class="form-control" formControlName="newKeyTxnLimit">
+                                <mat-error>{{getErrorMessage('newKeyTxnLimit')}}</mat-error>
+                              </mat-form-field>
+                            </td>
+                            <th>備註：</th>
+                            <td>
+                                <mat-form-field color="accent">
+                                    <input matInput #inputstate class="form-control" formControlName="remark">
+                                    <mat-error>{{getErrorMessage('remark')}}</mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </mat-card-content>
+                </mat-card>
+            </table>
+        </form>
+    </block-ui>
+</div>

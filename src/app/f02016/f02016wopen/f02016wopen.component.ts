@@ -1,34 +1,37 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { F03014Service } from '../f03014.service';
-import { F03014confirmComponent } from '../f03014confirm/f03014confirm.component';
+import { F02016Service } from '../f02016.service';
 interface sysCode {
   value: string;
   viewValue: string;
 }
 @Component({
-  templateUrl: './f03014wopen.component.html',
-  styleUrls: ['./f03014wopen.component.css']
+  templateUrl: './f02016wopen.component.html',
+  styleUrls: ['./f02016wopen.component.css']
 })
-export class F03014wopenComponent implements OnInit {
+export class F02016wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
     walletType: ['', [Validators.required]],
-    walletID: ['', []],
     startTime: ['', [ ]],
     endTime: ['', [ ]],
     dn: ['', [ ]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
-  
-  walletOption: sysCode[] = [{value: 'AUTHORIZE', viewValue: 'AUTHORIZE'}];
-  constructor(public dialogRef: MatDialogRef<F03014wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03014Service: F03014Service, public dialog: MatDialog) { }
+
+  walletOption: sysCode[] = [
+    {value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
+    {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (自然人，公鑰)'},
+    {value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
+    {value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'}];
+
+  constructor(public dialogRef: MatDialogRef<F02016wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02016Service: F02016Service) { }
 
   ngOnInit(): void {
   }
@@ -60,7 +63,6 @@ export class F03014wopenComponent implements OnInit {
   cleanToEmpty() {
     this.searchForm.patchValue({ dn : '' });
     this.searchForm.patchValue({ walletType : '' });
-    this.searchForm.patchValue({ walletID : '' });
     this.searchForm.patchValue({ startTime : '' });
     this.searchForm.patchValue({ endTime : '' });
     this.currentPage = {
@@ -90,12 +92,9 @@ export class F03014wopenComponent implements OnInit {
     jsonObj.perPage = perPage;
     //3.轉回字串
     let jsonString :string = JSON.stringify(jsonObj);
-    this.f03014Service.getWalletIdList('/consumer/f03014fn01', jsonString).subscribe(data => {
+    this.f02016Service.getWalletIdList('/consumer/f02016fn01', jsonString).subscribe(data => {
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
-      if ( this.totalCount == 0 ) {
-        this.dialog.open(F03014confirmComponent, { data: { msgStr: "查無錢包" } });
-      }
     });
   }
 
@@ -113,12 +112,7 @@ export class F03014wopenComponent implements OnInit {
     }
   }
 
-  goBack(authID: string, walletID: string, recipientID: string) {
-    this.dialogRef.close({
-      event:'success',
-      authID: authID ,
-      walletID: walletID,
-      recipientID: recipientID
-    });
+  goBack(walletID: string) {
+    this.dialogRef.close({ event:'success', walletID: walletID });
   }
 }

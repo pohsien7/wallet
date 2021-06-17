@@ -6,8 +6,9 @@ import { BaseService } from '../base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class F03014Service extends BaseService {
+export class F02016Service extends BaseService {
   constructor(protected httpClient: HttpClient) { super(httpClient); }
+
   getWalletIdList(baseUrl: string, jsonString: string): Observable<any> {
     const formdata: FormData = new FormData();
     formdata.append('value', jsonString);
