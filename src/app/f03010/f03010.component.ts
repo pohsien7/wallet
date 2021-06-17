@@ -29,8 +29,8 @@ export class F03010Component implements OnInit {
   queryForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
-    startTime: [''],
-    endTime: [''],
+    startTime: ['', [Validators.required]],
+    endTime: ['', [Validators.required]],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]],
     walletType: ['']
