@@ -25,6 +25,9 @@ import { F02016Component } from './f02016/f02016.component';
 import { F02017Component } from './f02017/f02017.component';
 import { F02018Component } from './f02018/f02018.component';
 import { F02019Component } from './f02019/f02019.component';
+import { F02020Component } from './f02020/f02020.component';
+import { F02021Component } from './f02021/f02021.component';
+import { F02022Component } from './f02022/f02022.component';
 import { F03001Component } from './f03001/f03001.component';
 import { F03002Component } from './f03002/f03002.component';
 import { F03003Component } from './f03003/f03003.component';
@@ -196,6 +199,18 @@ const routes: Routes = [
       {
         path: 'F02019',
         component: F02019Component
+      },
+      {
+        path: 'F02020',
+        component: F02020Component
+      },
+      {
+        path: 'F02021',
+        component: F02021Component
+      },
+      {
+        path: 'F02022',
+        component: F02022Component
       },
       {
         path: 'F03001',
