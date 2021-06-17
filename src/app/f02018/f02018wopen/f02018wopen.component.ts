@@ -25,7 +25,7 @@ export class F02018wopenComponent implements OnInit {
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'IntermediariesWallet', viewValue: 'IntermediariesWallet'}];
+  walletOption: sysCode[] = [{value: 'IntermediariesWallet', viewValue: '中介機構錢包'}];
   constructor(public dialogRef: MatDialogRef<F02018wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02018Service: F02018Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
