@@ -26,7 +26,7 @@ export class LoginComponent {
       this.bnIdle.startWatching(60*30).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) { this.routerGoUrl(); }
       });
-
+      sessionStorage.setItem('cvcCode', JSON.stringify(await this.loginService.getCvcCode()));
     } else {
       this.dialog.open(LoginconfirmComponent, { data: { msgStr: '員工編號或密碼有誤' } });
     }
