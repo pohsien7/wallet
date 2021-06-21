@@ -1,1 +1,55 @@
-<p>f02019child2 works!</p>
+<form [formGroup]="updateLimitForm" style="padding-left: 20px;">
+    <table>
+        <tr>
+            <th>
+                <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+                <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+            </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+            <mat-card-content>
+
+                <tr>
+                    <th nowrap="nowrap">錢包ID：</th>
+                    <td>
+                        <mat-form-field color="accent" class="form-id">
+                            <input matInput #input class="form-control" formControlName="walletID">
+                            <mat-error>{{getErrorMessage('walletID')}}</mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <button mat-icon-button color="primary" (click)="getList()">
+                            <span class="material-icons">view_list</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>錢包餘額限額：</th>
+                    <td>
+                        <mat-form-field color="accent">
+                            <input matInput #inputstate class="form-control" formControlName="balanceLimit">
+                            <mat-error>{{getErrorMessage('balanceLimit')}}</mat-error>
+                        </mat-form-field>
+                    </td>
+                    <th>憑證之單筆交易限額：</th>
+                    <td>
+                        <mat-form-field color="accent">
+                            <input matInput #inputstate class="form-control" formControlName="certTxnLimit">
+                            <mat-error>{{getErrorMessage('certTxnLimit')}}</mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <th>備註：</th>
+                    <td>
+                        <mat-form-field color="accent">
+                            <input matInput #inputstate class="form-control" formControlName="remark">
+                            <mat-error>{{getErrorMessage('remark')}}</mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </mat-card-content>
+        </mat-card>
+    </table>
+</form>
