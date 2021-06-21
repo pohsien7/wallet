@@ -25,10 +25,9 @@ export class F02019Component implements OnInit {
     this.chooseForm = 'A';
   }
 
-  set(which: string, walletID: string, balanceLimit: string, keyTxnLimit: string, certTxnLimit: string) {
+  set(which: string) {
     this.chooseForm = which;
-    // console.log(which);
-    // console.log("w="+walletID+",b="+balanceLimit+",k="+keyTxnLimit+",c="+certTxnLimit );
+     console.log(which);
   }
 
 }

@@ -9,27 +9,27 @@ import { F02019wopenComponent } from '../f02019wopen/f02019wopen.component';
 @Component({
   selector: 'app-f02019child1',
   templateUrl: './f02019child1.component.html',
-  styleUrls: ['./f02019child1.component.css','../../../assets/css/f02.css']
+  styleUrls: ['./f02019child1.component.css', '../../../assets/css/f02.css']
 })
 export class F02019child1Component implements OnInit {
 
   updateLimitForm: FormGroup = this.fb.group({
-    walletID:['',[Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
+    walletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     balanceLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     certTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     keyTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    remark:['',[Validators.maxLength(30)]],
+    remark: ['', [Validators.maxLength(30)]],
   });
 
   submitted = false;
-
+  display = false;
   constructor(private injector: Injector, private fb: FormBuilder, public f02019Service: F02019Service, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    this.updateLimitForm.patchValue({ walletID : localStorage.getItem('walletID') });
-    this.updateLimitForm.patchValue({ balanceLimit : localStorage.getItem('balanceLimit') });
-    this.updateLimitForm.patchValue({ certTxnLimit : localStorage.getItem('certTxnLimit') });
-    this.updateLimitForm.patchValue({ keyTxnLimit : localStorage.getItem('keyTxnLimit') });
+    this.updateLimitForm.patchValue({ walletID: localStorage.getItem('walletID') });
+    this.updateLimitForm.patchValue({ balanceLimit: localStorage.getItem('balanceLimit') });
+    this.updateLimitForm.patchValue({ certTxnLimit: localStorage.getItem('certTxnLimit') });
+    this.updateLimitForm.patchValue({ keyTxnLimit: localStorage.getItem('keyTxnLimit') });
     localStorage.removeItem('walletID');
     localStorage.removeItem('balanceLimit');
     localStorage.removeItem('certTxnLimit');
@@ -42,18 +42,18 @@ export class F02019child1Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.updateLimitForm.get(cloumnName);
-    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern')   ? '請輸入數字' : '';
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+      obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern') ? '請輸入數字' : '';
   }
 
-  async onSubmit(){
+  async onSubmit() {
     let msg = '';
     this.submitted = true;
-    if ( !this.updateLimitForm.valid ) {
+    if (!this.updateLimitForm.valid) {
       msg = '資料格式有誤，請修正!'
-    } else if ( parseInt(this.updateLimitForm.value.balanceLimit) <= parseInt(this.updateLimitForm.value.certTxnLimit) ) {
+    } else if (parseInt(this.updateLimitForm.value.balanceLimit) <= parseInt(this.updateLimitForm.value.certTxnLimit)) {
       msg = '交易限額不可大於或等於餘額限額'
-    } else if ( parseInt(this.updateLimitForm.value.balanceLimit) <= parseInt(this.updateLimitForm.value.keyTxnLimit) ) {
+    } else if (parseInt(this.updateLimitForm.value.balanceLimit) <= parseInt(this.updateLimitForm.value.keyTxnLimit)) {
       msg = '交易限額不可大於或等於餘額限額'
     } else {
       let jsonStr = JSON.stringify(this.updateLimitForm.value);
@@ -79,7 +79,7 @@ export class F02019child1Component implements OnInit {
         this.updateLimitForm.patchValue({ balanceLimit: result.balanceLimit });
         this.updateLimitForm.patchValue({ certTxnLimit: result.keyTxnLimit });
         this.updateLimitForm.patchValue({ keyTxnLimit: result.certTxnLimit });
-        this.injector.get(F02019Component).set(result.which, result.walletID, result.balanceLimit, result.keyTxnLimit, result.certTxnLimit);
+        this.injector.get(F02019Component).set(result.which);
       }
     });
   }
@@ -89,5 +89,42 @@ export class F02019child1Component implements OnInit {
     this.updateLimitForm.patchValue({ balanceLimit: '' });
     this.updateLimitForm.patchValue({ certTxnLimit: '' });
     this.updateLimitForm.patchValue({ keyTxnLimit: '' });
+  }
+
+  get() {
+    let balanceLimit: string, certTxnLimit: string, keyTxnLimit: string, which: string;
+    if (this.updateLimitForm.value.walletID.length == 23) {
+      this.f02019Service.get("JNNA", this.updateLimitForm.value.walletID).then((data) => {
+        if (data.IDerror == "error") {
+          this.display = true;
+        } else {
+          this.display = false;
+          console.log(data);
+          if (data.tableName == 'ANONYMOUS_WALLET' || data.tableName == 'NPWALLET_PUBKEY') {
+            balanceLimit = data.BALANCELIMIT;
+            keyTxnLimit = data.KEYTXNLIMIT;
+            certTxnLimit = '0';
+            which = 'C';
+          } else {
+            if (data.KEYTXNLIMIT == null) {
+              balanceLimit = data.BALANCELIMIT;
+              certTxnLimit = data.CERTTXNLIMIT;
+              keyTxnLimit = '0';
+              which = 'B';
+            } else {
+              balanceLimit = data.BALANCELIMIT;
+              keyTxnLimit = data.KEYTXNLIMIT;
+              certTxnLimit = data.CERTTXNLIMIT;
+              which = 'A';
+            }
+          }
+        }
+        localStorage.setItem('walletID', this.updateLimitForm.value.walletID);
+        localStorage.setItem('balanceLimit', balanceLimit);
+        localStorage.setItem('keyTxnLimit', keyTxnLimit);
+        localStorage.setItem('certTxnLimit', certTxnLimit);
+        this.injector.get(F02019Component).set(which);
+      });
+    }
   }
 }
