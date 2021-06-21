@@ -19,7 +19,7 @@ export class F03001Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
+  cvcCode: COMB[];
 
   transferForm: FormGroup = this.fb.group({
     walletid: ['', [Validators.maxLength(30)]],
@@ -36,6 +36,8 @@ export class F03001Component implements OnInit {
   constructor(private fb: FormBuilder, public f03001Service: F03001Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
+    this.cvcCode.push({value: '0901', viewValue: '0901'});
   }
 
   formControl = new FormControl('', [

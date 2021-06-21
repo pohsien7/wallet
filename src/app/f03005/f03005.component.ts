@@ -24,7 +24,7 @@ export class F03005Component implements OnInit {
   getBarcodeForF02009: string;
 
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }, { value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
+  cvcCode: COMB[];
 
   generateBarcodeForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
@@ -39,6 +39,8 @@ export class F03005Component implements OnInit {
 
   ngOnInit(): void {
     this.getBarcodeForF02009 =  this.data.f02009;
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
+    this.cvcCode.push({value: '0901', viewValue: '0901'});
   }
 
   submitted = false;
