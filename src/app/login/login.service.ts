@@ -34,4 +34,21 @@ export class LoginService extends BaseService {
     });
     return isOk;
   }
+
+  private async getRuleCodeOption(): Promise<Observable<any>> {
+    const baseURL = 'GetCvcCode';
+    return await this.postHttpClient(baseURL).toPromise();
+  }
+
+  public async getCvcCode(): Promise<sysCode[]> {
+    this.RuleCode = [];
+    const data = await this.getRuleCodeOption().then((data: any) => {
+      for(const jsonObj of data.items) {
+        const codeNo = jsonObj['cvc'];
+        this.RuleCode.push({value: codeNo, viewValue: codeNo});
+      }
+    });
+    return this.RuleCode;
+  }
+  
 }

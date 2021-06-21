@@ -18,7 +18,7 @@ interface COMB {
 export class F02018Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
-  cvcCode: COMB[] = [{ value: 'R001', viewValue: 'R001 專用款' }, { value: 'R002', viewValue: 'R002 數位券' }];
+  cvcCode: COMB[];
   registrationForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     cvc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
@@ -39,6 +39,7 @@ export class F02018Component implements OnInit {
   constructor(private fb: FormBuilder, public f02018Service: F02018Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
   }
 
   formControl = new FormControl('', [

@@ -1,1 +1,78 @@
-<p>f01006 works!</p>
+<div class="container">
+  <th class="f01_th">中介機構查詢自總庫券幣資訊</th>
+  <block-ui>
+    <form [formGroup]="queryVaultCVInfoForm" style="padding-left: 20px;">
+      <div class="f01_div">
+        <button type="submit" mat-raised-button color="primary" (click)="sendCBDC()">送出</button>
+        <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+      </div>
+      <table>
+        <br>
+        <tr>
+          <th nowrap="nowrap">中介機構總庫ID：</th>
+          <td nowrap="nowrap">
+            <mat-form-field color="accent" class="form-id">
+              <input matInput #input class="form-control" formControlName="vaultID">
+              <mat-error>{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+          <th>券幣代號：</th>
+          <td>
+            <mat-form-field color="accent">
+              <mat-select formControlName="cvc">
+                <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+                  {{cvc.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <form [formGroup]="resultForm" style="padding-left: 20px;">
+      <table>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">中介機構總庫ID</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="vaultID" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">券幣代號</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="cvc" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">總庫券幣餘額</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="balance" readonly>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th nowrap="nowrap">總庫目前券幣交易總筆數</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="totalCount" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap">總庫券幣資訊最後修改時間</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="lastModified" readonly>
+                </mat-form-field>
+              </td>
+              <th nowrap="nowrap"></th>
+              <td></td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>
