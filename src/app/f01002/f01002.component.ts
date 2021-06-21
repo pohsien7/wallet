@@ -19,7 +19,7 @@ export class F01002Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' },{value: 'R001', viewValue: 'R001'},{value: 'R002', viewValue: 'R002'}];
+  cvcCode: COMB[];
 
   queryVaultLedgerForm: FormGroup = this.fb.group({
     walletID: ['B-822', [Validators.maxLength(25)]],
@@ -49,6 +49,8 @@ export class F01002Component implements OnInit {
   constructor(private fb: FormBuilder, public f01002Service: F01002Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
+    this.cvcCode.push({value: '0901', viewValue: '0901'});
   }
 
   formControl = new FormControl('', [

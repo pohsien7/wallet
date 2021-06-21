@@ -20,7 +20,7 @@ export class F02011Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
+  cvcCode: COMB[];
   canBeDistributedCode: COMB[] = [{ value: 'true', viewValue: '是' }, { value: 'false', viewValue: '否' }];
   canUseCode: COMB[] = [{ value: 'true', viewValue: '是' }, { value: 'false', viewValue: '否' }];
   canAcceptCode: COMB[] = [{ value: 'true', viewValue: '是' }, { value: 'false', viewValue: '否' }];
@@ -42,7 +42,7 @@ export class F02011Component implements OnInit {
   constructor(private fb: FormBuilder, public f02011Service: F02011Service, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
   }
 
   formControl = new FormControl('', [

@@ -20,7 +20,7 @@ interface COMB {
 export class F01003Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{ value: 'R001', viewValue: 'R001' }, { value: 'R002', viewValue: 'R002' }];
+  cvcCode: COMB[];
   cvtypeCode: COMB[] = [{value: 'C', viewValue: '專用款'}, {value: 'V', viewValue: '數位券'}];
   minDate:Date;
 
@@ -37,6 +37,7 @@ export class F01003Component implements OnInit {
   constructor(private fb: FormBuilder, private datePipe: DatePipe, public f01003Service: F01003Service, public dialog: MatDialog) { this.minDate = new Date(); }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
   }
 
   formControl = new FormControl('', [

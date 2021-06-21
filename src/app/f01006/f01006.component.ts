@@ -17,7 +17,7 @@ export class F01006Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{ value: 'R001', viewValue: '專用款' }, { value: 'R002', viewValue: '數位券' }];
+  cvcCode: COMB[];
 
   queryVaultCVInfoForm: FormGroup = this.fb.group({
     vaultID: ['B-822', [Validators.maxLength(25)]],
@@ -36,6 +36,7 @@ export class F01006Component implements OnInit {
   constructor(private fb: FormBuilder, public f01006Service: F01006Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
   }
 
   formControl = new FormControl('', [

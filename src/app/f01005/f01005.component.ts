@@ -18,7 +18,7 @@ export class F01005Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
 
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '數位貨幣' }, { value: 'R001', viewValue: '專用款' }, { value: 'R002', viewValue: '數位券' }];
+  cvcCode: COMB[];
   
   queryVaultLedgerSNForm: FormGroup = this.fb.group({
     vaultID: ['B-822', [Validators.maxLength(25)]],
@@ -47,6 +47,8 @@ export class F01005Component implements OnInit {
   constructor(private fb: FormBuilder, public f01005Service: F01005Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
+    this.cvcCode.push({value: '0901', viewValue: '0901'});
   }
 
   formControl = new FormControl('', [
