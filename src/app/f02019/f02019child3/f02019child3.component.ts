@@ -115,12 +115,12 @@ export class F02019child3Component implements OnInit {
               which = 'A';
             }
           }
+          localStorage.setItem('walletID', this.updateLimitForm.value.walletID);
+          localStorage.setItem('balanceLimit', balanceLimit);
+          localStorage.setItem('keyTxnLimit', keyTxnLimit);
+          localStorage.setItem('certTxnLimit', certTxnLimit);
+          this.injector.get(F02019Component).set(which);
         }
-        localStorage.setItem('walletID', this.updateLimitForm.value.walletID);
-        localStorage.setItem('balanceLimit', balanceLimit);
-        localStorage.setItem('keyTxnLimit', keyTxnLimit);
-        localStorage.setItem('certTxnLimit', certTxnLimit);
-        this.injector.get(F02019Component).set(which);
       });
     }
   }
