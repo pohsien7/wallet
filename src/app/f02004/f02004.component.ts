@@ -56,7 +56,8 @@ export class F02004Component implements OnInit {
       keyTxnLimit: ['3000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
       statusCode: ['',[]],
       statusMessage: ['',[]],
-      walletID: ['',[]]
+      walletID: ['',[]],
+      agencyID : ['B-822', []]
     });
   }
 

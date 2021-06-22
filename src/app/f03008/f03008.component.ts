@@ -17,7 +17,8 @@ export class F03008Component implements OnInit {
 
   searchWalletInforForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(22), Validators.maxLength(25)]],
-    walletType: ['']
+    walletType: [''],
+    agencyID : ['B-822', []]
   });
 
   resultForm: FormGroup = this.fb.group({

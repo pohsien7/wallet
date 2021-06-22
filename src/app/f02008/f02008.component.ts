@@ -33,7 +33,8 @@ export class F02008Component implements OnInit {
     birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]],
-    userId: ['']
+    userId: [''],
+    agencyID : ['B-822', []]
   });
 
   getImfornationForm: FormGroup = this.fb.group({

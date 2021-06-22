@@ -15,7 +15,8 @@ export class F01004Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   queryVaultIDForm: FormGroup = this.fb.group({
-    vaultID: ['B-822', [Validators.maxLength(25)]]
+    vaultID: ['B-822', [Validators.maxLength(25)]],
+    agencyID : ['B-822', []]
   });
 
   resultForm: FormGroup = this.fb.group({

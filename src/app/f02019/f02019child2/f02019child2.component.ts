@@ -18,7 +18,8 @@ export class F02019child2Component implements OnInit {
     balanceLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     certTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     remark: ['', [Validators.maxLength(30)]],
-    keyTxnLimit: ['0']
+    keyTxnLimit: ['0'],
+    agencyID : ['B-822', []]
   });
   submitted = false;
   display = false;

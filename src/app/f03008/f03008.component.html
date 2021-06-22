@@ -24,6 +24,14 @@
           </td>
           <td *ngIf="display;"><font color="red">錢包ID有誤</font></td>
         </tr>
+        <tr>
+          <th nowrap="nowrap">AgencyID</th>
+            <td>
+                <mat-form-field color="accent">
+                    <input matInput #input formControlName="agencyID">
+                </mat-form-field>
+            </td>
+        </tr>
       </table>
     </form>
     <form [formGroup]="resultForm" style="padding-left: 20px;">

@@ -25,7 +25,8 @@ export class F01002Component implements OnInit {
     walletID: ['B-822', [Validators.maxLength(25)]],
     queryTxnID: ['', []],
     cvc: ['0901', [Validators.maxLength(4)]],
-    transType: []
+    transType: [],
+    agencyID : ['B-822', []]
   });
 
   resultForm: FormGroup = this.fb.group({

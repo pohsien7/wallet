@@ -22,6 +22,7 @@ export class F01006Component implements OnInit {
   queryVaultCVInfoForm: FormGroup = this.fb.group({
     vaultID: ['B-822', [Validators.maxLength(25)]],
     cvc: ['R001', [Validators.maxLength(4)]],
+    agencyID : ['B-822', []]
   });
 
   resultForm: FormGroup = this.fb.group({
