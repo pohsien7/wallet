@@ -33,7 +33,9 @@ export class F02012Component implements OnInit {
     canAccept: ['', [Validators.required, Validators.maxLength(30)]],
     canRedeem: ['', [Validators.required, Validators.maxLength(5)]],
     remark: ['', [Validators.maxLength(128)]],
-    agencyID : ['B-822', []]
+    agencyID : ['B-822', [Validators.required]],
+    agencyIDForSign : ['B-822', [Validators.required]]
+
   });
   submitted = false;
 

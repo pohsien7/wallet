@@ -57,7 +57,8 @@ export class F02004Component implements OnInit {
       statusCode: ['',[]],
       statusMessage: ['',[]],
       walletID: ['',[]],
-      agencyID : ['B-822', []]
+      agencyID : ['B-822', [Validators.required]],
+      agencyIDForSign : ['B-822', [Validators.required]]
     });
   }
 
@@ -103,7 +104,7 @@ export class F02004Component implements OnInit {
       const childernDialogRef = this.dialog.open(F02004confirmComponent, { data: { msgStr: msg } });
       if (dataMsg != "") {this.display = true; }
     }, 1500);
-    
+
   }
 
   resizeInput(inputText) {
@@ -116,6 +117,6 @@ export class F02004Component implements OnInit {
       }
     }, 0);
   }
-  
+
 
 }

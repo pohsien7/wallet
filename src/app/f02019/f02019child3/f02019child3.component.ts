@@ -19,7 +19,8 @@ export class F02019child3Component implements OnInit {
     keyTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     remark:['',[Validators.maxLength(30)]],
     certTxnLimit: ['0'],
-    agencyID : ['B-822', []]
+    agencyID : ['B-822', [Validators.required]],
+    agencyIDForSign : ['B-822', [Validators.required]]
   });
 
   submitted = false;
