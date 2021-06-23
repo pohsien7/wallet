@@ -42,20 +42,27 @@
                     </td>
                 </tr>
                 <tr>
-                    <th nowrap="nowrap">中介機構ID</th>
-                    <td>
-                        <mat-form-field color="accent">
-                            <input matInput #input formControlName="agencyID">
-                        </mat-form-field>
-                    </td>
-                    <th nowrap="nowrap">備註：</th>
-                    <td>
-                        <mat-form-field color="accent">
-                            <input matInput #inputstate class="form-control" formControlName="remark">
-                            <mat-error>{{getErrorMessage('remark')}}</mat-error>
-                        </mat-form-field>
-                    </td>
-
+                  <th nowrap="nowrap">發起API之中介機構ID：</th>
+                  <td>
+                      <mat-form-field color="accent">
+                          <input matInput #input formControlName="agencyID">
+                      </mat-form-field>
+                  </td>
+                  <th nowrap="nowrap">簽署指令之中介機構ID：</th>
+                  <td>
+                      <mat-form-field color="accent">
+                          <input matInput #input formControlName="agencyIDForSign">
+                      </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <th nowrap="nowrap">備註：</th>
+                  <td>
+                      <mat-form-field color="accent">
+                          <input matInput #inputstate class="form-control" formControlName="remark">
+                          <mat-error>{{getErrorMessage('remark')}}</mat-error>
+                      </mat-form-field>
+                  </td>
                 </tr>
             </mat-card-content>
         </mat-card>

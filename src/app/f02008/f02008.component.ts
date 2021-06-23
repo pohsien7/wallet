@@ -34,7 +34,9 @@ export class F02008Component implements OnInit {
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]],
     userId: [''],
-    agencyID : ['B-822', []]
+    agencyID : ['B-822', [Validators.required]],
+    agencyIDForSign : ['B-822', [Validators.required]]
+
   });
 
   getImfornationForm: FormGroup = this.fb.group({

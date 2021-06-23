@@ -19,7 +19,8 @@ export class F02019child1Component implements OnInit {
     certTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     keyTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     remark: ['', [Validators.maxLength(30)]],
-    agencyID : ['B-822', []]
+    agencyID : ['B-822', [Validators.required]],
+    agencyIDForSign : ['B-822', [Validators.required]]
   });
 
   submitted = false;
