@@ -94,7 +94,6 @@ export class F02014wopenComponent implements OnInit {
     this.f02014Service.getWalletIdList('/consumer/f02014fn01', jsonString).subscribe(data => {
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
-      console.log(data.items);
       if ( this.totalCount == 0 ) {
         this.dialog.open(F02014confirmComponent, { data: { msgStr: "查無錢包" } });
       }
@@ -118,7 +117,6 @@ export class F02014wopenComponent implements OnInit {
   goBack(walletID: string) {
     let name: string, idNumber: string, nation: string, gender: string, birthDate: string, phoneNumber: string, address: string;
     for (let index = 0; index < this.walletIdSource.data.length; index++) {
-      console.log(this.walletIdSource.data[index].WALLETID);
       if (this.walletIdSource.data[index].WALLETID == walletID) {
         name = this.walletIdSource.data[index].NAME;
         idNumber = this.walletIdSource.data[index].IDNUMBER;
