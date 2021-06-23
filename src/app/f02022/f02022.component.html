@@ -1,1 +1,45 @@
-<p>f02022 works!</p>
+<div class="container">
+  <th class="f02_th">修改中介中介機構憑證</th>
+  <block-ui>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">新機構憑證(X.509格式、PEM編碼)：</th>
+              <td>
+                <mat-form-field color="accent" style="width: 100%;">
+                  <textarea matInput
+                  formControlName="cert"
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5"></textarea>
+                  <!-- <mat-error>{{getErrorMessage('cert')}}</mat-error> -->
+                </mat-form-field>
+              </td>
+
+            </tr>
+            <tr>
+              <th nowrap="nowrap">註記</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" formControlName="remark">
+                  <!-- <mat-error>{{getErrorMessage('remark')}}</mat-error> -->
+                </mat-form-field>
+              </td>
+
+            </tr>
+          </mat-card-content>
+        </mat-card>
+        <br>
+      </table>
+    </form>
+  </block-ui>
+</div>
