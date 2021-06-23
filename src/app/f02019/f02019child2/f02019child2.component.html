@@ -42,6 +42,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <th nowrap="nowrap">中介機構ID</th>
+                    <td>
+                        <mat-form-field color="accent">
+                            <input matInput #input formControlName="agencyID">
+                        </mat-form-field>
+                    </td>
                     <th nowrap="nowrap">備註：</th>
                     <td>
                         <mat-form-field color="accent">
@@ -49,12 +55,7 @@
                             <mat-error>{{getErrorMessage('remark')}}</mat-error>
                         </mat-form-field>
                     </td>
-                    <th nowrap="nowrap">AgencyID</th>
-                    <td>
-                        <mat-form-field color="accent">
-                            <input matInput #input formControlName="agencyID">
-                        </mat-form-field>
-                    </td>
+
                 </tr>
             </mat-card-content>
         </mat-card>
