@@ -32,7 +32,7 @@ export class F02010Component implements OnInit {
     recipientID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
     cvc: ['0901', [Validators.required]],
     amount: ['1', [Validators.required]],
-    channelcode: ['N001', [Validators.required]],
+    channelcode: ['A001', [Validators.required]],
     payablenumber: ['', [Validators.required]],
     won: ['*'],
     remark: [''],

@@ -52,7 +52,7 @@ export class F02022Component implements OnInit {
     } else {
       let jsonStr = JSON.stringify(this.registrationForm.value);
       let jsonObj = JSON.parse(jsonStr);
-      alert(jsonStr)
+
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02022Service.sendConsumer('consumer/f02022', formdata).then((data) => {
