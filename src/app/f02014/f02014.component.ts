@@ -70,7 +70,11 @@ export class F02014Component implements OnInit {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
       this.f02014Service.sendConsumer('consumer/f02014', formdata).then((data) => {
-        msg = data.statusMessage;
+        if (data.statusMessage == 'E9999-系統異常！') {
+          msg = '無資料';
+        } else {
+          msg = data.statusMessage;
+        }
       });
     }
     setTimeout(() => {
