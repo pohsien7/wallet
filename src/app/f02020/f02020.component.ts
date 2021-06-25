@@ -62,15 +62,15 @@ export class F02020Component implements OnInit {
       await this.f02020Service.sendConsumer('consumer/f02020', formdata).then((data) => {
         msg = data.statusMessage;
         if (data.statusMessage == 'Success') {
-          this.resultForm.patchValue({ authID: data.authorizations[0].authID });
-          this.resultForm.patchValue({ operation: data.authorizations[0].operation });
-          this.resultForm.patchValue({ senderID: data.authorizations[0].senderID });
-          this.resultForm.patchValue({ authorizedAgencyID: data.authorizations[0].authorizedAgencyID });
-          this.resultForm.patchValue({ recipientID: data.authorizations[0].recipientID });
-          this.resultForm.patchValue({ remark: data.authorizations[0].remark });
-          this.resultForm.patchValue({ voidRemark: data.authorizations[0].voidRemark });
-          this.resultForm.patchValue({ status: data.authorizations[0].status });
-          this.resultForm.patchValue({ createTime: data.authorizations[0].createTime });
+          this.resultForm.patchValue({ authID: data.authorizationList[0].authID });
+          this.resultForm.patchValue({ operation: data.authorizationList[0].operation });
+          this.resultForm.patchValue({ senderID: data.authorizationList[0].senderID });
+          this.resultForm.patchValue({ authorizedAgencyID: data.authorizationList[0].authorizedAgencyID });
+          this.resultForm.patchValue({ recipientID: data.authorizationList[0].recipientID });
+          this.resultForm.patchValue({ remark: data.authorizationList[0].remark });
+          this.resultForm.patchValue({ voidRemark: data.authorizationList[0].voidRemark });
+          this.resultForm.patchValue({ status: data.authorizationList[0].status });
+          this.resultForm.patchValue({ createTime: data.authorizationList[0].createTime });
         }
       });
     }

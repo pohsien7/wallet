@@ -27,7 +27,7 @@ export class F03011wopenComponent implements OnInit {
   walletOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: 'Transfer'},
                               {value: 'Deduct', viewValue: 'Deduct'},
                               {value: 'BarcodePay', viewValue: 'BarcodePay'},
-                              {value: 'NnumberPay', viewValue: 'NnumberPay'},
+                              {value: 'NumberPay', viewValue: 'NumberPay'},
                               {value: 'IssueCV', viewValue: 'IssueCV'},
                               {value: 'RedeemCV', viewValue: 'RedeemCV'}
                               ];
@@ -42,6 +42,8 @@ export class F03011wopenComponent implements OnInit {
   currentPage: PageEvent;
   currentSort: Sort;
   walletIdSource = new MatTableDataSource<any>();
+
+  transType :string;
 
   ngAfterViewInit() {
     this.currentPage = {
@@ -72,10 +74,14 @@ export class F03011wopenComponent implements OnInit {
     this.totalCount = 0;
     this.paginator.firstPage();
     this.walletIdSource.data = null;
+
   }
 
   async getWalletId() {
 console.log(this.searchForm.value)
+
+
+    const transType=  this.searchForm.value.transType;
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
     //1.處理日期
@@ -93,6 +99,7 @@ console.log(this.searchForm.value)
     //3.轉回字串
     let jsonString :string = JSON.stringify(jsonObj);
     this.f03011Service.getWalletIdList('/consumer/f03011fn01', jsonString).subscribe(data => {
+      this.transType = transType;
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
       if ( this.totalCount == 0 ) {
@@ -115,7 +122,7 @@ console.log(this.searchForm.value)
     }
   }
 
-  goBack(walletId: string, txnID: string, cvc: string) {
+  goBack(walletId: string, txnID: string, cvc: string, transType:String) {
     this.dialogRef.close({ event:'success', value: walletId , txnID: txnID, cvc: cvc, valueTransType: this.searchForm.value.transType });
   }
 }
