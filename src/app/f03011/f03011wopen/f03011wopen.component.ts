@@ -18,15 +18,19 @@ interface sysCode {
 export class F03011wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
-    transType: ['', [Validators.required]],
-    startTime: ['', [ ]],
-    endTime: ['', [ ]],
-    dn: ['', [ ]],
+    transType: [''],
+    walletid:[''],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: 'TRANSFER'}, {value: 'reverse', viewValue: 'REVERSE'}];
+  walletOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: 'Transfer'},
+                              {value: 'Deduct', viewValue: 'Deduct'},
+                              {value: 'BarcodePay', viewValue: 'BarcodePay'},
+                              {value: 'NnumberPay', viewValue: 'NnumberPay'},
+                              {value: 'IssueCV', viewValue: 'IssueCV'},
+                              {value: 'RedeemCV', viewValue: 'RedeemCV'}
+                              ];
   constructor(public dialogRef: MatDialogRef<F03011wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03011Service: F03011Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -57,10 +61,9 @@ export class F03011wopenComponent implements OnInit {
   }
 
   cleanToEmpty() {
-    this.searchForm.patchValue({ dn : '' });
+
     this.searchForm.patchValue({ transType : '' });
-    this.searchForm.patchValue({ startTime : '' });
-    this.searchForm.patchValue({ endTime : '' });
+
     this.currentPage = {
       pageIndex: 0,
       pageSize: 10,
@@ -72,15 +75,16 @@ export class F03011wopenComponent implements OnInit {
   }
 
   async getWalletId() {
+console.log(this.searchForm.value)
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
     //1.處理日期
-    if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
-      let selectedStartDate = new Date(this.searchForm.value.startTime);
-      let selectedEndDate = new Date(this.searchForm.value.endTime);
-      jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
-      jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
-    }
+    // if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
+    //   let selectedStartDate = new Date(this.searchForm.value.startTime);
+    //   let selectedEndDate = new Date(this.searchForm.value.endTime);
+    //   jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
+    //   jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
+    // }
     //2.處理分頁
     let page :string = `${this.currentPage.pageIndex + 1}`;
     let perPage :string = `${this.currentPage.pageSize}`;
