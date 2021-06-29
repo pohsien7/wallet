@@ -32,7 +32,8 @@ export class F02005Component implements OnInit {
     certTxnLimit: ['', []],
     keyTxnLimit: ['', []],
     cvc: ['', []],
-    createTime: ['', []]
+    createTime: ['', []],
+    balanceLimit: ['', []]
   });
 
   submitted = false;
@@ -78,6 +79,7 @@ export class F02005Component implements OnInit {
           this.resultForm.patchValue({ keyTxnLimit : data.wallet.keyTxnLimit });
           this.resultForm.patchValue({ cvc : data.wallet.cvc });
           this.resultForm.patchValue({ createTime : data.wallet.createTime });
+          this.resultForm.patchValue({ balanceLimit : data.wallet.balanceLimit });
         }   
       });
     }
