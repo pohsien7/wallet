@@ -53,7 +53,7 @@ export class F02009Component implements OnInit {
       this.f02009Service.sendConsumer('consumer/f02009', formdata).then((data) => {
         msg = data.statusMessage;
       });
-      console.log(JSON.stringify(this.barcodePayForm.value));
+      //console.log(JSON.stringify(this.barcodePayForm.value));
     }
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking

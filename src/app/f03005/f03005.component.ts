@@ -71,7 +71,10 @@ export class F03005Component implements OnInit {
         this.barcodeImage= 'data:image/jpeg;base64,' + data.barcodeImage;
         this.qrcodeImage= 'data:image/jpeg;base64,' + data.qrcodeImage;
         if (this.getBarcodeForF02009 == "getBarcode") {
-          msg = '支付條碼取得成功!'
+          msg = '支付條碼取得成功!';
+          if ( data.statusMessage != 'Success') {
+            msg = '支付條碼取得失敗!';
+          }
           this.dialogRef.close({ event:'success',barcode: data.barcode });
         }
       });

@@ -69,6 +69,9 @@ export class F03006Component implements OnInit {
         this.payableNumberImage = 'data:image/jpeg;base64,' + data.payableNumberImage;
         if (this.getPayablenumberForF02010 == "getPayablenumber") {
           msg = '支付條碼取得成功!'
+          if ( data.statusMessage != 'Success') {
+            msg = '支付條碼取得失敗!';
+          }
           this.dialogRef.close({
             event: 'success',
             payableNumber: data.payableNumber,
