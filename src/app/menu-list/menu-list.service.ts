@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
+import { WINDOW } from '../window.service';
 import { Menu } from './menu.model';
 
 @Injectable({
@@ -12,8 +13,8 @@ export class MenuListService extends BaseService {
   private empNo: String = '';
   private menuList: Menu[] = [];
 
-  constructor (protected httpClient: HttpClient, private route: ActivatedRoute){
-    super(httpClient);
+  constructor (protected httpClient: HttpClient, private route: ActivatedRoute,  @Inject(WINDOW) protected window: Window) {
+    super(httpClient, window);
     this.addMenu();
   }
 

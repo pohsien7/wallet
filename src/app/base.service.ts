@@ -1,33 +1,54 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
+import { WINDOW } from './window.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService {
 
-  constructor(protected httpClient: HttpClient) { }
+  constructor(protected httpClient: HttpClient, @Inject(WINDOW) protected window: Window) {}
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': environment.allowOrigin,
-      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-      'Access-Control-Max-Age': '86400'
-    })
-  };
+  private getHostname() : string {
+    return '192.168.0.34' == this.window.location.hostname ? environment.insideAllowOrigin : environment.outsideAllowOrigin;
+  }
+
+  // private httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Access-Control-Allow-Origin': environment.allowOrigin,
+  //     'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+  //     'Access-Control-Max-Age': '86400'
+  //   })
+  // };
+
+  private getHttpOptions(allowOrigin: string) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': allowOrigin,
+        'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+        'Access-Control-Max-Age': '86400'
+      })
+    };
+    return httpOptions;
+  }
 
   protected postHttpClient(baseUrl: string) {
-    return this.httpClient.post<any>(environment.allowOrigin + '/' + baseUrl, this.httpOptions);
+    let allowOrigin : string = this.getHostname();
+    return this.httpClient.post<any>(allowOrigin + '/' + baseUrl, this.getHttpOptions(allowOrigin));
   }
 
   protected getHttpClient(baseUrl: string) {
-    return this.httpClient.get<any>(environment.allowOrigin + '/' + baseUrl, this.httpOptions);
+    let allowOrigin : string = this.getHostname();
+    return this.httpClient.get<any>(allowOrigin + '/' + baseUrl, this.getHttpOptions(allowOrigin));
   }
 
   protected postFormData(baseUrl: string, formdata: FormData) {
-    return this.httpClient.post<any>(environment.allowOrigin + '/' + baseUrl, formdata, this.httpOptions);
+    let allowOrigin : string = this.getHostname();
+    console.log('123'+allowOrigin);
+    return this.httpClient.post<any>(allowOrigin + '/' + baseUrl, formdata, this.getHttpOptions(allowOrigin));
   }
 
   public getSysTypeCode(codeType: string): Observable<any> {

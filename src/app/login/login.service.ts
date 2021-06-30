@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
+import { WINDOW } from '../window.service';
 
 interface sysCode {
   value: string;
@@ -14,7 +15,7 @@ interface sysCode {
 export class LoginService extends BaseService {
   RuleCode: sysCode[] = null;
   Condition: sysCode[] = null;
-  constructor(protected httpClient: HttpClient) { super(httpClient); }
+  constructor(protected httpClient: HttpClient, @Inject(WINDOW) protected window: Window) { super(httpClient, window); }
 
   private async checkEmpNoPromise(empNo: string, empPwd: string) {
     const formdata: FormData = new FormData();
@@ -30,6 +31,7 @@ export class LoginService extends BaseService {
       isOk = (data.rspCode === '0000' && data.rspMsg === '登入成功');
     })
     .catch((error) => {
+      console.log(error);
       console.log("Promise rejected with " + JSON.stringify(error));
     });
     return isOk;
@@ -50,5 +52,4 @@ export class LoginService extends BaseService {
     });
     return this.RuleCode;
   }
-  
 }

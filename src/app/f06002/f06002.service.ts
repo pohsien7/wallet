@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
+import { WINDOW } from '../window.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class F06002Service extends BaseService {
 
-  constructor(protected httpClient: HttpClient) { super(httpClient); }
+  constructor(protected httpClient: HttpClient, @Inject(WINDOW) protected window: Window) { super(httpClient, window); }
 
   getRuleParmOption(): Observable<any> {
     const baseUrl = 'getRuleParmOption';

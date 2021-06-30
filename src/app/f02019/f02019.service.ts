@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
+import { WINDOW } from '../window.service';
 import { F02019Component } from './f02019.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class F02019Service extends BaseService {
-  constructor(protected httpClient: HttpClient) { super(httpClient); }
+
+  constructor(protected httpClient: HttpClient, @Inject(WINDOW) protected window: Window) { super(httpClient, window); }
 
   which: string;
   getWalletIdList(baseUrl: string, jsonString: string): Observable<any> {
