@@ -59,10 +59,10 @@ export class F02002Component implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.registrationForm.get(cloumnName);
-    if (cloumnName == 'idNumber' && this.f02002Service.checkIdNumberIsValid(obj.value)) { obj.setErrors({ 'idNumberError': true }); }
+    //if (cloumnName == 'idNumber' && this.f02002Service.checkIdNumberIsValid(obj.value)) { obj.setErrors({ 'idNumberError': true }); }
     return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-      obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern') ? '請輸入數字' :
-        obj.hasError('idNumberError') ? '身分證格式錯誤' : '';
+      obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern') ? '請輸入數字' : '';
+        //obj.hasError('idNumberError') ? '身分證格式錯誤' : '';
   }
 
   // 參考範例: https://ej2.syncfusion.com/angular/documentation/datepicker/how-to/json-data-binding/
