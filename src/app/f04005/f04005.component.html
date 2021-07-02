@@ -18,7 +18,7 @@
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>
-            <th>會員姓名：</th>
+            <th nowrap="nowrap">會員姓名：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #input class="form-control" formControlName="userName">
@@ -35,14 +35,14 @@
           </tr>
 
           <tr>
-            <th>手機號碼：</th>
+            <th nowrap="nowrap">手機號碼：</th>
             <td>
               <mat-form-field color="accent">
                 <input matInput #inputstate class="form-control" formControlName="userPhone">
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>
-            <th nowrap="nowrap">註冊時間：</th>
+            <!-- <th nowrap="nowrap">註冊時間：</th>
             <td>
               <mat-form-field color="accent" class="example-form-field">
                 <mat-date-range-input [rangePicker]="rangePicker">
@@ -57,7 +57,7 @@
                   </mat-date-range-picker-actions>
                 </mat-date-range-picker>
               </mat-form-field>
-            </td>
+            </td> -->
           </tr>
         </mat-card-content>
       </mat-card>
@@ -71,60 +71,92 @@
     <ng-container matColumnDef="SETTING">
       <mat-header-cell *matHeaderCellDef><u></u></mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <ng-container *ngIf="row.IS_MERCHANT == 'Y'; else elseTemplate">
-          <button mat-raised-button color="warn" (click)="getRemoveShop(row.WALLET_ACCOUNT)">取消商家</button>
+        <ng-container *ngIf="row.isMerchant == 'Y'; else elseTemplate">
+          <button mat-raised-button color="warn" (click)="getRemoveShop(row.userId)">取消商家</button>
         </ng-container>
         <ng-template #elseTemplate>
-          <button mat-raised-button color="primary" (click)="getSetShop(row.WALLET_ACCOUNT)">註冊商家</button>
+          <button mat-raised-button color="primary" (click)="getSetShop(row.userId)">註冊商家</button>
         </ng-template>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="USER_ID">
       <mat-header-cell *matHeaderCellDef>會員帳號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.USER_ID }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.userId }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="WALLET_ACCOUNT">
       <mat-header-cell *matHeaderCellDef>虛擬錢包帳號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.WALLET_ACCOUNT }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.walletAccount }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="USER_NAME">
       <mat-header-cell *matHeaderCellDef>會員姓名</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.USER_NAME }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.userName }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="USER_PHONE">
       <mat-header-cell *matHeaderCellDef>手機號碼</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.USER_PHONE }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.userPhone }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="USER_BIRTH">
       <mat-header-cell *matHeaderCellDef>生日</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.USER_BIRTH }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.userBirth }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="USER_EMAIL">
       <mat-header-cell *matHeaderCellDef>電子郵件</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.USER_EMAIL }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.userCypher }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="USER_PID">
       <mat-header-cell *matHeaderCellDef>身分證號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.USER_PID }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.userPid }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="ADDRESS">
-      <mat-header-cell *matHeaderCellDef>戶籍地址</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.ADDRESS }}</mat-cell>
+    <ng-container matColumnDef="USER_ENABLE">
+      <mat-header-cell *matHeaderCellDef>是否啟用</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.userEnable }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="CREATE_TIME">
       <mat-header-cell *matHeaderCellDef>註冊時間</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.CREATE_TIME }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.createTime }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="IS_LOGIN">
+      <mat-header-cell *matHeaderCellDef>帳號是否登入</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.createTime }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="WALLET_TYPE">
+      <mat-header-cell *matHeaderCellDef>錢包類別</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.walletType }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="HMACKEY">
+      <mat-header-cell *matHeaderCellDef>驗證基碼</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.hmackey }}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="ADDRESS">
+      <mat-header-cell *matHeaderCellDef>戶籍地址</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.address }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="USER_ROLE">
+      <mat-header-cell *matHeaderCellDef>權限角色名稱</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.userRole }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="IS_MERCHANT">
       <mat-header-cell *matHeaderCellDef>是否為商家</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.IS_MERCHANT }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.isMerchant }}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="NATION">
+      <mat-header-cell *matHeaderCellDef>國籍</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.nation }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="GENDER">
+      <mat-header-cell *matHeaderCellDef>性別</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.gender }}</mat-cell>
+    </ng-container>
+
+
     <mat-header-row
-      *matHeaderRowDef="['SETTING', 'USER_ID', 'WALLET_ACCOUNT', 'USER_NAME', 'USER_PHONE', 'USER_BIRTH', 'USER_EMAIL', 'USER_PID', 'ADDRESS', 'CREATE_TIME', 'IS_MERCHANT']; sticky: true">
+      *matHeaderRowDef="['SETTING', 'USER_ID', 'WALLET_ACCOUNT', 'USER_NAME', 'USER_PHONE', 'USER_BIRTH', 'USER_EMAIL', 'USER_PID', 'USER_ENABLE', 'CREATE_TIME','IS_LOGIN','WALLET_TYPE','HMACKEY','ADDRESS','USER_ROLE','IS_MERCHANT','NATION', 'GENDER']; sticky: true">
     </mat-header-row>
     <mat-row
-      *matRowDef="let ruleParmRow; columns: ['SETTING', 'USER_ID', 'WALLET_ACCOUNT', 'USER_NAME', 'USER_PHONE', 'USER_BIRTH', 'USER_EMAIL', 'USER_PID', 'ADDRESS', 'CREATE_TIME', 'IS_MERCHANT']">
+      *matRowDef="let ruleParmRow; columns: ['SETTING',  'USER_ID', 'WALLET_ACCOUNT', 'USER_NAME', 'USER_PHONE', 'USER_BIRTH', 'USER_EMAIL', 'USER_PID', 'USER_ENABLE', 'CREATE_TIME','IS_LOGIN','WALLET_TYPE','HMACKEY','ADDRESS','USER_ROLE','IS_MERCHANT','NATION', 'GENDER']">
     </mat-row>
   </mat-table>
   <tr>
