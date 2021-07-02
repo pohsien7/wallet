@@ -20,6 +20,7 @@ interface COMB {
   styleUrls: ['./f04006.component.css', '../../assets/css/f04.css']
 })
 export class F04006Component implements OnInit, AfterViewInit {
+  cvcCode: COMB[];
 
   // 驗證範例 => https://stackblitz.com/edit/full-angular-reactive-forms-demo?file=src%2Fapp%2Fapp.component.ts
   registrationForm: FormGroup = this.fb.group({
@@ -35,6 +36,7 @@ export class F04006Component implements OnInit, AfterViewInit {
   constructor(private fb: FormBuilder, public F04006Service: F04006Service, private datePipe: DatePipe, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
 
   }
 

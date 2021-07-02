@@ -17,6 +17,8 @@ interface COMB {
 export class F03013Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
+  cvcCode: COMB[];
+
   redeemCVForm: FormGroup = this.fb.group({
     walletID: [''],
     cvc: ['', [Validators.required, Validators.maxLength(4)]],
@@ -29,6 +31,7 @@ export class F03013Component implements OnInit {
   constructor(private fb: FormBuilder, public f03013Service: F03013Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
   }
 
   formControl = new FormControl('', [

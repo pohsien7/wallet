@@ -6,6 +6,11 @@ import { F03009Service } from './f03009.service';
 import { F03009confirmComponent } from './f03009confirm/f03009confirm.component';
 import { F03009wopenComponent } from './f03009wopen/f03009wopen.component';
 
+
+interface COMB {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-f03009',
   templateUrl: './f03009.component.html',
@@ -14,6 +19,8 @@ import { F03009wopenComponent } from './f03009wopen/f03009wopen.component';
 export class F03009Component implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
+
+  cvcCode: COMB[];
 
   registrationForm: FormGroup = this.fb.group({
     queryWalletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
@@ -35,6 +42,7 @@ export class F03009Component implements OnInit {
   constructor(private fb: FormBuilder, public f03009Service: F03009Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
   }
 
   formControl = new FormControl('', [

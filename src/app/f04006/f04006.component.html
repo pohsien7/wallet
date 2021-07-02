@@ -11,11 +11,15 @@
       <mat-card class="matCard">
         <mat-card-content>
           <tr>
-            <th nowrap="nowrap">票券代號：</th>
+            <th nowrap="nowrap">券幣代號：</th>
             <td>
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="cvc">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <input type="text" matInput [formControl]="formControl" [matAutocomplete]="auto" formControlName="cvc">
+                <mat-autocomplete #auto="matAutocomplete" >
+                  <mat-option *ngFor="let cvc of cvcCode " [value]="cvc.viewValue">
+                    {{cvc.viewValue}}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </td>
           </tr>
