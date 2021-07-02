@@ -27,7 +27,7 @@ export class F04005Component implements OnInit {
   });
 
   cdbcUserInfoShopForm: FormGroup = this.fb.group({
-    walletAccount: ['']
+    userId: ['']
   });
 
   constructor(private fb: FormBuilder, public f04005Service: F04005Service, private datePipe: DatePipe, public dialog: MatDialog) { }
@@ -132,8 +132,9 @@ export class F04005Component implements OnInit {
     this.paginator._changePageSize(5);
   }
 
-  getSetShop(walletAccount: string) {
-    this.cdbcUserInfoShopForm.patchValue({ walletAccount: walletAccount });
+  getSetShop(userId: string) {
+
+    this.cdbcUserInfoShopForm.patchValue({ userId: userId });
     let jsonStr = JSON.stringify(this.cdbcUserInfoShopForm.value);
     let jsonObj = JSON.parse(jsonStr);
     const formdata: FormData = new FormData();
@@ -146,8 +147,8 @@ export class F04005Component implements OnInit {
     });
   }
 
-  async getRemoveShop(walletAccount: string){
-    const dialogRef = this.dialog.open(F04005confirmComponent, { data: { msgStr: "check", walletAccount: walletAccount} });
+  async getRemoveShop(userId: string){
+    const dialogRef = this.dialog.open(F04005confirmComponent, { data: { msgStr: "check", userId: userId} });
     dialogRef.afterClosed().subscribe(result => {
       this.clear();
     });
