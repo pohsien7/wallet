@@ -33,8 +33,8 @@ export class F02001Component implements OnInit {
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10), Validators.pattern('^[0-9]+$')]],
     mcc: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
     address: ['', [Validators.required,  Validators.maxLength(128)]],
-    balanceLimit: ['9000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    certTxnLimit: ['2000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    balanceLimit: ['', [Validators.required]],
+    certTxnLimit: ['', [Validators.required]],
     statusCode: ['',[]],
     statusMessage: ['',[]],
     walletID: ['',[]]
@@ -63,8 +63,8 @@ export class F02001Component implements OnInit {
     this.blockUI.start('Loading...');
     if(!this.registrationForm.valid) {
       msg = '資料格式有誤，請修正!'
-    } else if ( parseInt(this.registrationForm.value.balanceLimit) <= parseInt(this.registrationForm.value.certTxnLimit) ) {
-      msg = '交易限額不可大於或等於餘額限額'
+    } else if ( parseInt(this.registrationForm.value.balanceLimit) < parseInt(this.registrationForm.value.certTxnLimit) ) {
+      msg = '交易限額不可大於餘額限額'
     } else {
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(this.registrationForm.value));

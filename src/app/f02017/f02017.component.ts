@@ -17,12 +17,12 @@ export class F02017Component implements OnInit {
 
   ExtendPubkeyForm: FormGroup = this.fb.group({
     walletID:['',[Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
-    newKeyTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    newKeyTxnLimit: ['', [Validators.required]],
     remark:['新增錢包EC公鑰',[Validators.maxLength(30)]],
   });
 
   submitted = false;
-  
+
   constructor(private fb: FormBuilder, public f02017Service: F02017Service, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -44,8 +44,6 @@ export class F02017Component implements OnInit {
     this.blockUI.start('Loading...');
     if ( !this.ExtendPubkeyForm.valid ) {
       msg = '資料格式有誤，請修正!'
-    } else if ( this.ExtendPubkeyForm.value.newKeyTxnLimit <= 0 ) {
-      msg = '交易限額請填入大於0';
     } else {
       let jsonStr = JSON.stringify(this.ExtendPubkeyForm.value);
       let jsonObj = JSON.parse(jsonStr);

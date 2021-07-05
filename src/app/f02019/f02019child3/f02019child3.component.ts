@@ -15,10 +15,10 @@ export class F02019child3Component implements OnInit {
 
   updateLimitForm: FormGroup = this.fb.group({
     walletID:['',[Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
-    balanceLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    keyTxnLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    balanceLimit: ['', [Validators.required]],
+    keyTxnLimit: ['', [Validators.required]],
     remark:['',[Validators.maxLength(30)]],
-    certTxnLimit: ['0'],
+    certTxnLimit: ['', [Validators.required]],
     agencyID : ['B-822', [Validators.required]],
     agencyIDForSign : ['B-822', [Validators.required]]
   });
@@ -53,8 +53,8 @@ export class F02019child3Component implements OnInit {
     this.submitted = true;
     if ( !this.updateLimitForm.valid ) {
       msg = '資料格式有誤，請修正!'
-    } else if ( parseInt(this.updateLimitForm.value.balanceLimit) <= parseInt(this.updateLimitForm.value.keyTxnLimit) ) {
-      msg = '交易限額不可大於或等於餘額限額'
+    } else if ( parseInt(this.updateLimitForm.value.balanceLimit) < parseInt(this.updateLimitForm.value.keyTxnLimit) ) {
+      msg = '交易限額不可大於餘額限額'
     } else {
       let jsonStr = JSON.stringify(this.updateLimitForm.value);
       let jsonObj = JSON.parse(jsonStr);

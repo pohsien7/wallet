@@ -98,7 +98,7 @@
     </ng-container>
     <ng-container matColumnDef="USER_BIRTH">
       <mat-header-cell *matHeaderCellDef>生日</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.userBirth }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{row.userBirth | date:'yyyy-MM-dd'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="USER_EMAIL">
       <mat-header-cell *matHeaderCellDef>電子郵件</mat-header-cell>
@@ -114,11 +114,11 @@
     </ng-container>
     <ng-container matColumnDef="CREATE_TIME">
       <mat-header-cell *matHeaderCellDef>註冊時間</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.createTime }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{row.createTime | date:'yyyy-MM-dd hh:mm:ss'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="IS_LOGIN">
       <mat-header-cell *matHeaderCellDef>帳號是否登入</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.createTime }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.isLogin }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="WALLET_TYPE">
       <mat-header-cell *matHeaderCellDef>錢包類別</mat-header-cell>

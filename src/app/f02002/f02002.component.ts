@@ -39,8 +39,8 @@ export class F02002Component implements OnInit {
     birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]],
-    balanceLimit: ['9000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    certTxnLimit: ['2000', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    balanceLimit: ['', [Validators.required]],
+    certTxnLimit: ['', [Validators.required]],
     statusCode: ['',[]],
     statusMessage: ['',[]],
     walletID: ['',[]]
@@ -75,8 +75,8 @@ export class F02002Component implements OnInit {
     if (!this.registrationForm.valid) {
       console.log("判斷格式="+this.registrationForm.value.nation+","+this.registrationForm.value.gender);
       msg = '資料格式有誤，請修正!'
-    } else if ( parseInt(this.registrationForm.value.balanceLimit) <= parseInt(this.registrationForm.value.certTxnLimit) ) {
-      msg = '交易限額不可大於或等於餘額限額'
+    } else if ( parseInt(this.registrationForm.value.balanceLimit) < parseInt(this.registrationForm.value.certTxnLimit) ) {
+      msg = '交易限額不可大於餘額限額'
     }else {
       // 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
       let jsonStr = JSON.stringify(this.registrationForm.value);

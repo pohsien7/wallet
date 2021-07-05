@@ -80,7 +80,7 @@ export class F02005Component implements OnInit {
           this.resultForm.patchValue({ cvc : data.wallet.cvc });
           this.resultForm.patchValue({ createTime : data.wallet.createTime });
           this.resultForm.patchValue({ balanceLimit : data.wallet.balanceLimit });
-        }   
+        }
       });
     }
     setTimeout(() => {

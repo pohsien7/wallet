@@ -75,9 +75,9 @@ export class F04005Component implements OnInit {
   }
 
   getViewDataList() {
-    if (this.isFieldEmpty()) {
-      this.dialog.open(F04005confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
-      return;
+    if (1 !=1) {
+      // this.dialog.open(F04005confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
+      // return;
     } else {
 
       let jsonStr = JSON.stringify(this.cdbcUserInfoForm.value);
