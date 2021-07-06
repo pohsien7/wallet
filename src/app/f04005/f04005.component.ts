@@ -62,7 +62,8 @@ export class F04005Component implements OnInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      if (!this.isFieldEmpty()) { this.getViewDataList(); }
+      // if (!this.isFieldEmpty()) { this.getViewDataList(); }
+      this.getViewDataList();
     });
   }
 
@@ -75,10 +76,10 @@ export class F04005Component implements OnInit {
   }
 
   getViewDataList() {
-    if (1 !=1) {
+    // if (1 !=1) {
       // this.dialog.open(F04005confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
       // return;
-    } else {
+    // } else {
 
       let jsonStr = JSON.stringify(this.cdbcUserInfoForm.value);
       let jsonObj = JSON.parse(jsonStr);
@@ -107,7 +108,7 @@ export class F04005Component implements OnInit {
         this.totalCount = data.totalCount;
         this.cdbcUserInfo.data = data.dataMap;
       });
-    }
+    // }
   }
 
   setTimes() {

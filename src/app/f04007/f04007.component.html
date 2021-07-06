@@ -1,1 +1,93 @@
-<p>f04007 works!</p>
+<div class="container">
+  <th class="f04_th">查詢虛擬錢包資訊(APP)</th>
+
+  <form [formGroup]="cdbcUserInfoForm" style="padding-left: 20px;">
+    <div class="f04_div">
+      <button type="submit" mat-raised-button color="primary" (click)="getViewDataList()"> 查詢</button>
+      <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+    </div>
+    <table>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th nowrap="nowrap">錢包ID：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="walletId">
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+<br>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-table [dataSource]="cdbcUserInfo">
+
+    <!-- <ng-container matColumnDef="SETTING">
+      <mat-header-cell *matHeaderCellDef><u></u></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.isMerchant == 'Y'; else elseTemplate">
+          <button mat-raised-button color="warn" (click)="getRemoveShop(row.userId)">取消商家</button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button mat-raised-button color="primary" (click)="getSetShop(row.userId)">註冊商家</button>
+        </ng-template>
+      </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="WALLET_ID">
+      <mat-header-cell *matHeaderCellDef>錢包ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.walletId }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="WALLET_ACCOUNT">
+      <mat-header-cell *matHeaderCellDef>虛擬錢包帳號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.walletAccount }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="USER_ID">
+      <mat-header-cell *matHeaderCellDef>錢包帳號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.userId }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="WALLET_TYPE">
+      <mat-header-cell *matHeaderCellDef>錢包類別(1:匿名、2:記名、3:記名且綁帳戶)</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.walletType }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="WALLET_NAME">
+      <mat-header-cell *matHeaderCellDef>錢包暱稱</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.walletName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="BALANCE_LIMIT">
+      <mat-header-cell *matHeaderCellDef>錢包餘額限額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.balanceLimit }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CERT_TXN_LIMIT">
+      <mat-header-cell *matHeaderCellDef>憑證單筆交易限額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.certTxnLimit }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="HMAC_KEY">
+      <mat-header-cell *matHeaderCellDef>基碼</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.hmacKey }}</mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row
+      *matHeaderRowDef="['WALLET_ID', 'WALLET_ACCOUNT', 'USER_ID', 'WALLET_TYPE', 'WALLET_NAME', 'BALANCE_LIMIT', 'CERT_TXN_LIMIT', 'HMAC_KEY']; sticky: true">
+    </mat-header-row>
+    <mat-row
+      *matRowDef="let ruleParmRow; columns: ['WALLET_ID', 'WALLET_ACCOUNT', 'USER_ID', 'WALLET_TYPE', 'WALLET_NAME', 'BALANCE_LIMIT', 'CERT_TXN_LIMIT', 'HMAC_KEY']">
+    </mat-row>
+  </mat-table>
+  <tr>
+    <td>
+      <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</cdk-virtual-scroll-viewport>
+

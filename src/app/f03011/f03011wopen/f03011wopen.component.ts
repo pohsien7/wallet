@@ -78,8 +78,6 @@ export class F03011wopenComponent implements OnInit {
   }
 
   async getWalletId() {
-console.log(this.searchForm.value)
-
 
     const transType=  this.searchForm.value.transType;
     let jsonStr :string = JSON.stringify(this.searchForm.value);
