@@ -199,6 +199,8 @@ import { F01006Component } from './f01006/f01006.component';
 import { F01006confirmComponent } from './f01006/f01006confirm/f01006confirm.component';
 import { F02019child3Component } from './f02019/f02019child3/f02019child3.component';
 import { WINDOW_PROVIDERS } from './window.service';
+import { F04007Component } from './f04007/f04007.component';
+import { F04007confirmComponent } from './f04007/f04007confirm/f04007confirm.component';
 
 
 
@@ -394,7 +396,9 @@ export const TW_FORMATS = {
     F02022wopenComponent,
     F01006Component,
     F01006confirmComponent,
-    F02019child3Component
+    F02019child3Component,
+    F04007Component,
+    F04007confirmComponent
   ],
   imports: [
     BrowserModule,
