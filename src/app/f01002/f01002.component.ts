@@ -117,6 +117,8 @@ export class F01002Component implements OnInit {
       if (result != null && result.event == 'success') {
         this.queryVaultLedgerForm.patchValue({ queryTxnID: result.txnID });
         this.queryVaultLedgerForm.patchValue({ transType: result.valueTransType });
+        this.queryVaultLedgerForm.patchValue({ cvc: result.cvc });
+
       }
     });
   }

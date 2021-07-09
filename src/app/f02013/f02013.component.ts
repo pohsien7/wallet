@@ -53,6 +53,7 @@ export class F02013Component implements OnInit {
     if(!this.updateWalletForm.valid) {
       msg = '資料必填喔!'
     } else {
+
       let jsonStr = JSON.stringify(this.updateWalletForm.value);
       let jsonObj = JSON.parse(jsonStr);
       const formdata: FormData = new FormData();

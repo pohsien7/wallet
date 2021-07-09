@@ -52,8 +52,8 @@ export class F02004Component implements OnInit {
         Validators.maxLength(30),
         Validators.pattern('^[0-9]+$')
       ]),
-      balanceLimit: ['', [Validators.required]],
-      keyTxnLimit: ['', [Validators.required]],
+      balanceLimit: ['-1', [Validators.required]],
+      keyTxnLimit: ['-1', [Validators.required]],
       statusCode: ['',[]],
       statusMessage: ['',[]],
       walletID: ['',[]],

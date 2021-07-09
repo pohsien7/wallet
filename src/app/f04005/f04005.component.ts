@@ -62,24 +62,23 @@ export class F04005Component implements OnInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      // if (!this.isFieldEmpty()) { this.getViewDataList(); }
-      this.getViewDataList();
+      if (!this.isFieldEmpty()) { this.getViewDataList(); }
     });
   }
 
   isFieldEmpty() {
     if (this.cdbcUserInfoForm.value.userID == '' && this.cdbcUserInfoForm.value.userName == '' && this.cdbcUserInfoForm.value.userPid == ''
-      && this.cdbcUserInfoForm.value.userPhone == '' && this.cdbcUserInfoForm.value.createdate_start == '' && this.cdbcUserInfoForm.value.createdate_end == ''
+      && this.cdbcUserInfoForm.value.userPhone == ''
     ) {
       return true;
     }
   }
 
   getViewDataList() {
-    // if (1 !=1) {
-      // this.dialog.open(F04005confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
-      // return;
-    // } else {
+    if (this.isFieldEmpty()) {
+      this.dialog.open(F04005confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
+      return;
+    } else {
 
       let jsonStr = JSON.stringify(this.cdbcUserInfoForm.value);
       let jsonObj = JSON.parse(jsonStr);
@@ -108,7 +107,7 @@ export class F04005Component implements OnInit {
         this.totalCount = data.totalCount;
         this.cdbcUserInfo.data = data.dataMap;
       });
-    // }
+    }
   }
 
   setTimes() {

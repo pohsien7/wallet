@@ -21,12 +21,13 @@ export class F01002wopenComponent implements OnInit {
     transType: ['', [Validators.required]],
     startTime: ['', [ ]],
     endTime: ['', [ ]],
-    dn: ['', [ ]],
+    walletId: ['', [ ]],
+    cvc:['',[]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'VAULT_TRANSFER', viewValue: 'TRANSFER'}];
+  walletOption: sysCode[] = [{value: 'VAULT_TRANSFER', viewValue: 'TRANSFER'}, {value: 'issueCV', viewValue: 'IssueCV'}];
   constructor(public dialogRef: MatDialogRef<F01002wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f01002Service: F01002Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -57,7 +58,7 @@ export class F01002wopenComponent implements OnInit {
   }
 
   cleanToEmpty() {
-    this.searchForm.patchValue({ dn : '' });
+    this.searchForm.patchValue({ walletId : '' });
     this.searchForm.patchValue({ transType : '' });
     this.searchForm.patchValue({ startTime : '' });
     this.searchForm.patchValue({ endTime : '' });
@@ -94,6 +95,7 @@ export class F01002wopenComponent implements OnInit {
       if ( this.totalCount == 0 ) {
         this.dialog.open(F01002confirmComponent, { data: { msgStr: "查無錢包" } });
       }
+
     });
   }
 
@@ -111,7 +113,7 @@ export class F01002wopenComponent implements OnInit {
     }
   }
 
-  goBack(walletId: string, txnID: string) {
-    this.dialogRef.close({ event:'success', value: walletId , txnID: txnID, valueTransType: this.searchForm.value.transType });
+  goBack(walletId: string, txnID: string ,cvc:String) {
+    this.dialogRef.close({ event:'success', value: walletId , txnID: txnID, valueTransType: this.searchForm.value.transType, cvc:cvc });
   }
 }

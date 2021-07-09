@@ -27,8 +27,8 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
   });
 
   walletOption: sysCode[] = [
-                             {value: 'f02006', viewValue: '交易收方錢包交易檔'},
-                             {value: 'f02006_2', viewValue: '移轉自錢包CBDC檔'}
+                             {value: 'f02006', viewValue: 'Reverse'},
+                             {value: 'f02006_2', viewValue: 'Transfer'}
                             ];
 
   constructor(public dialogRef: MatDialogRef<F02006wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02006Service: F02006Service) { }

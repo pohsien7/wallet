@@ -16,7 +16,7 @@ export class F02006Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   registrationForm: FormGroup = this.fb.group({
-    queryTxnID: ['', [Validators.required, Validators.minLength(42), Validators.maxLength(42)]],
+    queryTxnID: ['', [Validators.required]],
     cvc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
   });
 
@@ -53,8 +53,7 @@ export class F02006Component implements OnInit {
 
   async getErrorMessage(cloumnName: string) {
     let obj = this.registrationForm.get(cloumnName);
-    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-      obj.hasError('minlength') ? '長度過短' : '';
+    return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ;
   }
 
   async sendCBDC() {

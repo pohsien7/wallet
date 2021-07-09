@@ -35,8 +35,9 @@ export class F02008Component implements OnInit {
     address: ['', [Validators.required, Validators.maxLength(128)]],
     userId: [''],
     agencyID : ['B-822', [Validators.required]],
-    agencyIDForSign : ['B-822', [Validators.required]]
-
+    agencyIDForSign : ['B-822', [Validators.required]],
+    balanceLimit: ['-1', [Validators.required]],
+    keyTxnLimit: ['-1', [Validators.required]]
   });
 
   getImfornationForm: FormGroup = this.fb.group({
@@ -83,6 +84,8 @@ export class F02008Component implements OnInit {
       // formdata.append('value', JSON.stringify(this.upgradeWalletForm.value));
       await this.f02008Service.sendConsumer('consumer/f02008', formdata).then((data) => {
         msg = data.statusMessage;
+        this.clear()
+
 
       });
     }
@@ -142,5 +145,19 @@ export class F02008Component implements OnInit {
         }
       });
     }
+  }
+
+  clear() {
+    // this.upgradeWalletForm.patchValue({ queryWalletID: ''});
+    this.upgradeWalletForm.patchValue({ dn: ''});
+    this.upgradeWalletForm.patchValue({ name: ''});
+    this.upgradeWalletForm.patchValue({ idNumber: ''});
+    this.upgradeWalletForm.patchValue({ nation: ''});
+    this.upgradeWalletForm.patchValue({ gender: ''});
+    this.upgradeWalletForm.patchValue({ birthDate: ''});
+    // this.upgradeWalletForm.patchValue({ phoneNumber: ''});
+    this.upgradeWalletForm.patchValue({ address: ''});
+    this.upgradeWalletForm.patchValue({ userId: ''});
+
   }
 }

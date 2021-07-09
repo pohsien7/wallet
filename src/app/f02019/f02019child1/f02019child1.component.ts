@@ -15,9 +15,9 @@ export class F02019child1Component implements OnInit {
 
   updateLimitForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
-    balanceLimit: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    certTxnLimit: ['', [Validators.required]],
-    keyTxnLimit: ['', [Validators.required]],
+    balanceLimit: ['-1', [Validators.required]],
+    certTxnLimit: ['-1', [Validators.required]],
+    keyTxnLimit: ['-1', [Validators.required]],
     remark: ['', [Validators.maxLength(30)]],
     agencyID : ['B-822', [Validators.required]],
     agencyIDForSign : ['B-822', [Validators.required]]
@@ -29,13 +29,13 @@ export class F02019child1Component implements OnInit {
 
   ngOnInit(): void {
     this.updateLimitForm.patchValue({ walletID: localStorage.getItem('walletID') });
-    this.updateLimitForm.patchValue({ balanceLimit: localStorage.getItem('balanceLimit') });
-    this.updateLimitForm.patchValue({ certTxnLimit: localStorage.getItem('certTxnLimit') });
-    this.updateLimitForm.patchValue({ keyTxnLimit: localStorage.getItem('keyTxnLimit') });
-    localStorage.removeItem('walletID');
-    localStorage.removeItem('balanceLimit');
-    localStorage.removeItem('certTxnLimit');
-    localStorage.removeItem('keyTxnLimit');
+    // this.updateLimitForm.patchValue({ balanceLimit: localStorage.getItem('balanceLimit') });
+    // this.updateLimitForm.patchValue({ certTxnLimit: localStorage.getItem('certTxnLimit') });
+    // this.updateLimitForm.patchValue({ keyTxnLimit: localStorage.getItem('keyTxnLimit') });
+     localStorage.removeItem('walletID');
+    // localStorage.removeItem('balanceLimit');
+    // localStorage.removeItem('certTxnLimit');
+    // localStorage.removeItem('keyTxnLimit');
   }
 
   formControl = new FormControl('', [
@@ -45,7 +45,7 @@ export class F02019child1Component implements OnInit {
   getErrorMessage(cloumnName: string) {
     let obj = this.updateLimitForm.get(cloumnName);
     return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-      obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern') ? '請輸入數字' : '';
+      obj.hasError('minlength') ? '長度過短' : obj.hasError('pattern') ;
   }
 
   async onSubmit() {

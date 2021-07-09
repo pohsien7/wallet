@@ -39,8 +39,8 @@ export class F02002Component implements OnInit {
     birthDate: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
     phoneNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('^[0-9]+$')]],
     address: ['', [Validators.required, Validators.maxLength(128)]],
-    balanceLimit: ['', [Validators.required]],
-    certTxnLimit: ['', [Validators.required]],
+    balanceLimit: ['-1', [Validators.required]],
+    certTxnLimit: ['-1', [Validators.required]],
     statusCode: ['',[]],
     statusMessage: ['',[]],
     walletID: ['',[]]

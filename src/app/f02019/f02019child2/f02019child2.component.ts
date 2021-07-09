@@ -15,10 +15,10 @@ export class F02019child2Component implements OnInit {
 
   updateLimitForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
-    balanceLimit: ['', [Validators.required]],
-    certTxnLimit: ['', [Validators.required]],
+    balanceLimit: ['-1', [Validators.required]],
+    certTxnLimit: ['-1', [Validators.required]],
     remark: ['', [Validators.maxLength(30)]],
-    keyTxnLimit: ['', [Validators.required]],
+    keyTxnLimit: ['-1', [Validators.required]],
     agencyID : ['B-822', [Validators.required]],
     agencyIDForSign : ['B-822', [Validators.required]]
   });

@@ -60,23 +60,22 @@ export class F04007Component implements OnInit {
     };
     this.paginator.page.subscribe((page: PageEvent) => {
       this.currentPage = page;
-      // if (!this.isFieldEmpty()) { this.getViewDataList(); }
-      this.getViewDataList();
+      if (!this.isFieldEmpty()) { this.getViewDataList(); }
+
     });
   }
 
   isFieldEmpty() {
-    // if (this.cdbcUserInfoForm.value.userID == '' && this.cdbcUserInfoForm.value.userName == '' && this.cdbcUserInfoForm.value.userPid == ''
-    //   && this.cdbcUserInfoForm.value.userPhone == '' && this.cdbcUserInfoForm.value.createdate_start == '' && this.cdbcUserInfoForm.value.createdate_end == ''
-    // ) {
-    //   return true;
-    // }
+    if (this.cdbcUserInfoForm.value.walletId == ''
+    ) {
+      return true;
+    }
   }
 
   getViewDataList() {
-    if (1 != 1) {
-      // this.dialog.open(F04005confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
-      // return;
+    if (this.isFieldEmpty()) {
+      this.dialog.open(F04007confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
+      return;
     } else {
 
       let jsonStr = JSON.stringify(this.cdbcUserInfoForm.value);
@@ -117,8 +116,7 @@ export class F04007Component implements OnInit {
 
   clear() {
     this.cdbcUserInfoForm.patchValue({
-      userID: '', userName: '', userPid: '', userPhone: '',
-      createdate_start: '', createdate_end: ''
+      walletId: ''
     });
     this.currentPage = {
       pageIndex: 0,
