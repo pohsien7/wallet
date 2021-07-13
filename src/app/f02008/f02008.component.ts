@@ -149,15 +149,15 @@ export class F02008Component implements OnInit {
 
   clear() {
     // this.upgradeWalletForm.patchValue({ queryWalletID: ''});
-    this.upgradeWalletForm.patchValue({ dn: ''});
-    this.upgradeWalletForm.patchValue({ name: ''});
-    this.upgradeWalletForm.patchValue({ idNumber: ''});
-    this.upgradeWalletForm.patchValue({ nation: ''});
-    this.upgradeWalletForm.patchValue({ gender: ''});
-    this.upgradeWalletForm.patchValue({ birthDate: ''});
+    // this.upgradeWalletForm.patchValue({ dn: ''});
+    // this.upgradeWalletForm.patchValue({ name: ''});
+    // this.upgradeWalletForm.patchValue({ idNumber: ''});
+    // this.upgradeWalletForm.patchValue({ nation: ''});
+    // this.upgradeWalletForm.patchValue({ gender: ''});
+    // this.upgradeWalletForm.patchValue({ birthDate: ''});
     // this.upgradeWalletForm.patchValue({ phoneNumber: ''});
-    this.upgradeWalletForm.patchValue({ address: ''});
-    this.upgradeWalletForm.patchValue({ userId: ''});
+    // this.upgradeWalletForm.patchValue({ address: ''});
+    // this.upgradeWalletForm.patchValue({ userId: ''});
 
   }
 }

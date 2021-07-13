@@ -45,30 +45,30 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="goBack(row.RECIPIENTID, row.TXNID, row.CVC)">
+        <button mat-icon-button color="primary" (click)="goBack(row.recipientid|| row.walletid, row.txnid, row.cvc || '0901' , type2)">
           <span class="material-icons">call_received</span>
         </button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="RECIPIENTID">
       <mat-header-cell *matHeaderCellDef>交易收方錢包ID</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.RECIPIENTID }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.recipientid || row.walletid}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="TXNID">
       <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.TXNID }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.txnid }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="AMOUNT">
       <mat-header-cell *matHeaderCellDef>交易金額</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.AMOUNT }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.amount }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="CVC">
       <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.CVC }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.cvc || '0901'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="TXNTIME">
       <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.TXNTIME }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.txntime | date:'yyyy-MM-dd hh:mm:ss' }}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'CVC', 'TXNTIME' ]"></mat-header-row>
     <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'CVC', 'TXNTIME' ]"></mat-row>

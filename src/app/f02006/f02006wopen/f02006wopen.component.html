@@ -14,7 +14,7 @@
         <td>
           <mat-form-field appearance="fill">
             <mat-label>交易類型</mat-label>
-            <mat-select formControlName="walletType" (click)="cleanToEmpty()">
+            <mat-select formControlName="transType" (click)="cleanToEmpty()">
               <mat-option *ngFor="let code of walletOption" [value]="code.value">
                 {{code.viewValue}}
               </mat-option>
@@ -23,21 +23,12 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-form-field appearance="fill">
-            <mat-label>交易日期</mat-label>
-            <mat-date-range-input [rangePicker]="rangePicker">
-              <input matStartDate placeholder="起" formControlName="startTime">
-              <input matEndDate placeholder="訖" formControlName="endTime">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-            <mat-date-range-picker #rangePicker>
-              <mat-date-range-picker-actions>
-                <button mat-raised-button color="primary" matDateRangePickerApply (click)="setEndTimes()">確認</button>
-                <button mat-button matDateRangePickerCancel>取消</button>
-              </mat-date-range-picker-actions>
-            </mat-date-range-picker>
+          <mat-form-field appearance="fill" class="form-id">
+            <mat-label>交易收方錢包ID</mat-label>
+            <input matInput #input class="form-control" formControlName="recipientid">
           </mat-form-field>
         </td>
+
       </tr>
       <tr>
         <td colspan="4">
@@ -59,24 +50,28 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="goBack(row.TXNID || row.txnid ,row.CVC || row.cvc)">
+        <button mat-icon-button color="primary" (click)="goBack( row.txnid , row.cvc||'0901', type2)">
           <span class="material-icons">call_received</span>
         </button>
       </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="RECIPIENTID">
+      <mat-header-cell *matHeaderCellDef>收方錢包ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.recipientid}}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="TXNID">
       <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.TXNID || row.txnid}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{  row.txnid}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="CVC">
       <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.CVC || row.cvc}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{  row.cvc ||'0901'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="TXNTIME">
       <mat-header-cell *matHeaderCellDef>交易日期</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.TXNTIME || row.txntime | date:'yyyy-MM-dd'}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{  row.txntime | date:'yyyy-MM-dd hh:mm:ss'}}</mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="['actions', 'TXNID', 'CVC','TXNTIME' ]"></mat-header-row>
-    <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'TXNID', 'CVC', 'TXNTIME' ]"></mat-row>
+    <mat-header-row *matHeaderRowDef="['actions', 'RECIPIENTID','TXNID', 'CVC','TXNTIME' ]"></mat-header-row>
+    <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'RECIPIENTID','TXNID', 'CVC', 'TXNTIME' ]"></mat-row>
   </mat-table>
 </mat-dialog-content>

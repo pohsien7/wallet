@@ -17,7 +17,8 @@ export class F02006Component implements OnInit {
 
   registrationForm: FormGroup = this.fb.group({
     queryTxnID: ['', [Validators.required]],
-    cvc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
+    cvc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
+    type2:['']
   });
 
   resultForm: FormGroup = this.fb.group({

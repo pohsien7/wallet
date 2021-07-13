@@ -35,7 +35,7 @@ export class F04003shopComponent implements OnInit {
     let obj = this.registrationShopForm.get(cloumnName);
     if (cloumnName == 'shopId' && this.f04003Service.checkBanIsValid(obj.value)) { obj.setErrors({'banError': true}); }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : obj.hasError('banError')  ? '統一編號格式錯誤' : '';
+           obj.hasError('minlength') ? '長度過短' : obj.hasError('banError') ;
   }
 
   async onSubmit(){

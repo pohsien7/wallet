@@ -14,12 +14,13 @@
               <tr>
                 <th nowrap="nowrap">券幣代號：</th>
                 <td>
-                  <mat-form-field color="accent">
-                    <mat-select formControlName="cvc">
-                      <mat-option *ngFor="let item of cvcCode" [value]="item.value">
-                        {{item.viewValue}}
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <input type="text" matInput [formControl]="formControl" [matAutocomplete]="auto" formControlName="cvc">
+                    <mat-autocomplete #auto="matAutocomplete" >
+                      <mat-option *ngFor="let cvc of cvcCode " [value]="cvc.viewValue">
+                        {{cvc.viewValue}}
                       </mat-option>
-                    </mat-select>
+                    </mat-autocomplete>
                   </mat-form-field>
                 </td>
                 <th nowrap="nowrap">欲發行券幣種類：</th>
@@ -59,7 +60,7 @@
                     <mat-error>{{getErrorMessage('remark')}}</mat-error>
                   </mat-form-field>
                 </td>
-  
+
               </tr>
             </mat-card-content>
           </mat-card>
@@ -67,4 +68,3 @@
       </form>
     </block-ui>
   </div>
-  

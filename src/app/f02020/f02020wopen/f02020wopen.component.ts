@@ -20,9 +20,8 @@ export class F02020wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
     walletType: ['', [Validators.required]],
-    startTime: ['', [ ]],
-    endTime: ['', [ ]],
-    dn: ['', [ ]],
+
+    walletID: ['', [ ]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
@@ -77,12 +76,12 @@ export class F02020wopenComponent implements OnInit {
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
     //1.處理日期
-    if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
-      let selectedStartDate = new Date(this.searchForm.value.startTime);
-      let selectedEndDate = new Date(this.searchForm.value.endTime);
-      jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
-      jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
-    }
+    // if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
+    //   let selectedStartDate = new Date(this.searchForm.value.startTime);
+    //   let selectedEndDate = new Date(this.searchForm.value.endTime);
+    //   jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
+    //   jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
+    // }
     //2.處理分頁
     let page :string = `${this.currentPage.pageIndex + 1}`;
     let perPage :string = `${this.currentPage.pageSize}`;

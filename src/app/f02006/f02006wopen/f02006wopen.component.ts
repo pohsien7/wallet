@@ -19,16 +19,20 @@ interface sysCode {
 export class F02006wopenComponent implements OnInit, AfterViewInit {
 
   searchForm: FormGroup = this.fb.group({
-    walletType: ['', [Validators.required]],
-    startTime: ['', [ ]],
-    endTime: ['', [ ]],
+    transType: ['', [Validators.required]],
+    recipientid: ['', []],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [
-                             {value: 'f02006', viewValue: 'Reverse'},
-                             {value: 'f02006_2', viewValue: 'Transfer'}
+
+  walletOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: 'Transfer'},
+                             {value: 'Deduct', viewValue: 'Deduct'},
+                             {value: 'BarcodePay', viewValue: 'BarcodePay'},
+                             {value: 'NumberPay', viewValue: 'NumberPay'},
+                             {value: 'IssueCV', viewValue: 'IssueCV'},
+                             {value: 'RedeemCV', viewValue: 'RedeemCV'},
+                             {value: 'Reverse', viewValue: 'Reverse'}
                             ];
 
   constructor(public dialogRef: MatDialogRef<F02006wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f02006Service: F02006Service) { }
@@ -39,6 +43,7 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
 
 //============================================================
   totalCount: any;
+  type2: any;
   @ViewChild('paginator', { static: true }) paginator: MatPaginator;
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
@@ -63,9 +68,9 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
   }
 
   cleanToEmpty() {
-    this.searchForm.patchValue({ walletType : '' });
-    this.searchForm.patchValue({ startTime : '' });
-    this.searchForm.patchValue({ endTime : '' });
+    // this.searchForm.patchValue({ walletType : '' });
+    // this.searchForm.patchValue({ startTime : '' });
+    // this.searchForm.patchValue({ endTime : '' });
     this.currentPage = {
       pageIndex: 0,
       pageSize: 10,
@@ -80,12 +85,12 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
     //1.處理日期
-    if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
-      let selectedStartDate = new Date(this.searchForm.value.startTime);
-      let selectedEndDate = new Date(this.searchForm.value.endTime);
-      jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
-      jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
-    }
+    // if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
+    //   let selectedStartDate = new Date(this.searchForm.value.startTime);
+    //   let selectedEndDate = new Date(this.searchForm.value.endTime);
+    //   jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
+    //   jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
+    // }
     //2.處理分頁
     let page :string = `${this.currentPage.pageIndex + 1}`;
     let perPage :string = `${this.currentPage.pageSize}`;
@@ -94,6 +99,7 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
     //3.轉回字串
     let jsonString :string = JSON.stringify(jsonObj);
     this.f02006Service.getWalletIdList('/consumer/f02006fn01', jsonString).subscribe(data => {
+      this.type2 = data.type2;
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
     });
@@ -108,12 +114,12 @@ export class F02006wopenComponent implements OnInit, AfterViewInit {
   }
 
   setEndTimes() {
-    if (this.searchForm.value.startTime != null && this.searchForm.value.endTime == null) {
-      this.searchForm.patchValue({ endTime:this.searchForm.value.startTime });
-    }
+    // if (this.searchForm.value.startTime != null && this.searchForm.value.endTime == null) {
+    //   this.searchForm.patchValue({ endTime:this.searchForm.value.startTime });
+    // }
   }
 
-  goBack(txnId: string, cvc: string) {
-    this.dialogRef.close({ event:'success', value: txnId , cvc: cvc });
+  goBack(txnId: string, cvc: string, type2:string) {
+    this.dialogRef.close({ event:'success', value: txnId , cvc: cvc , type2});
   }
 }

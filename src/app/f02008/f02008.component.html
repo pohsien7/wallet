@@ -33,13 +33,7 @@
               </td>
             </tr>
             <tr>
-              <th>錢包顯示名稱：</th>
-              <td>
-                <mat-form-field color="accent">
-                  <input matInput #input class="form-control" formControlName="dn">
-                  <mat-error>{{getErrorMessage('dn')}}</mat-error>
-                </mat-form-field>
-              </td>
+              <input matInput #input class="form-control" formControlName="dn" hidden>
               <th>姓名：</th>
               <td>
                 <mat-form-field color="accent">

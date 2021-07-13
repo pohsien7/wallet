@@ -23,7 +23,13 @@ export class F03002wopenComponent implements OnInit {
     perPage: ['', [ ]]
   });
 
-  transOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: '移轉自錢包之CBDC'}];
+  transOption: sysCode[] = [{value: 'myWallet_transfer', viewValue: 'Transfer'},
+                            {value: 'Deduct', viewValue: 'Deduct'},
+                            {value: 'BarcodePay', viewValue: 'BarcodePay'},
+                            {value: 'NumberPay', viewValue: 'NumberPay'},
+                            {value: 'IssueCV', viewValue: 'IssueCV'},
+                            {value: 'RedeemCV', viewValue: 'RedeemCV'}
+                            ];
 
   constructor(public dialogRef: MatDialogRef<F03002wopenComponent>, private fb: FormBuilder, private f03002Service: F03002Service, public dialog: MatDialog) { }
 
@@ -32,6 +38,7 @@ export class F03002wopenComponent implements OnInit {
   }
 
   totalCount: any;
+  type2:any;
   @ViewChild('paginator', { static: true }) paginator: MatPaginator;
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
@@ -73,7 +80,9 @@ export class F03002wopenComponent implements OnInit {
     jsonObj.perPage = perPage;
     //3.轉回字串
     let jsonString :string = JSON.stringify(jsonObj);
+
     this.f03002Service.getWalletIdList('/consumer/f03002fn01', jsonString).subscribe(data => {
+      this.type2 = data.type;
       this.totalCount = data.size;
       this.myWalletSource.data = data.items;
       if ( this.totalCount == 0 ) {
@@ -82,8 +91,8 @@ export class F03002wopenComponent implements OnInit {
     });
   }
 
-  goBack(recipientID: string, txnID: string, cvc: string) {
-    this.dialogRef.close({ event:'success', recipientID: recipientID , txnID: txnID, cvc: cvc });
+  goBack(recipientID: string, txnID: string, cvc: string, type2:string) {
+    this.dialogRef.close({ event:'success', recipientID: recipientID , txnID: txnID, cvc: cvc, type2:type2 });
   }
 
   cleanToEmpty() {

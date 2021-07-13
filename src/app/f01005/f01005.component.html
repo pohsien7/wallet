@@ -25,12 +25,13 @@
             </td>
             <th nowrap="nowrap">券幣代號：</th>
             <td>
-              <mat-form-field color="accent">
-                <mat-select formControlName="cvc">
-                  <mat-option *ngFor="let cvc of cvcCode" [value]="cvc.value">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <input type="text" matInput [formControl]="formControl" [matAutocomplete]="auto" formControlName="cvc">
+                <mat-autocomplete #auto="matAutocomplete" >
+                  <mat-option *ngFor="let cvc of cvcCode " [value]="cvc.viewValue">
                     {{cvc.viewValue}}
                   </mat-option>
-                </mat-select>
+                </mat-autocomplete>
               </mat-form-field>
             </td>
           </tr>
@@ -60,7 +61,7 @@
                   </mat-form-field>
                 </td>
               </tr>
-  
+
               <tr>
                 <th nowrap="nowrap">交易被授權中介機構ID</th>
                 <td>
@@ -80,9 +81,9 @@
                     <input matInput #input formControlName="cvc" readonly>
                   </mat-form-field>
                 </td>
-  
+
               </tr>
-  
+
               <tr>
                 <th nowrap="nowrap">交易金額</th>
                 <td>
@@ -145,4 +146,3 @@
       </form>
     </block-ui>
   </div>
-  

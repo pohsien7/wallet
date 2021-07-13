@@ -25,7 +25,7 @@ export class F03012Component implements OnInit {
   minDate:Date;
 
   issueCVForm: FormGroup = this.fb.group({
-    walletID: ['BI-822-2021052415340988'],
+    walletID: [''],
     cvc: ['', [Validators.required, Validators.maxLength(4)]],
     cvtype: ['', [Validators.required, Validators.maxLength(1)]],
     amount: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],

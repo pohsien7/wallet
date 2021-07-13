@@ -17,6 +17,7 @@ export class F03002Component implements OnInit {
     walletid: ['', [Validators.maxLength(30)]],
     stxnid: ['', [Validators.required]],
     cvc: ['', [Validators.required]],
+    type2: ['', [Validators.required]],
     remark: ['', []]
   })
 
@@ -70,6 +71,7 @@ export class F03002Component implements OnInit {
         this.reverseForm.patchValue({ walletid : result.recipientID });
         this.reverseForm.patchValue({ stxnid : result.txnID });
         this.reverseForm.patchValue({ cvc : result.cvc });
+        this.reverseForm.patchValue({ type2 : result.type2 });
       }
     });
   }
