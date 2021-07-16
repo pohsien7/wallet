@@ -80,7 +80,7 @@
       </ng-container>
       <ng-container matColumnDef="CREATEDATE">
         <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.CREATEDATE}}</mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'DN', 'CREATEDATE' ]"></mat-header-row>
       <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'DN', 'CREATEDATE' ]"></mat-row>

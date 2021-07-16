@@ -98,7 +98,7 @@
       </ng-container>
       <ng-container matColumnDef="CREATEDATE">
         <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.CREATEDATE }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.CREATEDATE |date :'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="WALLETID">
         <mat-header-cell *matHeaderCellDef>記名錢包ID</mat-header-cell>

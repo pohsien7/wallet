@@ -42,4 +42,8 @@ export class LoginComponent {
   public goBarcode() {
     this.router.navigate(['./barcode']);
   }
+
+  public goNumber() {
+    this.router.navigate(['./number']);
+  }
 }

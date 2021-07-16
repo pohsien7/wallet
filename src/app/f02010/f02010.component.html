@@ -47,12 +47,21 @@
                         <tr>
                             <th nowrap="nowrap">通路代號</th>
                             <td>
-                                <mat-form-field color="accent">
+                             <mat-form-field color="accent">
+                              <input type="text" matInput [formControl]="formControl" [matAutocomplete]="auto" formControlName="channelcode">
+                              <mat-autocomplete #auto="matAutocomplete" >
+                                <mat-option *ngFor="let channel of channelCode " [value]="channel.value">
+                                  {{channel.viewValue}}
+                                </mat-option>
+                              </mat-autocomplete>
+
+
+                                <!-- <mat-form-field color="accent">
                                     <mat-select formControlName="channelcode">
                                       <mat-option *ngFor="let channel of channelCode" [value]="channel.value">
                                           {{channel.viewValue}}
                                       </mat-option>
-                                  </mat-select>
+                                  </mat-select> -->
                                 </mat-form-field>
                             </td>
                             <th nowrap="nowrap">付方錢包支付號碼</th>

@@ -48,7 +48,7 @@
     </ng-container>
     <ng-container matColumnDef="deadlineDate">
       <mat-header-cell *matHeaderCellDef>兌換期限</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.deadlineDate | date:'yyyy-MM-dd'}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{row.deadlineDate | date:'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
     </ng-container>
     <mat-header-row
       *matHeaderRowDef="['setting','cvc','deadlineDate']; sticky: true">

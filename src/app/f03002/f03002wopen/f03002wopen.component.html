@@ -31,8 +31,12 @@
     </tr>
     <tr>
       <td colspan="4">
-        <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10"
-          [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+        <mat-paginator #paginator
+             [length]="totalCount"
+             [pageIndex]="0"
+             [pageSize]="10"
+             [pageSizeOptions]="[5, 10, 15, 50, 100]"
+             [showFirstLastButtons]="true">
         </mat-paginator>
       </td>
     </tr>
@@ -40,7 +44,7 @@
 </form>
 </div>
 <br>
-<mat-dialog-content>
+<mat-dialog-content >
   <mat-table [dataSource]="myWalletSource">
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
@@ -68,7 +72,7 @@
     </ng-container>
     <ng-container matColumnDef="TXNTIME">
       <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.txntime | date:'yyyy-MM-dd hh:mm:ss' }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.txntime | date:'yyyy-MM-dd HH:mm:ss' }}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'CVC', 'TXNTIME' ]"></mat-header-row>
     <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'RECIPIENTID', 'TXNID', 'AMOUNT', 'CVC', 'TXNTIME' ]"></mat-row>

@@ -2,8 +2,14 @@
   <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
     <mat-card class="box" style="background:rgba(0,0,0,0.0);margin-bottom:10px;margin-top: 15%;">
       <mat-card-header>
-        <mat-card-title (click) = "goBarcode()">Log in</mat-card-title>
+        <mat-card-title style="opacity:0.3" (click) = "goNumber()">GenerateNumber</mat-card-title>
       </mat-card-header>
+      <br>
+      <mat-card-header>
+        <mat-card-title  style="opacity:0.3" (click) = "goBarcode()">Log in</mat-card-title>
+      </mat-card-header>
+
+
 
       <form orm class="example-form">
         <mat-card-content>

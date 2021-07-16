@@ -159,6 +159,8 @@ import { F04005Component } from './f04005/f04005.component';
 import { F04005confirmComponent } from './f04005/f04005confirm/f04005confirm.component';
 import { LoginconfirmComponent } from './login/loginconfirm/loginconfirm.component';
 import { BarcodetestComponent } from './barcodetest/barcodetest.component';
+import { NumbertestComponent } from './bnumbertest/numbertest.component';
+
 import { F04006Component } from './f04006/f04006.component';
 import { F04006confirmComponent } from './f04006/f04006confirm/f04006confirm.component';
 import { F03014Component } from './f03014/f03014.component';
@@ -358,6 +360,7 @@ export const TW_FORMATS = {
     F04005confirmComponent,
     LoginconfirmComponent,
     BarcodetestComponent,
+    NumbertestComponent,
     F04006Component,
     F04006confirmComponent,
     F03014Component,

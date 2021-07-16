@@ -15,7 +15,7 @@ export class F04003shopComponent implements OnInit {
 
   registrationShopForm: FormGroup = this.fb.group({
     walletId: [''],
-    shopId: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+    shopId: ['', [Validators.required]],
     shopName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]]
   });
 
@@ -33,9 +33,9 @@ export class F04003shopComponent implements OnInit {
 
   getErrorMessage(cloumnName: string) {
     let obj = this.registrationShopForm.get(cloumnName);
-    if (cloumnName == 'shopId' && this.f04003Service.checkBanIsValid(obj.value)) { obj.setErrors({'banError': true}); }
+    if (cloumnName == 'shopId' ) { }
     return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : obj.hasError('banError') ;
+           obj.hasError('minlength') ;
   }
 
   async onSubmit(){

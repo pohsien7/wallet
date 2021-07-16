@@ -73,7 +73,7 @@
       </ng-container>
       <ng-container matColumnDef="TIMESTAMP">
         <mat-header-cell *matHeaderCellDef>授權時間</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.timestamp | date:'yyyyMMdd hh:mm:ss' }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.timestamp | date:'yyyy-MM-dd HH:mm:ss' }}</mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="['actions', 'AUTHID', 'OPERATION', 'WALLETID', 'RECIPIENTID', 'TIMESTAMP' ]"></mat-header-row>
       <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'AUTHID', 'OPERATION', 'WALLETID', 'RECIPIENTID', 'TIMESTAMP'  ]"></mat-row>

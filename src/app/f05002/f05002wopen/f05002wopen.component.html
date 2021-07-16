@@ -80,12 +80,11 @@
       </ng-container>
       <ng-container matColumnDef="TXNTIME">
         <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.TXNTIME }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.TXNTIME | date:'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
       </ng-container>
-      
+
       <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'STXNID', 'TXNTIME' ]"></mat-header-row>
       <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'STXNID', 'TXNTIME']"></mat-row>
     </mat-table>
   </mat-dialog-content>
-  
-  
+

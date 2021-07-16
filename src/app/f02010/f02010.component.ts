@@ -29,7 +29,7 @@ export class F02010Component implements OnInit {
                          { value: 'N003', viewValue: '網路繳稅' } ];
 
   numberPayForm: FormGroup = this.fb.group({
-    recipientID: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
+    recipientID: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
     amount: ['1', [Validators.required]],
     channelcode: ['A001', [Validators.required]],

@@ -1,7 +1,9 @@
+
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+
   <block-ui>
     <form [formGroup]="generateBarcodeForm" >
-      <th class="f03_th">動態產生OTP支付條碼</th>
+      <th class="f03_th">產生支付號碼</th>
       <table>
           <tr>
             <th nowrap="nowrap">
@@ -12,6 +14,7 @@
           <tr>
             <th nowrap="nowrap">錢包ID：</th>
             <td>
+
               <mat-form-field color="accent">
                 <mat-select formControlName="queryWalletID">
                   <mat-option *ngFor="let id of walletItCode" [value]="id.value">
@@ -33,33 +36,40 @@
                 </mat-form-field>
             </td>
           </tr>
+          <tr>
+            <th nowrap="nowrap">支付金額：</th>
+            <td>
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" formControlName="amount">
+                </mat-form-field>
+            </td>
+          </tr>
         </table>
     </form>
     <form [formGroup]="resultForm" style="padding-left: 30px;">
-      <table >
+      <table>
         <mat-card class="matCard">
-
           <mat-card-content>
             <tr>
               <td>
                 <div>
-                  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
-                    <img [src]="qrcodeImage" >
-                  </div>
-                  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
-                     <img [src]="barcodeImage" >
-                  </div>
-
-                  <mat-form-field color="accent" >
-                    <input matInput #input formControlName="barcode" readonly>
-                  </mat-form-field>
+                <mat-form-field color="accent" style="width: 100%;">
+                  <input matInput #input formControlName="number" readonly>
+                </mat-form-field>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <mat-form-field color="accent" style="width: 350px;">
-                  <input matInput #input formControlName="expireTime"  readonly>
+                <mat-form-field color="accent" style="width: 100%;">
+                  <input matInput #input formControlName="verify"  readonly>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field color="accent" style="width: 280px;">
+                  <input matInput #input formControlName="response"  readonly >
                 </mat-form-field>
               </td>
             </tr>

@@ -1,36 +1,46 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { F03009Service } from '../f03009.service';
-import { F03009confirmComponent } from '../f03009confirm/f03009confirm.component';
+import { NumbertestService } from '../numbertest.service';
+import { NumbertestConfirmComponent } from '../numbertestconfirm/numbertestconfirm.component';
+
 interface sysCode {
   value: string;
   viewValue: string;
 }
+
 @Component({
-  templateUrl: './f03009wopen.component.html',
-  styleUrls: ['./f03009wopen.component.css']
+  templateUrl: './numbertestwopen.component.html',
+  styleUrls: ['./numbertestwopen.component.css']
 })
-export class F03009wopenComponent implements OnInit {
+export class NumbertestwopenComponent implements OnInit, AfterViewInit {
 
   searchForm: FormGroup = this.fb.group({
     walletType: ['', [Validators.required]],
-    walletId:[''],
+    startTime: ['', [ ]],
+    endTime: ['', [ ]],
+    dn: ['', [ ]],
     page: ['', [ ]],
     perPage: ['', [ ]]
   });
 
-  walletOption: sysCode[] = [{value: 'WALLET_CV', viewValue: 'WALLET_CV'}];
-  constructor(public dialogRef: MatDialogRef<F03009wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03009Service: F03009Service, public dialog: MatDialog) { }
+  walletOption: sysCode[] = [{value: 'JPWALLET_CERT', viewValue: '記名錢包 (法人，憑證)'},
+                             {value: 'NPWALLET_CERT', viewValue: '記名錢包 (自然人，憑證)'},
+                             {value: 'NPWALLET_PUBKEY', viewValue: '記名錢包 (自然人，公鑰)'},
+                             {value: 'ANONYMOUS_WALLET', viewValue: '匿名錢包'}];
+
+  constructor(public dialogRef: MatDialogRef<NumbertestwopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private numbertestService: NumbertestService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
   }
 
-  //============================================================
+//============================================================
   totalCount: any;
   @ViewChild('paginator', { static: true }) paginator: MatPaginator;
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
@@ -74,12 +84,12 @@ export class F03009wopenComponent implements OnInit {
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
     //1.處理日期
-    // if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
-    //   let selectedStartDate = new Date(this.searchForm.value.startTime);
-    //   let selectedEndDate = new Date(this.searchForm.value.endTime);
-    //   jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
-    //   jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
-    // }
+    if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
+      let selectedStartDate = new Date(this.searchForm.value.startTime);
+      let selectedEndDate = new Date(this.searchForm.value.endTime);
+      jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
+      jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
+    }
     //2.處理分頁
     let page :string = `${this.currentPage.pageIndex + 1}`;
     let perPage :string = `${this.currentPage.pageSize}`;
@@ -87,11 +97,11 @@ export class F03009wopenComponent implements OnInit {
     jsonObj.perPage = perPage;
     //3.轉回字串
     let jsonString :string = JSON.stringify(jsonObj);
-    this.f03009Service.getWalletIdList('/consumer/f03009fn01', jsonString).subscribe(data => {
+    this.numbertestService.getWalletIdList('/consumer/f03005fn01', jsonString).subscribe(data => {
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
       if ( this.totalCount == 0 ) {
-        this.dialog.open(F03009confirmComponent, { data: { msgStr: "查無錢包" } });
+        this.dialog.open(NumbertestConfirmComponent, { data: { msgStr: "查無錢包" } });
       }
     });
   }
@@ -110,7 +120,7 @@ export class F03009wopenComponent implements OnInit {
     }
   }
 
-  goBack(walletId: string, cvc: string) {
-    this.dialogRef.close({ event:'success', value: walletId , cvc: cvc });
+  goBack(walletId: string) {
+    this.dialogRef.close({ event:'success', value: walletId , valueWalletType: this.searchForm.value.walletType });
   }
 }
