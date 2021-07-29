@@ -21,7 +21,7 @@ export class F02010Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   // 之後要改打API去取得下拉內容
-  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' }];
+  cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' },{ value: 'R001', viewValue: 'R001' },{ value: 'R002', viewValue: 'R002' }];
   channelCode: COMB[] = [{ value: 'A001', viewValue: 'ATM提款' },
                          { value: 'M001', viewValue: '實體消費' },
                          { value: 'N001', viewValue: '網路消費' },
@@ -97,6 +97,9 @@ export class F02010Component implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.event == 'success') {
         this.numberPayForm.patchValue({ payablenumber : result.payableNumber });
+        this.numberPayForm.patchValue({ amount : result.amount });
+        this.numberPayForm.patchValue({ cvc : result.cvc });
+
         this.numberPayForm.patchValue({ walletID : result.walletID });
         this.numberPayForm.patchValue({ walletType : result.walletType });
       }

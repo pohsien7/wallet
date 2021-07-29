@@ -42,19 +42,39 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="cvc">
+    <ng-container matColumnDef="CVC">
       <mat-header-cell *matHeaderCellDef>票券代號</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.cvc }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="deadlineDate">
-      <mat-header-cell *matHeaderCellDef>兌換期限</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.deadlineDate | date:'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
+    <ng-container matColumnDef="ISSUECV_VALID">
+      <mat-header-cell *matHeaderCellDef>票券領取(起)</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.issuecvValid | date:'yyyy-MM-dd'}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ISSUECV_EXP">
+      <mat-header-cell *matHeaderCellDef>票券領取(迄)</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.issuecvExp | date:'yyyy-MM-dd'}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="PAY_VALID">
+      <mat-header-cell *matHeaderCellDef>票券付款(起)</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.payValid | date:'yyyy-MM-dd'}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="PAY_EXP">
+      <mat-header-cell *matHeaderCellDef>票券付款(迄)</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.payExp| date:'yyyy-MM-dd'}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="REDEEM_VALID">
+      <mat-header-cell *matHeaderCellDef>票券兌換(起)</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.redeemValid | date:'yyyy-MM-dd'}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="REDEEM_EXP">
+      <mat-header-cell *matHeaderCellDef>票券兌換(迄)</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.redeemExp | date:'yyyy-MM-dd'}}</mat-cell>
     </ng-container>
     <mat-header-row
-      *matHeaderRowDef="['setting','cvc','deadlineDate']; sticky: true">
+      *matHeaderRowDef="['setting','CVC','ISSUECV_VALID','ISSUECV_EXP','PAY_VALID','PAY_EXP','REDEEM_VALID','REDEEM_EXP']; sticky: true">
     </mat-header-row>
     <mat-row
-      *matRowDef="let ruleParmRow; columns: ['setting','cvc','deadlineDate']">
+      *matRowDef="let ruleParmRow; columns: ['setting','CVC','ISSUECV_VALID','ISSUECV_EXP','PAY_VALID','PAY_EXP','REDEEM_VALID','REDEEM_EXP']">
     </mat-row>
   </mat-table>
   <tr>

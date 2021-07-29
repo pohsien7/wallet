@@ -29,7 +29,6 @@ export class F03012Component implements OnInit {
     cvc: ['', [Validators.required, Validators.maxLength(4)]],
     cvtype: ['', [Validators.required, Validators.maxLength(1)]],
     amount: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
-    redeemDeadline:['', [Validators.required]],
     remark: ['*', [, Validators.maxLength(30)]]
   });
 
@@ -60,8 +59,8 @@ export class F03012Component implements OnInit {
     } else {
       let jsonStr = JSON.stringify(this.issueCVForm.value);
       let jsonObj = JSON.parse(jsonStr);
-      let selectedDate = new Date(this.issueCVForm.value.redeemDeadline);
-      jsonObj.redeemDeadline = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
+      // let selectedDate = new Date(this.issueCVForm.value.redeemDeadline);
+      // jsonObj.redeemDeadline = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
       const formdata: FormData = new FormData();
       formdata.append('value', JSON.stringify(jsonObj));
       this.f03012Service.sendConsumer('consumer/f03012', formdata).then((data) => {

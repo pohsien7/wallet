@@ -17,9 +17,11 @@ export class QrcodeComponent implements OnInit {
   }
 
   registrationForm: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
-    name: ['', [Validators.required]],
-    money: ['', ]
+    recipientID: ['', [Validators.required]],
+    dn: ['', [Validators.required]],
+    amount: ['', Validators.pattern('^[0-9]+$')],
+    won:['pay'],
+    cvc:['*']
 
   });
 
@@ -38,7 +40,6 @@ async onSubmit() {
       msg = '資料格式有誤，請修正!'
     } else{
       await this.qrcodeService.sendConsumer('consumer/qrcode', formdata).then((data) => {
-        console.log(data)
         this.imageSource = data.String;
       });
     }

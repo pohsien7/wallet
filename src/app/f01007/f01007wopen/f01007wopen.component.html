@@ -14,7 +14,7 @@
           <td>
             <mat-form-field appearance="fill">
               <mat-label>錢包類型</mat-label>
-              <mat-select formControlName="transType" (click)="cleanToEmpty()">
+              <mat-select formControlName="walletType" (click)="cleanToEmpty()">
                 <mat-option *ngFor="let code of walletOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
@@ -23,15 +23,11 @@
             </mat-form-field>
           </td>
           <td>
-            <mat-form-field appearance="fill">
-              <mat-label>收方錢包ID</mat-label>
-              <input matInput #input class="form-control" formControlName="walletId">
-            </mat-form-field>
-          </td>
+
           <td>
-            <mat-form-field appearance="fill">
-              <mat-label>券幣代號</mat-label>
-              <input matInput #input class="form-control" formControlName="cvc">
+            <mat-form-field appearance="fill" class="form-id">
+              <mat-label>授權方錢包ID</mat-label>
+              <input matInput #input class="form-control" formControlName="walletID">
             </mat-form-field>
           </td>
         </tr>
@@ -55,32 +51,33 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" (click)="goBack(row.recipientid, row.txnid, row.cvc || '0901')">
+          <button mat-icon-button color="primary" (click)="goBack(row.authid, row.walletid, row.recipientid)">
             <span class="material-icons">call_received</span>
           </button>
         </mat-cell>
       </ng-container>
+      <ng-container matColumnDef="AUTHID">
+        <mat-header-cell *matHeaderCellDef>授權合約ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.authid }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="OPERATION">
+        <mat-header-cell *matHeaderCellDef>授權之作業名稱</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.operation }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="WALLETID">
+        <mat-header-cell *matHeaderCellDef>授權方錢包ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.walletid }}</mat-cell>
+      </ng-container>
       <ng-container matColumnDef="RECIPIENTID">
-        <mat-header-cell *matHeaderCellDef>收方錢包ID</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.recipientid || row.walletid}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef>授權收款方總庫/錢包ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.recipientid }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="TXNID">
-        <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.txnid }}</mat-cell>
+      <ng-container matColumnDef="TIMESTAMP">
+        <mat-header-cell *matHeaderCellDef>授權時間</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
       </ng-container>
-
-      <ng-container matColumnDef="CVC">
-        <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.cvc || '0901'}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="TXNTIME">
-        <mat-header-cell *matHeaderCellDef>交易時間</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.txntime | date:'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="['actions', 'RECIPIENTID', 'TXNID' ,'CVC' , 'TXNTIME' ]"></mat-header-row>
-      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'RECIPIENTID', 'TXNID', 'CVC', 'TXNTIME' ]"></mat-row>
+      <mat-header-row *matHeaderRowDef="['actions', 'AUTHID', 'OPERATION', 'WALLETID', 'RECIPIENTID', 'TIMESTAMP' ]"></mat-header-row>
+      <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'AUTHID', 'OPERATION', 'WALLETID', 'RECIPIENTID', 'TIMESTAMP'  ]"></mat-row>
     </mat-table>
   </mat-dialog-content>
 

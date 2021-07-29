@@ -26,7 +26,7 @@ export class F03006Component implements OnInit {
   payableNumberForm: FormGroup = this.fb.group({
     walletID: ['', [Validators.required, Validators.maxLength(23)]],
     cvc: ['0901', [Validators.required, Validators.maxLength(4)]],
-    amount: ['1', [Validators.required, Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
+    amount: ['', [Validators.required, Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     walletType: []
   });
 
@@ -66,6 +66,9 @@ export class F03006Component implements OnInit {
       this.f03006Service.sendConsumer('consumer/f03006', formdata).then((data) => {
         msg = data.statusMessage;
         this.resultForm.patchValue({ payableNumber: data.payableNumber });
+        this.resultForm.patchValue({ amount: data.amount });
+        this.resultForm.patchValue({ cvc: data.cvc });
+
         this.payableNumberImage = 'data:image/jpeg;base64,' + data.payableNumberImage;
         if (this.getPayablenumberForF02010 == "getPayablenumber") {
           msg = '支付條碼取得成功!'
@@ -75,6 +78,8 @@ export class F03006Component implements OnInit {
           this.dialogRef.close({
             event: 'success',
             payableNumber: data.payableNumber,
+            amount: data.amount,
+            cvc: data.cvc,
             walletID: this.payableNumberForm.value.walletID,
             walletType: this.payableNumberForm.value.walletType
           });

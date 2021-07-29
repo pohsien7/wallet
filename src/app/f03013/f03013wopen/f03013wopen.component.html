@@ -22,22 +22,14 @@
             <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </td>
+
         <td>
           <mat-form-field appearance="fill">
-            <mat-label>建立日期</mat-label>
-            <mat-date-range-input [rangePicker]="rangePicker">
-              <input matStartDate placeholder="起" formControlName="startTime">
-              <input matEndDate placeholder="訖" formControlName="endTime">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-            <mat-date-range-picker #rangePicker>
-              <mat-date-range-picker-actions>
-                <button mat-raised-button color="primary" matDateRangePickerApply (click)="setEndTimes()">確認</button>
-                <button mat-button matDateRangePickerCancel>取消</button>
-              </mat-date-range-picker-actions>
-            </mat-date-range-picker>
+            <mat-label>錢包ID</mat-label>
+            <input matInput #input class="form-control" formControlName="walletId">
           </mat-form-field>
         </td>
+
       </tr>
       <tr>
         <td colspan="4">
@@ -59,22 +51,22 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="goBack(row.WALLETID , row.CVC)">
+        <button mat-icon-button color="primary" (click)="goBack(row.walletid , row.cvc)">
           <span class="material-icons">call_received</span>
         </button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="WALLETID">
       <mat-header-cell *matHeaderCellDef>錢包ID</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.WALLETID }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.walletid }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="CVC">
       <mat-header-cell *matHeaderCellDef>券幣代號</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.CVC }}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.cvc }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="CREATEDATE">
       <mat-header-cell *matHeaderCellDef>建立日期</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.CREATEDATE|date :'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{ row.createDate|date :'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="['actions', 'WALLETID', 'CVC', 'CREATEDATE' ]"></mat-header-row>
     <mat-row *matRowDef="let walletIdRow; columns: ['actions', 'WALLETID', 'CVC', 'CREATEDATE' ]"></mat-row>

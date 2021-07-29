@@ -62,6 +62,10 @@ export class F02020Component implements OnInit {
       await this.f02020Service.sendConsumer('consumer/f02020', formdata).then((data) => {
         msg = data.statusMessage;
         if (data.statusMessage == 'Success') {
+          if(data.authorizationList == null){
+            msg = '此授權合約ID查無資料!'
+            return
+          }
           this.resultForm.patchValue({ authID: data.authorizationList[0].authID });
           this.resultForm.patchValue({ operation: data.authorizationList[0].operation });
           this.resultForm.patchValue({ senderID: data.authorizationList[0].senderID });

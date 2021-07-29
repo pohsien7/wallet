@@ -10,15 +10,65 @@
               <button type="submit" mat-raised-button color="primary">確定</button>
             </th>
           </tr>
-
           <tr>
-            <th nowrap="nowrap">兌回期限：</th>
+            <th nowrap="nowrap">票券領取(起)：</th>
             <td>
               <mat-form-field>
-                <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="deadlineDate">
+                <input matInput [matDatepicker]="picker"  formControlName="issueCvValid">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                <mat-error>{{getErrorMessage('deadlineDate')}}</mat-error>
+                <mat-error>{{getErrorMessage('issueCvValid')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">票券領取(迄)：</th>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker2" [min]="minDate" formControlName="issueCvExp">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error>{{getErrorMessage('issueCvExp')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">票券付款(起)：</th>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker3" formControlName="payValid">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+                <mat-error>{{getErrorMessage('payValid')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">票券付款(迄)：</th>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker4" [min]="minDate" formControlName="payExp">
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+                <mat-error>{{getErrorMessage('payExp')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">票券兌換(起)：</th>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker5" formControlName="redeemValid">
+                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                <mat-datepicker #picker5></mat-datepicker>
+                <mat-error>{{getErrorMessage('redeemValid')}}</mat-error>
+              </mat-form-field>
+            </td>
+            <th nowrap="nowrap">票券兌換(迄)：</th>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker6" [min]="minDate" formControlName="redeemExp">
+                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                <mat-datepicker #picker6></mat-datepicker>
+                <mat-error>{{getErrorMessage('redeemExp')}}</mat-error>
               </mat-form-field>
             </td>
           </tr>

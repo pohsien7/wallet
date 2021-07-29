@@ -75,9 +75,7 @@
                   <input matInput #input formControlName="remark" readonly>
                 </mat-form-field>
               </td>
-
             </tr>
-
             <tr>
               <th nowrap="nowrap">取消授權備註</th>
               <td>
@@ -85,18 +83,28 @@
                   <input matInput #input formControlName="voidRemark" readonly>
                 </mat-form-field>
               </td>
-              <th nowrap="nowrap">授權狀態</th>
+              <th nowrap="nowrap">授權合約狀態</th>
               <td>
                 <mat-form-field color="accent">
-                  <input matInput #input formControlName="status" readonly>
+                  <input matInput #input formControlName="authStatus" readonly>
                 </mat-form-field>
               </td>
+              <th nowrap="nowrap">授權計畫狀態</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #input formControlName="planStatus" readonly>
+                </mat-form-field>
+              </td>
+
+            </tr>
+            <tr>
               <th nowrap="nowrap">授權創建時間</th>
               <td>
                 <mat-form-field color="accent">
                   <input matInput #input formControlName="createTime" readonly>
                 </mat-form-field>
               </td>
+
             </tr>
           </mat-card-content>
         </mat-card>

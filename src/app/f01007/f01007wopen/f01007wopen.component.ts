@@ -5,30 +5,31 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { F01002Service } from '../f01002.service';
-import { F01002confirmComponent } from '../f01002confirm/f01002confirm.component';
+import { F01007Service } from '../f01007.service';
+import { F01007confirmComponent } from '../f01007confirm/f01007confirm.component';
 interface sysCode {
   value: string;
   viewValue: string;
 }
 @Component({
-  templateUrl: './f01002wopen.component.html',
-  styleUrls: ['./f01002wopen.component.css']
+  templateUrl: './f01007wopen.component.html',
+  styleUrls: ['./f01007wopen.component.css']
 })
-export class F01002wopenComponent implements OnInit {
+export class F01007wopenComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
-    transType: ['', [Validators.required]],
+    walletType: ['', [Validators.required]],
+    walletID: ['', []],
     startTime: ['', [ ]],
     endTime: ['', [ ]],
-    walletId: ['', [ ]],
-    cvc:['',[]],
+    dn: ['', [ ]],
     page: ['', [ ]],
-    perPage: ['', [ ]]
+    perPage: ['', [ ]],
+
   });
 
-  walletOption: sysCode[] = [{value: 'VAULT_TRANSFER', viewValue: 'Transfer'}, {value: 'issueCV', viewValue: 'IssueCV'}, {value: 'deduct', viewValue: 'Deduct'}];
-  constructor(public dialogRef: MatDialogRef<F01002wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f01002Service: F01002Service, public dialog: MatDialog) { }
+  walletOption: sysCode[] = [{value: 'AUTHORIZE', viewValue: 'AUTHORIZE'}];
+  constructor(public dialogRef: MatDialogRef<F01007wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f01007Service: F01007Service, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -58,8 +59,9 @@ export class F01002wopenComponent implements OnInit {
   }
 
   cleanToEmpty() {
-    this.searchForm.patchValue({ walletId : '' });
-    this.searchForm.patchValue({ transType : '' });
+    this.searchForm.patchValue({ dn : '' });
+    this.searchForm.patchValue({ walletType : '' });
+    this.searchForm.patchValue({ walletID : '' });
     this.searchForm.patchValue({ startTime : '' });
     this.searchForm.patchValue({ endTime : '' });
     this.currentPage = {
@@ -76,12 +78,12 @@ export class F01002wopenComponent implements OnInit {
     let jsonStr :string = JSON.stringify(this.searchForm.value);
     let jsonObj = JSON.parse(jsonStr);
     //1.處理日期
-    if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
-      let selectedStartDate = new Date(this.searchForm.value.startTime);
-      let selectedEndDate = new Date(this.searchForm.value.endTime);
-      jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
-      jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
-    }
+    // if (this.searchForm.value.startTime != '' && this.searchForm.value.endTime != '') {
+    //   let selectedStartDate = new Date(this.searchForm.value.startTime);
+    //   let selectedEndDate = new Date(this.searchForm.value.endTime);
+    //   jsonObj.startTime = this.datePipe.transform(selectedStartDate,"yyyy-MM-dd");
+    //   jsonObj.endTime = this.datePipe.transform(selectedEndDate,"yyyy-MM-dd");
+    // }
     //2.處理分頁
     let page :string = `${this.currentPage.pageIndex + 1}`;
     let perPage :string = `${this.currentPage.pageSize}`;
@@ -89,13 +91,12 @@ export class F01002wopenComponent implements OnInit {
     jsonObj.perPage = perPage;
     //3.轉回字串
     let jsonString :string = JSON.stringify(jsonObj);
-    this.f01002Service.getWalletIdList('/consumer/f01002fn01', jsonString).subscribe(data => {
+    this.f01007Service.getWalletIdList('/consumer/f01007fn01', jsonString).subscribe(data => {
       this.totalCount = data.size;
       this.walletIdSource.data = data.items;
       if ( this.totalCount == 0 ) {
-        this.dialog.open(F01002confirmComponent, { data: { msgStr: "查無錢包" } });
+        this.dialog.open(F01007confirmComponent, { data: { msgStr: "查無錢包" } });
       }
-
     });
   }
 
@@ -113,7 +114,12 @@ export class F01002wopenComponent implements OnInit {
     }
   }
 
-  goBack(walletId: string, txnID: string ,cvc:String) {
-    this.dialogRef.close({ event:'success', value: walletId , txnID: txnID, valueTransType: this.searchForm.value.transType, cvc:cvc });
+  goBack(authID: string, senderID: string, recipientID: string) {
+    this.dialogRef.close({
+      event:'success',
+      value: authID ,
+      senderID: senderID,
+      recipientID: recipientID
+    });
   }
 }

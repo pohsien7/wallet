@@ -29,7 +29,8 @@ export class F02015Component implements OnInit {
     recipientID: ['', []],
     remark: ['', []],
     voidRemark: ['', []],
-    status: ['', []],
+    authStatus: ['', []],
+    planStatus: ['', []],
     createTime: ['', []]
   });
 
@@ -70,7 +71,8 @@ export class F02015Component implements OnInit {
           this.resultForm.patchValue({ recipientID: data.authorizationList[0].recipientID });
           this.resultForm.patchValue({ remark: data.authorizationList[0].remark });
           this.resultForm.patchValue({ voidRemark: data.authorizationList[0].voidRemark });
-          this.resultForm.patchValue({ status: data.authorizationList[0].status });
+          this.resultForm.patchValue({ authStatus: data.authorizationList[0].authStatus });
+          this.resultForm.patchValue({ planStatus: data.authorizationList[0].planStatus });
           this.resultForm.patchValue({ createTime: data.authorizationList[0].createTime });
         }
       });
@@ -103,7 +105,8 @@ export class F02015Component implements OnInit {
     this.resultForm.patchValue({ recipientID: '' });
     this.resultForm.patchValue({ remark: '' });
     this.resultForm.patchValue({ voidRemark: '' });
-    this.resultForm.patchValue({ status: '' });
+    this.resultForm.patchValue({ authStatus: '' });
+    this.resultForm.patchValue({ planStatus: '' });
     this.resultForm.patchValue({ createTime: '' });
   }
 }

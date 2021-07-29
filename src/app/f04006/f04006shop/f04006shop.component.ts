@@ -16,8 +16,14 @@ export class F04006shopComponent implements OnInit {
 
   registrationShopForm: FormGroup = this.fb.group({
     cvc: [''],
-    deadlineDate: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]
+    issueCvValid: [''],
+    issueCvExp: [''],
 
+    payValid: [''],
+    payExp: [''],
+
+    redeemValid: [''],
+    redeemExp: ['']
   });
 
   submitted = false;
@@ -53,13 +59,38 @@ export class F04006shopComponent implements OnInit {
       this.registrationShopForm.patchValue( { cvc: this.data.cvc } );
       let jsonStr = JSON.stringify(this.registrationShopForm.value);
       let jsonObj = JSON.parse(jsonStr);
-      let selectedDate = new Date(this.registrationShopForm.value.deadlineDate);
-      jsonObj.deadlineDate = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
 
+      if(this.registrationShopForm.value.issueCvValid != ''){
+        let selectedDate = new Date(this.registrationShopForm.value.issueCvValid);
+        jsonObj.issueCvValid = this.datePipe.transform(selectedDate,"yyyy-MM-dd");
+      }
+
+      if(this.registrationShopForm.value.issueCvExp != ''){
+        let selectedDate2 = new Date(this.registrationShopForm.value.issueCvExp);
+        jsonObj.issueCvExp = this.datePipe.transform(selectedDate2,"yyyy-MM-dd");
+      }
+
+      if(this.registrationShopForm.value.payValid != ''){
+        let selectedDate3 = new Date(this.registrationShopForm.value.payValid);
+        jsonObj.payValid = this.datePipe.transform(selectedDate3,"yyyy-MM-dd");
+      }
+
+      if(this.registrationShopForm.value.payExp != ''){
+        let selectedDate4 = new Date(this.registrationShopForm.value.payExp);
+        jsonObj.payExp = this.datePipe.transform(selectedDate4,"yyyy-MM-dd");
+      }
+
+      if(this.registrationShopForm.value.redeemValid != ''){
+        let selectedDate5 = new Date(this.registrationShopForm.value.redeemValid);
+        jsonObj.redeemValid = this.datePipe.transform(selectedDate5,"yyyy-MM-dd");
+      }
+
+      if(this.registrationShopForm.value.redeemExp != ''){
+        let selectedDate6 = new Date(this.registrationShopForm.value.redeemExp);
+        jsonObj.redeemExp = this.datePipe.transform(selectedDate6,"yyyy-MM-dd");
+      }
 
       const formdata: FormData = new FormData();
-
-
       formdata.append('value', JSON.stringify(jsonObj));
       await this.f04006Service.sendConsumer('consumer/f04006Shop', formdata).then((data) => {
         msg = data.result;

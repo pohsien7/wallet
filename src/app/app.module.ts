@@ -21,6 +21,9 @@ import { F05001Component } from './f05001/f05001.component';
 import { F05002Component } from './f05002/f05002.component';
 
 import { F01001Component } from './f01001/f01001.component';
+import { F01007Component } from './f01007/f01007.component';
+import { F01007confirmComponent } from './f01007/f01007confirm/f01007confirm.component';
+import { F01007wopenComponent } from './f01007/f01007wopen/f01007wopen.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BnNgIdleService } from 'bn-ng-idle';
@@ -203,7 +206,8 @@ import { F02019child3Component } from './f02019/f02019child3/f02019child3.compon
 import { WINDOW_PROVIDERS } from './window.service';
 import { F04007Component } from './f04007/f04007.component';
 import { F04007confirmComponent } from './f04007/f04007confirm/f04007confirm.component';
-
+import { F04008Component } from './f04008/f04008.component';
+import { F04008confirmComponent } from './f04008/f04008confirm/f04008confirm.component';
 
 
 
@@ -399,9 +403,14 @@ export const TW_FORMATS = {
     F02022wopenComponent,
     F01006Component,
     F01006confirmComponent,
+    F01007Component,
+    F01007confirmComponent,
+    F01007wopenComponent,
     F02019child3Component,
     F04007Component,
-    F04007confirmComponent
+    F04007confirmComponent,
+    F04008Component,
+    F04008confirmComponent
   ],
   imports: [
     BrowserModule,

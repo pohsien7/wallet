@@ -87,10 +87,10 @@ export class F04006Component implements OnInit, AfterViewInit {
       let jsonStr = JSON.stringify(this.registrationForm.value);
       let jsonObj = JSON.parse(jsonStr);
       // 處理日期 當 JSON.stringify 遇上 angular material datepicker 時會有日期上的BUG,故轉成JSON物件後更換內容再轉成JSON字串
-      let deadlineDate = this.registrationForm.value.deadlineDate;
+      let issueCvValid = this.registrationForm.value.issueCvValid;
 
-      if (deadlineDate != null) {
-        jsonObj.deadlineDate = this.datePipe.transform(new Date(deadlineDate),"yyyy-MM-dd");
+      if (issueCvValid != null) {
+        jsonObj.issueCvValid = this.datePipe.transform(new Date(issueCvValid),"yyyy-MM-dd");
       }
       //處理分頁
       let pgIndex = `${this.currentPage.pageIndex + 1}`;
@@ -141,6 +141,7 @@ export class F04006Component implements OnInit, AfterViewInit {
       data:{
         cvc: cvc
       }
+
     });
     dialogRef.afterClosed().subscribe(result => {
       this.clear();
