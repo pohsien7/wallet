@@ -1,10 +1,8 @@
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'http://my-prod-url',
-  outsideAllowOrigin: 'https://ccc.rstn.com.tw/Web',
-  insideAllowOrigin: 'http://192.168.0.34:8080/Web'
+  outsideAllowOrigin: 'https://175.184.247.206:8443/Web',
+  outsideHostName: '175.184.247.206',
+  insideAllowOrigin: 'https://192.168.40.235:8443/Web',
+  insideHostName: '192.168.40.235'
 };
-
-// allowOrigin: 'http://192.168.0.34:8080/Web'
-// allowOrigin: 'http://ccc.rstn.com.tw/Web'
-// allowOrigin: 'https://172.24.11.132:8080/Web'
