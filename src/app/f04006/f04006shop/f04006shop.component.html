@@ -11,6 +11,16 @@
             </th>
           </tr>
           <tr>
+            <th nowrap="nowrap">可領取金額：</th>
+            <td>
+              <mat-form-field>
+                <input matInput  formControlName="distributedAmount">
+
+                <mat-error>{{getErrorMessage('issueCvValid')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
             <th nowrap="nowrap">票券領取(起)：</th>
             <td>
               <mat-form-field>

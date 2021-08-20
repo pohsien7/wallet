@@ -19,7 +19,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/RoutingPracticeForAngular30Days'),
+      dir: require('path').join(__dirname, './coverage/CBDC'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -13,7 +13,7 @@ export class BaseService {
   constructor(protected httpClient: HttpClient, @Inject(WINDOW) protected window: Window) {}
 
   private getHostname() : string {
-    return '192.168.0.34' == this.window.location.hostname ? environment.insideAllowOrigin : environment.outsideAllowOrigin;
+    return environment.insideHostName == this.window.location.hostname ? environment.insideAllowOrigin : environment.outsideAllowOrigin;
   }
 
   // private httpOptions = {
@@ -47,7 +47,7 @@ export class BaseService {
 
   protected postFormData(baseUrl: string, formdata: FormData) {
     let allowOrigin : string = this.getHostname();
-    console.log('123'+allowOrigin);
+
     return this.httpClient.post<any>(allowOrigin + '/' + baseUrl, formdata, this.getHttpOptions(allowOrigin));
   }
 

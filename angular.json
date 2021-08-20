@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "RoutingPracticeForAngular30Days": {
+    "CBDC": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/RoutingPracticeForAngular30Days",
+            "outputPath": "dist/CBDC",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "RoutingPracticeForAngular30Days:build"
+            "browserTarget": "CBDC:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "RoutingPracticeForAngular30Days:build:production"
+              "browserTarget": "CBDC:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "RoutingPracticeForAngular30Days:build"
+            "browserTarget": "CBDC:build"
           }
         },
         "test": {
@@ -113,18 +113,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "RoutingPracticeForAngular30Days:serve"
+            "devServerTarget": "CBDC:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "RoutingPracticeForAngular30Days:serve:production"
+              "devServerTarget": "CBDC:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "RoutingPracticeForAngular30Days",
+  "defaultProject": "CBDC",
   "cli": {
     "analytics": false
   }

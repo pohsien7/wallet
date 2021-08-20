@@ -46,6 +46,10 @@
       <mat-header-cell *matHeaderCellDef>票券代號</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.cvc }}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="DISTRIBUTED_AMOUNT">
+      <mat-header-cell *matHeaderCellDef>可領取金額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.distributedAmount | number:'1.0':'en-US' }}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="ISSUECV_VALID">
       <mat-header-cell *matHeaderCellDef>票券領取(起)</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.issuecvValid | date:'yyyy-MM-dd'}}</mat-cell>
@@ -71,10 +75,10 @@
       <mat-cell *matCellDef="let row">{{row.redeemExp | date:'yyyy-MM-dd'}}</mat-cell>
     </ng-container>
     <mat-header-row
-      *matHeaderRowDef="['setting','CVC','ISSUECV_VALID','ISSUECV_EXP','PAY_VALID','PAY_EXP','REDEEM_VALID','REDEEM_EXP']; sticky: true">
+      *matHeaderRowDef="['setting','CVC','DISTRIBUTED_AMOUNT','ISSUECV_VALID','ISSUECV_EXP','PAY_VALID','PAY_EXP','REDEEM_VALID','REDEEM_EXP']; sticky: true">
     </mat-header-row>
     <mat-row
-      *matRowDef="let ruleParmRow; columns: ['setting','CVC','ISSUECV_VALID','ISSUECV_EXP','PAY_VALID','PAY_EXP','REDEEM_VALID','REDEEM_EXP']">
+      *matRowDef="let ruleParmRow; columns: ['setting','CVC','DISTRIBUTED_AMOUNT','ISSUECV_VALID','ISSUECV_EXP','PAY_VALID','PAY_EXP','REDEEM_VALID','REDEEM_EXP']">
     </mat-row>
   </mat-table>
   <tr>

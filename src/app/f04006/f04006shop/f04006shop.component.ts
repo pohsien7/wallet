@@ -16,6 +16,7 @@ export class F04006shopComponent implements OnInit {
 
   registrationShopForm: FormGroup = this.fb.group({
     cvc: [''],
+    distributedAmount:[''],
     issueCvValid: [''],
     issueCvExp: [''],
 
@@ -50,6 +51,22 @@ export class F04006shopComponent implements OnInit {
   }
 
   async onSubmit(){
+
+    if(this.registrationShopForm.value.distributedAmount == ''
+      &&this.registrationShopForm.value.issueCvValid == ''
+      &&this.registrationShopForm.value.issueCvExp == ''
+      &&this.registrationShopForm.value.payValid == ''
+      &&this.registrationShopForm.value.payExp == ''
+      &&this.registrationShopForm.value.redeemValid == ''
+      &&this.registrationShopForm.value.redeemExp == ''
+    ){
+      this.dialog.open(F04006confirmComponent, { data: { msgStr: '請選擇一項更新!' } });
+      return;
+    }
+
+
+
+
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');
