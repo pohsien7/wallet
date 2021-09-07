@@ -24,6 +24,9 @@ import { F01001Component } from './f01001/f01001.component';
 import { F01007Component } from './f01007/f01007.component';
 import { F01007confirmComponent } from './f01007/f01007confirm/f01007confirm.component';
 import { F01007wopenComponent } from './f01007/f01007wopen/f01007wopen.component';
+import { F01008Component } from './f01008/f01008.component';
+import { F01008confirmComponent } from './f01008/f01008confirm/f01008confirm.component';
+import { F01008wopenComponent } from './f01008/f01008wopen/f01008wopen.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BnNgIdleService } from 'bn-ng-idle';
@@ -208,8 +211,16 @@ import { F04007Component } from './f04007/f04007.component';
 import { F04007confirmComponent } from './f04007/f04007confirm/f04007confirm.component';
 import { F04008Component } from './f04008/f04008.component';
 import { F04008confirmComponent } from './f04008/f04008confirm/f04008confirm.component';
-
-
+import { F04009Component } from './f04009/f04009.component';
+import { F04009confirmComponent } from './f04009/f04009confirm/f04009confirm.component';
+import { F04010Component } from './f04010/f04010.component';
+import { F04010confirmComponent } from './f04010/f04010confirm/f04010confirm.component';
+import { F04010addComponent } from './f04010/f04010add/f04010add.component';
+import { F04010EditComponent } from './f04010/f04010edit/f04010edit.component';
+import { F04011Component } from './f04011/f04011.component';
+import { F04011confirmComponent } from './f04011/f04011confirm/f04011confirm.component';
+import { F04011addComponent } from './f04011/f04011add/f04011add.component';
+import { F04011removeComponent } from './f04011/f04011remove/f04011remove.component';
 
 
 export const TW_FORMATS = {
@@ -406,11 +417,24 @@ export const TW_FORMATS = {
     F01007Component,
     F01007confirmComponent,
     F01007wopenComponent,
+    F01008Component,
+    F01008confirmComponent,
+    F01008wopenComponent,
     F02019child3Component,
     F04007Component,
     F04007confirmComponent,
     F04008Component,
-    F04008confirmComponent
+    F04008confirmComponent,
+    F04009Component,
+    F04009confirmComponent,
+    F04010Component,
+    F04010confirmComponent,
+    F04010addComponent,
+    F04010EditComponent,
+    F04011Component,
+    F04011confirmComponent,
+    F04011addComponent,
+    F04011removeComponent
   ],
   imports: [
     BrowserModule,
