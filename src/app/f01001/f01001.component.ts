@@ -23,7 +23,7 @@ export class F01001Component implements OnInit {
 
   transferForm: FormGroup = this.fb.group({
     vaultID: ['B-822', [Validators.maxLength(30)]],
-    recipientid: ['', [Validators.required, Validators.minLength(23), Validators.maxLength(23)]],
+    recipientid: ['', [Validators.required]],
     cvc: ['0901', [Validators.required]],
     amount: ['1', [Validators.required, Validators.maxLength(10)]],
     won: ['*', [Validators.required]],

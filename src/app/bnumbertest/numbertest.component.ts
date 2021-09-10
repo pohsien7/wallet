@@ -27,7 +27,7 @@ export class NumbertestComponent implements OnInit {
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' },{ value: 'R001', viewValue: 'R001' },{ value: 'R002', viewValue: 'R002' } ];
 
-  walletItCode: COMB[] = [{ value: 'BW-822-2021061010423247', viewValue: '測試付款者-BW-822-2021061010423247' } ];
+  walletItCode: COMB[] = [];
 
 
 
@@ -46,6 +46,7 @@ export class NumbertestComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBarcodeForF02009 =  this.data.f02009;
+    this. getTestWallet();
   }
 
   submitted = false;
@@ -58,6 +59,15 @@ export class NumbertestComponent implements OnInit {
     let obj = this.generateBarcodeForm.get(cloumnName);
     return obj.hasError('required') ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' : "" ;
   }
+
+
+  getTestWallet(){
+    this.numbertestService.sendConsumer('consumer/getTestWalletId', null).then((data) => {
+     for(const jsonObj of data) {
+       this.walletItCode.push({value: jsonObj.walletid, viewValue: jsonObj.walletid});
+     }
+   });
+ }
 
   async sendCBDC() {
     let msg = '';

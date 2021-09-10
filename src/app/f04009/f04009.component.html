@@ -1,0 +1,73 @@
+<div class="container">
+  <th class="f04_th">財經推播紀錄(APP)</th>
+
+  <form [formGroup]="cdbcMsgHistoryForm" style="padding-left: 20px;">
+    <div class="f04_div">
+      <button type="submit" mat-raised-button color="primary" (click)="getViewDataList()"> 查詢</button>
+      <button type="clear" mat-raised-button color="primary" (click)="clear()">清除</button>
+    </div>
+    <table>
+      <br>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <th nowrap="nowrap">接收時間：</th>
+            <td>
+              <mat-form-field color="accent" class="example-form-field">
+                <mat-date-range-input [rangePicker]="rangePicker">
+                  <input matStartDate formControlName="createdate_start" value="">
+                  <input matEndDate formControlName="createdate_end">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker>
+                  <mat-date-range-picker-actions>
+                    <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                    <button mat-button matDateRangePickerCancel>取消</button>
+                  </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+<br>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-table [dataSource]="cdbcMsgHistory">
+
+    <ng-container matColumnDef="SEQ_NO">
+      <mat-header-cell *matHeaderCellDef>序號</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.seqNo }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CONTENT">
+      <mat-header-cell *matHeaderCellDef>通知內容</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.content }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="RECEIVE_TIME">
+      <mat-header-cell *matHeaderCellDef>通知時間</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.receiveTime | date:'yyyy-MM-dd HH:mm:ss' }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="SOURCE">
+      <mat-header-cell *matHeaderCellDef>來源</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.source }}</mat-cell>
+    </ng-container>
+
+
+    <mat-header-row
+      *matHeaderRowDef="['SEQ_NO', 'CONTENT', 'RECEIVE_TIME', 'SOURCE']; sticky: true">
+    </mat-header-row>
+    <mat-row
+      *matRowDef="let ruleParmRow; columns: ['SEQ_NO', 'CONTENT', 'RECEIVE_TIME', 'SOURCE']">
+    </mat-row>
+  </mat-table>
+  <tr>
+    <td>
+      <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</cdk-virtual-scroll-viewport>
+

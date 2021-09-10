@@ -49,14 +49,14 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>請選擇</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" (click)="goBack(row.walletid, row.txnid, row.cvc == null ? '0901' : row.cvc )">
+          <button mat-icon-button color="primary" (click)="goBack(row.walletid == null? row.recipientid : row.walletid, row.txnid, row.cvc == null ? '0901' : row.cvc )">
             <span class="material-icons">call_received</span>
           </button>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="WALLETID">
         <mat-header-cell *matHeaderCellDef>錢包ID</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.walletid }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.walletid == null? row.recipientid : row.walletid }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="TXNID">
         <mat-header-cell *matHeaderCellDef>交易ID</mat-header-cell>

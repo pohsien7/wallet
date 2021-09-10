@@ -1,0 +1,47 @@
+<div class="container">
+  <th class="f03_th">向央行專庫進行CBDC回籠</th>
+  <block-ui>
+    <form [formGroup]="redeemCVForm" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">總庫ID：</th>
+              <td>
+                <mat-form-field color="accent" class="form-id">
+                  <input matInput #input class="form-control" formControlName="vaultID">
+                  <mat-error>{{getErrorMessage('vaultID')}}</mat-error>
+                </mat-form-field>
+              </td>
+
+            </tr>
+            <tr>
+              <th>回籠金額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="amount">
+                  <mat-error>{{getErrorMessage('amount')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th nowrap="nowrap">備註</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="remark">
+                  <mat-error>{{getErrorMessage('remark')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>

@@ -57,7 +57,7 @@ export class BaseService {
     return this.postHttpClient(targetUrl);
   }
 
-  public async sendConsumer(baseUrl: string, formdata: FormData): Promise<any> {
+public async sendConsumer(baseUrl: string, formdata: FormData): Promise<any> {
     return await this.postFormData(baseUrl, formdata).toPromise();
   }
 

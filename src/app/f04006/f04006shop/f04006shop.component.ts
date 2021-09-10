@@ -65,8 +65,6 @@ export class F04006shopComponent implements OnInit {
     }
 
 
-
-
     let msg = '';
     this.submitted = true;
     this.blockUI.start('Loading...');

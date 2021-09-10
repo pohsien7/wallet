@@ -1,0 +1,59 @@
+<div class="container">
+  <th class="f04_th">檔案設定(APP)</th>
+
+  <form [formGroup]="cdbcMsgHistoryForm" style="padding-left: 20px;">
+    <div class="f04_div">
+      <button type="submit" mat-raised-button color="primary" (click)="add()"> 新增</button>
+    </div>
+
+  </form>
+</div>
+<br>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <mat-table [dataSource]="cdbcMsgHistory">
+    <ng-container matColumnDef="setting">
+      <mat-header-cell *matHeaderCellDef><u></u></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container>
+          <button mat-raised-button color="primary" (click)="edit(row.enviroment)">編輯</button>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ENVIROMENT">
+      <mat-header-cell *matHeaderCellDef>環境</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.enviroment }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="REDPACKET_AMOUNT">
+      <mat-header-cell *matHeaderCellDef>紅包金額</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.redpacketAmount| number:'1.0':'en-US'  }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="STORE_WALLET_ID">
+      <mat-header-cell *matHeaderCellDef>線上商城錢包ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.storeWalletId }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="AGENCY_WALLET_ID">
+      <mat-header-cell *matHeaderCellDef>中介機構錢包ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.agencyWalletId }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="SERVER_KEY">
+      <mat-header-cell *matHeaderCellDef>密鑰</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.serverKey }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row
+      *matHeaderRowDef="['setting', 'ENVIROMENT', 'REDPACKET_AMOUNT', 'STORE_WALLET_ID', 'AGENCY_WALLET_ID', 'SERVER_KEY']; sticky: true">
+    </mat-header-row>
+    <mat-row
+      *matRowDef="let ruleParmRow; columns: ['setting', 'ENVIROMENT', 'REDPACKET_AMOUNT', 'STORE_WALLET_ID', 'AGENCY_WALLET_ID', 'SERVER_KEY']">
+    </mat-row>
+  </mat-table>
+  <tr>
+    <td>
+      <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </td>
+  </tr>
+</cdk-virtual-scroll-viewport>
+

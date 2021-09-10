@@ -1,0 +1,55 @@
+<div class="container">
+  <th class="f04_th"></th>
+
+  <mat-card class="matCard">
+    <mat-card-content>
+      <form  [formGroup]="registrationShopForm" (ngSubmit)="onSubmit()" #form="ngForm" style="padding-left: 20px;">
+        <table>
+          <tr>
+            <th>
+              <button type="submit" mat-raised-button color="primary">確定</button>
+              <input  hidden formControlName="enviroment">
+            </th>
+          </tr>
+
+          <tr>
+            <th nowrap="nowrap">紅包金額：</th>
+            <td>
+              <mat-form-field>
+                <input matInput  formControlName="redpacketAmount">
+                <mat-error>{{getErrorMessage('redpacketAmount')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">線上商城錢包ID</th>
+            <td>
+              <mat-form-field>
+                <input matInput  formControlName="storeWalletId">
+                <mat-error>{{getErrorMessage('storeWalletId')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">中介機構ID</th>
+            <td>
+              <mat-form-field>
+                <input matInput  formControlName="agencyWalletId">
+                <mat-error>{{getErrorMessage('agencyWalletId')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">密鑰</th>
+            <td>
+              <mat-form-field>
+                <input matInput  formControlName="serverKey">
+                <mat-error>{{getErrorMessage('serverKey')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

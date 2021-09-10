@@ -26,7 +26,7 @@ export class BarcodetestComponent implements OnInit {
   // 之後要改打API去取得下拉內容
   cvcCode: COMB[] = [{ value: '0901', viewValue: '0901' },{ value: 'R001', viewValue: 'R001' },{ value: 'R002', viewValue: 'R002' } ];
 
-  walletItCode: COMB[] = [{ value: 'BW-822-2021061010435709', viewValue: '卡機消費者-BW-822-2021061010435709' },{ value: 'BW-822-2021061010423247', viewValue: '販賣機消費者-BW-822-2021061010423247' } ];
+  walletItCode: COMB[] = [ ];
 
 
 
@@ -43,6 +43,7 @@ export class BarcodetestComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBarcodeForF02009 =  this.data.f02009;
+    this.getTestWallet();
   }
 
   submitted = false;
@@ -82,6 +83,14 @@ export class BarcodetestComponent implements OnInit {
       this.blockUI.stop(); // Stop blocking
       // const childernDialogRef = this.dialog.open(BarcodetestConfirmComponent, { data: { msgStr: msg } });
     // }, 1500);
+  }
+
+  getTestWallet(){
+     this.barcodetestService.sendConsumer('consumer/getTestWalletId', null).then((data) => {
+      for(const jsonObj of data) {
+        this.walletItCode.push({value: jsonObj.walletid, viewValue: jsonObj.walletid});
+      }
+    });
   }
 
   getList() {

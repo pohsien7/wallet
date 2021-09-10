@@ -20,9 +20,7 @@ export class QrcodeComponent implements OnInit {
     recipientID: ['', [Validators.required]],
     dn: ['', [Validators.required]],
     amount: ['', Validators.pattern('^[0-9]+$')],
-    won:['pay'],
-    cvc:['*']
-
+    won:['pay']
   });
 
   getErrorMessage(cloumnName: string) {
