@@ -40,11 +40,31 @@
             </td>
           </tr>
           <tr>
-            <th nowrap="nowrap">密鑰</th>
+            <th nowrap="nowrap">伺服器金鑰</th>
             <td>
               <mat-form-field>
                 <input matInput  formControlName="serverKey">
                 <mat-error>{{getErrorMessage('serverKey')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">Wallet規則序號</th>
+            <td>
+              <mat-form-field>
+                <input matInput  formControlName="walletConstant">
+                <mat-error>{{getErrorMessage('walletConstant')}}</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th nowrap="nowrap">是否啟用裝置唯一性</th>
+            <td>
+              <mat-form-field>
+                <select matNativeControl formControlName="deviceUnique">
+                  <option>Y</option>
+                  <option>N</option>
+                </select>
               </mat-form-field>
             </td>
           </tr>

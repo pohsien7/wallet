@@ -19,7 +19,7 @@ export class F01005Component implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   cvcCode: COMB[];
-  
+
   queryVaultLedgerSNForm: FormGroup = this.fb.group({
     vaultID: ['B-822', [Validators.maxLength(25)]],
     querySN: ['', [Validators.required,Validators.pattern('^[0-9]+$')]],
@@ -104,7 +104,7 @@ export class F01005Component implements OnInit {
     setTimeout(() => {
       this.blockUI.stop(); // Stop blocking
       const childernDialogRef = this.dialog.open(F01005confirmComponent, { data: { msgStr: msg } });
-    }, 1500);
+    }, 500);
   }
 
   clear() {

@@ -169,8 +169,6 @@ export class F04001Component implements OnInit, AfterViewInit {
       formdata.append('value', JSON.stringify(jsonObj));
 
       this.f04001Service.sendConsumer('consumer/f04001', formdata).then(data => {
-        console.log(data.dataMap)
-        console.log(data.totalCount)
 
         if ( data.totalCount == 0 ) {
           this.cleanToEmpty();

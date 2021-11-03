@@ -19,8 +19,9 @@ export class F04010EditComponent implements OnInit {
     storeWalletId:['', [Validators.maxLength(40)]],
     agencyWalletId: ['', [Validators.maxLength(40)]],
     serverKey:[''],
+    walletConstant:[''],
+    deviceUnique:[''],
     enviroment:[this.data.id]
-
   });
 
   submitted = false;
@@ -53,6 +54,8 @@ export class F04010EditComponent implements OnInit {
       &&this.registrationShopForm.value.agencyWalletId == ''
       &&this.registrationShopForm.value.enviroment == ''
       &&this.registrationShopForm.value.serverKey == ''
+      &&this.registrationShopForm.value.walletConstant == ''
+      &&this.registrationShopForm.value.deviceUnique == ''
 
     ){
       this.dialog.open(F04010confirmComponent, { data: { msgStr: '請選擇一項更新!' } });

@@ -20,7 +20,9 @@ export class F04010addComponent implements OnInit {
     redpacketAmount: ['', [Validators.required]],
     storeWalletId: ['', [Validators.required]],
     agencyWalletId: ['', [Validators.required]],
-    serverKey: ['', [Validators.required]]
+    serverKey: ['', [Validators.required]],
+    walletConstant:['', [Validators.required]],
+    deviceUnique:['', [Validators.required]]
   });
 
   submitted = false;
