@@ -221,6 +221,8 @@ import { F04011Component } from './f04011/f04011.component';
 import { F04011confirmComponent } from './f04011/f04011confirm/f04011confirm.component';
 import { F04011addComponent } from './f04011/f04011add/f04011add.component';
 import { F04011removeComponent } from './f04011/f04011remove/f04011remove.component';
+import { F01009Component } from './f01009/f01009.component';
+import { F03015Component } from './f03015/f03015.component';
 
 
 export const TW_FORMATS = {
@@ -434,7 +436,9 @@ export const TW_FORMATS = {
     F04011Component,
     F04011confirmComponent,
     F04011addComponent,
-    F04011removeComponent
+    F04011removeComponent,
+    F01009Component,
+    F03015Component
   ],
   imports: [
     BrowserModule,

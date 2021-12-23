@@ -1,0 +1,66 @@
+<div class="container">
+  <th class="f03_th">錢包繳回超額領取之數位券</th>
+  <block-ui>
+    <form [formGroup]="returnCVForm" style="padding-left: 20px;">
+      <table>
+        <tr>
+          <th>
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">送出</button>
+          </th>
+        </tr>
+        <br>
+        <mat-card class="matCard">
+          <mat-card-content>
+            <tr>
+              <th nowrap="nowrap">錢包ID：<br><p style="color: red;"></p></th>
+              <td>
+                <mat-form-field color="accent" class="form-id">
+                  <input matInput #input class="form-control" formControlName="walletID">
+                  <mat-error>{{getErrorMessage('walletID')}}</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <button mat-icon-button color="primary" (click)="getList()">
+                  <span class="material-icons">view_list</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th nowrap="nowrap">券幣代號：</th>
+              <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <input type="text" matInput [formControl]="formControl" [matAutocomplete]="auto"
+                    formControlName="cvc">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let cvc of cvcCode " [value]="cvc.viewValue">
+                      {{cvc.viewValue}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th>繳回金額：</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="amount">
+                  <mat-error>{{getErrorMessage('amount')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th nowrap="nowrap">備註</th>
+              <td>
+                <mat-form-field color="accent">
+                  <input matInput #inputstate class="form-control" formControlName="remark">
+                  <mat-error>{{getErrorMessage('remark')}}</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </mat-card-content>
+        </mat-card>
+      </table>
+    </form>
+  </block-ui>
+</div>
+

@@ -11,6 +11,7 @@ import { F01005Component } from './f01005/f01005.component';
 import { F01006Component } from './f01006/f01006.component';
 import { F01007Component } from './f01007/f01007.component';
 import { F01008Component } from './f01008/f01008.component';
+import { F01009Component } from './f01009/f01009.component';
 
 
 import { F02001Component } from './f02001/f02001.component';
@@ -49,6 +50,7 @@ import { F03011Component } from './f03011/f03011.component';
 import { F03012Component } from './f03012/f03012.component';
 import { F03013Component } from './f03013/f03013.component';
 import { F03014Component } from './f03014/f03014.component';
+import { F03015Component } from './f03015/f03015.component';
 
 import { F04001Component } from './f04001/f04001.component';
 import { F04002Component } from './f04002/f04002.component';
@@ -153,6 +155,10 @@ const routes: Routes = [
       {
         path: 'F01008',
         component: F01008Component
+      },
+      {
+        path: 'F01009',
+        component: F01009Component
       },
       {
         path: 'F02001',
@@ -297,6 +303,10 @@ const routes: Routes = [
       {
         path: 'F03014',
         component: F03014Component
+      },
+      {
+        path: 'F03015',
+        component: F03015Component
       },
       {
         path: 'F04001',
