@@ -28,14 +28,13 @@ export class F01009Component implements OnInit {
 
   returnCVForm: FormGroup = this.fb.group({
     vaultID: ['B-822'],
-    cvc: ['0901', [Validators.maxLength(4)]],
+    cvc: ['R001', [Validators.maxLength(4)]],
     amount: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(18), Validators.pattern('^[0-9]+$')]],
     remark: ['*', [, Validators.maxLength(30)]]
   });
 
   ngOnInit(): void {
     this.cvcCode = JSON.parse(sessionStorage.getItem('cvcCode'));
-    this.cvcCode.push({value: '0901', viewValue: '0901'});
   }
 
   formControl = new FormControl('', [
