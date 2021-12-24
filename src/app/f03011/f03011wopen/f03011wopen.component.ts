@@ -30,7 +30,8 @@ export class F03011wopenComponent implements OnInit {
                               {value: 'BarcodePay', viewValue: 'BarcodePay'},
                               {value: 'NumberPay', viewValue: 'NumberPay'},
                               {value: 'IssueCV', viewValue: 'IssueCV'},
-                              {value: 'RedeemCV', viewValue: 'RedeemCV'}
+                              {value: 'RedeemCV', viewValue: 'RedeemCV'},
+                              {value: 'ReturnCV', viewValue: 'ReturnCV'}
                               ];
   constructor(public dialogRef: MatDialogRef<F03011wopenComponent>, private fb: FormBuilder, private datePipe: DatePipe, private f03011Service: F03011Service, public dialog: MatDialog) { }
 
