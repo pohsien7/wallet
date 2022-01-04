@@ -13,7 +13,12 @@ export class BaseService {
   constructor(protected httpClient: HttpClient, @Inject(WINDOW) protected window: Window) {}
 
   private getHostname() : string {
-    return environment.insideHostName == this.window.location.hostname ? environment.insideAllowOrigin : environment.outsideAllowOrigin;
+    var protocol = this.window.location.protocol;
+    var port = this.window.location.port;
+    var hostname = this.window.location.hostname;
+    var url =  protocol +'//'+ hostname +':' + (port == '4200' ? '8080': port)+'/Web';
+
+    return  url
   }
 
   // private httpOptions = {
